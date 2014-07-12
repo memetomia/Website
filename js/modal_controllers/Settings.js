@@ -1,5 +1,8 @@
 SettingsController = function()
 {
+    // constante de la máxima cantidad de caracteres de la descripcion del usuario.
+    USER_DESCRIPTION_MAX_LENGTH = 180;
+
     // elemeto padre modal
     var $_modal;
     // elementos menú de opciones
@@ -7,12 +10,22 @@ SettingsController = function()
     // elementos de contenedores de contenido
     var $_contents;
 
+    /* PERFIL */
+    // formulario de perfil
+    var $_profileForm
+    // elemento textarea de descripcion de usuario
+    var $_userDescription
+
     // constructor
-    function init(modal, menu, contents)
+    function init(modal, menu, contents, profileForm, userDescription)
     {
         $_modal    = modal;
         $_menu     = menu;
         $_contents = contents;
+
+        /* PERFIL */
+        $_profileForm = profileForm;
+        $_userDescription = userDescription;
     }
     
     // activa los eventos y los ejecuta          
@@ -47,6 +60,38 @@ SettingsController = function()
             $_contents.hide();
             // busca dentro del modal y muestra el contenido escogido
             $_modal.find(idContent).show();            
+        });
+
+        /*
+         * Evento que realiza el conteo de caracteres
+         * del titulo y valida cuando sobrepasa el limite.
+         */
+        $_userDescription.on('keyup change blur', function()
+        {
+            // calcula los caracteres restantes
+            var remainingChars = USER_DESCRIPTION_MAX_LENGTH - $(this).val().length;
+            // cacheamos campo que muestra caracteres restantes
+            var $charCounter = $_profileForm.find('.char-counter');
+            // cacheamos el div que contiene el textarea del título
+            var $titleField = $(this).parent('div.form-group');
+            // asignamos el valor de los caracteres restantes al elemento
+            $charCounter.text(remainingChars);
+            // caracteres restantes sobrepasa el límite
+            if (remainingChars < 0)
+            {
+                // colocamos el contador de caracteres de color rojo para indicar error
+                $charCounter.addClass('text-danger');
+                // colocamos el campo del titulo de color rojo para indicar error
+                $titleField.addClass('has-error');
+            }
+            // caracteres restantes dentro del límite y algun elemento indica error
+            else if ((remainingChars >= 0) && ($charCounter.hasClass('text-danger')))
+            {
+                // removemos el color rojo en el contador de caracteres
+                $charCounter.removeClass('text-danger');
+                // removemos el color rojo en el campo del título
+                $titleField.removeClass('has-error');
+            }
         });
     }
 

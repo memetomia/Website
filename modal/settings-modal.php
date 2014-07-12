@@ -12,6 +12,10 @@
     {
         text-align: center;
     }
+    #settings-modal textarea
+    {
+        resize: none;
+    }
 </style>
 
 <div class="modal fade" id="settings-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -66,9 +70,9 @@
                     <form id="settings-profile-form" role="form">
                         <div class="form-group">
                             <label for="settings-name">Nombre</label>
-                            <input type="text" class="form-control" id="settings-name" placeholder="Ingresa tu nombre"/>
+                            <input type="text" class="form-control" id="settings-name" placeholder="Ingresa tu nombre" maxlength="70"/>
                         </div>
-                        
+
                         <div class="form-group">
                             <label>Género</label>
                             <div id="settings-gender-options" class="btn-group btn-group-justified" data-toggle="buttons">
@@ -87,21 +91,34 @@
                         <div class="row">                                                    
                             <div class="form-group col-md-3">
                                 <label for="settings-day">Día</label>
-                                <input type="text" class="form-control settings-birthdate" id="settings-day" placeholder="DD"/>
+                                <input type="text" class="form-control settings-birthdate" id="settings-day" placeholder="DD" maxlength="2" />
                             </div>                        
                             <div class="form-group col-md-3">
                                 <label for="settings-month">Mes</label>
-                                <input type="text" class="form-control settings-birthdate" id="settings-month" placeholder="MM"/>
+                                <select id="settings-month" class="form-control" name="settings-month">  
+                                    <option value="01">Enero</option>
+                                    <option value="02">Febrero</option>
+                                    <option value="03">Marzo</option>
+                                    <option value="04">Abril</option>
+                                    <option value="05">Mayo</option>
+                                    <option value="06">Junio</option>
+                                    <option value="07">Julio</option>
+                                    <option value="08">Agosto</option>
+                                    <option value="09">Septiembre</option>
+                                    <option value="10">Octubre</option>
+                                    <option value="11">Noviembre</option>
+                                    <option value="12">Diciembre</option>
+                                </select>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="settings-year">Año</label>
-                                <input type="text" class="form-control settings-birthdate" id="settings-year" placeholder="YYYY"/>
+                                <input type="text" class="form-control settings-birthdate" id="settings-year" placeholder="YYYY" maxlength="4" />
                             </div>    
                         </div>
                         
                         <div class="form-group">
                             <label for="settings-country">País</label>
-                            <select id="settings-country" class="form-control" name="country">
+                            <select id="settings-country" class="form-control" name="settings-country">
                                 <option value="AF">Afganistán</option>
                                 <option value="AL">Albania</option>
                                 <option value="DE">Alemania</option>
@@ -340,7 +357,7 @@
                         </div>
                         
                         <div class="form-group">
-                            <label for="settings-about-me">Acerca de ti</label>
+                            <label for="settings-about-me">Acerca de ti</label><span class="pull-right char-counter text-muted">180</span>
                             <textarea class="form-control" id="settings-about-me" placeholder="Ingresa una descripción"></textarea>
                         </div>
 
@@ -365,7 +382,9 @@
             SettingsController.init(
                     $('#settings-modal'),
                     $('#settings-options'),
-                    $('.settings-option-content'));
+                    $('.settings-option-content'),
+                    $('#settings-profile-form'),
+                    $('#settings-about-me'));
 
             SettingsController.activateEventListeners();
         });
