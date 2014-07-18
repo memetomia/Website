@@ -1,12 +1,8 @@
-<!-- NEW POST MODAL LOCAL STYLE -->
+<!-- SETTINGS MODAL LOCAL STYLE -->
 <style>
     #settings-modal .modal-body
     {
         overflow: auto;        
-    }
-    #settings-modal form .btn-success   
-    {
-        float: right;
     }
     #settings-modal .settings-birthdate
     {
@@ -15,6 +11,10 @@
     #settings-modal textarea
     {
         resize: none;
+    }
+    #settings-modal img
+    {
+        cursor: pointer;
     }
 </style>
 
@@ -26,7 +26,8 @@
                 <h4 class="modal-title" id="myModalLabel">Ajustes</h4>
             </div>
             <div class="modal-body">                    
-
+                
+                <!-- MENU -->
                 <div id="settings-options" class="btn-group btn-group-justified" data-toggle="buttons">
                     <label id="settings-account-option" class="btn btn-default active">
                         <input type="radio" name="options"><span class="glyphicon glyphicon-cog"></span> Cuenta
@@ -42,32 +43,77 @@
                     </label>
                 </div><br/>
 
+                <!-- CUENTA -->
                 <div id="settings-account-content" class="settings-option-content col-md-12">
-
-                    account
-
+                    <form id="settings-account-form" role="form">                                            
+                        <div class="form-group">
+                            <label for="settings-username">Nombre de usuario</label>
+                            <input type="text" class="form-control" id="settings-username" placeholder="Nombre de usuario"/>                            
+                        </div>
+                        <div class="form-group">
+                            <label for="settings-email">Correo electrónico</label>
+                            <input type="text" class="form-control" id="settings-email" placeholder="Correo electrónico"/>
+                        </div>
+                        
+                        <p class="help-block">Mostrar en mi timeline: </p>
+                        <div class="well well-sm">                            
+                            <div class="row">
+                                <div class="col-md-6 text-right">
+                                    <label for="settings-videos">Videos</label>    
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="checkbox" checked="checked" id="settings-videos" class="settings-switch"/>
+                                </div>                                                    
+                            </div></br>
+                            <div class="row">
+                                <div class="col-md-6 text-right">
+                                    <label for="settings-gif">Imágenes GIF</label>    
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="checkbox" checked="checked" id="settings-gif" class="settings-switch"/>
+                                </div>                                                    
+                            </div>
+                        </div></br>
+                        <div class="row">                        
+                            <div class="col-md-6">
+                                <small><a href="#">Eliminar mi cuenta</a></small>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-success pull-right">Guardar Cambios</button>
+                            </div>                            
+                        </div>                        
+                    </form>
                 </div>
 
+                <!-- PASSWORD -->
                 <div id="settings-new-password-content" class="settings-option-content col-md-12">
                     <form id="settings-new-password-form" role="form">
                         <div class="form-group">
                             <label for="settings-old-password">Contraseña actual</label>
                             <input type="password" class="form-control" id="settings-old-password" placeholder="Ingresa contraseña actual"/>
-                        </div></br>
+                        </div>
                         <div class="form-group">
                             <label for="settings-new-password">Contraseña nueva</label>
                             <input type="password" class="form-control" id="settings-new-password" placeholder="Ingresa contraseña nueva"/>
-                        </div></br>
+                        </div>
                         <div class="form-group">
                             <label for="settings-new-password-again">Reingresa contraseña nueva</label>
                             <input type="password" class="form-control" id="settings-old-password-again" placeholder="Reingresa contraseña nueva"/>
                         </div></br>
-                        <button type="submit" class="btn btn-success">Guardar Cambios</button>
+                        <button type="submit" class="btn btn-success pull-right">Guardar Cambios</button>
                     </form>
                 </div>
 
+                <!-- PERFIL -->
                 <div id="settings-profile-content" class="settings-option-content col-md-12">
                     <form id="settings-profile-form" role="form">
+                        <div class="form-group">
+                            <label for="settings-picture">Imágen de perfil</label>
+                            <div class="well well-sm text-center">
+                                <label for="settings-picture"><img src="media/example_img/post1.jpg" alt="user_pic" class="img-thumbnail" width="128" height="128"></label>
+                                <input type="file" class="form-control hidden" id="settings-picture">                                
+                            </div>                            
+                        </div>
                         <div class="form-group">
                             <label for="settings-name">Nombre</label>
                             <input type="text" class="form-control" id="settings-name" placeholder="Ingresa tu nombre" maxlength="70"/>
@@ -361,20 +407,41 @@
                             <textarea class="form-control" id="settings-about-me" placeholder="Ingresa una descripción"></textarea>
                         </div>
 
-                        </br><button type="submit" class="btn btn-success">Guardar Cambios</button>
+                        </br><button type="submit" class="btn btn-success pull-right">Guardar Cambios</button>
                     </form>                    
                 </div>
 
-                <div id="settings-notifications-content" class="settings-option-content col-md-12">
+                <!-- NOTIFICACIONES -->
+                <div id="settings-notifications-content" class="settings-option-content col-md-12">                    
+                    <form id="settings-notifications-form" role="form">
+                        <p class="help-block">Notificarme cuando: </p>
+                        <div class="well well-sm">                            
+                            <div class="row">
+                                <div class="col-md-6 text-right">
+                                    <label for="settings-like-notification">Den "me gusta" a un post mio</label>    
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="checkbox" checked="checked" id="settings-like-notification" class="settings-switch"/>
+                                </div>                                                    
+                            </div></br>
 
-                    notificactions
-
+                            <div class="row">
+                                <div class="col-md-6 text-right">
+                                    <label for="settings-comment-notification">Comenten en un post mio</label>    
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="checkbox" checked="checked" id="settings-comment-notification" class="settings-switch"/>
+                                </div>                                                    
+                            </div>
+                        </div><br/>        
+                        <button type="submit" class="btn btn-success pull-right">Guardar Cambios</button>
+                    </form>                  
                 </div>               
             </div>
         </div>
     </div>
 
-    <!-- NEW POST MODAL LOCAL JAVASCRIPT -->
+    <!-- SETTINGS MODAL LOCAL JAVASCRIPT -->
     <script type="text/javascript">
         // documento preparado
         $(function()

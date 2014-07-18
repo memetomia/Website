@@ -9,10 +9,12 @@
         <!--STYLES-->
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/jqueryUI.custom.min.css" rel="stylesheet">        
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-switch.min.css">
         
         <script src="js/jquery-2.1.0.min.js"></script>        
         <script src="js/bootstrap.min.js"></script>
-        <script src="js/jqueryUI.custom.min.js"></script>          
+        <script src="js/jqueryUI.custom.min.js"></script>  
+        <script src="js/bootstrap-switch.min.js"></script>        
 
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -248,5 +250,11 @@
         <script type="text/javascript" src="js/modal_controllers/NewPost.js"></script>
         <script type="text/javascript" src="js/modal_controllers/Activity.js"></script>
         <script type="text/javascript" src="js/modal_controllers/Settings.js"></script>
+
+        <!--Ver donde poner esto-->
+        <script>
+            // Activating All Switches
+            $(".settings-switch").bootstrapSwitch();
+        </script>
     </body>
 </html>
