@@ -1,0 +1,31 @@
+.Oculto {
+    display: none;
+}
+.msgbox {
+    box-shadow: 0 0px #000, 0 5px 3px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    border: 1px solid;
+    color: #FFF;
+    padding: 5px;
+
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    background: url("img/Diagonal.png");
+}
+.Error
+{
+    background-color:#de4343;
+    border-color: #c43d3d;
+}
+.Advertencia{
+    background-color: #eaaf51;
+    border-color: #d99a36;
+}.Exito{
+    background-color: #61b832;
+    border-color: #55a12c;
+}.Informacion{
+    background-color: #4ea5cd;
+    border-color: #3b8eb5;
+}

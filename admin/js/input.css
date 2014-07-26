@@ -1,0 +1,21 @@
+
+input[type="text"], input[type="password"], input[type="email"]
+{
+    font-size: 16px;
+    border: 1px solid #CCC;
+    height: 36px;
+    padding: 0 10px;
+    font-family: "Helvetica Neue", Helvetica, Verdana, Arial, sans-serif;
+    margin-bottom: 20px;
+}
+
+input:focus
+{
+    border: 1px solid #0066c1;
+    outline: none;
+}
+.ImgSubir{
+    width: 120px;
+    height: 120px;
+   
+}
