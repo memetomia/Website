@@ -127,7 +127,7 @@
                                 <div id="MsgName" class="msgbox Oculto"><span class="spanNoti"></span></div>
 
                             </div>
-                            <img id="ImgMeme" class="img-thumbnail img-small" src="./media/example_img/MemePredeterminado.jpg">
+                            <img id="ImgMeme" class="img-thumbnail img-small" src="../media/example_img/MemePredeterminado.jpg">
                             <button id='BtSubir' type="button" class="btn btn-default"  >Subir</button>
                             <div id="MsgMeme" class="msgbox Oculto"><span class="spanNoti"></span></div>
 
