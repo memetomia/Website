@@ -1,3 +1,4 @@
+<?php header ("Location: coming-soon.php"); ?>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -9,7 +10,7 @@
         <!--STYLES-->
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/jqueryUI.custom.min.css" rel="stylesheet">        
-        <link rel="stylesheet" type="text/css" href="css/bootstrap-switch.min.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-switch.min.css">        
         
         <script src="js/jquery-2.1.0.min.js"></script>        
         <script src="js/bootstrap.min.js"></script>
@@ -48,7 +49,7 @@
                                 <li><a href="#"><span class="glyphicon glyphicon-comment"></span> Alejandro comentó en tu post</a></li>                                
                                 <li><a href="#"><span class="glyphicon glyphicon-thumbs-up"></span> A Erika le gustó tu post</a></li>                                
                                 <li class="divider"></li>
-                                <li><a href="#" class="text-center">Ver todas las notificaciones</a></li>                                
+                                <li class="text-center"><a href="#" data-toggle="modal" data-target="#notifications-modal">Ver todas las notificaciones</a></li>                                
                             </ul>
                         </li>
                         <li><a href="#" data-toggle="modal" data-target="#new-post-modal"><span class="glyphicon glyphicon-upload"></span> Nuevo Post</a></li>
@@ -242,9 +243,12 @@
         </div>
 
         <!-- MODAL Windows -->
-        <?php include_once 'modal/new-post-modal.php'; ?>
-        <?php include_once 'modal/activity-modal.php'; ?>        
-        <?php include_once 'modal/settings-modal.php'; ?>        
+        <?php             
+        include_once 'modal/notifications-modal.php';
+        include_once 'modal/new-post-modal.php'; 
+        include_once 'modal/activity-modal.php';  
+        include_once 'modal/settings-modal.php';                    
+        ?>        
         
         <!--JS MODAL CONTROLLERS-->
         <script type="text/javascript" src="js/modal_controllers/NewPost.js"></script>
