@@ -1,5 +1,3 @@
-<?php //header ("Location: coming-soon.php"); ?>
-
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -44,25 +42,8 @@
                         <li><a href="#">GIF</a></li>
                     </ul>                    
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-bell"></span> Notificaciones <span class="label label-danger">2</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#"><span class="not-readed"></span> <span class="glyphicon glyphicon-comment"></span> Alejandro123 comentó en tu post</a></li>                                
-                                <li><a href="#"><span class="not-readed"></span> <span class="glyphicon glyphicon-thumbs-up"></span> A Erika33 le gustó tu post</a></li>                                
-                                <li class="divider"></li>
-                                <li class="text-center"><a href="#" data-toggle="modal" data-target="#notifications-modal">Ver todas las notificaciones</a></li>                                
-                            </ul>
-                        </li>
-                        <li><a href="#" data-toggle="modal" data-target="#new-post-modal"><span class="glyphicon glyphicon-upload"></span> Nuevo Post</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Jaivic Villegas<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#" data-toggle="modal" data-target="#activity-modal"><span class="glyphicon glyphicon-tasks"></span> Actividad</a></li>                                
-                                <li><a href="#" data-toggle="modal" data-target="#settings-modal"><span class="glyphicon glyphicon-cog"></span> Ajustes</a></li>                                
-                                <li class="divider"></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>
-                            </ul>
-                        </li>
+                        <li><a href="#" data-toggle="modal" data-target="#sign-in-modal">¡Regístrate en Memetomía!</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#login-modal">Iniciar sesión</a></li>                        
                     </ul>                    
                 </div>
             </div>
@@ -94,7 +75,7 @@
                             <img class="post-media img-thumbnail" src="media/example_img/post1.jpg" height="467" width="460" alt="I must become someone else, I must become something else"/>
                         </div>
                         <div class="post-options col-md-3">
-                            <button type="button" class="btn btn-default btn-block like-button" data-toggle="button">
+                            <button type="button" class="btn btn-default btn-block like-button">
                                 <span class="glyphicon glyphicon-thumbs-up"></span> Me gusta
                             </button>
                             <button type="button" class="btn btn-default btn-block comment-button">
@@ -128,8 +109,8 @@
                             <img class="post-media img-thumbnail" src="media/example_img/post2.jpg" alt="El pintor mas honesto en la historia de la humanidad"/>
                         </div>
                         <div class="post-options col-md-3">
-                            <button type="button" class="btn btn-default btn-block like-button active" data-toggle="button">
-                                <span class="glyphicon glyphicon-thumbs-up"></span> Te gusta
+                            <button type="button" class="btn btn-default btn-block like-button">
+                                <span class="glyphicon glyphicon-thumbs-up"></span> Me gusta
                             </button>
                             <button type="button" class="btn btn-default btn-block comment-button">
                                 <span class="glyphicon glyphicon-comment"></span> Comentar
@@ -160,7 +141,7 @@
                             <img class="post-media img-thumbnail" src="media/example_img/post3.jpg" alt="Los Vengadores de Spidey"/>
                         </div>
                         <div class="post-options col-md-3">
-                            <button type="button" class="btn btn-default btn-block like-button" data-toggle="button">
+                            <button type="button" class="btn btn-default btn-block like-button">
                                 <span class="glyphicon glyphicon-thumbs-up"></span> Me gusta
                             </button>
                             <button type="button" class="btn btn-default btn-block comment-button">
@@ -245,22 +226,15 @@
 
         <!-- MODAL Windows -->
         <?php             
-        include_once 'modal/notifications-modal.php';
-        include_once 'modal/new-post-modal.php'; 
-        include_once 'modal/activity-modal.php';  
-        include_once 'modal/settings-modal.php';                    
+        include_once 'modal/login-modal.php';
+        include_once 'modal/sign-in-modal.php';         
         ?>        
         
-        <!--JS MODAL CONTROLLERS-->
-        <script type="text/javascript" src="js/modal_controllers/NewPost.js"></script>
-        <script type="text/javascript" src="js/modal_controllers/Activity.js"></script>
-        <script type="text/javascript" src="js/modal_controllers/Settings.js"></script>
-        <script type="text/javascript" src="js/modal_controllers/Notifications.js"></script>
 
         <!--Ver donde poner esto-->
         <script>
-            // Activating All Switches
-            $(".settings-switch").bootstrapSwitch();
+            // activa modal registro al presionar botones
+            $('.comment-button, .like-button').click(function(){$('#sign-in-modal').modal('show')});
         </script>
     </body>
 </html>
