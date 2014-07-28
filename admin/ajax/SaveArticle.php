@@ -23,7 +23,7 @@ if ($bError == false) {
 }
 if ($iResultado > 0) {
     $stags = json_decode($aEtiqueta, true);
-    ECHO count($stags);
+   
 
     for ($i = 0; $i < count($stags); $i++) {
         $iIDTag = $bdTag->iSearchTagByNameExact($stags[$i]);

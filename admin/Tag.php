@@ -17,56 +17,45 @@
         </style>
         <script type="text/javascript">
             $(document).ready(function() {
-                function nombreFun(id, fileName, responseJSON) {
-                    //$('#imgSubirid').attr('src','/OnionFW/means/'+responseJSON.info);
-                    if (responseJSON.error) {
-                        sDirImagen = "";
-                        msj("#MsgMeme", responseJSON.error, "Error")
-                    } else {
-                        $('#ImgMeme').attr('src', MEME + "/" + responseJSON.info);
-                        sDirImagen = responseJSON.info;
-                        msj("#MsgMeme", "La imagen fue subida con exito", "Exito");
-                    }
-                }
-                var uploader = new qq.FileUploader({
-                    element: document.getElementById('BtSubir'),
-                    action: 'ajax/SubirImagenMeme.php',
-                    uploadButtonText: 'subir',
-                    dragText: 'Suelta aqui',
-                    debug: false,
-                    onComplete: nombreFun
+                $("form").submit(function() {
+
+                    return false;
                 });
-                function BuscarMeme(palabra) {
-                    $.post("ajax/SearchMemePreReturnImg.php", {
+                var id = -1;
+                function BuscarTag(palabra) {
+
+                    $.post("ajax/SearchTagReturnjson.php", {
                         q: palabra
                     }, function(o) {
                         if (o) {
                             // $('#ImgMeme').attr('src', "" + MEME + "/" + o[0]["URL"]);
-                            msj("#MsgName", "El nombre del meme ya existe Por favor busque otro", "Error");
+                            msj("#MsgName", "No puede agregar esta etiqueta ya existe", "Error");
+
+
+
                         } else {
-                            msj("#MsgName", "Perfecto!!!;No se ha encontrado el meme", "Exito");
+                            msj("#MsgName", "Etiqueta no encontrada puede agregarla", "Exito");
                         }
 
                     }, "json");
+
                 }
-                $('#Name').autocomplete('ajax/SearchMemePre.php', {width: 200, matchContains: true, selectFirst: false, funtion: BuscarMeme});
-                //      $('#Name').bind()
+                $('#Name').keydown(function() {
+                    if (event.which == 13) {
+                        BuscarTag($(this).val());
+                    }
+                });
                 $('#BtAgregar').bind('click', function() {
                     var flag = false;
                     if ($("#Name").val() == "") {
                         msj("#MsgGeneral", "Falta un nombre", "Error");
                         msj("#MsgName", "Ingrese un nombre ", "Error");
                         flag = true;
-                    }
-                    if (sDirImagen == "") {
-                        msj("#MsgGeneral", "Falta una imagen", "Error");
-                        msj("#MsgName", "necesita subir el meme ", "Error");
-                        flag = true;
-                    }
+                    }                   
                     if (flag == false) {
-                        $.post("ajax/AddMeme.php", {
-                            sNombre: $("#Name").val(),
-                            sUrl: sDirImagen
+                        $.post("ajax/AddTag.php", {
+                            sName: $("#Name").val(),
+                          
                         }
                         , function(o) {
 
@@ -79,7 +68,7 @@
 </td></tr>');
                                 $("#NombrePg").val("");
                                 $("#UrlPg").val("");
-                                   msj("#MsgGeneral", "el meme fue guardado correctamente", "Exito");
+                                msj("#MsgGeneral", "el meme fue guardado correctamente", "Exito");
                             }
                         }, "json");
                     }
@@ -96,7 +85,7 @@
             }
 
             function Modificar(iPosicionEnPantalla, iIdEnTabla) {
-                location.href = SERVER + ADMIN + "/EditMeme.php?ID=" + iIdEnTabla;
+                location.href = SERVER + ADMIN + "/EditTag.php?ID=" + iIdEnTabla;
             }
         </script>
     </head>
@@ -114,28 +103,26 @@
                     <div class="row placeholders">
                         <form role="form">
 
-
-
+<iframe width="480" height="270" allowfullscreen="true" frameborder="0" marginwidth="0" marginheight='0' scrolling="no" src="http://hub.video.msn.com/embed/c2726807-9422-11ec-656d-5010fafbc681/?vars=c3luZGljYXRpb249dGFnJmxpbmtiYWNrPWh0dHAlM0ElMkYlMkZ3d3cuYmluZy5jb20lMkZ2aWRlb3MlMkZicm93c2UmY29uZmlnQ3NpZD1NU05WaWRlbyZmcj1zaGFyZWVtYmVkLXN5bmRpY2F0aW9uJmJyYW5kPXY1JTVFNTQ0eDMwNiZsaW5rb3ZlcnJpZGUyPWh0dHAlM0ElMkYlMkZ3d3cuYmluZy5jb20lMkZ2aWRlb3MlMkZicm93c2UlM0Zta3QlM0Rlbi11cyUyNnZpZCUzRCU3QjAlN0QlMjZmcm9tJTNEJmNvbmZpZ05hbWU9c3luZGljYXRpb25wbGF5ZXImbWt0PWVuLXVz">
+  <A href="http://www.bing.com/videos/browse?mkt=en-us&vid=c2726807-9422-11ec-656d-5010fafbc681&from=shareembed-syndication&src=v5:embed:syndication:" target="_new" title="Shane O'Neill Street League Chicago 5-Trick Fix">Video: Shane O'Neill Street League Chicago 5-Trick Fix</A>
+</iframe>
 
 
 
                             <div class="form-group">
                                 <label for="Name">Nombre </label>
-                                <input type="text" class="form-control" id="Name" placeholder="Agrega una pagina nueva">
-                                <script type="text/javascript">
-                                    //     $('#NombrePg').autocomplete('../buscarNombrePagina', {width: 200, matchContains: true, selectFirst: false, funtion: BuscarNombrePagina});
-                                </script> 
+                                <input type="text" class="form-control" id="Name" placeholder="buscar la etiqueta">
+
                                 <div id="MsgName" class="msgbox Oculto"><span class="spanNoti"></span></div>
 
                             </div>
-                            <img id="ImgMeme" class="img-thumbnail img-small"  src="<?php include_once '../base/const.php';echo SERVER;?>/media/example_img/MemePredeterminado.jpg">
-                            <button id='BtSubir' type="button" class="btn btn-default"  >Subir</button>
-                            <div id="MsgMeme" class="msgbox Oculto"><span class="spanNoti"></span></div>
+
+
 
 
 
                             <br>
-                            <button id='BtAgregar' type="button" class="btn btn-default"  >Agregar</button>
+                            <button id='BtAgregar' type="button" class="btn btn-default"  >Cambiar</button>
                             <div id="MsgGeneral" class="msgbox Oculto"><span class="spanNoti"></span></div>
 
 
@@ -155,31 +142,29 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Nombre</th>
-                                    <th>URL</th>
                                     <th>Count</th>
+                                    <th>Visit</th>
                                     <th>Botones</th>
                                 </tr>
                             </thead>
 
                             <tbody>
                                 <?php
-                                include_once '../base/TableMeme.php';
-                                $bd = new TableMeme();
+                                include_once '../base/TableTag.php';
+                                $bd = new TableTag();
                                 $todo = $bd->All();
                                 $html = "";
                                 if ($todo > 0) {
                                     $sClass = "";
                                     for ($i = 0; $i < $todo; $i++) {
-                                        if ($bd->bd->obtener_respuesta($i, "STATE") == "1") {
-                                            $sClass = "trDel";
-                                        }
-                                        $html .= '<tr id="t' . $i . '" class="' . $sClass . '"><td>' . $bd->bd->obtener_respuesta($i, "ID") . '</td>'
+
+                                        $html .= '<tr id="t' . $bd->bd->obtener_respuesta($i, "ID") . '" ><td>' . $bd->bd->obtener_respuesta($i, "ID") . '</td>'
                                                 . '<td width="100" height="100">' . $bd->bd->obtener_respuesta($i, "NAME") . '</td>'
-                                                . '<td><img class="img-thumbnail img-small" width="150" height="150" src="' . EXT_MEME . "/" . $bd->bd->obtener_respuesta($i, "URL") . '"/></td>'
                                                 . '<td>' . $bd->bd->obtener_respuesta($i, "COUNT") . '</td>'
+                                                . '<td>' . $bd->bd->obtener_respuesta($i, "VISIT") . '</td>'
                                                 . '<td>   '
-                                                . '    <button type="button" class="btn btn-default"  onclick="Modificar(\'' . $i . '\',\'' . $bd->bd->obtener_respuesta($i, "ID") . '\')" >Modificar</button>    '
-                                                . '    <button type="button" class="btn btn-default"  onclick="Eliminar(\'' . $i . '\',\'' . $bd->bd->obtener_respuesta($i, "ID") . '\')" >Eliminar</button>      </td></tr>';
+                                                . '    <button type="button" class="btn btn-default"  onclick="Modificar(\'' . $bd->bd->obtener_respuesta($i, "ID") . '\')" >Modificar</button>    '
+                                                . '    <button type="button" class="btn btn-default"  onclick="Eliminar(\'' . $bd->bd->obtener_respuesta($i, "ID") . '\')" >Eliminar</button>      </td></tr>';
                                     }
                                     echo $html;
                                 }

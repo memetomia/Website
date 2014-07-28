@@ -17,39 +17,25 @@
         </style>
         <script type="text/javascript">
             $(document).ready(function() {
-                function nombreFun(id, fileName, responseJSON) {
-                    //$('#imgSubirid').attr('src','/OnionFW/means/'+responseJSON.info);
-                    if (responseJSON.error) {
-                        sDirImagen = "";
-                        msj("#MsgMeme", responseJSON.error, "Error")
-                    } else {
-                        $('#ImgMeme').attr('src', MEME + "/" + responseJSON.info);
-                        sDirImagen = responseJSON.info;
-                        msj("#MsgMeme", "La imagen fue subida con exito", "Exito");
-                    }
-                }
-                var uploader = new qq.FileUploader({
-                    element: document.getElementById('BtSubir'),
-                    action: 'ajax/SubirImagenMeme.php',
-                    uploadButtonText: 'subir',
-                    dragText: 'Suelta aqui',
-                    debug: false,
-                    onComplete: nombreFun
-                });
-                function BuscarMeme(palabra) {
-                    $.post("ajax/SearchMemePreReturnImg.php", {
+var id=-1;
+                function BuscarTag(palabra) {
+                    $.post("ajax/SearchTagReturnjson.php", {
                         q: palabra
                     }, function(o) {
                         if (o) {
                             // $('#ImgMeme').attr('src', "" + MEME + "/" + o[0]["URL"]);
-                            msj("#MsgName", "El nombre del meme ya existe Por favor busque otro", "Error");
+                            msj("#MsgName", "Se encontró la etiqueta", "Exito");
+                            $("#NewName").val($("#Name").val());
+                              $("#ID").val(o[0]["ID"]);
+                             id=o[0]["ID"];
+                            $("#NewName").focus()
                         } else {
-                            msj("#MsgName", "Perfecto!!!;No se ha encontrado el meme", "Exito");
+                            msj("#MsgName", "No hay etiqueta con ese nombre", "Error");
                         }
 
                     }, "json");
                 }
-                $('#Name').autocomplete('ajax/SearchMemePre.php', {width: 200, matchContains: true, selectFirst: false, funtion: BuscarMeme});
+                $('#Name').autocomplete('ajax/SearchTag.php', {width: 200, matchContains: true, selectFirst: false, funtion: BuscarTag});
                 //      $('#Name').bind()
                 $('#BtAgregar').bind('click', function() {
                     var flag = false;
@@ -58,15 +44,20 @@
                         msj("#MsgName", "Ingrese un nombre ", "Error");
                         flag = true;
                     }
-                    if (sDirImagen == "") {
-                        msj("#MsgGeneral", "Falta una imagen", "Error");
-                        msj("#MsgName", "necesita subir el meme ", "Error");
+                    if ($("#NewName").val() == "") {
+                        msj("#MsgGeneral", "de escribir algo en Nombre nuevo", "Error");
+                        msj("#MsgName", "Escriba algo en nombre nuevo", "Error");
                         flag = true;
                     }
+                    if(id==-1){
+                              msj("#MsgGeneral", "hay un problema en el id de la etiqueta a modificar porfavor busque nuevamente", "Error");
+                        msj("#MsgName", "Ingrese un nombre otra vez por favor ", "Error");
+                        flag = true; 
+                    }
                     if (flag == false) {
-                        $.post("ajax/AddMeme.php", {
-                            sNombre: $("#Name").val(),
-                            sUrl: sDirImagen
+                        $.post("ajax/ModTag.php", {
+                            sNewName: $("#Name").val(),
+                            iID: id
                         }
                         , function(o) {
 
@@ -79,7 +70,7 @@
 </td></tr>');
                                 $("#NombrePg").val("");
                                 $("#UrlPg").val("");
-                                   msj("#MsgGeneral", "el meme fue guardado correctamente", "Exito");
+                                msj("#MsgGeneral", "el meme fue guardado correctamente", "Exito");
                             }
                         }, "json");
                     }
@@ -116,26 +107,37 @@
 
 
 
+                            <div class="form-group">
+                                <label for="Name">ID</label>
+                                <input type="text" class="form-control" id="ID" disabled="disabled">
 
+                                <div id="MsgID" class="msgbox Oculto"><span class="spanNoti"></span></div>
 
+                            </div>
 
                             <div class="form-group">
                                 <label for="Name">Nombre </label>
-                                <input type="text" class="form-control" id="Name" placeholder="Agrega una pagina nueva">
-                                <script type="text/javascript">
-                                    //     $('#NombrePg').autocomplete('../buscarNombrePagina', {width: 200, matchContains: true, selectFirst: false, funtion: BuscarNombrePagina});
-                                </script> 
+                                <input type="text" class="form-control" id="Name" placeholder="buscar la etiqueta">
+
                                 <div id="MsgName" class="msgbox Oculto"><span class="spanNoti"></span></div>
 
                             </div>
-                            <img id="ImgMeme" class="img-thumbnail img-small"  src="<?php include_once '../base/const.php';echo SERVER;?>/media/example_img/MemePredeterminado.jpg">
-                            <button id='BtSubir' type="button" class="btn btn-default"  >Subir</button>
-                            <div id="MsgMeme" class="msgbox Oculto"><span class="spanNoti"></span></div>
+
+                            <div class="form-group">
+                                <label for="NewName">Nombre Nuevo </label>
+                                <input type="text" class="form-control" id="NewName" placeholder="pon el nombre nuevo">
+                                <script type="text/javascript">
+                                    //     $('#NombrePg').autocomplete('../buscarNombrePagina', {width: 200, matchContains: true, selectFirst: false, funtion: BuscarNombrePagina});
+                                </script> 
+                                <div id="MsgNewName" class="msgbox Oculto"><span class="spanNoti"></span></div>
+
+                            </div>
+
 
 
 
                             <br>
-                            <button id='BtAgregar' type="button" class="btn btn-default"  >Agregar</button>
+                            <button id='BtAgregar' type="button" class="btn btn-default"  >Cambiar</button>
                             <div id="MsgGeneral" class="msgbox Oculto"><span class="spanNoti"></span></div>
 
 
@@ -155,31 +157,29 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Nombre</th>
-                                    <th>URL</th>
                                     <th>Count</th>
+                                    <th>Visit</th>
                                     <th>Botones</th>
                                 </tr>
                             </thead>
 
                             <tbody>
                                 <?php
-                                include_once '../base/TableMeme.php';
-                                $bd = new TableMeme();
+                                include_once '../base/TableTag.php';
+                                $bd = new TableTag();
                                 $todo = $bd->All();
                                 $html = "";
                                 if ($todo > 0) {
                                     $sClass = "";
                                     for ($i = 0; $i < $todo; $i++) {
-                                        if ($bd->bd->obtener_respuesta($i, "STATE") == "1") {
-                                            $sClass = "trDel";
-                                        }
-                                        $html .= '<tr id="t' . $i . '" class="' . $sClass . '"><td>' . $bd->bd->obtener_respuesta($i, "ID") . '</td>'
+
+                                        $html .= '<tr id="t' . $bd->bd->obtener_respuesta($i, "ID") . '" ><td>' . $bd->bd->obtener_respuesta($i, "ID") . '</td>'
                                                 . '<td width="100" height="100">' . $bd->bd->obtener_respuesta($i, "NAME") . '</td>'
-                                                . '<td><img class="img-thumbnail img-small" width="150" height="150" src="' . EXT_MEME . "/" . $bd->bd->obtener_respuesta($i, "URL") . '"/></td>'
                                                 . '<td>' . $bd->bd->obtener_respuesta($i, "COUNT") . '</td>'
+                                                . '<td>' . $bd->bd->obtener_respuesta($i, "VISIT") . '</td>'
                                                 . '<td>   '
-                                                . '    <button type="button" class="btn btn-default"  onclick="Modificar(\'' . $i . '\',\'' . $bd->bd->obtener_respuesta($i, "ID") . '\')" >Modificar</button>    '
-                                                . '    <button type="button" class="btn btn-default"  onclick="Eliminar(\'' . $i . '\',\'' . $bd->bd->obtener_respuesta($i, "ID") . '\')" >Eliminar</button>      </td></tr>';
+                                                . '    <button type="button" class="btn btn-default"  onclick="Modificar(\'' . $bd->bd->obtener_respuesta($i, "ID") . '\')" >Modificar</button>    '
+                                                . '    <button type="button" class="btn btn-default"  onclick="Eliminar(\'' . $bd->bd->obtener_respuesta($i, "ID") . '\')" >Eliminar</button>      </td></tr>';
                                     }
                                     echo $html;
                                 }

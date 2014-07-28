@@ -277,7 +277,7 @@ class qqFileUploader
 
 }
 
-$allowedExtensions = array("jpg", "png", "jpeg", "bmp");
+$allowedExtensions = array("jpg", "png", "jpeg", "bmp","gif");
 $sizeLimit = 2 * 1024 * 1024;
 
 $uploader = new qqFileUploader($allowedExtensions, $sizeLimit);

@@ -128,7 +128,7 @@
                                 <div id="MsgName" class="msgbox Oculto"><span class="spanNoti"></span></div>
 
                             </div>
-                            <img id="ImgMeme" class="img-thumbnail img-small"  src="<?php include_once '../base/const.php';echo SERVER;?>/media/example_img/MemePredeterminado.jpg">
+                            <img id="ImgMeme" class="img-thumbnail img-small"  src="http://localhost:8080/memetomia/media/example_img/MemePredeterminado.jpg">
                             <button id='BtSubir' type="button" class="btn btn-default"  >Subir</button>
                             <div id="MsgMeme" class="msgbox Oculto"><span class="spanNoti"></span></div>
 

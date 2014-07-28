@@ -2,9 +2,9 @@
                     <ul class="nav nav-sidebar">
                         <li class="active"><a href="#">Articulo </a></li>
                         <li><a href="buscar.php">Buscar</a></li>
-                        <li><a href="subir.php">Subir un Articulo</a></li>
+                        <li><a href="Article.php">Subir un Articulo</a></li>
                         <li><a href="#">Subir un Articulo (video)</a></li>
-                        <li><a href="#">Editar</a></li>
+                        <li><a href="EditArticle.php">Editar</a></li>
                         <li><a href="#">Extraer de otra pagina</a></li>
 
 
@@ -18,8 +18,8 @@
                     <ul class="nav nav-sidebar">
 
                         <li>Etiqueta</li>
-                        <li><a href="#">Agregar</a></li>
-                        <li><a href="#">Editar</a></li>
+                        <li><a href="Tag.php">Agregar</a></li>
+                        <li><a href="EditTag.php">Editar</a></li>
                     </ul>
                     <ul class="nav nav-sidebar">
 

@@ -1,6 +1,6 @@
 <?php
 include_once '../../base/TableMeme.php';
-$bd=new TablePage();
+$bd=new TableMeme();
 $bError=false;
 $sNamePage = $_POST["sNombre"];
 $sUrlPage = $_POST["sUrl"];

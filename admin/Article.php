@@ -78,21 +78,31 @@
                     var bool = true;
                     if (sTitulo == "") {
                         bool = false;
+                        msj("#MsgBtGuardar", "Ingrese titulo", "Error");
                     }
                     if (sDirImagen == "") {
                         bool = false;
+                        msj("#MsgBtGuardar", "Suba una imagen", "Error");
                     }
+
+
                     if (bool == true) {
-                        var sInfo='<img class="post-media img-thumbnail" src="'.ARTICLE.'/'.sDirImagen.'" alt="'.sTitulo.'">';
+                        var sInfo = '<img class="post-media img-thumbnail" src="' + ARTICLE + '/' + sDirImagen + '" alt="' + sTitulo + '">'
                         $.post("ajax/SaveArticle.php", {
                             sTitulo: sTitulo,
                             sComentario: sComentario,
                             aEtiquetas: string,
                             sImagen: sDirImagen,
-                            sinfo:sInfo
+                            sinfo: sInfo
                         }, function(o) {
                             if (o.Tupla > 0) {
                                 msj("#MsgBtGuardar", "Todo ok", "Exito");
+                                $("#tabla tbody").prepend('<tr id="t' + $('#tabla >tbody >tr').length + '"><td>' + o.Tupla + '</td><td>' + $("#NombrePg").val() + '<br>Tag:<br>' + string + '</td><td><img id="" class="img-thumbnail img-small" src="' + ARTICLE + '/' + sDirImagen + '">' + sComentario + '</td>\n\
+                                <td> <button type="button" class="btn btn-default"  onclick="Activar(\'' + $('#tabla >tbody >tr').length + '\',\'' + o.Tupla + '\')" >Activar</button>\n\
+                                    <button type="button" class="btn btn-default"  onclick="Desactivar(\'' + $('#tabla >tbody >tr').length + '\',\'' + o.Tupla + '\')" >Desactivar</button>\n\
+                                    <button type="button" class="btn btn-default"  onclick="Modificar(\'' + $('#tabla >tbody >tr').length + '\',\'' + o.Tupla + '\')" >Modificar</button>\n\
+                                    <button type="button" class="btn btn-default"  onclick="Eliminar(\'' + $('#tabla >tbody >tr').length + '\',\'' + o.Tupla + '\')" >Eliminar</button>\n\
+</td></tr>');
                             } else {
                                 msj("#MsgBtGuardar", o.Error, "Error");
                             }
@@ -141,7 +151,7 @@
                         q: palabra
                     }, function(o) {
                         if (o) {
-                            $('#ImgMeme').attr('src', "" + MEME + "/" + o[0]["URL"]);
+                            $('#ImgMeme').attr('src',  MEME + "/" + o[0]["URL"]);
                             msj("#MsgBtAgregar", "Meme predeterminado encontrado", "Exito");
                         } else {
                             msj("#MsgBtAgregar", "No se ha encontrado el meme", "Error");
@@ -161,7 +171,7 @@
                     command: "inserthtml",
                     popupName: "hello",
                     popupClass: "cleditorPrompt",
-                    popupContent: "meme:<br><input id=meme type=text size=50><br><img id=ImgMeme src=../media/example_img/MemePredeterminado.jpg height=200 width=200 /><br><input type=button value=Submit>",
+                    popupContent: "meme:<br><input id=meme type=text size=50><br><img id=ImgMeme src=../media/example_img/MemePredeterminado.jpg height=200 width=200 /><br><input type=button value=Agregar>",
                     buttonClick: helloClick
                 };
 
@@ -198,7 +208,42 @@
             })(jQuery);
 //            http://premiumsoftware.net/cleditor/gettingstarted
 
+            function Eliminar(iPosicionEnPantalla, iIdEnTabla) {
 
+                $.post("ajax/DelArticle.php", {
+                    iID: iIdEnTabla
+                }
+                , function(o) {
+                    if (o.Tupla > 0) {
+                        $("#t" + iPosicionEnPantalla).hide();
+                    }
+                }, "json");
+            }
+            function Activar(iPosicionEnPantalla, iIdEnTabla) {
+
+                $.post("ajax/ActiveArticle.php", {
+                    iID: iIdEnTabla
+                }
+                , function(o) {
+                    if (o.Tupla > 0) {
+                        $("#t" + iPosicionEnPantalla).removeClass("trDel");
+                    }
+                }, "json");
+            }
+            function Desactivar(iPosicionEnPantalla, iIdEnTabla) {
+
+                $.post("ajax/DesactiveArticle.php", {
+                    iID: iIdEnTabla
+                }
+                , function(o) {
+                    if (o.Tupla > 0) {
+                        $("#t" + iPosicionEnPantalla).addClass("trDel");
+                    }
+                }, "json");
+            }
+            function Modificar(iPosicionEnPantalla, iIdEnTabla) {
+                location.href = SERVER + ADMIN + "/EditArticle.php?IDPage=" + iIdEnTabla;
+            }
         </script>
 
     </head>
@@ -251,15 +296,15 @@
 
                     </div>
                     <!--tabla para verficiar-->
-                       <div class="table-responsive">
-                           <h2 class="sub-header">Lista de Articulo </h2>
-                        <table id="tabla" class="table table-striped">
+                    <div class="table-responsive">
+                        <h2 class="sub-header">Lista de Articulo </h2>
+                        <table id="tabla" class="table ">
                             <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Titulo</th>
                                     <th>Articulo</th>
-                                    
+
                                     <th>Acción</th>
                                 </tr>
                             </thead>
@@ -275,12 +320,15 @@
                                     for ($i = 0; $i < $todo; $i++) {
                                         if ($bd->bd->obtener_respuesta($i, "STATE") == "1") {
                                             $sClass = "trDel";
+                                        } else {
+                                            $sClass = "";
                                         }
                                         $html .= '<tr id="t' . $i . '" class="' . $sClass . '"><td>' . $bd->bd->obtener_respuesta($i, "ID") . '</td>'
-                                                . '<td>' . $bd->bd->obtener_respuesta($i, "TITLE") . '<br><strong>Tag:</strong><br>'. $bd->bd->obtener_respuesta($i, "TAG") .'</td>'
-                                                . '<td><img class="img-thumbnail img-small" src="' .EXT_ARTICLE."/". $bd->bd->obtener_respuesta($i, "URL") . '"/>'. $bd->bd->obtener_respuesta($i, "COMMENT_ADDITIONAL") .'</td>'
-                                                .  '<td>   '
-                                                . '    <button type="button" class="btn btn-default"  onclick="Modificar(\'' . $i . '\',\'' . $bd->bd->obtener_respuesta($i, "ID") . '\')" >Activar</button>    '
+                                                . '<td>' . $bd->bd->obtener_respuesta($i, "TITLE") . '<br><strong>Tag:</strong><br>' . $bd->bd->obtener_respuesta($i, "TAG") . '</td>'
+                                                . '<td><img class="img-thumbnail img-small" src="' . EXT_ARTICLE . "/" . $bd->bd->obtener_respuesta($i, "URL") . '"/>' . $bd->bd->obtener_respuesta($i, "COMMENT_ADDITIONAL") . '</td>'
+                                                . '<td>   '
+                                                . '    <button type="button" class="btn btn-default"  onclick="Activar(\'' . $i . '\',\'' . $bd->bd->obtener_respuesta($i, "ID") . '\')" >Activar</button>    '
+                                                . '    <button type="button" class="btn btn-default"  onclick="Desactivar(\'' . $i . '\',\'' . $bd->bd->obtener_respuesta($i, "ID") . '\')" >Desactivar</button>    '
                                                 . '    <button type="button" class="btn btn-default"  onclick="Modificar(\'' . $i . '\',\'' . $bd->bd->obtener_respuesta($i, "ID") . '\')" >Modificar</button>    '
                                                 . '    <button type="button" class="btn btn-default"  onclick="Eliminar(\'' . $i . '\',\'' . $bd->bd->obtener_respuesta($i, "ID") . '\')" >Eliminar</button>      </td></tr>';
                                     }
@@ -323,24 +371,16 @@
                             <div id="ContentAdicional" class="post-media-content col-md-9">
                             </div>
                             <div class="post-footer col-md-12">
-
                                 <div id="post-tags" data-count="0">                                
-
-
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
             </div>
-            
+
         </div>
-
-        <!-- Bootstrap core JavaScript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-
 
     </body>
 </html>
