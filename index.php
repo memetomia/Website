@@ -1,4 +1,4 @@
-<?php header ("Location: coming-soon.php"); ?>
+<?php //header ("Location: coming-soon.php"); ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -47,8 +47,8 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-bell"></span> Notificaciones <span class="label label-danger">2</span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><span class="glyphicon glyphicon-comment"></span> Alejandro comentó en tu post</a></li>                                
-                                <li><a href="#"><span class="glyphicon glyphicon-thumbs-up"></span> A Erika le gustó tu post</a></li>                                
+                                <li><a href="#"><span class="not-readed"></span> <span class="glyphicon glyphicon-comment"></span> Alejandro comentó en tu post</a></li>                                
+                                <li><a href="#"><span class="not-readed"></span> <span class="glyphicon glyphicon-thumbs-up"></span> A Erika le gustó tu post</a></li>                                
                                 <li class="divider"></li>
                                 <li class="text-center"><a href="#" data-toggle="modal" data-target="#notifications-modal">Ver todas las notificaciones</a></li>                                
                             </ul>

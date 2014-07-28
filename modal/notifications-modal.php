@@ -20,8 +20,7 @@
                         <input type="radio" name="options"><span class="glyphicon glyphicon-comment"></span> Comentarios
                     </label>
                 </div><br/>
-                
-                
+                                
             </div>
             <!-- <div class="modal-footer">                        
                 <button type="button" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-upload"></span> Publicar</button>
