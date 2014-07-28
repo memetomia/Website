@@ -11,15 +11,38 @@
                 <h4 class="modal-title" id="myModalLabel">Notificaciones</h4>
             </div>
             <div class="modal-body">
+                
+                <button id="notifications-mark-as-read" class="pull-right btn btn-xs btn-default">Marcar todo como leído</button>                                  
 
-                <div id="notifications-options" class="btn-group btn-group-justified" data-toggle="buttons">                    
-                    <label id="notifications-likes-option" class="btn btn-default active">
-                        <input type="radio" name="options"><span class="glyphicon glyphicon-thumbs-up"></span> Me gusta
-                    </label>
-                    <label id="notifications-comments-option" class="btn btn-default">
-                        <input type="radio" name="options"><span class="glyphicon glyphicon-comment"></span> Comentarios
-                    </label>
-                </div><br/>
+                <ul class="list-group">                      
+                    <p class="text-muted">Comentarios</p>                
+                    <li class="list-group-item">
+                        <span class="not-readed"></span> 
+                        <span class="glyphicon glyphicon-comment"></span>
+                        <a href="#">Alejandro123</a> hizo un comentario en tu post: <a href="#">I must become someone else, I must become something else</a>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="glyphicon glyphicon-comment"></span>
+                        <a href="#">JaivicX</a> hizo un comentario en tu post: <a href="#">El pintor mas honesto en la historia de la humanidad</a>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="glyphicon glyphicon-comment"></span>
+                        <a href="#">hegd26</a> hizo un comentario en tu post: <a href="#">El pintor mas honesto en la historia de la humanidad</a>
+                    </li>                    
+                </ul>    
+                
+                <ul class="list-group">
+                    <p class="text-muted">Me gusta</p>                  
+                    <li class="list-group-item">
+                        <span class="not-readed"></span> 
+                        <span class="glyphicon glyphicon-thumbs-up"></span>
+                        <a href="#">Erika33</a> le gustó tu post: <a href="#">El pintor mas honesto en la historia de la humanidad</a>
+                    </li>                    
+                    <li class="list-group-item">                        
+                        <span class="glyphicon glyphicon-thumbs-up"></span>
+                        <a href="#">Erika33</a> le gustó tu post: <a href="#">Los Vengadores de Spidey</a>
+                    </li>                    
+                </ul>        
                                 
             </div>
             <!-- <div class="modal-footer">                        
@@ -34,6 +57,10 @@
     // documento preparado
     $(function()
     {        
-        
+        NotificationsController.init(
+            $('#notifications-modal'),
+            $('#notifications-mark-as-read'));
+
+        NotificationsController.activateEventListeners();
     });
 </script>

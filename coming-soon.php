@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Cover Template for Bootstrap</title>
+    <title>Memetomía</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="cover.css" rel="stylesheet">
