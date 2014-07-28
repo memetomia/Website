@@ -83,7 +83,7 @@
                         bool = false;
                     }
                     if (bool == true) {
-                        var sInfo='<img class="post-media img-thumbnail" src="'.ARTICLE.'/'.sDirImagen.'" alt="'.sTitulo.'">';
+                        var sInfo='<img class="post-media img-thumbnail" src="'.ARTICLE.'/'.sDirImagen.'" alt="'.sTitulo.'">'
                         $.post("ajax/SaveArticle.php", {
                             sTitulo: sTitulo,
                             sComentario: sComentario,

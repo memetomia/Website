@@ -1,4 +1,4 @@
-var SERVER  = "http://localhost/memetomia";
+var SERVER  = "http://localhost:8080/memetomia";
 //var SERVER          = "http://www.memetomia.com"
 var RESOURCES         = "/resources";
 var FONTS             = "/resources/fonts";

@@ -1,5 +1,4 @@
 <?php header ("Location: coming-soon.php"); ?>
-
 <!DOCTYPE html>
 <html lang="es">
     <head>
