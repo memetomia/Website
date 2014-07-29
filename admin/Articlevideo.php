@@ -1,10 +1,12 @@
 <html lang="en">
     <head>
+        <title>Gestionar Articulo (video)</title>
         <?php include_once 'frames/head.php'; ?>
         <script src="../js/const.js"></script>
 
         <link rel="stylesheet" type="text/css" href="js/jquery.cleditor.css" />
         <link rel="stylesheet" type="text/css" href="js/autocomplete/jquery.autocomplete.css" />
+        <link rel="stylesheet" type="text/css" href="css/videoprueba.css" />
         <script type="text/javascript" src="js/jq.js"></script>
         <script type="text/javascript" src="js/jquery.cleditor.js"></script>
         <script type="text/javascript" src="js/autocomplete/jquery.autocomplete.js"></script>
@@ -19,31 +21,12 @@
              MsginputTag
              MsgBtAgregar
              MsgBtGuardar
-    http://www.bing.com/videos/browse/viral
-    https://vimeo.com/
+             http://www.bing.com/videos/browse/viral
+             https://vimeo.com/
              */
             $(document).ready(function() {
 
-                var uploader = new qq.FileUploader({
-                    element: document.getElementById('BtSubir'),
-                    action: 'ajax/subirImagenArticle.php',
-                    uploadButtonText: 'subir',
-                    dragText: 'Suelta aqui',
-                    debug: false,
-                    onComplete: nombreFun
-                });
 
-                function nombreFun(id, fileName, responseJSON) {
-                    //$('#imgSubirid').attr('src','/OnionFW/means/'+responseJSON.info);
-                    if (responseJSON.error) {
-                        sDirImagen = "";
-                        msj("#MsgUrlPg", responseJSON.error, "Error")
-                    } else {
-                        $('#Imagen').attr('src', ARTICLE + "/" + responseJSON.info);
-                        sDirImagen = responseJSON.info;
-                        msj("#MsgUrlPg", "La imagen fue subida con exito", "Exito");
-                    }
-                }
 
                 $("#TextAdicional").cleditor();
 
@@ -61,6 +44,7 @@
 
                 function CargarTitulo(event, t) {
                     if (event.which == 13) {
+                       
                         $("#Titulo").html($(t).val());
                         sTitulo = $(t).val();
                         msj("#MsgNombrePg", "Titulo agregado correctamente", "Exito");
@@ -72,6 +56,21 @@
                 $('#inputTag').keydown(function() {
                     AgregarTagWithEnter(event, this)
                 });
+                $('#UrlYouTube').keydown(function() {
+                    if (event.which == 13) {
+                         sDirImagen= "http://img.youtube.com/vi/" + $("#UrlYouTube").val() + "/0.jpg"
+                         HtmlMedia= '<iframe id="iframe" width="430" height="315" src="//www.youtube.com/embed/' + $("#UrlYouTube").val() + '?autoplay=1&amp;controls=1&amp;iv_load_policy=3" frameborder="0" allowfullscreen></iframe>';
+                                   
+                        $("#Imagen").attr("src", "http://img.youtube.com/vi/" + $("#UrlYouTube").val() + "/0.jpg");
+                        $("#DivYouTube").attr("video", $("#UrlYouTube").val());
+                        $("#DivYouTube").append('<div id="VideoPlay" class="play"></div>');
+                        $("#VideoPlay").click(function() {
+                            $("#DivYouTube").html( HtmlMedia);
+                        });
+                    }
+
+                });
+
                 $('#BtGuardar').bind('click', function() {
                     PostGuardar();
                 });
@@ -89,17 +88,17 @@
 
 
                     if (bool == true) {
-                        var sInfo = '<img class="post-media img-thumbnail" src="' + ARTICLE + '/' + sDirImagen + '" alt="' + sTitulo + '">'
-                        $.post("ajax/SaveArticle.php", {
+                         $.post("ajax/SaveVideoArticle.php", {
                             sTitulo: sTitulo,
                             sComentario: sComentario,
                             aEtiquetas: string,
                             sImagen: sDirImagen,
-                            sinfo: sInfo
+                            sHtmlMedia:HtmlMedia
+                           
                         }, function(o) {
                             if (o.Tupla > 0) {
                                 msj("#MsgBtGuardar", "Todo ok", "Exito");
-                                $("#tabla tbody").prepend('<tr id="t' + $('#tabla >tbody >tr').length + '"><td>' + o.Tupla + '</td><td>' + $("#NombrePg").val() + '<br>Tag:<br>' + string + '</td><td><img id="" class="img-thumbnail img-small" src="' + ARTICLE + '/' + sDirImagen + '">' + sComentario + '</td>\n\
+                                $("#tabla tbody").prepend('<tr id="t' + $('#tabla >tbody >tr').length + '"><td>' + o.Tupla + '</td><td>' + $("#NombrePg").val() + '<br>Tag:<br>' + string + '</td><td><img id="" class="img-thumbnail img-small" src="' +sDirImagen + '">' + sComentario + '</td>\n\
                                 <td> <button type="button" class="btn btn-default"  onclick="Activar(\'' + $('#tabla >tbody >tr').length + '\',\'' + o.Tupla + '\')" >Activar</button>\n\
                                     <button type="button" class="btn btn-default"  onclick="Desactivar(\'' + $('#tabla >tbody >tr').length + '\',\'' + o.Tupla + '\')" >Desactivar</button>\n\
                                     <button type="button" class="btn btn-default"  onclick="Modificar(\'' + $('#tabla >tbody >tr').length + '\',\'' + o.Tupla + '\')" >Modificar</button>\n\
@@ -271,15 +270,15 @@
 
                             </div>
                             <div class="form-group">
-                                <label for="UrlPg">Imagen</label>
-                                <button id='BtSubir' type="button" class="btn btn-default"  >Subir</button>
-                                <div id="MsgUrlPg" class="msgbox Oculto"><span class="spanNoti"></span></div>
+                                <label for="UrlYouTube">Url del video de youtube</label>
+                                <input type="text" class="form-control" id="UrlYouTube" placeholder="">
+                                <div id="MsgUrlYouTube" class="msgbox Oculto "></div>
 
                             </div>
 
                             <div class="form-group">
                                 <label for="inputTag">Etiqueta</label>
-                                <input type="text" class="form-control" id="inputTag" placeholder="Agrega una pagina nueva">
+                                <input type="text" class="form-control" id="inputTag" placeholder="Agrega una etiqueta y presiona enter">
                                 <div id="MsginputTag" class="msgbox Oculto"><span class="spanNoti"></span></div>
 
                             </div>
@@ -317,7 +316,7 @@
                                 $bd = new TableGallery();
                                 $todo = $bd->All();
                                 $html = "";
-                                if ($todo > 0) {
+                                 if ($todo > 0) {
                                     $sClass = "";
                                     for ($i = 0; $i < $todo; $i++) {
                                         if ($bd->bd->obtener_respuesta($i, "STATE") == "1") {
@@ -325,9 +324,41 @@
                                         } else {
                                             $sClass = "";
                                         }
+                                        $sUrlaMostrar = "";
+                                        $botonplay = "";
+                                        if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 0) {
+                                         
+                                             $sUrlaMostrar = '<img class="img-thumbnail img-small" src="' . EXT_ARTICLE . "/" . $bd->bd->obtener_respuesta($i, "URL"). '"/>';
+                                            $botonplay = "";
+                                        }
+                                        if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 1) {
+                                              $sUrlaMostrar = '<img class="img-thumbnail img-small" src="' . $bd->bd->obtener_respuesta($i, "URL"). '"/>';
+                                        
+                                            $botonplay = '<div id="Video-' . $bd->bd->obtener_respuesta($i, "ID") . '" class="play"></div>';
+                                            $botonplay .= '<script type="text/javascript">'
+                                                    . '$("#Video-' . $bd->bd->obtener_respuesta($i, "ID") . '").click(function() {
+                                                           $("#d-' . $bd->bd->obtener_respuesta($i, "ID") . '").html(\'' . $bd->bd->obtener_respuesta($i, "INFOMEDIA") . '\');
+                                                       });                               </script>';
+                                        }
+                                        if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 2) {
+                                         $sUrlaMostrar = '<img class="img-thumbnail img-small" src="' . $bd->bd->obtener_respuesta($i, "URL"). '"/>';
+                                        
+                                            $botonplay = '<div id="Vine-' . $bd->bd->obtener_respuesta($i, "ID") . '" class="play"></div>';
+                                            $botonplay .= '<script type="text/javascript">'
+                                                    . '$("#Vine-' . $bd->bd->obtener_respuesta($i, "ID") . '").click(function() {
+                                                           $("#d-' . $bd->bd->obtener_respuesta($i, "ID") . '").html(\'' . $bd->bd->obtener_respuesta($i, "INFOMEDIA") . '\');
+                                                        $(".Vine").click(function() {
+                                                            $(this).get(0).paused ? $(this).get(0).play() : $(this).get(0).pause();
+                            });});                               </script>';
+                                        }
+                                        if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 3) {
+                                            $sUrlaMostrar = $bd->bd->obtener_respuesta($i, "INFOMEDIA");
+                                            $botonplay ="" ;
+                                          
+                                        }
                                         $html .= '<tr id="t' . $i . '" class="' . $sClass . '"><td>' . $bd->bd->obtener_respuesta($i, "ID") . '</td>'
                                                 . '<td>' . $bd->bd->obtener_respuesta($i, "TITLE") . '<br><strong>Tag:</strong><br>' . $bd->bd->obtener_respuesta($i, "TAG") . '</td>'
-                                                . '<td><img class="img-thumbnail img-small" src="' . EXT_ARTICLE . "/" . $bd->bd->obtener_respuesta($i, "URL") . '"/>' . $bd->bd->obtener_respuesta($i, "COMMENT_ADDITIONAL") . '</td>'
+                                                . '<td><div id="d-' . $bd->bd->obtener_respuesta($i, "ID") . '">' . $sUrlaMostrar   . $botonplay . "</div>" . $bd->bd->obtener_respuesta($i, "COMMENT_ADDITIONAL") . '</td>'
                                                 . '<td>   '
                                                 . '    <button type="button" class="btn btn-default"  onclick="Activar(\'' . $i . '\',\'' . $bd->bd->obtener_respuesta($i, "ID") . '\')" >Activar</button>    '
                                                 . '    <button type="button" class="btn btn-default"  onclick="Desactivar(\'' . $i . '\',\'' . $bd->bd->obtener_respuesta($i, "ID") . '\')" >Desactivar</button>    '
@@ -355,8 +386,8 @@
                                     <span class="comment-counter"><span class="glyphicon glyphicon-comment"></span> 341 comentarios</span>
                                 </h5>                        
                             </div>
-                            <div class="post-media-content col-md-9">
-                                <img id="Imagen" class="post-media img-thumbnail" src="../media/example_img/ArticlePredeterminado.jpg" height="467" width="460" alt="I must become someone else, I must become something else">
+                            <div id="DivYouTube" class="post-media-content col-md-9">
+                                <img id="Imagen" class="post-media img-thumbnail" src="../media/example_img/VideoPredeterminado.jpg" height="467" width="460" alt="I must become someone else, I must become something else">
                             </div>
 
                             <div class="post-options col-md-3">

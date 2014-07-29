@@ -1,0 +1,16 @@
+.play {
+position: relative;
+top: 50%;
+margin-top: -190px;
+left: 50%;
+margin-left: -30px;
+margin-bottom: 120px;
+height: 90px;
+width: 70px;
+text-indent: -999px;
+background-image: url("../../media/example_img/icon-video-play.png");
+}
+.vine{
+  width: 300px;
+   
+}

@@ -1,8 +1,9 @@
 <html lang="en">
     <head>
+         <title>Gestionar Articulo</title>
         <?php include_once 'frames/head.php'; ?>
         <script src="../js/const.js"></script>
-
+ <link rel="stylesheet" type="text/css" href="css/videoprueba.css" />
         <link rel="stylesheet" type="text/css" href="js/jquery.cleditor.css" />
         <link rel="stylesheet" type="text/css" href="js/autocomplete/jquery.autocomplete.css" />
         <script type="text/javascript" src="js/jq.js"></script>
@@ -97,7 +98,7 @@
                         }, function(o) {
                             if (o.Tupla > 0) {
                                 msj("#MsgBtGuardar", "Todo ok", "Exito");
-                                $("#tabla tbody").prepend('<tr id="t' + $('#tabla >tbody >tr').length + '"><td>' + o.Tupla + '</td><td>' + $("#NombrePg").val() + '<br>Tag:<br>' + string + '</td><td><img id="" class="img-thumbnail img-small" src="' + ARTICLE + '/' + sDirImagen + '">' + sComentario + '</td>\n\
+                                $("#tabla tbody").prepend('<tr id="t' + $('#tabla >tbody >tr').length + '" class="trDel"><td>' + o.Tupla + '</td><td>' + $("#NombrePg").val() + '<br>Tag:<br>' + string + '</td><td><img id="" class="img-thumbnail img-small" src="' + ARTICLE + '/' + sDirImagen + '">' + sComentario + '</td>\n\
                                 <td> <button type="button" class="btn btn-default"  onclick="Activar(\'' + $('#tabla >tbody >tr').length + '\',\'' + o.Tupla + '\')" >Activar</button>\n\
                                     <button type="button" class="btn btn-default"  onclick="Desactivar(\'' + $('#tabla >tbody >tr').length + '\',\'' + o.Tupla + '\')" >Desactivar</button>\n\
                                     <button type="button" class="btn btn-default"  onclick="Modificar(\'' + $('#tabla >tbody >tr').length + '\',\'' + o.Tupla + '\')" >Modificar</button>\n\
@@ -315,7 +316,7 @@
                                 $bd = new TableGallery();
                                 $todo = $bd->All();
                                 $html = "";
-                                if ($todo > 0) {
+                                   if ($todo > 0) {
                                     $sClass = "";
                                     for ($i = 0; $i < $todo; $i++) {
                                         if ($bd->bd->obtener_respuesta($i, "STATE") == "1") {
@@ -323,9 +324,41 @@
                                         } else {
                                             $sClass = "";
                                         }
+                                        $sUrlaMostrar = "";
+                                        $botonplay = "";
+                                        if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 0) {
+                                         
+                                             $sUrlaMostrar = '<img class="img-thumbnail img-small" src="' . EXT_ARTICLE . "/" . $bd->bd->obtener_respuesta($i, "URL"). '"/>';
+                                            $botonplay = "";
+                                        }
+                                        if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 1) {
+                                              $sUrlaMostrar = '<img class="img-thumbnail img-small" src="' . $bd->bd->obtener_respuesta($i, "URL"). '"/>';
+                                        
+                                            $botonplay = '<div id="Video-' . $bd->bd->obtener_respuesta($i, "ID") . '" class="play"></div>';
+                                            $botonplay .= '<script type="text/javascript">'
+                                                    . '$("#Video-' . $bd->bd->obtener_respuesta($i, "ID") . '").click(function() {
+                                                           $("#d-' . $bd->bd->obtener_respuesta($i, "ID") . '").html(\'' . $bd->bd->obtener_respuesta($i, "INFOMEDIA") . '\');
+                                                       });                               </script>';
+                                        }
+                                        if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 2) {
+                                         $sUrlaMostrar = '<img class="img-thumbnail img-small" src="' . $bd->bd->obtener_respuesta($i, "URL"). '"/>';
+                                        
+                                            $botonplay = '<div id="Vine-' . $bd->bd->obtener_respuesta($i, "ID") . '" class="play"></div>';
+                                            $botonplay .= '<script type="text/javascript">'
+                                                    . '$("#Vine-' . $bd->bd->obtener_respuesta($i, "ID") . '").click(function() {
+                                                           $("#d-' . $bd->bd->obtener_respuesta($i, "ID") . '").html(\'' . $bd->bd->obtener_respuesta($i, "INFOMEDIA") . '\');
+                                                        $(".Vine").click(function() {
+                                                            $(this).get(0).paused ? $(this).get(0).play() : $(this).get(0).pause();
+                            });});                               </script>';
+                                        }
+                                        if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 3) {
+                                            $sUrlaMostrar = $bd->bd->obtener_respuesta($i, "INFOMEDIA");
+                                            $botonplay ="" ;
+                                          
+                                        }
                                         $html .= '<tr id="t' . $i . '" class="' . $sClass . '"><td>' . $bd->bd->obtener_respuesta($i, "ID") . '</td>'
                                                 . '<td>' . $bd->bd->obtener_respuesta($i, "TITLE") . '<br><strong>Tag:</strong><br>' . $bd->bd->obtener_respuesta($i, "TAG") . '</td>'
-                                                . '<td><img class="img-thumbnail img-small" src="' . EXT_ARTICLE . "/" . $bd->bd->obtener_respuesta($i, "URL") . '"/>' . $bd->bd->obtener_respuesta($i, "COMMENT_ADDITIONAL") . '</td>'
+                                                . '<td><div id="d-' . $bd->bd->obtener_respuesta($i, "ID") . '">' . $sUrlaMostrar   . $botonplay . "</div>" . $bd->bd->obtener_respuesta($i, "COMMENT_ADDITIONAL") . '</td>'
                                                 . '<td>   '
                                                 . '    <button type="button" class="btn btn-default"  onclick="Activar(\'' . $i . '\',\'' . $bd->bd->obtener_respuesta($i, "ID") . '\')" >Activar</button>    '
                                                 . '    <button type="button" class="btn btn-default"  onclick="Desactivar(\'' . $i . '\',\'' . $bd->bd->obtener_respuesta($i, "ID") . '\')" >Desactivar</button>    '

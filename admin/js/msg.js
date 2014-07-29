@@ -23,4 +23,3 @@ function OcultarMsj(id) {
     $(id).addClass("Oculto");
 }
 
-

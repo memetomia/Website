@@ -3,7 +3,9 @@
                         <li class="active"><a href="#">Articulo </a></li>
                         <li><a href="buscar.php">Buscar</a></li>
                         <li><a href="Article.php">Subir un Articulo</a></li>
-                        <li><a href="#">Subir un Articulo (video)</a></li>
+                        <li><a href="ArticleVideo.php">Subir un Articulo (video)</a></li>
+                         <li><a href="ArticleVine.php">Subir un Articulo (vine)</a></li>
+                            <li><a href="ArticleEmbed.php">Subir un Articulo (Embed)</a></li>
                         <li><a href="EditArticle.php">Editar</a></li>
                         <li><a href="#">Extraer de otra pagina</a></li>
 

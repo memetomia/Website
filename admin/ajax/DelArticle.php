@@ -6,11 +6,15 @@ $bd = new TableGallery();
 $iID = $_POST["iID"];
 $sDirImagen = $bd->SearchById($iID);
 $iResultado = -1;
-$bRespuestaArchivoEliminado = unlink(ARTICLE . "/" . $sDirImagen[0]["URL"]);
-if ($bRespuestaArchivoEliminado) {
-    $iResultado = $bd->Del($iID);
+if ($sDirImagen[0]["TYPEMEDIA"] == 0) {
+    $bRespuestaArchivoEliminado = unlink(ARTICLE . "/" . $sDirImagen[0]["URL"]);
+    if ($bRespuestaArchivoEliminado) {
+        $iResultado = $bd->Del($iID);
+    } else {
+        $bd->Desactive($iID);
+    }
 } else {
-    $bd->Desactive($iID);
+     $iResultado = $bd->Del($iID);
 }
 
 $json = new stdClass();

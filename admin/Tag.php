@@ -103,9 +103,7 @@
                     <div class="row placeholders">
                         <form role="form">
 
-<iframe width="480" height="270" allowfullscreen="true" frameborder="0" marginwidth="0" marginheight='0' scrolling="no" src="http://hub.video.msn.com/embed/c2726807-9422-11ec-656d-5010fafbc681/?vars=c3luZGljYXRpb249dGFnJmxpbmtiYWNrPWh0dHAlM0ElMkYlMkZ3d3cuYmluZy5jb20lMkZ2aWRlb3MlMkZicm93c2UmY29uZmlnQ3NpZD1NU05WaWRlbyZmcj1zaGFyZWVtYmVkLXN5bmRpY2F0aW9uJmJyYW5kPXY1JTVFNTQ0eDMwNiZsaW5rb3ZlcnJpZGUyPWh0dHAlM0ElMkYlMkZ3d3cuYmluZy5jb20lMkZ2aWRlb3MlMkZicm93c2UlM0Zta3QlM0Rlbi11cyUyNnZpZCUzRCU3QjAlN0QlMjZmcm9tJTNEJmNvbmZpZ05hbWU9c3luZGljYXRpb25wbGF5ZXImbWt0PWVuLXVz">
-  <A href="http://www.bing.com/videos/browse?mkt=en-us&vid=c2726807-9422-11ec-656d-5010fafbc681&from=shareembed-syndication&src=v5:embed:syndication:" target="_new" title="Shane O'Neill Street League Chicago 5-Trick Fix">Video: Shane O'Neill Street League Chicago 5-Trick Fix</A>
-</iframe>
+
 
 
 
