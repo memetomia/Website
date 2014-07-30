@@ -31,7 +31,7 @@ class TableGallery {
       @return integer numero de tupla o -1 si falla la creacion
      */
     public function Create($sTitle, $iTypeMedia, $sInfoMedia, $sUrl, $sTag, $sComment) {
-        $query = sprintf("INSERT INTO `gallery`.`gallery` "
+        $query = sprintf("INSERT INTO `gallery` "
                 . "(`ID`, `TITLE`, `TYPEMEDIA`, `INFOMEDIA`, `URL`, `DATE`, `TAG`, `N_MORE`, `N_LESS`, `N_COMMENT`, `COMMENT_ADDITIONAL`,STATE) "
                 . "VALUES (NULL, '%s', '%s', '%s', '%s', CURRENT_TIMESTAMP, '%s', 0, 0, 0, '%s','1');", $sTitle, $iTypeMedia, $sInfoMedia, $sUrl, $sTag, $sComment);
         $this->bd->hacer_query($query);
@@ -46,7 +46,7 @@ class TableGallery {
       @return integer numero de filas retornados ejemplo 1 si agrego 0 sino agrego o -1 otro tipo de errores
      */
     public function UpdateTitle($sData, $iID) {
-        $query = sprintf("UPDATE  `gallery`.`gallery` SET  `TITLE` =  '%s' WHERE  `gallery`.`ID` ='%s';", $sData, $iID);
+        $query = sprintf("UPDATE  `gallery` SET  `TITLE` =  '%s' WHERE  `ID` ='%s';", $sData, $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
@@ -59,7 +59,7 @@ class TableGallery {
       @return integer numero de filas retornados ejemplo 1 si agrego 0 sino agrego o -1 otro tipo de errores
      */
     public function UpdateTag($sData, $iID) {
-        $query = sprintf("UPDATE  `gallery`.`gallery` SET  `TAG` =  '%s' WHERE  `gallery`.`ID` ='%s';", $sData, $iID);
+        $query = sprintf("UPDATE  `gallery` SET  `TAG` =  '%s' WHERE  `ID` ='%s';", $sData, $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
@@ -71,7 +71,7 @@ class TableGallery {
       @return integer numero de filas retornados ejemplo 1 si agrego 0 sino agrego o -1 otro tipo de errores
      */
     public function UpdateNMorePlus($iID) {
-        $query = sprintf("UPDATE  `gallery`.`gallery` SET  `N_MORE` = N_MORE+1 WHERE  `gallery`.`ID` ='%s';", $iID);
+        $query = sprintf("UPDATE  `gallery` SET  `N_MORE` = N_MORE+1 WHERE  `ID` ='%s';", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
@@ -82,7 +82,7 @@ class TableGallery {
       @return integer numero de filas retornados ejemplo 1 si agrego 0 sino agrego o -1 otro tipo de errores
      */
     public function UpdateNMoreLess($iID) {
-        $query = sprintf("UPDATE  `gallery`.`gallery` SET  `N_MORE` = N_MORE-1 WHERE  `gallery`.`ID` ='%s';", $iID);
+        $query = sprintf("UPDATE  `gallery` SET  `N_MORE` = N_MORE-1 WHERE  `ID` ='%s';", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
@@ -94,7 +94,7 @@ class TableGallery {
       @return integer numero de filas retornados ejemplo 1 si agrego 0 sino agrego o -1 otro tipo de errores
      */
     public function UpdateNLessPlus($iID) {
-        $query = sprintf("UPDATE  `gallery`.`gallery` SET  `N_LESS` = N_LESS+1 WHERE  `gallery`.`ID` ='%s';", $iID);
+        $query = sprintf("UPDATE  `gallery` SET  `N_LESS` = N_LESS+1 WHERE  `ID` ='%s';", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
@@ -106,7 +106,7 @@ class TableGallery {
       @return integer numero de filas retornados ejemplo 1 si agrego 0 sino agrego o -1 otro tipo de errores
      */
     public function UpdateNLessLess($iID) {
-        $query = sprintf("UPDATE  `gallery`.`gallery` SET  `N_LESS` = N_LESS-1 WHERE  `gallery`.`ID` ='%s';", $iID);
+        $query = sprintf("UPDATE  `gallery` SET  `N_LESS` = N_LESS-1 WHERE  `ID` ='%s';", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
@@ -117,7 +117,7 @@ class TableGallery {
       @return integer numero de filas retornados ejemplo 1 si agrego 0 sino agrego o -1 otro tipo de errores
      */
     public function UpdateNCOMMENTPlus($iID) {
-        $query = sprintf("UPDATE  `gallery`.`gallery` SET  `N_COMMENT` = N_COMMENT+1 WHERE  `gallery`.`ID` ='%s';", $iID);
+        $query = sprintf("UPDATE  `gallery` SET  `N_COMMENT` = N_COMMENT+1 WHERE  `ID` ='%s';", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
@@ -129,37 +129,37 @@ class TableGallery {
       @return integer numero de filas retornados ejemplo 1 si agrego 0 sino agrego o -1 otro tipo de errores
      */
     public function UpdateNCOMMENTLess($iID) {
-        $query = sprintf("UPDATE  `gallery`.`gallery` SET  `N_COMMENT` = N_COMMENT-1 WHERE  `gallery`.`ID` ='%s';", $iID);
+        $query = sprintf("UPDATE  `gallery` SET  `N_COMMENT` = N_COMMENT-1 WHERE  `ID` ='%s';", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
 
     public function All() {
-        $query = sprintf("Select * from `gallery`.gallery ORDER BY  `gallery`.`ID` DESC ;");
+        $query = sprintf("Select * from gallery ORDER BY  `ID` DESC ;");
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
      
  public function SearchById($iID) {
-        $query = sprintf("Select * from `gallery`.gallery ORDER BY  `gallery`.`ID`='%s' DESC ;",$iID);
+        $query = sprintf("Select * from gallery ORDER BY  `ID`='%s' DESC ;",$iID);
         $this->bd->hacer_query($query);
         return $this->bd->obtener_respuesta_completa();
     }
     public function Active($iID) {
-        $query = sprintf("UPDATE  `gallery`.`gallery` SET  `STATE` = 0 WHERE  `gallery`.`ID` ='%s';", $iID);
+        $query = sprintf("UPDATE  `gallery` SET  `STATE` = 0 WHERE  `ID` ='%s';", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
 
     public function Desactive($iID) {
-        $query = sprintf("UPDATE  `gallery`.`gallery` SET  `STATE` = 1 WHERE  `gallery`.`ID` ='%s';", $iID);
+        $query = sprintf("UPDATE  `gallery` SET  `STATE` = 1 WHERE  `ID` ='%s';", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
 
     public function Del($iID) {
-        $query = sprintf("Delete from `gallery`.`gallery` "
-                ." WHERE  `gallery`.`ID` =%s;", $iID);
+        $query = sprintf("Delete from `gallery` "
+                ." WHERE  `ID` =%s;", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }

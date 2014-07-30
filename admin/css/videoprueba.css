@@ -1,14 +1,17 @@
 .play {
-position: absolute;
-top: 50%;	
-left: 50%;
-margin: -47px 0 0 -35px;
-width: 70px;
-height: 94px;	
-background-image: url("../../media/example_img/icon-video-play.png");
-background-repeat: no-repeat;
+    position: absolute;
+    top: 50%;	
+    left: 50%;
+    margin: -47px 0 0 -35px;
+    width: 70px;
+    height: 94px;	
+    background-image: url("../../media/example_img/icon-video-play.png");
+    background-repeat: no-repeat;
+}
+padreplay{
+
 }
 .vine{
-  width: 300px;
-   
+    width: 300px;
+
 }
