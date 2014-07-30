@@ -135,7 +135,31 @@ class TableGallery {
     }
 
     public function All() {
-           $query = sprintf("Select * from `gallery`.gallery ORDER BY  `gallery`.`ID` DESC ;");
+        $query = sprintf("Select * from `gallery`.gallery ORDER BY  `gallery`.`ID` DESC ;");
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+     
+ public function SearchById($iID) {
+        $query = sprintf("Select * from `gallery`.gallery ORDER BY  `gallery`.`ID`='%s' DESC ;",$iID);
+        $this->bd->hacer_query($query);
+        return $this->bd->obtener_respuesta_completa();
+    }
+    public function Active($iID) {
+        $query = sprintf("UPDATE  `gallery`.`gallery` SET  `STATE` = 0 WHERE  `gallery`.`ID` ='%s';", $iID);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+
+    public function Desactive($iID) {
+        $query = sprintf("UPDATE  `gallery`.`gallery` SET  `STATE` = 1 WHERE  `gallery`.`ID` ='%s';", $iID);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+
+    public function Del($iID) {
+        $query = sprintf("Delete from `gallery`.`gallery` "
+                ." WHERE  `gallery`.`ID` =%s;", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }

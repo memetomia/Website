@@ -90,19 +90,69 @@ FROM  `tag` where NAME='%s'", $sName);
     function AddTagToArticle($iIDTag, $UltimoId) {
         $sQuery = sprintf("SELECT * FROM `gallery_tag` "
                 . "WHERE `ID_TAG` = '%s' AND `ID_GALLERY` = '%s';", $iIDTag, $UltimoId);
-       $this->bd->hacer_query($sQuery);
-        if ($this->bd->filas_retornadas_por_consulta()<= 0) {
+        $this->bd->hacer_query($sQuery);
+        if ($this->bd->filas_retornadas_por_consulta() <= 0) {
             $sQuery = sprintf("INSERT INTO `gallery_tag` "
                     . "(`ID_TAG`, `ID_GALLERY`, `PESO`) "
                     . "VALUES"
                     . " ('%s', '%s', '0');", $iIDTag, $UltimoId);
-           $this->bd->hacer_query($sQuery);
+            $this->bd->hacer_query($sQuery);
         } else {
             $sQuery = sprintf("UPDATE `gallery_tag` SET PESO=PESO+1 "
                     . "WHERE `ID_TAG` = '%s' AND `ID_GALLERY` = '%s';", $iIDTag, $UltimoId);
-             $this->bd->hacer_query($sQuery);
+            $this->bd->hacer_query($sQuery);
         }
         $this->UpdateCountPlus($iIDTag);
+    }
+
+    public function All() {
+        $query = sprintf("Select * from `gallery`.tag ORDER BY  `tag`.`ID` DESC ;");
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+
+    public function SearchById($iID) {
+        $query = sprintf("Select * from `gallery`.gallery ORDER BY  `gallery`.`ID`='%s' DESC ;", $iID);
+        $this->bd->hacer_query($query);
+        return $this->bd->obtener_respuesta_completa();
+    }
+
+    public function Active($iID) {
+        $query = sprintf("UPDATE  `gallery`.`gallery` SET  `STATE` = 0 WHERE  `gallery`.`ID` ='%s';", $iID);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+
+    public function Desactive($iID) {
+        $query = sprintf("UPDATE  `gallery`.`gallery` SET  `STATE` = 1 WHERE  `gallery`.`ID` ='%s';", $iID);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+
+    public function Del($iID) {
+        $query = sprintf("Delete from `gallery`.`gallery` "
+                . " WHERE  `gallery`.`ID` =%s;", $iID);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+
+    public function SearchByName($sName) {
+        $query = sprintf("Select * from `gallery`.tag where NAME LIKE '%s%%';", $sName);
+        $this->bd->hacer_query($query);
+
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+ public function SearchByExactName($sName) {
+        $query = sprintf("Select * from `gallery`.tag where NAME = '%s';", $sName);
+        $this->bd->hacer_query($query);
+
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+    public function mod($id,$new) {
+          $query = sprintf("UPDATE  `gallery`.`tag` SET  `NAME` =  '%s' WHERE  `tag`.`ID` ='%s';", $new,$id);
+        $this->bd->hacer_query($query);
+
+        return $this->bd->filas_retornadas_por_consulta();
     }
 
 }
