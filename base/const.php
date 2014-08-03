@@ -33,6 +33,7 @@ if ($usuario == "jaivic") {
     defined('ADMIN_JS') ? null : define("ADMIN_JS", "/admin/js");
     defined('EXT_MEME') ? null : define("EXT_MEME", SERVER . MEDIA . "/meme");
     defined('EXT_ARTICLE') ? null : define("EXT_ARTICLE", SERVER . MEDIA . "/article");
+    defined('EXT_TAG') ? null : define("EXT_TAG", SERVER . "/Tag.php");
 }
 if ($usuario == "memetomia") {
     defined('DB_SERVER') ? null : define("DB_SERVER", "localhost");
@@ -61,6 +62,7 @@ if ($usuario == "memetomia") {
     defined('ADMIN_JS') ? null : define("ADMIN_JS", "/admin/js");
     defined('EXT_MEME') ? null : define("EXT_MEME", SERVER . MEDIA . "/meme");
     defined('EXT_ARTICLE') ? null : define("EXT_ARTICLE", SERVER . MEDIA . "/article");
+    defined('EXT_TAG') ? null : define("EXT_TAG", SERVER . "/Tag.php");
 }
 
 if ($usuario == "hector") {

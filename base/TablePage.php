@@ -24,7 +24,7 @@ class TablePage {
       @return integer nuemo de la tupla creada o -1 si falla
      */
     public function Create($sName, $sUrl) {
-        $query = sprintf("INSERT INTO `gallery`.`page` (`ID`, `NAME`, `URL`, `COUNT`) "
+        $query = sprintf("INSERT INTO `page` (`ID`, `NAME`, `URL`, `COUNT`) "
                 . "VALUES "
                 . "(NULL, '%s', '%s', '0');", $sName, $sUrl);
         $this->bd->hacer_query($query);
@@ -32,14 +32,14 @@ class TablePage {
     }
 
     public function Del($iID) {
-        $query = sprintf("UPDATE  `gallery`.`page` "
+        $query = sprintf("UPDATE  `page` "
                 . "SET  `STATE` =  '1' WHERE  `page`.`ID` =%s;", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
 
     public function Mod($sName, $sUrl, $iID) {
-        $query = sprintf("UPDATE  `gallery`.`page` "
+        $query = sprintf("UPDATE  `page` "
                 . "SET  `NAME` =  '%s', URL='%s' WHERE  `page`.`ID` =%s;", $sName, $sUrl, $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
@@ -52,7 +52,7 @@ class TablePage {
       @return interger retorna el id de la filas modificadas
      */
     public function UpdateCountPlus($iID) {
-        $query = sprintf("UPDATE  `gallery`.`page` SET  `COUNT` =  COUNT+1 WHERE  `user`.`ID` ='%s';", $sData, $iID);
+        $query = sprintf("UPDATE  `page` SET  `COUNT` =  COUNT+1 WHERE  `user`.`ID` ='%s';", $sData, $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
@@ -64,20 +64,20 @@ class TablePage {
       @return integer retorna el id de las filas a modificar
      */
     public function UpdateCountLess($iID) {
-        $query = sprintf("UPDATE  `gallery`.`page` SET  `COUNT` =  COUNT-1 WHERE  `user`.`ID` ='%s';", $sData, $iID);
+        $query = sprintf("UPDATE  `page` SET  `COUNT` =  COUNT-1 WHERE  `user`.`ID` ='%s';", $sData, $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
 
     public function SearchPage($iID) {
-        $query = sprintf("Select * from `gallery`.page where ID='%s';", $iID);
+        $query = sprintf("Select * from page where ID='%s';", $iID);
         $this->bd->hacer_query($query);
 
         return $this->bd->filas_retornadas_por_consulta();
     }
 
     public function AllPage() {
-        $query = sprintf("Select * from `gallery`.page ORDER BY  `page`.`STATE` ASC ;");
+        $query = sprintf("Select * from page ORDER BY  `page`.`STATE` ASC ;");
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }

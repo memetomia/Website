@@ -5,11 +5,11 @@
     margin: -47px 0 0 -35px;
     width: 70px;
     height: 94px;	
-    background-image: url("../../media/example_img/icon-video-play.png");
+    background-image: url("../../media/default/icon-video-play.png");
     background-repeat: no-repeat;
 }
-padreplay{
-
+.DivPlay{
+position: relative;
 }
 .vine{
     width: 300px;

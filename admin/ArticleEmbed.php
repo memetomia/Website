@@ -164,7 +164,7 @@
                     command: "inserthtml",
                     popupName: "hello",
                     popupClass: "cleditorPrompt",
-                    popupContent: "meme:<br><input id=meme type=text size=50><br><img id=ImgMeme src=../media/example_img/MemePredeterminado.jpg height=200 width=200 /><br><input type=button value=Agregar>",
+                    popupContent: "meme:<br><input id=meme type=text size=50><br><img id=ImgMeme src=" + DEFAULT + "/MemePredeterminado.jpg height=200 width=200 /><br><input type=button value=Agregar>",
                     buttonClick: helloClick
                 };
 
@@ -287,7 +287,7 @@
                         </form>
 <!--<iframe src="http://blip.tv/play/h8Z9g6LUfAI.x?p=1" width="720" height="433" frameborder="0" allowfullscreen></iframe><embed type="application/x-shockwave-flash" src="http://a.blip.tv/api.swf#h8Z9g6LUfAI" style="display:none"></embed>-->
                     </div>
-                   <?php include_once 'frames/tabla.php';?>
+                    <?php include_once 'frames/tabla.php'; ?>
                 </div>
                 <div class="col-sm-5  col-md-5 ">
 
@@ -304,7 +304,7 @@
                             </div>
                             <div id="DivUrlImagen" class="post-media-content col-md-9">
 
-                                <img id="Imagen" class="post-media img-thumbnail" src="../media/example_img/VideoPredeterminado.jpg" height="467" width="460" alt="I must become someone else, I must become something else">
+                                <img id="Imagen" class="post-media img-thumbnail" src="../media/default/VideoPredeterminado.jpg" height="467" width="460" alt="I must become someone else, I must become something else">
                             </div>
 
                             <div class="post-options col-md-3">

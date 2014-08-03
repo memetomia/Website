@@ -24,7 +24,7 @@ class TableMeme {
       @return integer numero de la nueva tupla o -1 si hay un error
      */
     public function Create($sName, $sUrl) {
-        $query = sprintf("INSERT INTO `gallery`.`meme` (`ID`, `NAME`, `URL`, `COUNT`) "
+        $query = sprintf("INSERT INTO `meme` (`ID`, `NAME`, `URL`, `COUNT`) "
                 . "VALUES "
                 . "(NULL, '%s', '%s', '0');", $sName, $sUrl);
         $this->bd->hacer_query($query);
@@ -38,7 +38,7 @@ class TableMeme {
       @return type description
      */
     public function UpdateCountPlus($iID) {
-        $query = sprintf("UPDATE  `gallery`.`meme` SET  `COUNT` =  COUNT+1 WHERE  `user`.`ID` ='%s';", $sData, $iID);
+        $query = sprintf("UPDATE  `meme` SET  `COUNT` =  COUNT+1 WHERE  `user`.`ID` ='%s';", $sData, $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
@@ -50,51 +50,51 @@ class TableMeme {
       @return type description
      */
     public function UpdateCountLess($iID) {
-        $query = sprintf("UPDATE  `gallery`.`meme` SET  `COUNT` =  COUNT-1 WHERE  `user`.`ID` ='%s';", $sData, $iID);
+        $query = sprintf("UPDATE  `meme` SET  `COUNT` =  COUNT-1 WHERE  `user`.`ID` ='%s';", $sData, $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
 
     public function All() {
-        $query = sprintf("Select * from `gallery`.meme ORDER BY  `meme`.`STATE` ASC ;");
+        $query = sprintf("Select * from meme ORDER BY  `meme`.`STATE` ASC ;");
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
 
     public function SearchByName($sName) {
-        $query = sprintf("Select * from `gallery`.meme where NAME LIKE '%s%%';", $sName);
+        $query = sprintf("Select * from meme where NAME LIKE '%s%%';", $sName);
         $this->bd->hacer_query($query);
 
         return $this->bd->filas_retornadas_por_consulta();
     }
 
     public function rSearchByName($sName) {
-        $query = sprintf("Select * from `gallery`.meme where NAME ='%s';", $sName);
+        $query = sprintf("Select * from meme where NAME ='%s';", $sName);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
 
     public function Desactive($iID) {
-        $query = sprintf("UPDATE  `gallery`.`meme` "
+        $query = sprintf("UPDATE  `meme` "
                 . "SET  `STATE` =  '1' WHERE  `meme`.`ID` =%s;", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
   public function Active($iID) {
-        $query = sprintf("UPDATE  `gallery`.`meme` "
+        $query = sprintf("UPDATE  `meme` "
                 . "SET  `STATE` =  '0' WHERE  `meme`.`ID` =%s;", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
     public function SearchById($iID) {
-        $query = sprintf("select * from `gallery`.`meme` "
+        $query = sprintf("select * from `meme` "
                 . " WHERE  `meme`.`ID` =%s;", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->obtener_respuesta_completa(); 
     }
 
     public function Del($iID) {
-        $query = sprintf("Delete from `gallery`.`meme` "
+        $query = sprintf("Delete from `meme` "
                 . " WHERE  `meme`.`ID` =%s;", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();

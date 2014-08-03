@@ -23,7 +23,7 @@ class TableTag {
       @return integer numero de la tupla creada
      */
     public function Create($sName) {
-        $query = sprintf("INSERT INTO `gallery`.`tag` (`ID`, `NAME`, `COUNT`, `VISIT`)"
+        $query = sprintf("INSERT INTO `tag` (`ID`, `NAME`, `COUNT`, `VISIT`)"
                 . " VALUES (NULL, '%s', '0', '0');", $sName);
         $this->bd->hacer_query($query);
         return $this->bd->ultimo_id_generado_por_la_bd();
@@ -36,7 +36,7 @@ class TableTag {
       @return type description
      */
     public function UpdateCountPlus($iID) {
-        $query = sprintf("UPDATE  `gallery`.`tag` SET  `COUNT` =  COUNT+1 WHERE  `tag`.`ID` ='%s';", $iID);
+        $query = sprintf("UPDATE  `tag` SET  `COUNT` =  COUNT+1 WHERE  `tag`.`ID` ='%s';", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
@@ -47,7 +47,7 @@ class TableTag {
       @return type description
      */
     public function UpdateCountLess($iID) {
-        $query = sprintf("UPDATE  `gallery`.`tag` SET  `COUNT` =  COUNT-1 WHERE  `gallery`.`ID` ='%s';", $iID);
+        $query = sprintf("UPDATE  `tag` SET  `COUNT` =  COUNT-1 WHERE  `ID` ='%s';", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
@@ -59,7 +59,7 @@ class TableTag {
       @return type description
      */
     public function UpdateVisitPlus($iID) {
-        $query = sprintf("UPDATE  `gallery`.`tag` SET  `VISIT` =  VISIT+1 WHERE  `gallery`.`ID` ='%s';", $iID);
+        $query = sprintf("UPDATE  `tag` SET  `VISIT` =  VISIT+1 WHERE  `ID` ='%s';", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
@@ -71,7 +71,7 @@ class TableTag {
       @return type description
      */
     public function UpdateVisitLess($iID) {
-        $query = sprintf("UPDATE  `gallery`.`tag` SET  `VISIT` =  VISIT-1 WHERE  `gallery`.`ID` ='%s';", $iID);
+        $query = sprintf("UPDATE  `tag` SET  `VISIT` =  VISIT-1 WHERE  `ID` ='%s';", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
@@ -106,52 +106,38 @@ FROM  `tag` where NAME='%s'", $sName);
     }
 
     public function All() {
-        $query = sprintf("Select * from `gallery`.tag ORDER BY  `tag`.`ID` DESC ;");
+        $query = sprintf("Select * from tag ORDER BY  `tag`.`COUNT` DESC ;");
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
 
-    public function SearchById($iID) {
-        $query = sprintf("Select * from `gallery`.gallery ORDER BY  `gallery`.`ID`='%s' DESC ;", $iID);
-        $this->bd->hacer_query($query);
-        return $this->bd->obtener_respuesta_completa();
-    }
+   
 
-    public function Active($iID) {
-        $query = sprintf("UPDATE  `gallery`.`gallery` SET  `STATE` = 0 WHERE  `gallery`.`ID` ='%s';", $iID);
+    public function SearchByName($sName) {
+        $query = sprintf("Select * from tag where NAME LIKE '%s%%';", $sName);
         $this->bd->hacer_query($query);
+
         return $this->bd->filas_retornadas_por_consulta();
     }
 
-    public function Desactive($iID) {
-        $query = sprintf("UPDATE  `gallery`.`gallery` SET  `STATE` = 1 WHERE  `gallery`.`ID` ='%s';", $iID);
+    public function SearchByExactName($sName) {
+        $query = sprintf("Select * from tag where NAME = '%s';", $sName);
         $this->bd->hacer_query($query);
+
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+
+    public function mod($id, $new) {
+        $query = sprintf("UPDATE  `tag` SET  `NAME` =  '%s' WHERE  `tag`.`ID` ='%s';", $new, $id);
+        $this->bd->hacer_query($query);
+
         return $this->bd->filas_retornadas_por_consulta();
     }
 
     public function Del($iID) {
-        $query = sprintf("Delete from `gallery`.`gallery` "
-                . " WHERE  `gallery`.`ID` =%s;", $iID);
+        $query = sprintf("Delete from `tag` "
+                . " WHERE  `tag`.`ID` =%s;", $iID);
         $this->bd->hacer_query($query);
-        return $this->bd->filas_retornadas_por_consulta();
-    }
-
-    public function SearchByName($sName) {
-        $query = sprintf("Select * from `gallery`.tag where NAME LIKE '%s%%';", $sName);
-        $this->bd->hacer_query($query);
-
-        return $this->bd->filas_retornadas_por_consulta();
-    }
- public function SearchByExactName($sName) {
-        $query = sprintf("Select * from `gallery`.tag where NAME = '%s';", $sName);
-        $this->bd->hacer_query($query);
-
-        return $this->bd->filas_retornadas_por_consulta();
-    }
-    public function mod($id,$new) {
-          $query = sprintf("UPDATE  `gallery`.`tag` SET  `NAME` =  '%s' WHERE  `tag`.`ID` ='%s';", $new,$id);
-        $this->bd->hacer_query($query);
-
         return $this->bd->filas_retornadas_por_consulta();
     }
 

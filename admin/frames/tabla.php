@@ -59,7 +59,7 @@
                                         }
                                         $html .= '<tr id="t' . $i . '" class="' . $sClass . '"><td>' . $bd->bd->obtener_respuesta($i, "ID") . '</td>'
                                                 . '<td>' . $bd->bd->obtener_respuesta($i, "TITLE") . '<br><strong>Tag:</strong><br>' . $bd->bd->obtener_respuesta($i, "TAG") . '</td>'
-                                                . '<td><div id="d-' . $bd->bd->obtener_respuesta($i, "ID") . '">' . $sUrlaMostrar   . $botonplay . "</div>" . $bd->bd->obtener_respuesta($i, "COMMENT_ADDITIONAL") . '</td>'
+                                                . '<td><div class="DivPlay" id="d-' . $bd->bd->obtener_respuesta($i, "ID") . '">' . $sUrlaMostrar   . $botonplay . "</div>" . $bd->bd->obtener_respuesta($i, "COMMENT_ADDITIONAL") . '</td>'
                                                 . '<td>   '
                                                 . '    <button type="button" class="btn btn-default"  onclick="Activar(\'' . $i . '\',\'' . $bd->bd->obtener_respuesta($i, "ID") . '\')" >Activar</button>    '
                                                 . '    <button type="button" class="btn btn-default"  onclick="Desactivar(\'' . $i . '\',\'' . $bd->bd->obtener_respuesta($i, "ID") . '\')" >Desactivar</button>    '

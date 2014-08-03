@@ -74,13 +74,13 @@
                     }
                 });
             });
-            function Eliminar(iPosicionEnPantalla, iIdEnTabla) {
-                $("#t" + iPosicionEnPantalla).hide();
-                $.post("ajax/DelMeme.php", {
-                    iID: iIdEnTabla
+            function Eliminar(iPosicionEnPantalla) {
+               
+                $.post("ajax/DelTag.php", {
+                    iID: iPosicionEnPantalla
                 }
                 , function(o) {
-
+ $("#t" + iPosicionEnPantalla).hide();
                 }, "json");
             }
 

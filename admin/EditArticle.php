@@ -386,7 +386,7 @@
                                 </h5>                        
                             </div>
                             <div class="post-media-content col-md-9">
-                                <img id="Imagen" class="post-media img-thumbnail" src="../media/example_img/ArticlePredeterminado.jpg" height="467" width="460" alt="I must become someone else, I must become something else">
+                                <img id="Imagen" class="post-media img-thumbnail" src="../media/default/ArticlePredeterminado.jpg" height="467" width="460" alt="I must become someone else, I must become something else">
                             </div>
 
                             <div class="post-options col-md-3">

@@ -135,16 +135,26 @@ class TableGallery {
     }
 
     public function All() {
-        $query = sprintf("Select * from gallery ORDER BY  `ID` DESC ;");
+        $query = sprintf("Select * from gallery ORDER BY  `ID` DESC LIMIT 0 , 30;");
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
-     
- public function SearchById($iID) {
-        $query = sprintf("Select * from gallery ORDER BY  `ID`='%s' DESC ;",$iID);
+
+    public function Trending($iN) {
+        $query = sprintf("SELECT * 
+FROM  `gallery` 
+ORDER BY  `gallery`.`N_MORE` ASC 
+LIMIT 0 , %s", $iN);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+
+    public function SearchById($iID) {
+        $query = sprintf("Select * from gallery ORDER BY  `ID`='%s' DESC ;", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->obtener_respuesta_completa();
     }
+
     public function Active($iID) {
         $query = sprintf("UPDATE  `gallery` SET  `STATE` = 0 WHERE  `ID` ='%s';", $iID);
         $this->bd->hacer_query($query);
@@ -159,7 +169,13 @@ class TableGallery {
 
     public function Del($iID) {
         $query = sprintf("Delete from `gallery` "
-                ." WHERE  `ID` =%s;", $iID);
+                . " WHERE  `ID` =%s;", $iID);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+
+    public function LastNArticle($iInicio, $iFin) {
+        $query = sprintf("Select * from gallery join user on (user.ID=gallery.OWNER) ORDER BY  gallery.`ID` DESC LIMIT %s,%s;", $iInicio, $iFin);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }

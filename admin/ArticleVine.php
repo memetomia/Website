@@ -185,7 +185,7 @@
                     command: "inserthtml",
                     popupName: "hello",
                     popupClass: "cleditorPrompt",
-                    popupContent: "meme:<br><input id=meme type=text size=50><br><img id=ImgMeme src=../media/example_img/MemePredeterminado.jpg height=200 width=200 /><br><input type=button value=Agregar>",
+                    popupContent: "meme:<br><input id=meme type=text size=50><br><img id=ImgMeme src=" + DEFAULT + "/MemePredeterminado.jpg height=200 width=200 /><br><input type=button value=Agregar>",
                     buttonClick: helloClick
                 };
 
@@ -284,7 +284,7 @@
                             <div class="form-group">
                                 <label for="UrlImagen">Url  de la imagen del vine </label>
                                 <input type="text" class="form-control" id="UrlImagen" value="https://v.cdn.vine.co/r/thumbs/46B23C3BB91084627087769432064_2.0.3.1032442651813206051.mp4.jpg?versionId=Woob3BUJHmxQYcuOAXq22p82fybFDEeL">
-                                <img id="Img-thumbnail" class="post-media img-thumbnail" width="200" heigth="200" src="../media/example_img/VideoPredeterminado.jpg" height="467" width="460" alt="I must become someone else, I must become something else">
+                                <img id="Img-thumbnail" class="post-media img-thumbnail" width="200" heigth="200" src="../media/default/VideoPredeterminado.jpg" height="467" width="460" alt="I must become someone else, I must become something else">
                                 <div id="MsgUrlYouTube" class="msgbox Oculto "></div>
 
                             </div>
@@ -315,7 +315,7 @@
                         </form>
 
                     </div>
-                 <?php include_once 'frames/tabla.php';?>
+                    <?php include_once 'frames/tabla.php'; ?>
                 </div>
                 <div class="col-sm-5  col-md-5 ">
 
@@ -332,7 +332,7 @@
                             </div>
                             <div id="DivUrlImagen" class="post-media-content col-md-9">
 
-                                <img id="Imagen" class="post-media img-thumbnail" src="../media/example_img/VideoPredeterminado.jpg" height="467" width="460" alt="I must become someone else, I must become something else">
+                                <img id="Imagen" class="post-media img-thumbnail" src="../media/default/VideoPredeterminado.jpg" height="467" width="460" alt="I must become someone else, I must become something else">
                             </div>
 
                             <div class="post-options col-md-3">

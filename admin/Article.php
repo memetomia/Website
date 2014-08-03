@@ -172,7 +172,7 @@
                     command: "inserthtml",
                     popupName: "hello",
                     popupClass: "cleditorPrompt",
-                    popupContent: "meme:<br><input id=meme type=text size=50><br><img id=ImgMeme src=../media/example_img/MemePredeterminado.jpg height=200 width=200 /><br><input type=button value=Agregar>",
+                    popupContent: "meme:<br><input id=meme type=text size=50><br><img id=ImgMeme src="+DEFAULT +"/MemePredeterminado.jpg height=200 width=200 /><br><input type=button value=Agregar>",
                     buttonClick: helloClick
                 };
 
@@ -313,7 +313,7 @@
                                 </h5>                        
                             </div>
                             <div class="post-media-content col-md-9">
-                                <img id="Imagen" class="post-media img-thumbnail" src="../media/example_img/ArticlePredeterminado.jpg" height="467" width="460" alt="I must become someone else, I must become something else">
+                                <img id="Imagen" class="post-media img-thumbnail" src="../media/default/ArticlePredeterminado.jpg" height="467" width="460" alt="I must become someone else, I must become something else">
                             </div>
 
                             <div class="post-options col-md-3">
