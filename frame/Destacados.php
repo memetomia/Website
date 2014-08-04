@@ -14,21 +14,31 @@
             ?>
             <?php
             for ($i = 0; $i < $todo; $i++) {
-                if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 0) {
-                    $sUrlaMostrar = '<img class="post-media img-thumbnail" src="' . EXT_ARTICLE . "/" . $bd->bd->obtener_respuesta($i, "URL") . '"/>';
-                }
-                if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 1) {
-                    $sUrlaMostrar = '<img class="post-media img-thumbnail" src="' . $bd->bd->obtener_respuesta($i, "URL") . '"/>';
-                }
-                if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 2) {
-                    $sUrlaMostrar = '<img class="post-media img-thumbnail" src="' . $bd->bd->obtener_respuesta($i, "URL") . '"/>';
-                }
-                if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 3) {
-                    $sUrlaMostrar = $bd->bd->obtener_respuesta($i, "INFOMEDIA");
-                }
+                $SePuedeImprimir = false;
 
-                echo '<div class="col-md-6 col-xs-4">' . $sUrlaMostrar . '     </div>
+                if ($bd->bd->obtener_respuesta($i, "STATE") == 0) {
+
+                    if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 0) {
+                        $sUrlaMostrar = '<a href="' . EXT_IMAGEN . "?id=" . $bd->bd->obtener_respuesta($i, "ID") . '" ><img class="post-media img-thumbnail" src="' . EXT_ARTICLE . "/" . $bd->bd->obtener_respuesta($i, "URL") . '"/></a>';
+                        $SePuedeImprimir = true;
+                    }
+                    if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 1) {
+                        $sUrlaMostrar = '<a href="" ><img class="post-media img-thumbnail" src="' . $bd->bd->obtener_respuesta($i, "URL") . '"/></a>';
+                        $SePuedeImprimir = true;
+                    }
+                    if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 2) {
+                        $sUrlaMostrar = '<a href="" ><img class="post-media img-thumbnail" src="' . $bd->bd->obtener_respuesta($i, "URL") . '"/></a>';
+                        $SePuedeImprimir = true;
+                    }
+                    if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 3) {
+                        //$sUrlaMostrar = $bd->bd->obtener_respuesta($i, "INFOMEDIA");
+                        $SePuedeImprimir = false;
+                    }
+                    if ($SePuedeImprimir) {
+                        echo '<div class="col-md-6 col-xs-4">' . $sUrlaMostrar . '     </div>
         ';
+                    }
+                }
             }
         }
         ?>

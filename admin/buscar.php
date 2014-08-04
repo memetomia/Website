@@ -24,7 +24,8 @@
                             if (o.Tupla > 0) {
 
                                 $("#tabla tbody").append('<tr id="t' + $('#tabla >tbody >tr').length + '"><td>' + o.Tupla + '</td><td>' + $("#NombrePg").val() + '</td><td>' + $("#UrlPg").val() + '</td><td>0</td>\n\
-                                <td><button type="button" class="btn btn-default"  onclick="Buscar(\'' + $('#tabla >tbody >tr').length + '\',\'' + o.Tupla + '\')" >Buscar</button>\n\
+                                <td><button type="button" class="btn btn-default"  onclick="Activar(\'' + $('#tabla >tbody >tr').length + '\',\'' + o.Tupla + '\')" >Activar</button>\n\
+<button type="button" class="btn btn-default"  onclick="Buscar(\'' + $('#tabla >tbody >tr').length + '\',\'' + o.Tupla + '\')" >Buscar</button>\n\
                                     <button type="button" class="btn btn-default"  onclick="Modificar(\'' + $('#tabla >tbody >tr').length + '\',\'' + o.Tupla + '\')" >Modificar</button>\n\
                                     <button type="button" class="btn btn-default"  onclick="Eliminar(\'' + $('#tabla >tbody >tr').length + '\',\'' + o.Tupla + '\')" >Eliminar</button>\n\
 </td></tr>');
@@ -36,13 +37,47 @@
                 });
             });
             function Eliminar(iPosicionEnPantalla, iIdEnTabla) {
-                $("#t" + iPosicionEnPantalla).hide();
-                $.post("ajax/DelPage.php", {
-                    iID: iIdEnTabla
-                }
-                , function(o) {
 
-                }, "json");
+                var respuesta = true;
+                if ($("#t" + iPosicionEnPantalla).hasClass('trDel') == true) {
+                    respuesta = false;
+                    respuesta = confirm("¿Desea eliminar este registro?");
+                    if (respuesta == true) {
+                        $("#t" + iPosicionEnPantalla).hide();
+                    }
+
+                } else {
+                    $("#t" + iPosicionEnPantalla).addClass("trDel");
+                }
+
+                if (respuesta == true) {
+
+                    $.post("ajax/DelPage.php", {
+                        iID: iIdEnTabla
+                    }
+                    , function(o) {
+
+                    }, "json");
+                }
+
+            }
+            function Activar(iPosicionEnPantalla, iIdEnTabla) {
+
+                var respuesta = false;
+                if ($("#t" + iPosicionEnPantalla).hasClass('trDel') == true) {
+                    respuesta = true;
+                    $("#t" + iPosicionEnPantalla).removeClass("trDel");
+                }
+
+                if (respuesta == true) {
+                    $.post("ajax/ActivePage.php", {
+                        iID: iIdEnTabla
+                    }
+                    , function(o) {
+
+                    }, "json");
+                }
+
             }
             function Buscar(iPosicionEnPantalla, iIdEnTabla) {
                 location.href = SERVER + ADMIN + "/memetomizar.php?IDPage=" + iIdEnTabla;
@@ -71,9 +106,9 @@
                                 $sUrl = "";
                                 include_once '../base/TablePage.php';
                                 $bd = new TablePage();
-                          
+
                                 if ($bd->SearchPage($_GET["IDPage"]) > 0) {
-                                 
+
                                     $sName = $bd->bd->obtener_respuesta(0, "NAME");
                                     $sUrl = $bd->bd->obtener_respuesta(0, "URL");
                                 }
@@ -110,7 +145,7 @@
                                         }
                                         if (flag == false) {
                                             $.post("ajax/ModPage.php", {
-                                                iID:$("#IDPg").val(),
+                                                iID: $("#IDPg").val(),
                                                 sNombre: $("#NombrePg").val(),
                                                 sUrl: $("#UrlPg").val()
                                             }
@@ -119,7 +154,7 @@
                                                 if (o.Tupla > 0) {
                                                     $("#NombrePg").val("");
                                                     $("#UrlPg").val("");
-                                                    
+
                                                 }
                                             }, "json");
                                         }
@@ -159,7 +194,7 @@
 
                     <h2 class="sub-header">Lista de Páginas donde se puedes buscar chistes</h2>
                     <div class="table-responsive">
-                        <table id="tabla" class="table table-striped">
+                        <table id="tabla" class="table ">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -177,17 +212,17 @@
                                 $todo = $bd->AllPage();
                                 $html = "";
                                 if ($todo > 0) {
-                                    $sClass="";
+                                    $sClass = "";
                                     for ($i = 0; $i < $todo; $i++) {
-                                        if ($bd->bd->obtener_respuesta($i, "STATE")=="1"){
-                                            $sClass="trDel";
-                                                
+                                        if ($bd->bd->obtener_respuesta($i, "STATE") == "1") {
+                                            $sClass = "trDel";
                                         }
-                                        $html .= '<tr id="t' . $i . '" class="'.$sClass.'"><td>' . $bd->bd->obtener_respuesta($i, "ID") . '</td>'
+                                        $html .= '<tr id="t' . $i . '" class="' . $sClass . '"><td>' . $bd->bd->obtener_respuesta($i, "ID") . '</td>'
                                                 . '<td>' . $bd->bd->obtener_respuesta($i, "NAME") . '</td>'
                                                 . '<td><a href="' . $bd->bd->obtener_respuesta($i, "URL") . '" target="_blank">' . $bd->bd->obtener_respuesta($i, "URL") . '</a></td>'
                                                 . '<td>' . $bd->bd->obtener_respuesta($i, "COUNT") . '</td>'
-                                                . '<td>    <button type="button" class="btn btn-default"  onclick="Buscar(\'' . $i . '\',\'' . $bd->bd->obtener_respuesta($i, "ID") . '\')" >Buscar</button>  '
+                                                . '<td> <button type="button" class="btn btn-default"  onclick="Activar(\'' . $i . '\',\'' . $bd->bd->obtener_respuesta($i, "ID") . '\')" >Activar</button>  '
+                                                . '    <button type="button" class="btn btn-default"  onclick="Buscar(\'' . $i . '\',\'' . $bd->bd->obtener_respuesta($i, "ID") . '\')" >Buscar</button>  '
                                                 . '    <button type="button" class="btn btn-default"  onclick="Modificar(\'' . $i . '\',\'' . $bd->bd->obtener_respuesta($i, "ID") . '\')" >Modificar</button>    '
                                                 . '    <button type="button" class="btn btn-default"  onclick="Eliminar(\'' . $i . '\',\'' . $bd->bd->obtener_respuesta($i, "ID") . '\')" >Eliminar</button>      </td></tr>';
                                     }

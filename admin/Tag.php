@@ -51,11 +51,10 @@
                         msj("#MsgGeneral", "Falta un nombre", "Error");
                         msj("#MsgName", "Ingrese un nombre ", "Error");
                         flag = true;
-                    }                   
+                    }
                     if (flag == false) {
                         $.post("ajax/AddTag.php", {
                             sName: $("#Name").val(),
-                          
                         }
                         , function(o) {
 
@@ -75,17 +74,19 @@
                 });
             });
             function Eliminar(iPosicionEnPantalla) {
-               
-                $.post("ajax/DelTag.php", {
-                    iID: iPosicionEnPantalla
+                if (confirm("Desea eliminar esta etiqueta?"))
+                {
+                    $.post("ajax/DelTag.php", {
+                        iID: iPosicionEnPantalla
+                    }
+                    , function(o) {
+                        $("#t" + iPosicionEnPantalla).hide();
+                    }, "json");
                 }
-                , function(o) {
- $("#t" + iPosicionEnPantalla).hide();
-                }, "json");
             }
 
-            function Modificar(iPosicionEnPantalla, iIdEnTabla) {
-                location.href = SERVER + ADMIN + "/EditTag.php?ID=" + iIdEnTabla;
+            function Modificar(iPosicionEnPantalla) {
+                location.href = SERVER + ADMIN + "/EditTag.php?ID=" + iPosicionEnPantalla;
             }
         </script>
     </head>

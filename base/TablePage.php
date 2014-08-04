@@ -31,9 +31,21 @@ class TablePage {
         return $this->bd->ultimo_id_generado_por_la_bd();
     }
 
-    public function Del($iID) {
+    public function SeudoDel($iID) {
         $query = sprintf("UPDATE  `page` "
                 . "SET  `STATE` =  '1' WHERE  `page`.`ID` =%s;", $iID);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+ public function Active($iID) {
+        $query = sprintf("UPDATE  `page` "
+                . "SET  `STATE` =  '0' WHERE  `page`.`ID` =%s;", $iID);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+    public function Del($iID) {
+        $query = sprintf("Delete from `page` "
+                . " WHERE  `page`.`ID` =%s;", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }

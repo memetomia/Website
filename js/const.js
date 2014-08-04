@@ -6,7 +6,9 @@ var MEDIA = "/media";
 var MEME = SERVER + MEDIA + "/meme";
 var DEFAULT = SERVER + MEDIA + "/default";
 var ARTICLE = SERVER + MEDIA + "/article";
+var IMAGE=ARTICLE+"/imagen.php?i="
 var JS = "/js";
+
 var CSS = "/css";
 var BASE = "/base";
 var AJAX = "/ajax";
@@ -23,7 +25,7 @@ function TW(iId) {
     window.open($("#TW-" + iId).attr("d-link"), "nuevo", "directories=no, location=no, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=600, height=400");
 }
 function FunComment(iId) {
-
+window.location.href = IMAGE+iId;   
 }
 function FunLike(iId) {
     $.post("ajax/AddLike.php", {

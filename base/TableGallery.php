@@ -175,7 +175,7 @@ LIMIT 0 , %s", $iN);
     }
 
     public function LastNArticle($iInicio, $iFin) {
-        $query = sprintf("Select * from gallery join user on (user.ID=gallery.OWNER) ORDER BY  gallery.`ID` DESC LIMIT %s,%s;", $iInicio, $iFin);
+        $query = sprintf("Select * from gallery join user on (user.ID=gallery.OWNER) ORDER BY  gallery.`DATE`  DESC LIMIT %s,%s;", $iInicio, $iFin);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
