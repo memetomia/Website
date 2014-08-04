@@ -15,12 +15,12 @@ if ($usuario == "jaivic") {
     defined('DB_NAME') ? null : define("DB_NAME", "Gallery");
     defined('DIR_LOG') ? null : define("DIR_LOG", "class/log_de_conexion_con_bd.txt");
     defined('MODO_DEBUG') ? null : define("MODO_DEBUG", false);
-    defined('SERVER') ? null : define("SERVER", "http://localhost:8080/memetomia");
+    defined('SERVER') ? null : define("SERVER", "http://localhost:8080/Website");
     defined('RESOURCES') ? null : define("RESOURCES", "/resources");
     defined('FONTS') ? null : define("FONTS", "/resources/fonts");
     defined('MEDIA') ? null : define("MEDIA", "/media");
-    defined('MEME') ? null : define("MEME", "C:\wamp\www\memetomia\media\meme"); // no fue cambiada por HG
-    defined('ARTICLE') ? null : define("ARTICLE", "C:\wamp\www\memetomia\media\article"); // no fue cambiada por HG
+    defined('MEME') ? null : define("MEME", "C:\wamp\www\Website\media\meme"); // no fue cambiada por HG
+    defined('ARTICLE') ? null : define("ARTICLE", "C:\wamp\www\Website\media\article"); // no fue cambiada por HG
     defined('CONTS_DEFAULT') ? null : define("CONTS_DEFAULT",SERVER . MEDIA .  "/default");
     defined('JS') ? null : define("JS", "/js");
     defined('MODAL_CONTROLLER') ? null : define("MODAL_CONTROLLER", "/js/modal_controllers");
