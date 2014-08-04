@@ -16,7 +16,8 @@
         <script src="js/jquery-2.1.0.min.js"></script>        
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jqueryUI.custom.min.js"></script>  
-        <script src="js/bootstrap-switch.min.js"></script>        
+        <script src="js/bootstrap-switch.min.js"></script>  
+        <script src="js/jquery.validate.min.js"></script>      
 
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
