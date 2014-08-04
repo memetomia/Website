@@ -250,13 +250,7 @@
         include_once 'modal/new-post-modal.php'; 
         include_once 'modal/activity-modal.php';  
         include_once 'modal/settings-modal.php';                    
-        ?>        
-        
-        <!--JS MODAL CONTROLLERS-->
-        <script type="text/javascript" src="js/modal_controllers/NewPost.js"></script>
-        <script type="text/javascript" src="js/modal_controllers/Activity.js"></script>
-        <script type="text/javascript" src="js/modal_controllers/Settings.js"></script>
-        <script type="text/javascript" src="js/modal_controllers/Notifications.js"></script>
+        ?>                        
 
         <!--Ver donde poner esto-->
         <script>

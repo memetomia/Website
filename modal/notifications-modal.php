@@ -1,7 +1,5 @@
-<!-- NOTIFICATIONS MODAL LOCAL STYLE -->
-<style>
-
-</style>
+<!-- NOTIFICATIONS MODAL -->
+<style></style>
 
 <div class="modal fade" id="notifications-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -45,22 +43,35 @@
                 </ul>        
                                 
             </div>
-            <!-- <div class="modal-footer">                        
-                <button type="button" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-upload"></span> Publicar</button>
-            </div> -->
         </div>
     </div>
 </div>
 
-<!-- NOTIFICATIONS MODAL LOCAL JAVASCRIPT -->
-<script type="text/javascript">
-    // documento preparado
-    $(function()
-    {        
-        NotificationsController.init(
-            $('#notifications-modal'),
-            $('#notifications-mark-as-read'));
+<script type="text/javascript">    
+$(function()
+{        
+    // Prefijo del modal
+    var MODAL_PREFIX = 'notifications-';
 
-        NotificationsController.activateEventListeners();
+    // Variables cacheadas
+    var $_modal            = $('#' + MODAL_PREFIX + 'modal');
+    var $_markAsReadButton = $('#' + MODAL_PREFIX + 'mark-as-read');        
+        
+    /**
+     * Evento que marca como leído todas las 
+     * notificaciones pendientes
+     */
+    $_markAsReadButton.click(function(){
+
+        // llamadas a ajax y BD
+        
+        // eliminar marca roja de notificaciones no leidas
+        $_modal.find('span.not-readed').remove();
+
+        // falta eliminar puntos rojos fuera del modal
+        // ocultar contador de notificaciones sin leer
+        // mensaje de "no tienes notificaciones nuevas" en el nav
     });
+    
+});
 </script>

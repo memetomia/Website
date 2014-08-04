@@ -1,4 +1,4 @@
-<!-- LOCAL STYLE -->
+<!-- ACTIVITY MODAL -->
 <style>
     #activity-modal .modal-body, #activity-modal .list-group-item
     {
@@ -110,19 +110,47 @@
     </div>
 </div>
 
-<!-- ACTIVITY MODAL LOCAL JAVASCRIPT -->
 <script type="text/javascript">
+$(function(){
+
+    // Prefijo del modal
+    var MODAL_PREFIX = 'activity-';    
+
+    // Variables cacheadas
+    var $_modal    = $('#' + MODAL_PREFIX + 'modal');
+    var $_menu     = $('#' + MODAL_PREFIX + 'options');    
+    var $_contents = $('.' + MODAL_PREFIX + 'option-content');
+
     /*
-     * Eventos que se ejecutan cuando el documento está
-     * preparado "document.ready()".
+     * Evento que se ejecutan al hacer click sobre una opción
+     * del menú, selecciona el contenido a mostrar dependiendo
+     * de la opción seleccionada.
      */
-    $(function()
-    {
-        ActivityController.init(
-                $('#activity-modal'),
-                $('#activity-options'),
-                $('.activity-option-content'));
-                
-        ActivityController.activateEventListeners();
+    $_menu.find('label').click(function()
+    {            
+        /* 
+         * Descripción: 
+         * 1- captura el ID de la opción seleccionada.
+         * 2- reemplaza el 'option' del ID por 'content'.
+         * 3- agrega el signo # al inicio de la cadena.
+         */
+        var idContent = '#'.concat($(this).attr('id').toString().replace('option', 'content'));
+        // oculta todos los contenidos del modal
+        $_contents.hide();
+        // busca dentro del modal y muestra el contenido escogido
+        $_modal.find(idContent).show();            
     });
+
+    /*
+     * Eventos que se ejecutan cuando el modal se carga
+     * pero aún no es visible para el usuario
+     */
+    $_modal.on('show.bs.modal', function()
+    {                                 
+        // remueve la clase .active del menú que lo posea actualmente
+        $_menu.find('label.active').removeClass('active');
+        // coloca la clase .active al primer elemento del menú y llama al evento click
+        $_menu.find('label:first').addClass('active').click();     
+    });
+});    
 </script>

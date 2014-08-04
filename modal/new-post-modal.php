@@ -1,4 +1,4 @@
-<!-- NEW POST MODAL LOCAL STYLE -->
+<!-- NEW POST MODAL -->
 <style>
     #new-post-modal textarea
     {
@@ -73,31 +73,165 @@
     </div>
 </div>
 
-<!-- NEW POST MODAL LOCAL JAVASCRIPT -->
 <script type="text/javascript">
-    // documento preparado
-    $(function()
-    {        
-        /*
-         * los eventos y funciones de este modal son capturados
-         * y manejados por un objeto controlador el cual inicia
-         * recibe parametros de control y ejecuta los eventos.
-         */
+$(function(){
 
-        
-        // asignación de los elementos de control
-        NewPostController.init(
-                $('#new-post-modal'),
-                $('#new-post-mode'),
-                $('#new-post-form'),
-                $('#new-post-title'),
-                $('#new-post-url-field'),
-                $('#new-post-image-field'),
-                $('#new-post-tags-search'),
-                $('#new-post-add-tag'),
-                $('#new-post-tags-field'));        
+    // Prefijo del modal
+    var MODAL_PREFIX = 'new-post-';
+    
+    // constante de la máxima cantidad de caracteres del título del post.
+    const POST_TITLE_MAX_LENGTH = 150;    
 
-        // activa captador de eventos 
-        NewPostController.activateEventListeners();
+    // Variables cacheadas
+    var $_modal     = $('#' + MODAL_PREFIX + 'modal');
+    var $_menu      = $('#' + MODAL_PREFIX + 'mode'); 
+    var $_form      = $('#' + MODAL_PREFIX + 'form');
+    var $_postTitle = $('#' + MODAL_PREFIX + 'title');
+    var $_postURL   = $('#' + MODAL_PREFIX + 'url-field'); 
+    var $_postImage = $('#' + MODAL_PREFIX + 'image-field');   
+    var $_tagInput  = $('#' + MODAL_PREFIX + 'tags-search');    
+    var $_tagButton = $('#' + MODAL_PREFIX + 'add-tag');    
+    var $_tags      = $('#' + MODAL_PREFIX + 'tags-field');
+
+    /*
+     * activa el autocompletado de tags para
+     * tratar de evitar duplicado de tags. 
+     */
+    $_tagInput.autocomplete({
+        source: "ajax/autocomplete-tags.php",
+        delay: 500,
+        minLength: 2
+    });              
+
+    /*
+     * Evento que modifica el formulario dependiendo
+     * del modo seleccionado.
+     */
+    $_menu.find('label').click(function()
+    {
+        // obtiene el id de la opción del menú al que se le dió click
+        var selectedMode = $(this).attr('id').toString();
+        // oculta y muestra los campos dependiendo de la opción seleccionada
+        switch (selectedMode)
+        {
+            // caso modo URL
+            case 'new-post-url-mode':
+                // ocultamos campo de imágen
+                $_postImage.hide();
+                // mostramos campo de URL
+                $_postURL.show();
+                break;
+                // caso modo imágen
+            case 'new-post-image-mode':
+                // ocultamos campo URL
+                $_postURL.hide();
+                // mostramos campo de imágen
+                $_postImage.show();
+                break;
+        }
     });
+
+    /*
+     * Evento que realiza el conteo de caracteres
+     * del titulo y valida cuando sobrepasa el limite.
+     */
+    $_postTitle.on('keyup change blur', function()
+    {
+        // calcula los caracteres restantes
+        var remainingChars = POST_TITLE_MAX_LENGTH - $(this).val().length;
+        // cacheamos campo que muestra caracteres restantes
+        var $charCounter = $_form.find('.char-counter');
+        // cacheamos el div que contiene el textarea del título
+        var $titleField = $(this).parent('div.form-group');
+        // asignamos el valor de los caracteres restantes al elemento
+        $charCounter.text(remainingChars);
+        // caracteres restantes sobrepasa el límite
+        if (remainingChars < 0)
+        {
+            // colocamos el contador de caracteres de color rojo para indicar error
+            $charCounter.addClass('text-danger');
+            // colocamos el campo del titulo de color rojo para indicar error
+            $titleField.addClass('has-error');
+        }
+        // caracteres restantes dentro del límite y algun elemento indica error
+        else if ((remainingChars >= 0) && ($charCounter.hasClass('text-danger')))
+        {
+            // removemos el color rojo en el contador de caracteres
+            $charCounter.removeClass('text-danger');
+            // removemos el color rojo en el campo del título
+            $titleField.removeClass('has-error');
+        }
+    });
+
+    /*
+     * Evento que permite agregar tag presionando
+     * el botón + del input de tags
+     */
+    $_tagButton.click(function()
+    {
+        // se obtiene el valor del tag
+        var tagValue = $_tagInput.val();                                    
+
+        // se construye el html agregando el valor del tag
+        var tagHtml = '<span class="label label-default tag">'
+                .concat(tagValue.toUpperCase())
+                .concat('<label class="delete-tag">&times;</label></span>')
+                .concat(' '); // espacio en blanco para separar tags (importante)
+
+        // agrega el código html al documento
+        $_tags.append(tagHtml);
+
+        // limpia el campo donde se agrega el tag
+        $_tagInput.val('');
+    });
+
+    /*
+     * Evento que se ejecuta al presionar cualquier tecla
+     * y teniendo la ventana modal disponible, permite
+     * agregar tags a una lista al presionar la tecla 'enter'
+     * o 'intro'.
+     */
+    $_modal.keypress(function(e)
+    {
+        // la tecla presionada es "enter"
+        if (e.which === 13)
+        {
+            // el campo de tags está seleccionado
+            if ($_tagInput.is(':focus'))
+            {
+                // ejecuta el evento click del boton agrega tag
+                $_tagButton.click();
+            }
+        }
+    });
+
+    /*
+     * Evento que permite elimiar un tag agregado
+     * al formulario.
+     */
+    $_modal.on('click', '.delete-tag', function()
+    {
+        // selecciona y elimina tag con animacion fadeOut
+        $(this).parent().fadeOut('fast');
+    });
+
+    /*
+     * Eventos que se ejecutan cuando el modal se carga
+     * pero aún no es visible para el usuario
+     */
+    $_modal.on('show.bs.modal', function()
+    {                   
+        // reinicia lo valores del formulario por default
+        $_form.get(0).reset();
+        // remueve la clase .active del menú que lo posea actualmente
+        $_menu.find('label.active').removeClass('active');
+        // coloca la clase .active al primer elemento del menú y llama al evento click
+        $_menu.find('label:first').addClass('active').click();
+        // reinicia el contador de caracteres asignando el valor máximo
+        $_form.find('.char-counter').text(POST_TITLE_MAX_LENGTH);
+        // elimina todos los tags introducidos previamente
+        $_tags.empty(); 
+    });
+
+});
 </script>

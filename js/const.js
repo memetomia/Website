@@ -7,7 +7,6 @@ var MEME = SERVER + MEDIA + "/meme";
 var DEFAULT = SERVER + MEDIA + "/default";
 var ARTICLE = SERVER + MEDIA + "/article";
 var JS = "/js";
-var MODAL_CONTROLLERS = "/js/modal_controllers";
 var CSS = "/css";
 var BASE = "/base";
 var AJAX = "/ajax";
