@@ -1,3 +1,4 @@
+<?php //header ("Location: coming-soon.php");   ?>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -17,6 +18,7 @@
         <script src="js/jqueryUI.custom.min.js"></script>  
         <script src="js/bootstrap-switch.min.js"></script>  
         <script src="js/jquery.validate.min.js"></script>     
+        <script src="js/jquery.validate.min.js"></script>    
 
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -27,7 +29,7 @@
         <nav class="navbar navbar-static-top navbar-inverse" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-media/example-navbar-collapse-1">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#memetomia-navbar">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -37,18 +39,19 @@
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-media/example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Inicio</a></li>
-                        <li><a href="#">Top</a></li>
-                        <li><a href="#">Vídeos</a></li>
-                        <li><a href="#">GIF</a></li>
-                    </ul>                    
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#" data-toggle="modal" data-target="#sign-in-modal">¡Regístrate en Memetomía!</a></li>
-                        <li><a href="#" data-toggle="modal" data-target="#login-modal">Iniciar sesión</a></li>                        
-                    </ul>                    
+                    <div class="collapse navbar-collapse" id="memetomia-navbar">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">Inicio</a></li>
+                            <li><a href="#">Top</a></li>
+                            <li><a href="#">Vídeos</a></li>
+                            <li><a href="#">GIF</a></li>
+                        </ul>                    
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#" data-toggle="modal" data-target="#sign-in-modal">¡Regístrate en Memetomía!</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#login-modal">Iniciar sesión</a></li>                        
+                        </ul>                    
+                    </div>
                 </div>
-            </div>
         </nav>
 
         <div id="main-content" class="container">
@@ -66,6 +69,7 @@
 
 
                     <?php include_once 'frame/TimeLine.php'; ?>
+             
 
                 </div>
 
@@ -85,7 +89,14 @@
                         </div>
                     </div>
 
+                
                     <?php include_once 'frame/Tag.php'; ?>
+    
+
+                    <?php include_once 'frame/Tag.php'; ?>
+
+                    <?php include_once 'frame/Destacados.php'; ?>
+             
 
                     <?php include_once 'frame/Destacados.php'; ?>
 
@@ -100,6 +111,7 @@
 
         <!-- MODAL Windows -->
         <?php
+      
         include_once 'modal/login-modal.php';
         include_once 'modal/sign-in-modal.php';
         ?>        
@@ -112,5 +124,12 @@
                 $('#sign-in-modal').modal('show')
             });
         </script>
+<?php
+        include_once 'modal/notifications-modal.php';
+        include_once 'modal/new-post-modal.php';
+        include_once 'modal/activity-modal.php';
+        include_once 'modal/settings-modal.php';
+        ?>        
+
     </body>
 </html>

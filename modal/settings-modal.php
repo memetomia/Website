@@ -459,7 +459,13 @@ $(function()
     /* PERFIL */
     var $_profileForm     = $('#' + MODAL_PREFIX + 'profile-form');            
     var $_userDescription = $('#' + MODAL_PREFIX + 'about-me');            
-
+    
+    /*
+     * Evento que inicializa la funcionalidad de
+     * la libreria bootstrap-switch
+     */    
+    $(".settings-switch").bootstrapSwitch();
+    
     /*
      * Evento que modifica el contenido del modal dependiendo
      * de la opción seleccionada.

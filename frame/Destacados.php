@@ -4,7 +4,7 @@
     </div>
     <div class="panel-body">
         <?php
-        include_once '/base/TableGallery.php';
+        include_once 'base/TableGallery.php';
 
         $bd = new TableGallery();
         $todo = $bd->Trending(5);
@@ -35,8 +35,7 @@
                         $SePuedeImprimir = false;
                     }
                     if ($SePuedeImprimir) {
-                        echo '<div class="col-md-6 col-xs-4">' . $sUrlaMostrar . '     </div>
-        ';
+                        echo '<div class="col-md-6 col-xs-4">' . $sUrlaMostrar . '     </div>';
                     }
                 }
             }

@@ -1,4 +1,2 @@
 <?php
-
-$usuario = "jaivic";
-?>
+$usuario ="jaivic";
