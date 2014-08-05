@@ -6,20 +6,16 @@ if ($usuario == "jaivic") {
     defined('DB_USER') ? null : define("DB_USER", "root");
     defined('DB_PASS') ? null : define("DB_PASS", "");
     defined('DB_NAME') ? null : define("DB_NAME", "Gallery");
-    defined('DIR_LOG') ? null : define("DIR_LOG", "class/log_de_conexion_con_bd.txt");
     defined('MODO_DEBUG') ? null : define("MODO_DEBUG", false);
     defined('SERVER') ? null : define("SERVER", "http://localhost:8080/Website");
     defined('RESOURCES') ? null : define("RESOURCES", "/resources");
     defined('FONTS') ? null : define("FONTS", "/resources/fonts");
     defined('MEDIA') ? null : define("MEDIA", "/media");
-
-    defined('MEME') ? null : define("MEME", "C:\wamp\www\Website\media\meme"); // no fue cambiada por HG
-    defined('ARTICLE') ? null : define("ARTICLE", "C:\wamp\www\Website\media\article"); // no fue cambiada por HG
-
-    defined('MEME') ? null : define("MEME", "C:\wamp\www\memetomia\media\meme"); // no fue cambiada por HG
-    defined('ARTICLE') ? null : define("ARTICLE", "C:\wamp\www\memetomia\media\article"); // no fue cambiada por HG
+    defined('MEME') ? null : define("MEME", "C:\wamp\www\Website\media\meme");
+    defined('ARTICLE') ? null : define("ARTICLE", "C:\wamp\www\Website\media\article");
+    defined('MEME') ? null : define("MEME", "C:\wamp\www\memetomia\media\meme"); 
+    defined('ARTICLE') ? null : define("ARTICLE", "C:\wamp\www\memetomia\media\article"); 
     defined('CONTS_DEFAULT') ? null : define("CONTS_DEFAULT", SERVER . MEDIA . "/default");
-
     defined('JS') ? null : define("JS", "/js");
     defined('MODAL_CONTROLLER') ? null : define("MODAL_CONTROLLER", "/js/modal_controllers");
     defined('CSS') ? null : define("CSS", "/css");
@@ -63,7 +59,6 @@ if ($usuario == "memetomia") {
     defined('EXT_TAG') ? null : define("EXT_TAG", SERVER . "/Tag.php");
     defined('EXT_IMAGEN') ? null : define("EXT_IMAGEN", EXT_MEDIA . "/Imagen.php");
     defined('EXT_DEFAULT') ? null : define("EXT_DEFAULT", EXT_MEDIA . "/default");
-    defined('EXT_IMAGEN') ? null : define("EXT_IMAGEN", SERVER . MEDIA . "/Imagen.php");
 }
 
 if ($usuario == "hector") {
@@ -71,7 +66,7 @@ if ($usuario == "hector") {
     defined('DB_USER') ? null : define("DB_USER", "root");
     defined('DB_PASS') ? null : define("DB_PASS", "");
     defined('DB_NAME') ? null : define("DB_NAME", "gallery");
-    defined('DIR_LOG') ? null : define("DIR_LOG", "class/log_de_conexion_con_bd.txt");
+   
     defined('MODO_DEBUG') ? null : define("MODO_DEBUG", false);
     defined('SERVER') ? null : define("SERVER", "http://localhost/memetomia");
     defined('RESOURCES') ? null : define("RESOURCES", "/resources");
@@ -92,9 +87,8 @@ if ($usuario == "hector") {
     defined('EXT_MEME') ? null : define("EXT_MEME", EXT_MEDIA . "/meme");
     defined('EXT_ARTICLE') ? null : define("EXT_ARTICLE", EXT_MEDIA . "/article");
     defined('EXT_TAG') ? null : define("EXT_TAG", SERVER . "/Tag.php");
-
     defined('EXT_IMAGEN') ? null : define("EXT_IMAGEN", EXT_MEDIA . "/Imagen.php");
     defined('EXT_DEFAULT') ? null : define("EXT_DEFAULT", EXT_MEDIA . "/default");
-}//no entiendo porque hay error aqui pero lo hay
+}
 ?>
 
