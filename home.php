@@ -38,8 +38,13 @@
                     <a class="navbar-brand" href="#">Memetomía</a>
                 </div>
 <<<<<<< HEAD:home.php
+<<<<<<< HEAD:home.php
                 
                 <div class="collapse navbar-collapse" id="bs-media/example-navbar-collapse-1">
+=======
+
+                <div class="collapse navbar-collapse" id="memetomia-navbar">
+>>>>>>> origin/master:not-logged.php
 =======
 
                 <div class="collapse navbar-collapse" id="memetomia-navbar">
