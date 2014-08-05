@@ -2,7 +2,7 @@
 <style>
     #settings-modal .modal-body
     {
-        overflow: auto;        
+        overflow: auto;
     }
     #settings-modal .settings-birthdate
     {
@@ -25,8 +25,8 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">Ajustes</h4>
             </div>
-            <div class="modal-body">                    
-                
+            <div class="modal-body">
+
                 <!-- MENU -->
                 <div id="settings-options" class="btn-group btn-group-justified" data-toggle="buttons">
                     <label id="settings-account-option" class="btn btn-default active">
@@ -45,43 +45,43 @@
 
                 <!-- CUENTA -->
                 <div id="settings-account-content" class="settings-option-content col-md-12">
-                    <form id="settings-account-form" role="form">                                            
+                    <form id="settings-account-form" role="form">
                         <div class="form-group">
                             <label for="settings-username">Nombre de usuario</label>
-                            <input type="text" class="form-control" id="settings-username" placeholder="Nombre de usuario"/>                            
+                            <input type="text" name="username" class="form-control" id="settings-username" placeholder="Nombre de usuario"/>
                         </div>
                         <div class="form-group">
                             <label for="settings-email">Correo electrónico</label>
-                            <input type="text" class="form-control" id="settings-email" placeholder="Correo electrónico"/>
+                            <input type="text" name="email" class="form-control" id="settings-email" placeholder="Correo electrónico"/>
                         </div>
-                        
+
                         <p class="help-block">Mostrar en mi timeline: </p>
-                        <div class="well well-sm">                            
+                        <div class="well well-sm">
                             <div class="row">
                                 <div class="col-md-6 text-right">
-                                    <label for="settings-videos">Videos</label>    
+                                    <label for="settings-videos">Videos</label>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="checkbox" checked="checked" id="settings-videos" class="settings-switch"/>
-                                </div>                                                    
+                                </div>
                             </div></br>
                             <div class="row">
                                 <div class="col-md-6 text-right">
-                                    <label for="settings-gif">Imágenes GIF</label>    
+                                    <label for="settings-gif">Imágenes GIF</label>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="checkbox" checked="checked" id="settings-gif" class="settings-switch"/>
-                                </div>                                                    
+                                </div>
                             </div>
                         </div></br>
-                        <div class="row">                        
+                        <div class="row">
                             <div class="col-md-6">
                                 <small><a href="#">Eliminar mi cuenta</a></small>
                             </div>
                             <div class="col-md-6">
                                 <button type="submit" class="btn btn-success pull-right">Guardar Cambios</button>
-                            </div>                            
-                        </div>                        
+                            </div>
+                        </div>
                     </form>
                 </div>
 
@@ -90,15 +90,15 @@
                     <form id="settings-new-password-form" role="form">
                         <div class="form-group">
                             <label for="settings-old-password">Contraseña actual</label>
-                            <input type="password" class="form-control" id="settings-old-password" placeholder="Ingresa contraseña actual"/>
+                            <input type="password" name="oldpassword" class="form-control" id="settings-old-password" placeholder="Ingresa contraseña actual"/>
                         </div>
                         <div class="form-group">
                             <label for="settings-new-password">Contraseña nueva</label>
-                            <input type="password" class="form-control" id="settings-new-password" placeholder="Ingresa contraseña nueva"/>
+                            <input type="password" name="newpassword" class="form-control" id="settings-new-password" placeholder="Ingresa contraseña nueva"/>
                         </div>
                         <div class="form-group">
                             <label for="settings-new-password-again">Reingresa contraseña nueva</label>
-                            <input type="password" class="form-control" id="settings-old-password-again" placeholder="Reingresa contraseña nueva"/>
+                            <input type="password" name="confirmpassword" class="form-control" id="settings-old-password-again" placeholder="Reingresa contraseña nueva"/>
                         </div></br>
                         <button type="submit" class="btn btn-success pull-right">Guardar Cambios</button>
                     </form>
@@ -111,12 +111,12 @@
                             <label for="settings-picture">Imágen de perfil</label>
                             <div class="well well-sm text-center">
                                 <label for="settings-picture"><img src="media/example_img/post1.jpg" alt="user_pic" class="img-thumbnail" width="128" height="128"></label>
-                                <input type="file" class="form-control hidden" id="settings-picture">                                
-                            </div>                            
+                                <input type="file" class="form-control hidden" id="settings-picture" accept="image/jpeg, image/png">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="settings-name">Nombre</label>
-                            <input type="text" class="form-control" id="settings-name" placeholder="Ingresa tu nombre" maxlength="70"/>
+                            <input type="text" class="form-control" name="name" id="settings-name" placeholder="Ingresa tu nombre" maxlength="70"/>
                         </div>
 
                         <div class="form-group">
@@ -130,18 +130,18 @@
                                 </label>
                                 <label id="settings-gender-female-option" class="btn btn-default">
                                     <input type="radio" name="-gender-options">Mujer
-                                </label>                                
+                                </label>
                             </div>
                         </div>
-                        
-                        <div class="row">                                                    
+
+                        <div class="row">
                             <div class="form-group col-md-3">
                                 <label for="settings-day">Día</label>
-                                <input type="text" class="form-control settings-birthdate" id="settings-day" placeholder="DD" maxlength="2" />
-                            </div>                        
+                                <input type="text" name="day" class="form-control settings-birthdate" id="settings-day" placeholder="DD" maxlength="2" />
+                            </div>
                             <div class="form-group col-md-3">
                                 <label for="settings-month">Mes</label>
-                                <select id="settings-month" class="form-control" name="settings-month">  
+                                <select id="settings-month" class="form-control" name="month">
                                     <option value="01">Enero</option>
                                     <option value="02">Febrero</option>
                                     <option value="03">Marzo</option>
@@ -158,13 +158,13 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="settings-year">Año</label>
-                                <input type="text" class="form-control settings-birthdate" id="settings-year" placeholder="YYYY" maxlength="4" />
-                            </div>    
+                                <input type="text" name="year" class="form-control settings-birthdate" id="settings-year" placeholder="YYYY" maxlength="4" />
+                            </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="settings-country">País</label>
-                            <select id="settings-country" class="form-control" name="settings-country">
+                            <select id="settings-country" class="form-control">
                                 <option value="AF">Afganistán</option>
                                 <option value="AL">Albania</option>
                                 <option value="DE">Alemania</option>
@@ -401,47 +401,47 @@
                                 <option value="ZW">Zimbabue</option>
                             </select>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="settings-about-me">Acerca de ti</label><span class="pull-right char-counter text-muted">180</span>
-                            <textarea class="form-control" id="settings-about-me" placeholder="Ingresa una descripción"></textarea>
+                            <textarea class="form-control" name="aboutme" id="settings-about-me" placeholder="Ingresa una descripción"></textarea>
                         </div>
 
                         </br><button type="submit" class="btn btn-success pull-right">Guardar Cambios</button>
-                    </form>                    
+                    </form>
                 </div>
 
                 <!-- NOTIFICACIONES -->
-                <div id="settings-notifications-content" class="settings-option-content col-md-12">                    
+                <div id="settings-notifications-content" class="settings-option-content col-md-12">
                     <form id="settings-notifications-form" role="form">
                         <p class="help-block">Notificarme cuando: </p>
-                        <div class="well well-sm">                            
+                        <div class="well well-sm">
                             <div class="row">
                                 <div class="col-md-6 text-right">
-                                    <label for="settings-like-notification">Den "me gusta" a un post mio</label>    
+                                    <label for="settings-like-notification">Den "me gusta" a un post mio</label>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="checkbox" checked="checked" id="settings-like-notification" class="settings-switch"/>
-                                </div>                                                    
+                                </div>
                             </div></br>
 
                             <div class="row">
                                 <div class="col-md-6 text-right">
-                                    <label for="settings-comment-notification">Comenten en un post mio</label>    
+                                    <label for="settings-comment-notification">Comenten en un post mio</label>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="checkbox" checked="checked" id="settings-comment-notification" class="settings-switch"/>
-                                </div>                                                    
+                                </div>
                             </div>
-                        </div><br/>        
+                        </div><br/>
                         <button type="submit" class="btn btn-success pull-right">Guardar Cambios</button>
-                    </form>                  
-                </div>               
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 
-    
+
 <script type="text/javascript">
 $(function()
 {
@@ -452,20 +452,32 @@ $(function()
     const USER_DESCRIPTION_MAX_LENGTH = 180;
 
     // Variables cacheadas
-    var $_modal           = $('#' + MODAL_PREFIX + 'modal');            
-    var $_menu            = $('#' + MODAL_PREFIX + 'options');            
-    var $_contents        = $('.' + MODAL_PREFIX + 'option-content');            
-    
+    var $_modal           = $('#' + MODAL_PREFIX + 'modal');
+    var $_menu            = $('#' + MODAL_PREFIX + 'options');
+    var $_contents        = $('.' + MODAL_PREFIX + 'option-content');
+
+    /* CUENTA */
+    var $_accountForm     = $('#' + MODAL_PREFIX + 'account-form');
+    var $_usernameField   = $('#' + MODAL_PREFIX + 'username');
+    var $_emailField      = $('#' + MODAL_PREFIX + 'email');
+
+    /* CONTRASEÑA */
+    var $_newPasswordForm = $('#' + MODAL_PREFIX + 'new-password-form');
+
     /* PERFIL */
-    var $_profileForm     = $('#' + MODAL_PREFIX + 'profile-form');            
-    var $_userDescription = $('#' + MODAL_PREFIX + 'about-me');            
-    
+    var $_profileForm     = $('#' + MODAL_PREFIX + 'profile-form');
+    var $_userDescription = $('#' + MODAL_PREFIX + 'about-me');
+    var $_genderOptions   = $('#' + MODAL_PREFIX + 'gender-options');
+
+    /* NOTIFICACIONES */
+    var $_notificationsForm = $('#' + MODAL_PREFIX + 'notifications-form');
+
     /*
      * Evento que inicializa la funcionalidad de
      * la libreria bootstrap-switch
-     */    
+     */
     $(".settings-switch").bootstrapSwitch();
-    
+
     /*
      * Evento que modifica el contenido del modal dependiendo
      * de la opción seleccionada.
@@ -481,7 +493,33 @@ $(function()
         // ocultamos todos los contenidos del modal
         $_contents.hide();
         // busca dentro del modal y muestra el contenido escogido
-        $_modal.find(idContent).show();            
+        $_modal.find(idContent).show();
+    });
+
+    /*
+     * Eventos que se ejecutan cuando el modal se carga
+     * y ya es visible para el usuario
+     */
+    $_modal.on('shown.bs.modal', function()
+    {
+        // // Configurar las validaciones
+        // var $field = null;
+        // var $params = {rules:{}, messages:{}};
+
+        // /* VALIDACIONES DE PESTAÑA: CUENTA */
+
+        // // validando username
+        // $field = $_usernameField.attr('name');
+        // $params['rules'][$field] = {"required":true, "rangelength":[3,10]};
+        // $params['messages'][$field] = {"rangelength": jQuery.validator.format("El nombre de usuario debe contener entre {0} y {1} caracteres")};
+
+        // // validando correo
+        // $field = $_emailField.attr('name');
+        // $params['rules'][$field] = {"required":true, "maxlength": 50};
+        // $params['messages'][$field] = {"maxlength": jQuery.validator.format("El correo no puede sobrepasar los {0} caracteres")};
+
+        
+
     });
 
     /*
@@ -489,11 +527,27 @@ $(function()
      * pero aún no es visible para el usuario
      */
     $_modal.on('show.bs.modal', function()
-    {        
+    {
+        // reset a los formularios
+        $_accountForm.get(0).reset();
+        $_newPasswordForm.get(0).reset();
+        $_profileForm.get(0).reset();
+        $_notificationsForm.get(0).reset();
+
+        // removemos la clase .active del genero que lo posea actualmente
+        $_genderOptions.find('label.active').removeClass('active');
+        // colocamos la clase .active al primer elemento del menú y llama al evento click
+        $_genderOptions.find('label:first').addClass('active').click();
+
         // removemos la clase .active del menú que lo posea actualmente
         $_menu.find('label.active').removeClass('active');
         // colocamos la clase .active al primer elemento del menú y llama al evento click
-        $_menu.find('label:first').addClass('active').click();            
+        $_menu.find('label:first').addClass('active').click();
+
+        // Limpia el formulario
+//        $_form.validate().resetForm();
+//        $_form.get(0).reset();
+//        $_form.children().removeClass('has-error has-success');
     });
 
     /*
