@@ -1,5 +1,4 @@
 <?php
-
 include_once 'programador.php';
 if ($usuario == "jaivic") {
     defined('DB_SERVER') ? null : define("DB_SERVER", "localhost");
@@ -23,7 +22,6 @@ if ($usuario == "jaivic") {
     defined('ADMIN_CSS') ? null : define("ADMIN_CSS", "/admin/css");
     defined('ADMIN_JS') ? null : define("ADMIN_JS", "/admin/js");
     defined('EXT_MEDIA') ? null : define("EXT_MEDIA", SERVER . MEDIA);
-
     defined('EXT_MEME') ? null : define("EXT_MEME", EXT_MEDIA . "/meme");
     defined('EXT_ARTICLE') ? null : define("EXT_ARTICLE", EXT_MEDIA . "/article");
     defined('EXT_TAG') ? null : define("EXT_TAG", SERVER . "/Tag.php");
@@ -53,7 +51,6 @@ if ($usuario == "memetomia") {
     defined('ADMIN_CSS') ? null : define("ADMIN_CSS", "/admin/css");
     defined('ADMIN_JS') ? null : define("ADMIN_JS", "/admin/js");
    defined('EXT_MEDIA') ? null : define("EXT_MEDIA", SERVER . MEDIA);
-
     defined('EXT_MEME') ? null : define("EXT_MEME", EXT_MEDIA . "/meme");
     defined('EXT_ARTICLE') ? null : define("EXT_ARTICLE", EXT_MEDIA . "/article");
     defined('EXT_TAG') ? null : define("EXT_TAG", SERVER . "/Tag.php");
@@ -67,14 +64,11 @@ if ($usuario == "hector") {
     defined('DB_PASS') ? null : define("DB_PASS", "");
     defined('DB_NAME') ? null : define("DB_NAME", "gallery");
     defined('DIR_LOG') ? null : define("DIR_LOG", "class/log_de_conexion_con_bd.txt");
-
     defined('MODO_DEBUG') ? null : define("MODO_DEBUG", false);
-
     defined('SERVER') ? null : define("SERVER", "http://localhost/memetomia");
     defined('RESOURCES') ? null : define("RESOURCES", "/resources");
     defined('FONTS') ? null : define("FONTS", "/resources/fonts");
     defined('MEDIA') ? null : define("MEDIA", "/media");
-
     defined('MEME') ? null : define("MEME", "/Library/WebServer/documents/memetomia/media/meme");
     defined('ARTICLE') ? null : define("ARTICLE", "/Library/WebServer/documents/memetomia/media/article");
     defined('CONTS_DEFAULT') ? null : define("CONTS_DEFAULT", SERVER . MEDIA . "/default");
@@ -92,5 +86,5 @@ if ($usuario == "hector") {
     defined('EXT_TAG') ? null : define("EXT_TAG", SERVER . "/Tag.php");
     defined('EXT_IMAGEN') ? null : define("EXT_IMAGEN", EXT_MEDIA . "/Imagen.php");
     defined('EXT_DEFAULT') ? null : define("EXT_DEFAULT", EXT_MEDIA . "/default");
-}
-?>
+}//no entiendo porque hay error aqui pero lo hay
+
