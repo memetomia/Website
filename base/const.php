@@ -15,7 +15,7 @@ if ($usuario == "jaivic") {
     defined('ARTICLE') ? null : define("ARTICLE", "C:\wamp\www\Website\media\article");
     defined('MEME') ? null : define("MEME", "C:\wamp\www\memetomia\media\meme"); 
     defined('ARTICLE') ? null : define("ARTICLE", "C:\wamp\www\memetomia\media\article"); 
-    defined('CONTS_DEFAULT') ? null : define("CONTS_DEFAULT", SERVER . MEDIA . "/default");
+   
     defined('JS') ? null : define("JS", "/js");
     defined('MODAL_CONTROLLER') ? null : define("MODAL_CONTROLLER", "/js/modal_controllers");
     defined('CSS') ? null : define("CSS", "/css");
@@ -44,7 +44,7 @@ if ($usuario == "memetomia") {
     defined('MEDIA') ? null : define("MEDIA", "/media");
     defined('MEME') ? null : define("MEME", "/home/memetomia/public_html/media/meme"); // no fue cambiada por HG
     defined('ARTICLE') ? null : define("ARTICLE", "/home/memetomia/public_html/media/article"); // no fue cambiada por HG
-    defined('CONTS_DEFAULT') ? null : define("CONTS_DEFAULT", SERVER . MEDIA . "/default");
+   
     defined('JS') ? null : define("JS", "/js");
     defined('MODAL_CONTROLLER') ? null : define("MODAL_CONTROLLER", "/js/modal_controllers");
     defined('CSS') ? null : define("CSS", "/css");
@@ -74,7 +74,7 @@ if ($usuario == "hector") {
     defined('MEDIA') ? null : define("MEDIA", "/media");
     defined('MEME') ? null : define("MEME", "/Library/WebServer/documents/memetomia/media/meme");
     defined('ARTICLE') ? null : define("ARTICLE", "/Library/WebServer/documents/memetomia/media/article");
-    defined('CONTS_DEFAULT') ? null : define("CONTS_DEFAULT", SERVER . MEDIA . "/default");
+    
     defined('JS') ? null : define("JS", "/js");
     defined('MODAL_CONTROLLER') ? null : define("MODAL_CONTROLLER", "/js/modal_controllers");
     defined('CSS') ? null : define("CSS", "/css");
