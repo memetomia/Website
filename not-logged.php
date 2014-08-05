@@ -27,7 +27,7 @@
         <nav class="navbar navbar-static-top navbar-inverse" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-media/example-navbar-collapse-1">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#memetomia-navbar">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -36,7 +36,7 @@
                     <a class="navbar-brand" href="#">Memetomía</a>
                 </div>
 
-                <div class="collapse navbar-collapse" id="bs-media/example-navbar-collapse-1">
+                <div class="collapse navbar-collapse" id="memetomia-navbar">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#">Inicio</a></li>
                         <li><a href="#">Top</a></li>
@@ -109,7 +109,7 @@
         <script>
             // activa modal registro al presionar botones
             $('.comment-button, .like-button').click(function() {
-                $('#sign-in-modal').modal('show')
+                $('#sign-in-modal').modal('show');
             });
         </script>
     </body>

@@ -1,4 +1,4 @@
-<?php //header ("Location: coming-soon.php"); ?>
+<?php //header ("Location: coming-soon.php");  ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -7,7 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Memetomía</title>
-        
+
         <!--STYLES-->
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/jqueryUI.custom.min.css" rel="stylesheet">        
@@ -17,7 +17,7 @@
         <script src="js/jquery-2.1.0.min.js"></script>        
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jqueryUI.custom.min.js"></script>  
-       <script src="js/bootstrap-switch.min.js"></script>  
+        <script src="js/bootstrap-switch.min.js"></script>  
         <script src="js/jquery.validate.min.js"></script>    
 
         <!--[if lt IE 9]>
@@ -29,7 +29,7 @@
         <nav class="navbar navbar-static-top navbar-inverse" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-media/example-navbar-collapse-1">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#memetomia-navbar">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -37,8 +37,8 @@
                     </button>
                     <a class="navbar-brand" href="#">Memetomía</a>
                 </div>
-                
-                <div class="collapse navbar-collapse" id="bs-media/example-navbar-collapse-1">
+
+                <div class="collapse navbar-collapse" id="memetomia-navbar">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#">Inicio</a></li>
                         <li><a href="#">Top</a></li>
@@ -69,7 +69,7 @@
                 </div>
             </div>
         </nav>
-        
+
         <div id="main-content" class="container">
             <div id="timeline-container" class="col-md-12">
 
@@ -83,9 +83,9 @@
 
                 <div id="timeline" class="col-md-8">
 
-               
-                    <?php include_once 'frame/TimeLine.php';?>
-                 
+
+                    <?php include_once 'frame/TimeLine.php'; ?>
+
 
                 </div>
 
@@ -105,10 +105,10 @@
                         </div>
                     </div>
 
-                   
-                    <?php include_once 'frame/Tag.php';?>
-                    
-                            <?php include_once 'frame/Destacados.php';?>
+
+                    <?php include_once 'frame/Tag.php'; ?>
+
+                    <?php include_once 'frame/Destacados.php'; ?>
 
                     <div class="panel panel-info">                        
                         <div class="panel-body">
@@ -120,20 +120,11 @@
         </div>
 
         <!-- MODAL Windows -->
-        <?php             
+        <?php
         include_once 'modal/notifications-modal.php';
-        include_once 'modal/new-post-modal.php'; 
-        include_once 'modal/activity-modal.php';  
-        include_once 'modal/settings-modal.php';                    
+        include_once 'modal/new-post-modal.php';
+        include_once 'modal/activity-modal.php';
+        include_once 'modal/settings-modal.php';
         ?>        
-        
-      
-      
-
-        <!--Ver donde poner esto-->
-        <script>
-            // Activating All Switches
-            $(".settings-switch").bootstrapSwitch();
-        </script>
     </body>
 </html>
