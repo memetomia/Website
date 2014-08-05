@@ -85,8 +85,7 @@
 
 
                     <?php include_once 'frame/TimeLine.php'; ?>
-
-
+                    
                 </div>
 
                 <div id="sidebar" class="col-md-4">
