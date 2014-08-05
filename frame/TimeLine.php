@@ -16,8 +16,8 @@
         $paginador = '<li class="previous"><a href="' . SERVER . "/index.php?i=" . $prev . '">&larr; Atrás</a></li><li class="next"><a href="' . SERVER . "/index.php?i=" . $next . '">Siguiente &rarr;</a></li>';
     }
 
-    include_once '/base/TableGallery.php';
-    include_once '/base/TableUser_Gallery.php';
+    include_once 'base/TableGallery.php';
+    include_once 'base/TableUser_Gallery.php';
     $bd = new TableGallery();
     $bdtag = new TableUser_Gallery();
     $todo = $bd->LastNArticle($index, 5);

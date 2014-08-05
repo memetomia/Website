@@ -1,6 +1,5 @@
-<div class="post col-md-12">   
     <?php
-    include_once '/base/TableTag.php';
+    include_once 'base/TableTag.php';
 
     $bd = new TableTag();
 
@@ -8,21 +7,18 @@
     $html = "";
     if ($todo > 0) {
         $sClass = "";
-        ?>
+    ?>
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h3 class="panel-title">Tendencias</h3>
             </div>
             <div class="panel-body">
-                <?php
+            <?php
                 for ($i = 0; $i < $todo; $i++) {
 
-                    echo '<a href="#"><span class="label label-warning">' . $bd->bd->obtener_respuesta($i, "NAME") . '</span></a> '
-                            . '';
+                    echo '<a href="#"><span class="label label-warning">' . $bd->bd->obtener_respuesta($i, "NAME") . '</span></a> '. '';
                 }
             }
             ?>
-
-         
+            </div>
         </div>
-    </div>

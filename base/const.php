@@ -69,14 +69,11 @@ if ($usuario == "hector") {
     defined('DB_PASS') ? null : define("DB_PASS", "");
     defined('DB_NAME') ? null : define("DB_NAME", "gallery");
     defined('DIR_LOG') ? null : define("DIR_LOG", "class/log_de_conexion_con_bd.txt");
-
     defined('MODO_DEBUG') ? null : define("MODO_DEBUG", false);
-
     defined('SERVER') ? null : define("SERVER", "http://localhost/memetomia");
     defined('RESOURCES') ? null : define("RESOURCES", "/resources");
     defined('FONTS') ? null : define("FONTS", "/resources/fonts");
     defined('MEDIA') ? null : define("MEDIA", "/media");
-
     defined('MEME') ? null : define("MEME", "/Library/WebServer/documents/memetomia/media/meme");
     defined('ARTICLE') ? null : define("ARTICLE", "/Library/WebServer/documents/memetomia/media/article");
     defined('CONTS_DEFAULT') ? null : define("CONTS_DEFAULT", SERVER . MEDIA . "/default");
