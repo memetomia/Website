@@ -1,4 +1,4 @@
-<?php //header ("Location: coming-soon.php");   ?>
+<?php //header ("Location: coming-soon.php");    ?>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -69,7 +69,7 @@
 
 
                     <?php include_once 'frame/TimeLine.php'; ?>
-             
+
 
                 </div>
 
@@ -89,14 +89,14 @@
                         </div>
                     </div>
 
-                
+
                     <?php include_once 'frame/Tag.php'; ?>
-    
+
 
                     <?php include_once 'frame/Tag.php'; ?>
 
                     <?php include_once 'frame/Destacados.php'; ?>
-             
+
 
                     <?php include_once 'frame/Destacados.php'; ?>
 
@@ -111,7 +111,6 @@
 
         <!-- MODAL Windows -->
         <?php
-      
         include_once 'modal/login-modal.php';
         include_once 'modal/sign-in-modal.php';
         ?>        
@@ -124,7 +123,7 @@
                 $('#sign-in-modal').modal('show')
             });
         </script>
-<?php
+        <?php
         include_once 'modal/notifications-modal.php';
         include_once 'modal/new-post-modal.php';
         include_once 'modal/activity-modal.php';
