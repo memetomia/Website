@@ -1,3 +1,4 @@
+
 <?php //header ("Location: coming-soon.php");  ?>
 
 <!DOCTYPE html>
@@ -19,7 +20,6 @@
         <script src="js/jqueryUI.custom.min.js"></script>  
         <script src="js/bootstrap-switch.min.js"></script>  
         <script src="js/jquery.validate.min.js"></script>    
-
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -37,7 +37,6 @@
                     </button>
                     <a class="navbar-brand" href="#">Memetomía</a>
                 </div>
-
                 <div class="collapse navbar-collapse" id="memetomia-navbar">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#">Inicio</a></li>
@@ -66,8 +65,8 @@
                             </ul>
                         </li>
                     </ul>                    
+
                 </div>
-            </div>
         </nav>
 
         <div id="main-content" class="container">
@@ -109,21 +108,36 @@
 
                     <?php include_once 'frame/Destacados.php'; ?>
 
-                    <div class="panel panel-info">                        
-                        <div class="panel-body">
-                            publicidad aqui
-                        </div>
-                    </div>
+
+                    <!--                    <div class="panel panel-info">                        
+                                            <div class="panel-body">
+                                                publicidad aqui
+                                            </div>
+                                        </div>-->
                 </div>
             </div>
         </div>
 
         <!-- MODAL Windows -->
         <?php
+        include_once 'modal/login-modal.php';
+        include_once 'modal/sign-in-modal.php';
+        ?>        
+
+
+        <!--Ver donde poner esto-->
+        <script>
+            // activa modal registro al presionar botones
+            $('.comment-button, .like-button').click(function() {
+                $('#sign-in-modal').modal('show')
+            });
+        </script>
+        <?php
         include_once 'modal/notifications-modal.php';
         include_once 'modal/new-post-modal.php';
         include_once 'modal/activity-modal.php';
         include_once 'modal/settings-modal.php';
         ?>        
+
     </body>
 </html>
