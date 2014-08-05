@@ -1,4 +1,4 @@
 
 base/programador.php
-nbproject/
-.idea/
+nbproject
+.idea
