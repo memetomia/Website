@@ -3,4 +3,4 @@ base/programador.php
 
 nbproject/
 
-.idea/
+*.DS_Store
