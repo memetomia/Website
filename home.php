@@ -37,9 +37,12 @@
                     </button>
                     <a class="navbar-brand" href="#">Memetomía</a>
                 </div>
-                
-                <div class="collapse navbar-collapse" id="memetomia-navbar">
+                <div class="collapse navbar-collapse" id="bs-media/example-navbar-collapse-1">
 
+
+           
+
+                <div class="collapse navbar-collapse" id="memetomia-navbar">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#">Inicio</a></li>
                         <li><a href="#">Top</a></li>
@@ -133,15 +136,12 @@
 
         <!--Ver donde poner esto-->
         <script>
-<<<<<<< HEAD:home.php
             // Activating All Switches
             $(".settings-switch").bootstrapSwitch();
-=======
             // activa modal registro al presionar botones
             $('.comment-button, .like-button').click(function() {
                 $('#sign-in-modal').modal('show');
             });
->>>>>>> origin/master:not-logged.php
         </script>
     </body>
 </html>

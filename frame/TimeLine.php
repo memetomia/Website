@@ -9,7 +9,7 @@
         $index = 0;
         $prev = $index - 1;
         $next = $index + 1;
-        $paginador = '<li class="previous disabled"><a href="' . SERVER . "/index.php?i=" .$prev . '">&larr; Atrás</a></li><li class="next"><a href="' . SERVER . "/index.php?i=" .  $next. '">Siguiente &rarr;</a></li>';
+        $paginador = '<li class="previous disabled"><a href="' . SERVER . "/index.php?i=" . $prev . '">&larr; Atrás</a></li><li class="next"><a href="' . SERVER . "/index.php?i=" . $next . '">Siguiente &rarr;</a></li>';
     } else {
         $prev = $index - 1;
         $next = $index + 1;
