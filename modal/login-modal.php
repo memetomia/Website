@@ -1,4 +1,4 @@
-<!-- LOGIN MODAL LOCAL STYLE -->
+<!-- LOGIN MODAL -->
 <style>
     
 </style>
@@ -21,11 +21,11 @@
                 <form id="login-form" role="form">
                     <div class="form-group">
                         <label for="login-username-email">Nombre de usuario o correo eletrónico</label>
-                        <input type="text" class="form-control" id="login-username-email" placeholder="correo@ejemplo.com">
+                        <input type="text" name="emailusername" class="form-control" id="login-username-email" placeholder="correo@ejemplo.com">
                     </div>
                     <div class="form-group">
                         <label for="login-password">Contraseña</label>
-                        <input type="password" class="form-control" id="login-password" placeholder="contraseña">                        
+                        <input type="password" name="password" class="form-control" id="login-password" placeholder="contraseña">                        
                     </div>
                     <small><a class="pull-right" href="#">¿Olvidaste tu contraseña?</a></small>
                     <div class="checkbox">
@@ -43,11 +43,44 @@
     </div>
 </div>
 
-<!-- LOGIN MODAL LOCAL JAVASCRIPT -->
-<script type="text/javascript">
-    // documento preparado
-    $(function()
+<script type="text/javascript">    
+$(function(){
+
+    // Prefijo del modal
+    var MODAL_PREFIX = 'login-';
+
+    // Variables cacheadas
+    var $_modal         = $('#' + MODAL_PREFIX + 'modal');
+    var $_form          = $('#' + MODAL_PREFIX + 'form');
+    var $_usernameEmail = $('#' + MODAL_PREFIX + 'username-email');    
+    var $_password      = $('#' + MODAL_PREFIX + 'password');    
+
+    /*
+     * Eventos que se ejecutan cuando el modal se carga
+     * y ya es visible para el usuario
+     */
+    $_modal.on('show.bs.modal', function()
     {        
-        
-    });
+        // Configurar las validaciones
+        var $field = null;
+        var $params = {rules:{}, messages:{}};        
+
+        // validaciones de username
+        $field = $_usernameEmail.attr('name');        
+        $params['rules'][$field] = {"required":true};
+        $params['messages'][$field] = {};
+
+        // validaciones de password
+        $field = $_password.attr('name');
+        $params['rules'][$field] = {"required":true, "passwordcheck": true};
+        $params['messages'][$field] = {"minlength": jQuery.validator.format("La contraseña debe contener el menos 6 caracteres")};
+
+        // envia parametros de validación al formulario
+        $_form.validate($params).resetForm();
+
+        // limpia el formulario
+        $_form.get(0).reset();
+        $_form.children().removeClass('has-error has-success');                      
+    });          
+});
 </script>
