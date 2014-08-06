@@ -1,6 +1,3 @@
-
-<?php //header ("Location: coming-soon.php");  ?>
-
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -19,7 +16,8 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jqueryUI.custom.min.js"></script>  
         <script src="js/bootstrap-switch.min.js"></script>  
-        <script src="js/jquery.validate.min.js"></script>    
+        <script src="js/jquery.validate.min.js"></script>
+
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -45,25 +43,8 @@
                         <li><a href="#">GIF</a></li>
                     </ul>                    
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-bell"></span> Notificaciones <span class="label label-danger">2</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#"><span class="not-readed"></span> <span class="glyphicon glyphicon-comment"></span> Alejandro123 comentó en tu post</a></li>                                
-                                <li><a href="#"><span class="not-readed"></span> <span class="glyphicon glyphicon-thumbs-up"></span> A Erika33 le gustó tu post</a></li>                                
-                                <li class="divider"></li>
-                                <li class="text-center"><a href="#" data-toggle="modal" data-target="#notifications-modal">Ver todas las notificaciones</a></li>                                
-                            </ul>
-                        </li>
-                        <li><a href="#" data-toggle="modal" data-target="#new-post-modal"><span class="glyphicon glyphicon-upload"></span> Nuevo Post</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Jaivic Villegas<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#" data-toggle="modal" data-target="#activity-modal"><span class="glyphicon glyphicon-tasks"></span> Actividad</a></li>                                
-                                <li><a href="#" data-toggle="modal" data-target="#settings-modal"><span class="glyphicon glyphicon-cog"></span> Ajustes</a></li>                                
-                                <li class="divider"></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>
-                            </ul>
-                        </li>
+                        <li><a href="#" data-toggle="modal" data-target="#sign-in-modal">¡Regístrate en Memetomía!</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#login-modal">Iniciar sesión</a></li>                        
                     </ul>                    
 
                 </div>
@@ -132,12 +113,6 @@
                 $('#sign-in-modal').modal('show')
             });
         </script>
-        <?php
-        include_once 'modal/notifications-modal.php';
-        include_once 'modal/new-post-modal.php';
-        include_once 'modal/activity-modal.php';
-        include_once 'modal/settings-modal.php';
-        ?>        
 
     </body>
 </html>
