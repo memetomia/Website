@@ -137,11 +137,7 @@
         <!--Ver donde poner esto-->
         <script>
             // Activating All Switches
-            $(".settings-switch").bootstrapSwitch();
-            // activa modal registro al presionar botones
-            $('.comment-button, .like-button').click(function() {
-                $('#sign-in-modal').modal('show');
-            });
+            $(".settings-switch").bootstrapSwitch();            
         </script>
     </body>
 </html>
