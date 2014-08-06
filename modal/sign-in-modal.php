@@ -1,4 +1,4 @@
-<!-- SIGN IN MODAL -->
+ <!-- SIGN IN MODAL -->
 <style></style>
 
 <div class="modal fade" id="sign-in-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

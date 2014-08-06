@@ -38,11 +38,11 @@
                 <form id="new-post-form" role="form">
                     <div class="form-group">
                         <label for="new-post-title">Título</label><span class="pull-right char-counter text-muted">150</span>
-                        <textarea class="form-control" id="new-post-title" placeholder="Ingresa título"></textarea>
+                        <textarea class="form-control" name="title" id="new-post-title" placeholder="Ingresa título"></textarea>
                     </div>
                     <div id="new-post-url-field" class="form-group">
                         <label for="new-post-url">URL</label>
-                        <input type="url" class="form-control" id="new-post-url" placeholder="http://">
+                        <input type="url" class="form-control" name="url" id="new-post-url" placeholder="http://">
                         <p class="help-block">Pueden colocarse URL de youtube</p>
                     </div>
                     <div id="new-post-image-field" class="form-group">
@@ -53,7 +53,7 @@
                     <div id="new-post-tags-search-field" class="form-group">
                         <label for="new-post-tags-search">Etiquetas</label>                        
                         <div class="input-group">
-                            <input type="text" class="form-control" id="new-post-tags-search" placeholder="Ingresa etiquetas">
+                            <input type="text" name="tag" class="form-control" id="new-post-tags-search" placeholder="Ingresa etiquetas">
                             <span class="input-group-btn">
                                 <button id="new-post-add-tag" class="btn btn-default" type="button">
                                     <span class="gylphicon glyphicon-plus"></span>
@@ -169,20 +169,26 @@ $(function(){
      */
     $_tagButton.click(function()
     {
-        // se obtiene el valor del tag
-        var tagValue = $_tagInput.val();                                    
+        // antes de agregar, desenfoca para activar validación
+        $_tagInput.blur();
 
-        // se construye el html agregando el valor del tag
-        var tagHtml = '<span class="label label-default tag">'
-                .concat(tagValue.toUpperCase())
-                .concat('<label class="delete-tag">&times;</label></span>')
-                .concat(' '); // espacio en blanco para separar tags (importante)
+        if (!$_tagInput.parents('.form-group').hasClass('has-error')) 
+        {
+            // se obtiene el valor del tag
+            var tagValue = $_tagInput.val();                                    
 
-        // agrega el código html al documento
-        $_tags.append(tagHtml);
+            // se construye el html agregando el valor del tag
+            var tagHtml = '<span class="label label-default tag">'
+                    .concat(tagValue.toUpperCase())
+                    .concat('<label class="delete-tag">&times;</label></span>')
+                    .concat(' '); // espacio en blanco para separar tags (importante)
 
-        // limpia el campo donde se agrega el tag
-        $_tagInput.val('');
+            // agrega el código html al documento
+            $_tags.append(tagHtml);
+
+            // limpia el campo donde se agrega el tag
+            $_tagInput.val('');
+        }
     });
 
     /*
@@ -223,6 +229,7 @@ $(function(){
     {                   
         // reinicia lo valores del formulario por default
         $_form.get(0).reset();
+        $_form.children().removeAttr('has-error has-success');
         // remueve la clase .active del menú que lo posea actualmente
         $_menu.find('label.active').removeClass('active');
         // coloca la clase .active al primer elemento del menú y llama al evento click
@@ -230,7 +237,30 @@ $(function(){
         // reinicia el contador de caracteres asignando el valor máximo
         $_form.find('.char-counter').text(POST_TITLE_MAX_LENGTH);
         // elimina todos los tags introducidos previamente
-        $_tags.empty(); 
+        $_tags.empty();
+
+
+        // Configurar las validaciones
+        var $field = null;
+        var $params = {rules:{}, messages:{}};        
+
+        // validaciones de titulo
+        $field = $_postTitle.attr('name');        
+        $params['rules'][$field] = {"required":true, "rangelength":[3,150]};
+        $params['messages'][$field] = {"rangelength": jQuery.validator.format("El título del post debe contener entre {0} y {1} caracteres")};
+
+        // validaciones de url
+        $field = $_postURL.attr('name');
+        $params['rules'][$field] = {"required": true};
+        $params['messages'][$field] = {};
+    
+        // validaciones de tags
+        $field = $_tagInput.attr('name');
+        $params['rules'][$field] = {"lettersonly":true};
+        $params['messages'][$field] = {"lettersonly": "Las etiquetas sólo permiten caracteres alfabéticos"};
+
+        // envia parametros de validación al formulario
+        $_form.validate($params).resetForm();         
     });
 
 });

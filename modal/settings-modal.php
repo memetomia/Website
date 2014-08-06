@@ -52,7 +52,7 @@
                         </div>
                         <div class="form-group">
                             <label for="settings-email">Correo electrónico</label>
-                            <input type="text" name="email" class="form-control" id="settings-email" placeholder="Correo electrónico"/>
+                            <input type="email" name="email" class="form-control" id="settings-email" placeholder="Correo electrónico"/>
                         </div>
 
                         <p class="help-block">Mostrar en mi timeline: </p>
@@ -98,7 +98,7 @@
                         </div>
                         <div class="form-group">
                             <label for="settings-new-password-again">Reingresa contraseña nueva</label>
-                            <input type="password" name="confirmpassword" class="form-control" id="settings-old-password-again" placeholder="Reingresa contraseña nueva"/>
+                            <input type="password" name="confirmpassword" class="form-control" id="settings-confirm-password" placeholder="Reingresa contraseña nueva"/>
                         </div></br>
                         <button type="submit" class="btn btn-success pull-right">Guardar Cambios</button>
                     </form>
@@ -116,7 +116,7 @@
                         </div>
                         <div class="form-group">
                             <label for="settings-name">Nombre</label>
-                            <input type="text" class="form-control" name="name" id="settings-name" placeholder="Ingresa tu nombre" maxlength="70"/>
+                            <input type="text" class="form-control" name="fullname" id="settings-name" placeholder="Ingresa tu nombre" maxlength="70"/>
                         </div>
 
                         <div class="form-group">
@@ -137,7 +137,21 @@
                         <div class="row">
                             <div class="form-group col-md-3">
                                 <label for="settings-day">Día</label>
-                                <input type="text" name="day" class="form-control settings-birthdate" id="settings-day" placeholder="DD" maxlength="2" />
+                                <select id="settings-day" class="form-control" name="day">
+                                    <?php
+                                        for ($i=1; $i <= 31; $i++) 
+                                        {
+                                            if ($i < 10) 
+                                            {
+                                                echo '<option value="0'.$i.'">0'.$i.'</option>';    
+                                            }
+                                            else
+                                            {
+                                                echo '<option value="'.$i.'">'.$i.'</option>';    
+                                            }
+                                        }
+                                    ?>
+                                </select>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="settings-month">Mes</label>
@@ -158,247 +172,23 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="settings-year">Año</label>
-                                <input type="text" name="year" class="form-control settings-birthdate" id="settings-year" placeholder="YYYY" maxlength="4" />
+                                <select id="settings-year" class="form-control" name="year">
+                                    <?php
+                                        $currentYear = date("Y");
+                                        $yearsRange = range($currentYear, ($currentYear-100));
+                                        foreach ($yearsRange as $year) 
+                                        {
+                                            echo '<option value="'.$year.'">'.$year.'</option>';
+                                        }                                        
+                                    ?>
+                                </select>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="settings-country">País</label>
                             <select id="settings-country" class="form-control">
-                                <option value="AF">Afganistán</option>
-                                <option value="AL">Albania</option>
-                                <option value="DE">Alemania</option>
-                                <option value="AD">Andorra</option>
-                                <option value="AO">Angola</option>
-                                <option value="AI">Anguilla</option>
-                                <option value="AQ">Antártida</option>
-                                <option value="AG">Antigua y Barbuda</option>
-                                <option value="AN">Antillas Holandesas</option>
-                                <option value="SA">Arabia Saudí</option>
-                                <option value="DZ">Argelia</option>
-                                <option value="AR">Argentina</option>
-                                <option value="AM">Armenia</option>
-                                <option value="AW">Aruba</option>
-                                <option value="AU">Australia</option>
-                                <option value="AT">Austria</option>
-                                <option value="AZ">Azerbaiyán</option>
-                                <option value="BS">Bahamas</option>
-                                <option value="BH">Bahrein</option>
-                                <option value="BD">Bangladesh</option>
-                                <option value="BB">Barbados</option>
-                                <option value="BE">Bélgica</option>
-                                <option value="BZ">Belice</option>
-                                <option value="BJ">Benin</option>
-                                <option value="BM">Bermudas</option>
-                                <option value="BY">Bielorrusia</option>
-                                <option value="MM">Birmania</option>
-                                <option value="BO">Bolivia</option>
-                                <option value="BA">Bosnia y Herzegovina</option>
-                                <option value="BW">Botswana</option>
-                                <option value="BR">Brasil</option>
-                                <option value="BN">Brunei</option>
-                                <option value="BG">Bulgaria</option>
-                                <option value="BF">Burkina Faso</option>
-                                <option value="BI">Burundi</option>
-                                <option value="BT">Bután</option>
-                                <option value="CV">Cabo Verde</option>
-                                <option value="KH">Camboya</option>
-                                <option value="CM">Camerún</option>
-                                <option value="CA">Canadá</option>
-                                <option value="TD">Chad</option>
-                                <option value="CL">Chile</option>
-                                <option value="CN">China</option>
-                                <option value="CY">Chipre</option>
-                                <option value="VA">Ciudad del Vaticano (Santa Sede)</option>
-                                <option value="CO">Colombia</option>
-                                <option value="KM">Comores</option>
-                                <option value="CG">Congo</option>
-                                <option value="CD">Congo, República Democrática del</option>
-                                <option value="KR">Corea</option>
-                                <option value="KP">Corea del Norte</option>
-                                <option value="CI">Costa de Marfíl</option>
-                                <option value="CR">Costa Rica</option>
-                                <option value="HR">Croacia (Hrvatska)</option>
-                                <option value="CU">Cuba</option>
-                                <option value="DK">Dinamarca</option>
-                                <option value="DJ">Djibouti</option>
-                                <option value="DM">Dominica</option>
-                                <option value="EC">Ecuador</option>
-                                <option value="EG">Egipto</option>
-                                <option value="SV">El Salvador</option>
-                                <option value="AE">Emiratos Árabes Unidos</option>
-                                <option value="ER">Eritrea</option>
-                                <option value="SI">Eslovenia</option>
-                                <option value="ES">España</option>
-                                <option value="US">Estados Unidos</option>
-                                <option value="EE">Estonia</option>
-                                <option value="ET">Etiopía</option>
-                                <option value="FJ">Fiji</option>
-                                <option value="PH">Filipinas</option>
-                                <option value="FI">Finlandia</option>
-                                <option value="FR">Francia</option>
-                                <option value="GA">Gabón</option>
-                                <option value="GM">Gambia</option>
-                                <option value="GE">Georgia</option>
-                                <option value="GH">Ghana</option>
-                                <option value="GI">Gibraltar</option>
-                                <option value="GD">Granada</option>
-                                <option value="GR">Grecia</option>
-                                <option value="GL">Groenlandia</option>
-                                <option value="GP">Guadalupe</option>
-                                <option value="GU">Guam</option>
-                                <option value="GT">Guatemala</option>
-                                <option value="GY">Guayana</option>
-                                <option value="GF">Guayana Francesa</option>
-                                <option value="GN">Guinea</option>
-                                <option value="GQ">Guinea Ecuatorial</option>
-                                <option value="GW">Guinea-Bissau</option>
-                                <option value="HT">Haití</option>
-                                <option value="HN">Honduras</option>
-                                <option value="HU">Hungría</option>
-                                <option value="IN">India</option>
-                                <option value="ID">Indonesia</option>
-                                <option value="IQ">Irak</option>
-                                <option value="IR">Irán</option>
-                                <option value="IE">Irlanda</option>
-                                <option value="BV">Isla Bouvet</option>
-                                <option value="CX">Isla de Christmas</option>
-                                <option value="IS">Islandia</option>
-                                <option value="KY">Islas Caimán</option>
-                                <option value="CK">Islas Cook</option>
-                                <option value="CC">Islas de Cocos o Keeling</option>
-                                <option value="FO">Islas Faroe</option>
-                                <option value="HM">Islas Heard y McDonald</option>
-                                <option value="FK">Islas Malvinas</option>
-                                <option value="MP">Islas Marianas del Norte</option>
-                                <option value="MH">Islas Marshall</option>
-                                <option value="UM">Islas menores de Estados Unidos</option>
-                                <option value="PW">Islas Palau</option>
-                                <option value="SB">Islas Salomón</option>
-                                <option value="SJ">Islas Svalbard y Jan Mayen</option>
-                                <option value="TK">Islas Tokelau</option>
-                                <option value="TC">Islas Turks y Caicos</option>
-                                <option value="VI">Islas Vírgenes (EEUU)</option>
-                                <option value="VG">Islas Vírgenes (Reino Unido)</option>
-                                <option value="WF">Islas Wallis y Futuna</option>
-                                <option value="IL">Israel</option>
-                                <option value="IT">Italia</option>
-                                <option value="JM">Jamaica</option>
-                                <option value="JP">Japón</option>
-                                <option value="JO">Jordania</option>
-                                <option value="KZ">Kazajistán</option>
-                                <option value="KE">Kenia</option>
-                                <option value="KG">Kirguizistán</option>
-                                <option value="KI">Kiribati</option>
-                                <option value="KW">Kuwait</option>
-                                <option value="LA">Laos</option>
-                                <option value="LS">Lesotho</option>
-                                <option value="LV">Letonia</option>
-                                <option value="LB">Líbano</option>
-                                <option value="LR">Liberia</option>
-                                <option value="LY">Libia</option>
-                                <option value="LI">Liechtenstein</option>
-                                <option value="LT">Lituania</option>
-                                <option value="LU">Luxemburgo</option>
-                                <option value="MK">Macedonia, Ex-República Yugoslava de</option>
-                                <option value="MG">Madagascar</option>
-                                <option value="MY">Malasia</option>
-                                <option value="MW">Malawi</option>
-                                <option value="MV">Maldivas</option>
-                                <option value="ML">Malí</option>
-                                <option value="MT">Malta</option>
-                                <option value="MA">Marruecos</option>
-                                <option value="MQ">Martinica</option>
-                                <option value="MU">Mauricio</option>
-                                <option value="MR">Mauritania</option>
-                                <option value="YT">Mayotte</option>
-                                <option value="MX">México</option>
-                                <option value="FM">Micronesia</option>
-                                <option value="MD">Moldavia</option>
-                                <option value="MC">Mónaco</option>
-                                <option value="MN">Mongolia</option>
-                                <option value="MS">Montserrat</option>
-                                <option value="MZ">Mozambique</option>
-                                <option value="NA">Namibia</option>
-                                <option value="NR">Nauru</option>
-                                <option value="NP">Nepal</option>
-                                <option value="NI">Nicaragua</option>
-                                <option value="NE">Níger</option>
-                                <option value="NG">Nigeria</option>
-                                <option value="NU">Niue</option>
-                                <option value="NF">Norfolk</option>
-                                <option value="NO">Noruega</option>
-                                <option value="NC">Nueva Caledonia</option>
-                                <option value="NZ">Nueva Zelanda</option>
-                                <option value="OM">Omán</option>
-                                <option value="NL">Países Bajos</option>
-                                <option value="PA">Panamá</option>
-                                <option value="PG">Papúa Nueva Guinea</option>
-                                <option value="PK">Paquistán</option>
-                                <option value="PY">Paraguay</option>
-                                <option value="PE">Perú</option>
-                                <option value="PN">Pitcairn</option>
-                                <option value="PF">Polinesia Francesa</option>
-                                <option value="PL">Polonia</option>
-                                <option value="PT">Portugal</option>
-                                <option value="PR">Puerto Rico</option>
-                                <option value="QA">Qatar</option>
-                                <option value="UK">Reino Unido</option>
-                                <option value="CF">República Centroafricana</option>
-                                <option value="CZ">República Checa</option>
-                                <option value="ZA">República de Sudáfrica</option>
-                                <option value="DO">República Dominicana</option>
-                                <option value="SK">República Eslovaca</option>
-                                <option value="RE">Reunión</option>
-                                <option value="RW">Ruanda</option>
-                                <option value="RO">Rumania</option>
-                                <option value="RU">Rusia</option>
-                                <option value="EH">Sahara Occidental</option>
-                                <option value="KN">Saint Kitts y Nevis</option>
-                                <option value="WS">Samoa</option>
-                                <option value="AS">Samoa Americana</option>
-                                <option value="SM">San Marino</option>
-                                <option value="VC">San Vicente y Granadinas</option>
-                                <option value="SH">Santa Helena</option>
-                                <option value="LC">Santa Lucía</option>
-                                <option value="ST">Santo Tomé y Príncipe</option>
-                                <option value="SN">Senegal</option>
-                                <option value="SC">Seychelles</option>
-                                <option value="SL">Sierra Leona</option>
-                                <option value="SG">Singapur</option>
-                                <option value="SY">Siria</option>
-                                <option value="SO">Somalia</option>
-                                <option value="LK">Sri Lanka</option>
-                                <option value="PM">St Pierre y Miquelon</option>
-                                <option value="SZ">Suazilandia</option>
-                                <option value="SD">Sudán</option>
-                                <option value="SE">Suecia</option>
-                                <option value="CH">Suiza</option>
-                                <option value="SR">Surinam</option>
-                                <option value="TH">Tailandia</option>
-                                <option value="TW">Taiwán</option>
-                                <option value="TZ">Tanzania</option>
-                                <option value="TJ">Tayikistán</option>
-                                <option value="TF">Territorios franceses del Sur</option>
-                                <option value="TP">Timor Oriental</option>
-                                <option value="TG">Togo</option>
-                                <option value="TO">Tonga</option>
-                                <option value="TT">Trinidad y Tobago</option>
-                                <option value="TN">Túnez</option>
-                                <option value="TM">Turkmenistán</option>
-                                <option value="TR">Turquía</option>
-                                <option value="TV">Tuvalu</option>
-                                <option value="UA">Ucrania</option>
-                                <option value="UG">Uganda</option>
-                                <option value="UY">Uruguay</option>
-                                <option value="UZ">Uzbekistán</option>
-                                <option value="VU">Vanuatu</option>
-                                <option value="VE">Venezuela</option>
-                                <option value="VN">Vietnam</option>
-                                <option value="YE">Yemen</option>
-                                <option value="YU">Yugoslavia</option>
-                                <option value="ZM">Zambia</option>
-                                <option value="ZW">Zimbabue</option>
+                                <?php include_once 'frame/Countries.php' ?>
                             </select>
                         </div>
 
@@ -452,22 +242,26 @@ $(function()
     const USER_DESCRIPTION_MAX_LENGTH = 180;
 
     // Variables cacheadas
-    var $_modal           = $('#' + MODAL_PREFIX + 'modal');
-    var $_menu            = $('#' + MODAL_PREFIX + 'options');
-    var $_contents        = $('.' + MODAL_PREFIX + 'option-content');
+    var $_modal    = $('#' + MODAL_PREFIX + 'modal');
+    var $_menu     = $('#' + MODAL_PREFIX + 'options');
+    var $_contents = $('.' + MODAL_PREFIX + 'option-content');
 
     /* CUENTA */
-    var $_accountForm     = $('#' + MODAL_PREFIX + 'account-form');
-    var $_usernameField   = $('#' + MODAL_PREFIX + 'username');
-    var $_emailField      = $('#' + MODAL_PREFIX + 'email');
+    var $_accountForm   = $('#' + MODAL_PREFIX + 'account-form');
+    var $_usernameField = $('#' + MODAL_PREFIX + 'username');
+    var $_emailField    = $('#' + MODAL_PREFIX + 'email');
 
     /* CONTRASEÑA */
-    var $_newPasswordForm = $('#' + MODAL_PREFIX + 'new-password-form');
+    var $_newPasswordForm      = $('#' + MODAL_PREFIX + 'new-password-form');
+    var $_oldPasswordField     = $('#' + MODAL_PREFIX + 'old-password');
+    var $_newPasswordField     = $('#' + MODAL_PREFIX + 'new-password');
+    var $_confirmPasswordField = $('#' + MODAL_PREFIX + 'confirm-password');
 
     /* PERFIL */
     var $_profileForm     = $('#' + MODAL_PREFIX + 'profile-form');
     var $_userDescription = $('#' + MODAL_PREFIX + 'about-me');
     var $_genderOptions   = $('#' + MODAL_PREFIX + 'gender-options');
+    var $_nameField       = $('#' + MODAL_PREFIX + 'name');    
 
     /* NOTIFICACIONES */
     var $_notificationsForm = $('#' + MODAL_PREFIX + 'notifications-form');
@@ -498,42 +292,10 @@ $(function()
 
     /*
      * Eventos que se ejecutan cuando el modal se carga
-     * y ya es visible para el usuario
-     */
-    $_modal.on('shown.bs.modal', function()
-    {
-        // // Configurar las validaciones
-        // var $field = null;
-        // var $params = {rules:{}, messages:{}};
-
-        // /* VALIDACIONES DE PESTAÑA: CUENTA */
-
-        // // validando username
-        // $field = $_usernameField.attr('name');
-        // $params['rules'][$field] = {"required":true, "rangelength":[3,10]};
-        // $params['messages'][$field] = {"rangelength": jQuery.validator.format("El nombre de usuario debe contener entre {0} y {1} caracteres")};
-
-        // // validando correo
-        // $field = $_emailField.attr('name');
-        // $params['rules'][$field] = {"required":true, "maxlength": 50};
-        // $params['messages'][$field] = {"maxlength": jQuery.validator.format("El correo no puede sobrepasar los {0} caracteres")};
-
-        
-
-    });
-
-    /*
-     * Eventos que se ejecutan cuando el modal se carga
      * pero aún no es visible para el usuario
      */
     $_modal.on('show.bs.modal', function()
     {
-        // reset a los formularios
-        $_accountForm.get(0).reset();
-        $_newPasswordForm.get(0).reset();
-        $_profileForm.get(0).reset();
-        $_notificationsForm.get(0).reset();
-
         // removemos la clase .active del genero que lo posea actualmente
         $_genderOptions.find('label.active').removeClass('active');
         // colocamos la clase .active al primer elemento del menú y llama al evento click
@@ -542,12 +304,76 @@ $(function()
         // removemos la clase .active del menú que lo posea actualmente
         $_menu.find('label.active').removeClass('active');
         // colocamos la clase .active al primer elemento del menú y llama al evento click
-        $_menu.find('label:first').addClass('active').click();
+        $_menu.find('label:first').addClass('active').click();        
 
-        // Limpia el formulario
-//        $_form.validate().resetForm();
-//        $_form.get(0).reset();
-//        $_form.children().removeClass('has-error has-success');
+        // Configurar las validaciones
+        var $field = null;
+        var $params = {rules:{}, messages:{}};
+
+        /* VALIDACIONES DE PESTAÑA: CUENTA */
+
+        // validando username
+        $field = $_usernameField.attr('name');
+        $params['rules'][$field] = {"required":true, "rangelength":[3,10]};
+        $params['messages'][$field] = {"rangelength": jQuery.validator.format("El nombre de usuario debe contener entre {0} y {1} caracteres")};
+
+        // validando correo
+        $field = $_emailField.attr('name');
+        $params['rules'][$field] = {"required":true, "maxlength": 50};
+        $params['messages'][$field] = {"maxlength": jQuery.validator.format("El correo no puede sobrepasar los {0} caracteres")};
+
+        // envia parametros de validación al formulario
+        $_accountForm.validate($params).resetForm();
+
+        /* VALIDACIONES DE PESTAÑA: PASSWORD */
+
+        // validando old password
+        $field = $_oldPasswordField.attr('name');        
+        $params['rules'][$field] = {"required":true, "passwordcheck": true};
+        $params['messages'][$field] = {"minlength": jQuery.validator.format("La contraseña debe contener el menos 6 caracteres")};
+
+        // validando new password
+        $field = $_newPasswordField.attr('name');        
+        $params['rules'][$field] = {"required":true, "passwordcheck": true, "notequal": $_oldPasswordField};
+        $params['messages'][$field] = {"minlength": jQuery.validator.format("La contraseña debe contener el menos 6 caracteres"),
+                                       "notequal": "La nueva contraseña no puede ser igual a la anterior"};
+        // validando confirm password
+        $field = $_confirmPasswordField.attr('name');        
+        $params['rules'][$field] = {"required":true, "equalTo": $_newPasswordField};
+        $params['messages'][$field] = {"equalTo": "Las contraseñas no coinciden"};        
+
+        // envia parametros de validación al formulario
+        $_newPasswordForm.validate($params).resetForm();
+
+        /* VALIDACIONES DE PESTAÑA: PERFIL */
+
+        // validando nombre
+        $field = $_nameField.attr('name');        
+        $params['rules'][$field] = {"rangelength":[3,70], "lettersonly": true};
+        $params['messages'][$field] = {"rangelength": jQuery.validator.format("El nombre debe contener entre {0} y {1} caracteres"),
+                                       "lettersonly": "El nombre sólo puede poseer caracteres alfabéticos"};
+
+        // envia parametros de validación al formulario
+        $_profileForm.validate($params).resetForm();        
+    });
+
+    /*
+     * Eventos que se ejecutan cuando el modal se carga
+     * pero aún no es visible para el usuario
+     */
+    $_modal.on('hidden.bs.modal', function()
+    {
+        // reseteando los formularios
+        $_accountForm.get(0).reset();        
+        $_accountForm.children().removeClass('has-error has-success');
+
+        $_newPasswordForm.get(0).reset();        
+        $_newPasswordForm.children().removeClass('has-error has-success');
+
+        $_profileForm.get(0).reset();        
+        $_profileForm.children().removeClass('has-error has-success');
+
+        $_notificationsForm.get(0).reset();                        
     });
 
     /*
