@@ -59,7 +59,7 @@ class TableGallery {
       @return integer numero de filas retornados ejemplo 1 si agrego 0 sino agrego o -1 otro tipo de errores
      */
     public function UpdateTag($sData, $iID) {
-        $query = sprintf("UPDATE  `gallery` SET  `TAG` =  '%s' WHERE  `ID` ='%s';", $sData, $iID);
+        $query = sprintf("UPDATE  `gallery` SET  `TAG` =  '%s',DATE=DATE WHERE  `ID` ='%s';", $sData, $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
@@ -71,7 +71,7 @@ class TableGallery {
       @return integer numero de filas retornados ejemplo 1 si agrego 0 sino agrego o -1 otro tipo de errores
      */
     public function UpdateNMorePlus($iID) {
-        $query = sprintf("UPDATE  `gallery` SET  `N_MORE` = N_MORE+1 WHERE  `ID` ='%s';", $iID);
+        $query = sprintf("UPDATE  `gallery` SET  `N_MORE` = N_MORE+1,DATE=DATE WHERE  `ID` ='%s';", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
@@ -82,7 +82,7 @@ class TableGallery {
       @return integer numero de filas retornados ejemplo 1 si agrego 0 sino agrego o -1 otro tipo de errores
      */
     public function UpdateNMoreLess($iID) {
-        $query = sprintf("UPDATE  `gallery` SET  `N_MORE` = N_MORE-1 WHERE  `ID` ='%s';", $iID);
+        $query = sprintf("UPDATE  `gallery` SET  `N_MORE` = N_MORE-1,DATE=DATE WHERE  `ID` ='%s';", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
@@ -94,7 +94,7 @@ class TableGallery {
       @return integer numero de filas retornados ejemplo 1 si agrego 0 sino agrego o -1 otro tipo de errores
      */
     public function UpdateNLessPlus($iID) {
-        $query = sprintf("UPDATE  `gallery` SET  `N_LESS` = N_LESS+1 WHERE  `ID` ='%s';", $iID);
+        $query = sprintf("UPDATE  `gallery` SET  `N_LESS` = N_LESS+1,DATE=DATE WHERE  `ID` ='%s';", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
@@ -106,7 +106,7 @@ class TableGallery {
       @return integer numero de filas retornados ejemplo 1 si agrego 0 sino agrego o -1 otro tipo de errores
      */
     public function UpdateNLessLess($iID) {
-        $query = sprintf("UPDATE  `gallery` SET  `N_LESS` = N_LESS-1 WHERE  `ID` ='%s';", $iID);
+        $query = sprintf("UPDATE  `gallery` SET  `N_LESS` = N_LESS-1,DATE=DATE WHERE  `ID` ='%s';", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
@@ -117,7 +117,7 @@ class TableGallery {
       @return integer numero de filas retornados ejemplo 1 si agrego 0 sino agrego o -1 otro tipo de errores
      */
     public function UpdateNCOMMENTPlus($iID) {
-        $query = sprintf("UPDATE  `gallery` SET  `N_COMMENT` = N_COMMENT+1 WHERE  `ID` ='%s';", $iID);
+        $query = sprintf("UPDATE  `gallery` SET  `N_COMMENT` = N_COMMENT+1,DATE=DATE WHERE  `ID` ='%s';", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
@@ -129,7 +129,7 @@ class TableGallery {
       @return integer numero de filas retornados ejemplo 1 si agrego 0 sino agrego o -1 otro tipo de errores
      */
     public function UpdateNCOMMENTLess($iID) {
-        $query = sprintf("UPDATE  `gallery` SET  `N_COMMENT` = N_COMMENT-1 WHERE  `ID` ='%s';", $iID);
+        $query = sprintf("UPDATE  `gallery` SET  `N_COMMENT` = N_COMMENT-1,DATE=DATE WHERE  `ID` ='%s';", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
@@ -175,7 +175,7 @@ LIMIT 0 , %s", $iN);
     }
 
     public function LastNArticle($iInicio, $iFin) {
-        $query = sprintf("Select g.ID, g.OWNER,g.TITLE,g.TYPEMEDIA,g.INFOMEDIA,g.URL,g.DATE,g.TAG,g.N_MORE,g.N_LESS,g.N_COMMENT,g.STATE,g.COMMENT_ADDITIONAL,U.NAME from gallery as g join user as u on (u.ID=g.OWNER) ORDER BY  g.`DATE`  DESC LIMIT %s,%s;", $iInicio, $iFin);
+        $query = sprintf("Select g.ID, g.OWNER,g.TITLE,g.TYPEMEDIA,g.INFOMEDIA,g.URL,g.DATE,g.TAG,g.N_MORE,g.N_LESS,g.N_COMMENT,g.STATE,g.COMMENT_ADDITIONAL,u.NAME from gallery as g join user as u on (u.ID=g.OWNER) ORDER BY  g.`DATE`  DESC LIMIT %s,%s;", $iInicio, $iFin);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }

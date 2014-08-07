@@ -7,7 +7,7 @@
                          <li><a href="ArticleVine.php">Subir un Articulo (vine)</a></li>
                             <li><a href="ArticleEmbed.php">Subir un Articulo (Embed)</a></li>
                         <li><a href="EditArticle.php">Editar</a></li>
-                        <li><a href="#">Extraer de otra pagina</a></li>
+                        <li><a href="memetomizar.php">Extraer de otra pagina</a></li>
 
 
                     </ul>
