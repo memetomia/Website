@@ -69,6 +69,13 @@
                     if (event.which == 13) {
                         $("#DivUrlImagen").append('<div id="VideoPlay" class="play"></div>');
                         HtmlMedia = '<video class="Vine" autoplay loop preload="auto" src="' + $('#Urlvideo').val() + '"></video>';
+                        $("#TextMeta").val('<meta property="og:type" content="video"><meta property="twitter:card" content="player">\n\
+<meta property = "twitter:player:width" content = "435">\n\
+<meta property = "twitter:player:height" content = "435">\n\
+<meta property = "twitter:player" content ="' + $('#Urlvideo').val() + '">\n\
+<meta property = "og:video" content ="' + $('#Urlvideo').val() + '">');
+
+
                         $("#video-thumbnail").attr("src", $('#Urlvideo').val());
                         $("#VideoPlay").click(function() {
                             $("#DivUrlImagen").html(HtmlMedia);
@@ -105,7 +112,8 @@
                             sComentario: sComentario,
                             aEtiquetas: string,
                             sImagen: sDirImagen,
-                            sHtmlMedia: HtmlMedia
+                            sHtmlMedia: HtmlMedia,
+                            sMetaData: $("#TextMeta").val()
 
                         }, function(o) {
                             if (o.Tupla > 0) {
@@ -301,8 +309,16 @@
 
                             </div>
 
-                            <textarea id="TextAdicional" style="width:400px; height: 500px"></textarea>
 
+                            <div class="form-group">
+                                <label for="inputTag">Metas datas</label><br>
+                                <textarea id="TextMeta" style="width:500px; height: 100px">                                
+
+
+                                </textarea>
+
+                            </div>
+                            <textarea id="TextAdicional" style="width:400px; height: 500px"></textarea>
 
                             <button id='BtAgregar' type="button" class="btn btn-default"  >Agregar</button>
                             <div id="MsgBtAgregar" class="msgbox Oculto"><span class="spanNoti"></span></div>

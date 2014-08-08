@@ -16,41 +16,36 @@
             $bdGallery->SearchById($iID);
             $sMetaTitulo = $bdGallery->bd->obtener_respuesta(0, "TITLE");
         }
-
-        if ($bd->bd->obtener_respuesta($i, "STATE") == 0) {
+        $i = 0;
+        if ($bdGallery->bd->obtener_respuesta($i, "STATE") == 0) {
 
 //IAMGEN NORMAL
-            if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 0) {
-                $sMetaImagen = EXT_ARTICLE . "/" . $bd->bd->obtener_respuesta($i, "URL");
+            if ($bdGallery->bd->obtener_respuesta($i, "TYPEMEDIA") == 0) {
+                $sMetaImagen = EXT_ARTICLE . "/" . $bdGallery->bd->obtener_respuesta($i, "URL");
                 ECHO '<meta name="twitter:card" value="photo"><meta property="twitter:card" content="photo">';
             }
             //VIDEO YOTUBE
-            if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 1) {
-                $sMetaImagen = $bd->bd->obtener_respuesta($i, "URL");
-                ECHO '<meta name="twitter:card" value="player"><meta property="twitter:card" content="player">';
+            if ($bdGallery->bd->obtener_respuesta($i, "TYPEMEDIA") == 1) {
+            $sMetaImagen = $bdGallery->bd->obtener_respuesta($i, "URL");
+           echo  $bdGallery->bd->obtener_respuesta($i, "META");
             }
             //   VINE
-            if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 2) {
-                $sMetaImagen = $bd->bd->obtener_respuesta($i, "URL");
-                ECHO '<meta property="twitter:card" content="player">';
-                <meta property = "twitter:image:src" content = "">
-                <meta property = "og:image" content = "">
-                <meta property = "twitter:player:width" content = "435">
-                <meta property = "twitter:player:height" content = "435">
-                <meta property = "twitter:player" content = "https://vine.co/v/M5BYrMjV1BW/card">
+            if ($bdGallery->bd->obtener_respuesta($i, "TYPEMEDIA") == 2) {
+                $sMetaImagen = $bdGallery->bd->obtener_respuesta($i, "URL");
+             
             }
             //EMB
-            if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 3) {
-                $sUrlaMostrar = $bd->bd->obtener_respuesta($i, "INFOMEDIA");
+            if ($bdGallery->bd->obtener_respuesta($i, "TYPEMEDIA") == 3) {
+                $sUrlaMostrar = $bdGallery->bd->obtener_respuesta($i, "INFOMEDIA");
                 $botonplay = "";
             }
-
+        }
 
 
 
             include_once 'frame/metadato.php';
             ?>
-            <title> <?php echo $sMetaTitulo; ?>  | Memetomía</title>
+            <title> <?php echo $sMetaTitulo; ?> | Memetomía</title>
             <!--STYLES-->
             <link href="css/bootstrap.min.css" rel="stylesheet">
             <link href="css/jqueryUI.custom.min.css" rel="stylesheet">        

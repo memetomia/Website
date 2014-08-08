@@ -14,8 +14,7 @@
         <script type="text/javascript">
             sTitulo = "";
             sComentario = "";
-            sDirImagen = "";
-            /*
+            sDirImagen = "";        /*
              MsgNombrePg
              MsgUrlPg
              MsginputTag
@@ -25,6 +24,7 @@
              https://vimeo.com/
              */
             $(document).ready(function() {
+
 
 
 
@@ -44,7 +44,7 @@
 
                 function CargarTitulo(event, t) {
                     if (event.which == 13) {
-                       
+
                         $("#Titulo").html($(t).val());
                         sTitulo = $(t).val();
                         msj("#MsgNombrePg", "Titulo agregado correctamente", "Exito");
@@ -58,14 +58,20 @@
                 });
                 $('#UrlYouTube').keydown(function() {
                     if (event.which == 13) {
-                         sDirImagen= "http://img.youtube.com/vi/" + $("#UrlYouTube").val() + "/0.jpg"
-                         HtmlMedia= '<iframe id="iframe" width="430" height="315" src="//www.youtube.com/embed/' + $("#UrlYouTube").val() + '?autoplay=1&amp;controls=1&amp;iv_load_policy=3" frameborder="0" allowfullscreen></iframe>';
-                                   
-                        $("#Imagen").attr("src", "http://img.youtube.com/vi/" + $("#UrlYouTube").val() + "maxresdefault.jpg");
+                        sDirImagen = "http://img.youtube.com/vi/" + $("#UrlYouTube").val() + "/0.jpg";
+                        HtmlMedia = '<iframe id="iframe" width="430" height="315" src="//www.youtube.com/embed/' + $("#UrlYouTube").val() + '?autoplay=1&amp;controls=1&amp;iv_load_policy=3" frameborder="0" allowfullscreen></iframe>';
+                        $("#TextMeta").val('<meta property="og:type" content="video"><meta property="twitter:card" content="player">\n\
+<meta property = "twitter:player:width" content = "435">\n\
+<meta property = "twitter:player:height" content = "435">\n\
+<meta property = "twitter:player" content ="https://www.youtube.com/embed/' + $("#UrlYouTube").val() + '">\n\
+<meta property = "og:video" content ="https://www.youtube.com/embed/' + $("#UrlYouTube").val() + '">');
+
+
+                        $("#Imagen").attr("src", "http://img.youtube.com/vi/" + $("#UrlYouTube").val() + "/maxresdefault.jpg");
                         $("#DivYouTube").attr("video", $("#UrlYouTube").val());
                         $("#DivYouTube").append('<div id="VideoPlay" class="play"></div>');
                         $("#VideoPlay").click(function() {
-                            $("#DivYouTube").html( HtmlMedia);
+                            $("#DivYouTube").html(HtmlMedia);
                         });
                     }
 
@@ -88,17 +94,18 @@
 
 
                     if (bool == true) {
-                         $.post("ajax/SaveVideoArticle.php", {
+                        $.post("ajax/SaveVideoArticle.php", {
                             sTitulo: sTitulo,
                             sComentario: sComentario,
                             aEtiquetas: string,
                             sImagen: sDirImagen,
-                            sHtmlMedia:HtmlMedia
-                           
+                            sHtmlMedia: HtmlMedia,
+                            sMetaData: $("#TextMeta").val()
+
                         }, function(o) {
                             if (o.Tupla > 0) {
                                 msj("#MsgBtGuardar", "Todo ok", "Exito");
-                                $("#tabla tbody").prepend('<tr id="t' + $('#tabla >tbody >tr').length + '"><td>' + o.Tupla + '</td><td>' + $("#NombrePg").val() + '<br>Tag:<br>' + string + '</td><td><img id="" class="img-thumbnail img-small" src="' +sDirImagen + '">' + sComentario + '</td>\n\
+                                $("#tabla tbody").prepend('<tr id="t' + $('#tabla >tbody >tr').length + '"><td>' + o.Tupla + '</td><td>' + $("#NombrePg").val() + '<br>Tag:<br>' + string + '</td><td><img id="" class="img-thumbnail img-small" src="' + sDirImagen + '">' + sComentario + '</td>\n\
                                 <td> <button type="button" class="btn btn-default"  onclick="Activar(\'' + $('#tabla >tbody >tr').length + '\',\'' + o.Tupla + '\')" >Activar</button>\n\
                                     <button type="button" class="btn btn-default"  onclick="Desactivar(\'' + $('#tabla >tbody >tr').length + '\',\'' + o.Tupla + '\')" >Desactivar</button>\n\
                                     <button type="button" class="btn btn-default"  onclick="Modificar(\'' + $('#tabla >tbody >tr').length + '\',\'' + o.Tupla + '\')" >Modificar</button>\n\
@@ -172,8 +179,8 @@
                     command: "inserthtml",
                     popupName: "hello",
                     popupClass: "cleditorPrompt",
-                      popupContent: "meme:<br><input id=meme type=text size=50><br><img id=ImgMeme src="+DEFAULT +"/MemePredeterminado.jpg height=200 width=200 /><br><input type=button value=Agregar>",
-             buttonClick: helloClick
+                    popupContent: "meme:<br><input id=meme type=text size=50><br><img id=ImgMeme src=" + DEFAULT + "/MemePredeterminado.jpg height=200 width=200 /><br><input type=button value=Agregar>",
+                    buttonClick: helloClick
                 };
 
                 // Add the button to the default controls before the bold button
@@ -271,7 +278,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="UrlYouTube">Url del video de youtube</label>
-                                <input type="text" class="form-control" id="UrlYouTube" placeholder="">
+                                <input type="text" class="form-control" id="UrlYouTube" placeholder="" value="BashkKR08qo">
                                 <div id="MsgUrlYouTube" class="msgbox Oculto "></div>
 
                             </div>
@@ -283,9 +290,16 @@
 
                             </div>
 
+
+                            <div class="form-group">
+                                <label for="inputTag">Metas datas</label><br>
+                                <textarea id="TextMeta" style="width:500px; height: 100px">                                
+
+
+                                </textarea>
+
+                            </div>
                             <textarea id="TextAdicional" style="width:400px; height: 500px"></textarea>
-
-
                             <button id='BtAgregar' type="button" class="btn btn-default"  >Agregar</button>
                             <div id="MsgBtAgregar" class="msgbox Oculto"><span class="spanNoti"></span></div>
 
@@ -296,7 +310,7 @@
                         </form>
 
                     </div>
-                    <?php include_once 'frames/tabla.php';?>
+                    <?php include_once 'frames/tabla.php'; ?>
                 </div>
                 <div class="col-sm-5  col-md-5 ">
 

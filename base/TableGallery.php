@@ -30,10 +30,10 @@ class TableGallery {
 
       @return integer numero de tupla o -1 si falla la creacion
      */
-    public function Create($sTitle, $iTypeMedia, $sInfoMedia, $sUrl, $sTag, $sComment) {
+    public function Create($sTitle, $iTypeMedia, $sInfoMedia, $sUrl, $sTag, $sComment,$sMeta="") {
         $query = sprintf("INSERT INTO `gallery` "
-                . "(`ID`, `TITLE`, `TYPEMEDIA`, `INFOMEDIA`, `URL`, `DATE`, `TAG`, `N_MORE`, `N_LESS`, `N_COMMENT`, `COMMENT_ADDITIONAL`,STATE) "
-                . "VALUES (NULL, '%s', '%s', '%s', '%s', CURRENT_TIMESTAMP, '%s', 0, 0, 0, '%s','1');", $sTitle, $iTypeMedia, $sInfoMedia, $sUrl, $sTag, $sComment);
+                . "(`ID`, `TITLE`, `TYPEMEDIA`, `INFOMEDIA`, `URL`, `DATE`, `TAG`, `N_MORE`, `N_LESS`, `N_COMMENT`, `COMMENT_ADDITIONAL`,STATE,META) "
+                . "VALUES (NULL, '%s', '%s', '%s', '%s', CURRENT_TIMESTAMP, '%s', 0, 0, 0, '%s','1','%s');", $sTitle, $iTypeMedia, $sInfoMedia, $sUrl, $sTag, $sComment,$sMeta);
         $this->bd->hacer_query($query);
            
         return $this->bd->ultimo_id_generado_por_la_bd();
