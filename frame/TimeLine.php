@@ -31,7 +31,7 @@
             $botonplay = "";
             if ($bd->bd->obtener_respuesta($i, "STATE") == 0) {
 
-
+//IAMGEN NORMAL
                 if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 0) {
 
                     $sUrlaMostrar = '<img class="img-thumbnail img-small" src="' . EXT_ARTICLE . "/" . $bd->bd->obtener_respuesta($i, "URL") . '"/>';
@@ -46,6 +46,7 @@
                                                            $("#d-' . $bd->bd->obtener_respuesta($i, "ID") . '").html(\'<div class="flex-video widescreen">' . $bd->bd->obtener_respuesta($i, "INFOMEDIA") . '</div>\');
                                                        });                               </script>';
                 }
+             //   VINE
                 if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 2) {
                     $sUrlaMostrar = '<img class="img-thumbnail img-small" src="' . $bd->bd->obtener_respuesta($i, "URL") . '"/>';
 
@@ -57,6 +58,7 @@
                                                             $(this).get(0).paused ? $(this).get(0).play() : $(this).get(0).pause();
                             });});                               </script>';
                 }
+                //EMB
                 if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 3) {
                     $sUrlaMostrar = $bd->bd->obtener_respuesta($i, "INFOMEDIA");
                     $botonplay = "";

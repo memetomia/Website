@@ -35,6 +35,7 @@ class TableGallery {
                 . "(`ID`, `TITLE`, `TYPEMEDIA`, `INFOMEDIA`, `URL`, `DATE`, `TAG`, `N_MORE`, `N_LESS`, `N_COMMENT`, `COMMENT_ADDITIONAL`,STATE) "
                 . "VALUES (NULL, '%s', '%s', '%s', '%s', CURRENT_TIMESTAMP, '%s', 0, 0, 0, '%s','1');", $sTitle, $iTypeMedia, $sInfoMedia, $sUrl, $sTag, $sComment);
         $this->bd->hacer_query($query);
+           
         return $this->bd->ultimo_id_generado_por_la_bd();
     }
 

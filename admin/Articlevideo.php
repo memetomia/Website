@@ -61,7 +61,7 @@
                          sDirImagen= "http://img.youtube.com/vi/" + $("#UrlYouTube").val() + "/0.jpg"
                          HtmlMedia= '<iframe id="iframe" width="430" height="315" src="//www.youtube.com/embed/' + $("#UrlYouTube").val() + '?autoplay=1&amp;controls=1&amp;iv_load_policy=3" frameborder="0" allowfullscreen></iframe>';
                                    
-                        $("#Imagen").attr("src", "http://img.youtube.com/vi/" + $("#UrlYouTube").val() + "/0.jpg");
+                        $("#Imagen").attr("src", "http://img.youtube.com/vi/" + $("#UrlYouTube").val() + "maxresdefault.jpg");
                         $("#DivYouTube").attr("video", $("#UrlYouTube").val());
                         $("#DivYouTube").append('<div id="VideoPlay" class="play"></div>');
                         $("#VideoPlay").click(function() {
