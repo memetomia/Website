@@ -28,7 +28,7 @@ if ($usuario == "jaivic") {
     defined('EXT_MEME') ? null : define("EXT_MEME", EXT_MEDIA . "/meme");
     defined('EXT_ARTICLE') ? null : define("EXT_ARTICLE", EXT_MEDIA . "/article");
     defined('EXT_TAG') ? null : define("EXT_TAG", SERVER . "/Tag.php");
-    defined('EXT_IMAGEN') ? null : define("EXT_IMAGEN", EXT_MEDIA . "/Imagen.php");
+    defined('EXT_IMAGEN') ? null : define("EXT_IMAGEN", SERVER . "/Imagen.php");
     defined('EXT_DEFAULT') ? null : define("EXT_DEFAULT", EXT_MEDIA . "/default");
 }
 if ($usuario == "memetomia") {
@@ -57,7 +57,7 @@ if ($usuario == "memetomia") {
     defined('EXT_MEME') ? null : define("EXT_MEME", EXT_MEDIA . "/meme");
     defined('EXT_ARTICLE') ? null : define("EXT_ARTICLE", EXT_MEDIA . "/article");
     defined('EXT_TAG') ? null : define("EXT_TAG", SERVER . "/Tag.php");
-    defined('EXT_IMAGEN') ? null : define("EXT_IMAGEN", EXT_MEDIA . "/Imagen.php");
+    defined('EXT_IMAGEN') ? null : define("EXT_IMAGEN", SERVER  . "/Imagen.php");
     defined('EXT_DEFAULT') ? null : define("EXT_DEFAULT", EXT_MEDIA . "/default");
 }
 

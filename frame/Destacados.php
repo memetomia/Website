@@ -23,11 +23,11 @@
                         $SePuedeImprimir = true;
                     }
                     if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 1) {
-                        $sUrlaMostrar = '<a href="" ><img class="post-media img-thumbnail" src="' . $bd->bd->obtener_respuesta($i, "URL") . '"/></a>';
+                        $sUrlaMostrar = '<a href="' . EXT_IMAGEN . "?id=" . $bd->bd->obtener_respuesta($i, "ID") . '" ><img class="post-media img-thumbnail" src="' . $bd->bd->obtener_respuesta($i, "URL") . '"/></a>';
                         $SePuedeImprimir = true;
                     }
                     if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 2) {
-                        $sUrlaMostrar = '<a href="" ><img class="post-media img-thumbnail" src="' . $bd->bd->obtener_respuesta($i, "URL") . '"/></a>';
+                        $sUrlaMostrar = '<a href="' . EXT_IMAGEN . "?id=" . $bd->bd->obtener_respuesta($i, "ID") . '" ><img class="post-media img-thumbnail" src="' . $bd->bd->obtener_respuesta($i, "URL") . '"/></a>';
                         $SePuedeImprimir = true;
                     }
                     if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 3) {

@@ -14,7 +14,8 @@
         <script type="text/javascript">
             sTitulo = "";
             sComentario = "";
-            sDirImagen = "";        /*
+            sDirImagen = "";    
+            /*
              MsgNombrePg
              MsgUrlPg
              MsginputTag
