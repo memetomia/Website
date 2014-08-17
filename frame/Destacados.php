@@ -2,6 +2,14 @@
     <div class="panel-heading">
         <h3 class="panel-title">Destacados</h3>
     </div>
+    <style type="text/css">
+        .thumbdestacados{
+            min-height:129px;
+            min-width: 129px;
+            overflow:  hidden;
+                
+        }
+    </style>
     <div class="panel-body">
         <?php
         include_once 'base/TableGallery.php';
@@ -19,15 +27,15 @@
                 if ($bd->bd->obtener_respuesta($i, "STATE") == 0) {
 
                     if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 0) {
-                        $sUrlaMostrar = '<a href="' . EXT_IMAGEN . "?id=" . $bd->bd->obtener_respuesta($i, "ID") . '" ><img class="post-media img-thumbnail" src="' . EXT_ARTICLE . "/" . $bd->bd->obtener_respuesta($i, "URL") . '"/></a>';
+                        $sUrlaMostrar = '<a href="' . EXT_IMAGEN . "?id=" . $bd->bd->obtener_respuesta($i, "ID") . '" ><img class="thumbdestacados post-media img-thumbnail" src="' . EXT_ARTICLE . "/" . $bd->bd->obtener_respuesta($i, "URL") . '"/></a>';
                         $SePuedeImprimir = true;
                     }
                     if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 1) {
-                        $sUrlaMostrar = '<a href="' . EXT_IMAGEN . "?id=" . $bd->bd->obtener_respuesta($i, "ID") . '" ><img class="post-media img-thumbnail" src="' . $bd->bd->obtener_respuesta($i, "URL") . '"/></a>';
+                        $sUrlaMostrar = '<a href="' . EXT_IMAGEN . "?id=" . $bd->bd->obtener_respuesta($i, "ID") . '" ><img class="thumbdestacados post-media img-thumbnail" src="' . $bd->bd->obtener_respuesta($i, "URL") . '"/></a>';
                         $SePuedeImprimir = true;
                     }
                     if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 2) {
-                        $sUrlaMostrar = '<a href="' . EXT_IMAGEN . "?id=" . $bd->bd->obtener_respuesta($i, "ID") . '" ><img class="post-media img-thumbnail" src="' . $bd->bd->obtener_respuesta($i, "URL") . '"/></a>';
+                        $sUrlaMostrar = '<a href="' . EXT_IMAGEN . "?id=" . $bd->bd->obtener_respuesta($i, "ID") . '" ><img class="thumbdestacados post-media img-thumbnail" src="' . $bd->bd->obtener_respuesta($i, "URL") . '"/></a>';
                         $SePuedeImprimir = true;
                     }
                     if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 3) {
@@ -35,7 +43,7 @@
                         $SePuedeImprimir = false;
                     }
                     if ($SePuedeImprimir) {
-                        echo '<div class="col-md-6 col-xs-4">' . $sUrlaMostrar . '     </div>';
+                        echo '<div class="col-md-6 col-xs-4">'  . $sUrlaMostrar . '     </div>';
                     }
                 }
             }

@@ -65,7 +65,7 @@
                 }
                 ?>
                 <div id="A<?php echo $bd->bd->obtener_respuesta($i, "ID") ?>" class="post-header col-md-12">
-                    <h3 class="post-title text-info"><?php echo $bd->bd->obtener_respuesta($i, "TITLE") ?></h3>
+                    <h3 class="post-title text-info"><a href="./Imagen.php?id=<?php echo $bd->bd->obtener_respuesta($i, "ID") ?>"><?php echo $bd->bd->obtener_respuesta($i, "TITLE") ?></a></h3>
                     <h5 class="post-subtitle text-muted">
                         Publicado por: <a href="#"><?php echo $bd->bd->obtener_respuesta($i, "NAME") ?></a> <b>·</b> 
                         <span class="like-counter"><span class="glyphicon glyphicon-thumbs-up"></span> <?php echo $bd->bd->obtener_respuesta($i, "N_MORE") ?> me gusta</span> <b>·</b> 

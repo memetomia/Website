@@ -6,7 +6,7 @@ var MEDIA = "/media";
 var MEME = SERVER + MEDIA + "/meme";
 var DEFAULT = SERVER + MEDIA + "/default";
 var ARTICLE = SERVER + MEDIA + "/article";
-var IMAGE=ARTICLE+"/imagen.php?i="
+var IMAGE=SERVER +"/Imagen.php?id="
 var JS = "/js";
 
 var CSS = "/css";

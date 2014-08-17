@@ -8,7 +8,7 @@
         <?php
         include_once 'base/TableGallery.php';
         $bdGallery = new TableGallery();
-
+ $iID=0;
         $sMetaTitulo = "";
         $sMetaImagen = "";
         if (isset($_GET["id"])) {
@@ -225,7 +225,19 @@
 
 
 
+ <?php
+        include_once 'modal/login-modal.php';
+        include_once 'modal/sign-in-modal.php';
+        ?>        
 
+
+        <!--Ver donde poner esto-->
+        <script>
+            // activa modal registro al presionar botones
+            $('.comment-button, .like-button').click(function() {
+                $('#sign-in-modal').modal('show')
+            });
+        </script>
         <!--Ver donde poner esto-->
         <script>
             // Activating All Switches
