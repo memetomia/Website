@@ -30,12 +30,12 @@ class TableGallery {
 
       @return integer numero de tupla o -1 si falla la creacion
      */
-    public function Create($sTitle, $iTypeMedia, $sInfoMedia, $sUrl, $sTag, $sComment,$sMeta="") {
+    public function Create($sTitle, $iTypeMedia, $sInfoMedia, $sUrl, $sTag, $sComment, $sMeta = "") {
         $query = sprintf("INSERT INTO `gallery` "
                 . "(`ID`, `TITLE`, `TYPEMEDIA`, `INFOMEDIA`, `URL`, `DATE`, `TAG`, `N_MORE`, `N_LESS`, `N_COMMENT`, `COMMENT_ADDITIONAL`,STATE,META) "
-                . "VALUES (NULL, '%s', '%s', '%s', '%s', CURRENT_TIMESTAMP, '%s', 0, 0, 0, '%s','1','%s');", $sTitle, $iTypeMedia, $sInfoMedia, $sUrl, $sTag, $sComment,$sMeta);
+                . "VALUES (NULL, '%s', '%s', '%s', '%s', CURRENT_TIMESTAMP, '%s', 0, 0, 0, '%s','1','%s');", $sTitle, $iTypeMedia, $sInfoMedia, $sUrl, $sTag, $sComment, $sMeta);
         $this->bd->hacer_query($query);
-           
+
         return $this->bd->ultimo_id_generado_por_la_bd();
     }
 
@@ -177,6 +177,30 @@ LIMIT 0 , %s", $iN);
 
     public function LastNArticle($iInicio, $iFin) {
         $query = sprintf("Select g.ID, g.OWNER,g.TITLE,g.TYPEMEDIA,g.INFOMEDIA,g.URL,g.DATE,g.TAG,g.N_MORE,g.N_LESS,g.N_COMMENT,g.STATE,g.COMMENT_ADDITIONAL,u.NAME from gallery as g join user as u on (u.ID=g.OWNER) ORDER BY  g.`DATE`  DESC LIMIT %s,%s;", $iInicio, $iFin);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+
+    public function ArticleForTAg($sTag, $iInicio, $iFin) {
+        $query = sprintf("SELECT g.ID,
+            g.OWNER,
+            g.TITLE,
+            g.TYPEMEDIA,
+            g.INFOMEDIA,
+            g.URL,
+            g.DATE,
+            g.TAG,
+            g.N_MORE,
+            g.N_LESS,
+            g.N_COMMENT,
+            g.STATE,
+            g.COMMENT_ADDITIONAL,
+            u.NAME 
+FROM  `tag` AS t
+JOIN gallery_tag AS gt ON ( t.ID = gt.ID_TAG ) 
+JOIN gallery AS g ON ( g.ID = gt.ID_GALLERY ) 
+join user as u on (u.ID=g.OWNER)
+WHERE t.NAME =  '%s' LIMIT %s,%s ;", $sTag, $iInicio, $iFin);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
