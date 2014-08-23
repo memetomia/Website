@@ -151,7 +151,7 @@ LIMIT 0 , %s", $iN);
     }
 
     public function SearchById($iID) {
-        $query = sprintf("Select * from gallery ORDER BY  `ID`='%s' DESC ;", $iID);
+        $query = sprintf("Select g.ID, g.OWNER,g.TITLE,g.TYPEMEDIA,g.INFOMEDIA,g.URL,g.DATE,g.TAG,g.N_MORE,g.N_LESS,g.N_COMMENT,g.STATE,g.COMMENT_ADDITIONAL,u.NAME from gallery as g join user as u on (u.ID=g.OWNER) where g.ID='%s'", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->obtener_respuesta_completa();
     }

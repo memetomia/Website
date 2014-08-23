@@ -85,7 +85,12 @@
                     include_once 'base/TableUser_Gallery.php';
                     $bd = new TableGallery();
                     $bdtag = new TableUser_Gallery();
+                    if ($index != 0) {
+                        $index = $index * 5;
+                    }
+
                     $todo = $bd->LastNArticle($index, 5);
+
                     if ($todo > 0) {
                         $html = "";
                         for ($i = 0; $i < $todo; $i++) {
@@ -99,13 +104,21 @@
                             $sTitle = $bd->bd->obtener_respuesta($i, "TITLE");
                             $iNMore = $bd->bd->obtener_respuesta($i, "N_MORE");
                             $iNComment = $bd->bd->obtener_respuesta($i, "N_COMMENT");
-
-                            include_once 'frame/TagTimeLine.php';
+                            $ComentarioAdicional = $bd->bd->obtener_respuesta($i, "COMMENT_ADDITIONAL");
+                            include 'frame/TimeLineOut.php';
                         }
                     }
                     ?>
                     <?php // include_once 'frame/TimeLine.php'; ?>
 
+                    <div class="col-md-12">
+                        <ul class="pager">
+                            <?php
+                            echo $paginador;
+                            ?>
+
+                        </ul>
+                    </div>
                 </div>
 
                 <div id="sidebar" class="col-md-4">

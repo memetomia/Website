@@ -18,8 +18,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style id="holderjs-style" type="text/css"></style>
-
-
+ 
     <style type="text/css">
     /*
      * Globals

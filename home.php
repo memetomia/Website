@@ -88,7 +88,7 @@
                 <div id="timeline" class="col-md-8">
 
                
-                    <?php include_once 'frame/TimeLine.php';?>
+                    <?php include_once 'frame/TimeLineOut.php';?>
                  
 
                 </div>
