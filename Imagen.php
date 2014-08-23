@@ -156,10 +156,7 @@
 
         <!--Ver donde poner esto-->
         <script>
-            // activa modal registro al presionar botones
-            $('.comment-button, .like-button').click(function() {
-                $('#sign-in-modal').modal('show')
-            });
+            
         </script>
 
     </body>
