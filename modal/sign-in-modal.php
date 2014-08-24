@@ -1,4 +1,4 @@
- <!-- SIGN IN MODAL -->
+<!-- SIGN IN MODAL -->
 <style></style>
 
 <div class="modal fade" id="sign-in-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -36,7 +36,7 @@
                                 <input type="password" name="confirmpassword" class="form-control" id="sign-in-confirm-password" placeholder="Ingresa nuevamente tu contraseña">
                             </div>  
                             <div class="text-right">
-                                <button type="button" class="btn btn-success">Registrarme</button>    
+                                <button id="sign-in-Registrar" type="button" class="btn btn-success">Registrarme</button>    
                             </div>                                                                                  
                         </form>
                     </div>
@@ -52,57 +52,71 @@
     var MODAL_PREFIX = 'sign-in-';
 
     // Variables cacheadas
-    var $_modal           = $('#' + MODAL_PREFIX + 'modal');
-    var $_form            = $('#' + MODAL_PREFIX + 'form');
-    var $_username        = $('#' + MODAL_PREFIX + 'username');
-    var $_email           = $('#' + MODAL_PREFIX + 'email');
-    var $_password        = $('#' + MODAL_PREFIX + 'password');
-    var $_confirmPassword = $('#' + MODAL_PREFIX + 'confirm-password');    
+    var $_modal = $('#' + MODAL_PREFIX + 'modal');
+    var $_form = $('#' + MODAL_PREFIX + 'form');
+    var $_username = $('#' + MODAL_PREFIX + 'username');
+    var $_email = $('#' + MODAL_PREFIX + 'email');
+    var $_password = $('#' + MODAL_PREFIX + 'password');
+    var $_confirmPassword = $('#' + MODAL_PREFIX + 'confirm-password');
+    var $_registrar = $('#' + MODAL_PREFIX + 'Registrar');
 
+
+    $_registrar.click(function() {
+
+        if ($_form.valid()) {
+            $.post(Varr, {
+                sUser: $_username.val(),
+                sEmail: $_email.val(),
+                sPassword: $_password.val()
+            }, function(o) {
+
+            }, "json");
+        }
+    });
     /*
      * Eventos que se ejecutan cuando el modal se carga
      * y ya es visible para el usuario
      */
     $_modal.on('shown.bs.modal', function()
-    {        
+    {
         // Configurar las validaciones
         var $field = null;
-        var $params = {rules:{}, messages:{}};        
+        var $params = {rules: {}, messages: {}};
 
         // validaciones de username
-        $field = $_username.attr('name');        
-        $params['rules'][$field] = {"required":true, "rangelength":[3,10]};
+        $field = $_username.attr('name');
+        $params['rules'][$field] = {"required": true, "rangelength": [3, 10]};
         $params['messages'][$field] = {"rangelength": jQuery.validator.format("El nombre de usuario debe contener entre {0} y {1} caracteres")};
 
         // validaciones de email
         $field = $_email.attr('name');
-        $params['rules'][$field] = {"required":true, "maxlength": 50};
+        $params['rules'][$field] = {"required": true, "maxlength": 50};
         $params['messages'][$field] = {"maxlength": jQuery.validator.format("El correo no puede sobrepasar los {0} caracteres")};
 
         // validaciones de password
         $field = $_password.attr('name');
-        $params['rules'][$field] = {"required":true, "passwordcheck": true};
+        $params['rules'][$field] = {"required": true, "passwordcheck": true};
         $params['messages'][$field] = {"minlength": jQuery.validator.format("La contraseña debe contener el menos 6 caracteres")};
 
         // validaciones de confirm password
         $field = $_confirmPassword.attr('name');
-        $params['rules'][$field] = {"required":true, "equalTo": $_password};
+        $params['rules'][$field] = {"required": true, "equalTo": $_password};
         $params['messages'][$field] = {"equalTo": "Las contraseñas no coinciden"};
 
         // envia parametros de validación al formulario
-        $_form.validate($params);        
-    });  
+        $_form.validate($params);
+    });
 
     /*
      * Eventos que se ejecutan una vez el modal ha sido
      * cerrado y ya no es visible para el usuario.
      */
-    $_modal.on('hidden.bs.modal', function() 
+    $_modal.on('hidden.bs.modal', function()
     {
         // Limpia el formulario
-        $_form.validate().resetForm(); 
+        $_form.validate().resetForm();
         $_form.get(0).reset();
-        $_form.children().removeClass('has-error has-success');              
-    });    
+        $_form.children().removeClass('has-error has-success');
+    });
 
 </script>

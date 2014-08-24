@@ -54,7 +54,7 @@
             <?php
             echo '<div class="DivPlay" id="d-' . $iID . '" >' . $sUrlaMostrar;
             echo $botonplay . "</div>";
-            echo $bd->bd->obtener_respuesta($i, "COMMENT_ADDITIONAL");
+           echo $ComentarioAdicional;
             ?>    
 
         </div>

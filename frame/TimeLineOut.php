@@ -62,9 +62,7 @@
             <button id="Like-<?php echo $iID ?>" type="button" class="btn btn-default btn-block like-button" data-toggle="button">
                 <span class="glyphicon glyphicon-thumbs-up"></span> Me gusta
             </button>
-            <script type="text/javascript">$('#Like-<?php echo $iID ?>').click(function() {
-                    FunLike(<?php echo $iID ?>);
-                });</script>
+           
             <button id="Comment-<?php echo $iID ?>" type="button" class="btn btn-default btn-block comment-button">
                 <span class="glyphicon glyphicon-comment"></span> Comentar
             </button>
