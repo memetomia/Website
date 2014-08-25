@@ -28,10 +28,18 @@ class TableUser {
 
       @return type description
      */
-    public function Create($sFBID, $sName, $sEmail, $sDirPicture, $sUrlFbPicture, $sUser, $sPass) {
+    public function Create($sFBID, $sName, $sEmail, $sDirPicture, $sUser, $sPass) {
         $query = sprintf("INSERT INTO `user` "
                 . "(`ID`, `FBID`, `NAME`, `EMAIL`, `PICTURE`, `VERIFY`, `USER`, `PASS`) VALUES "
-                . "(NULL, '%s', '%s', '%s', '%s', 0, '%s', md5('%s'));", $sFBID, $sName, $sEmail, $sDirPicture, $sUrlFbPicture, $sUser, $sPass);
+                . "(NULL, '%s', '%s', '%s', '%s', 0, '%s', md5('%s'));", $sFBID, $sName, $sEmail, $sDirPicture, $sUser, $sPass);
+        $this->bd->hacer_query($query);
+        return $this->bd->ultimo_id_generado_por_la_bd();
+    }
+
+    public function CreateFB($sFBID, $sName, $sEmail, $sDirPicture, $sUser, $sPass) {
+        $query = sprintf("INSERT INTO `user` "
+                . "(`ID`, `FBID`, `NAME`, `EMAIL`, `PICTURE`, `VERIFY`, `USER`, `PASS`) VALUES "
+                . "(NULL, '%s', '%s', '%s', '%s', 1, '%s', md5('%s'));", $sFBID, $sName, $sEmail, $sDirPicture, $sUser, $sPass);
         $this->bd->hacer_query($query);
         return $this->bd->ultimo_id_generado_por_la_bd();
     }
