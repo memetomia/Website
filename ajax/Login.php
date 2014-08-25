@@ -25,7 +25,7 @@ if ($bError == false) {
     if ($iResultado > 1) {
         if ($bd->bd->obtener_respuesta(0, "VERIFY") == 1) {
             $co = new ClassCookie("sec");
-            $co->setSVar("iId", $bd->obtener_respuesta(0, "ID"));
+            $co->setSVar("iId", $bd->bd->obtener_respuesta(0, "ID"));
             $json->Listo="ok";
         } else {
             $json->sError = "falta verificar la cuenta";

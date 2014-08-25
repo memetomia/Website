@@ -52,18 +52,28 @@ if (isset($_POST["sEmail"])) {
 function CrearCookie($id) {
     $co = new ClassCookie("sec");
     $co->setSVar("iId", $id);
-    $json->Listo = "ok";
 }
 
 $json = new stdClass();
 if ($bError == false) {
     $iResultado = $bd->SearchFbID($iID);
     if ($iResultado > 1) {
-        CrearCookie($iID);
+        CrearCookie($iResultado);
+        $json->Tupla = 1;
+        $json->Listo = "ok";
     } else {
-        $bd->CreateFB($iID, $sName, $sEmail, $sPicture, str_replace(" ", ".", $sUser), "");
+        $registro = -1;
+        $registro = $bd->CreateFB($iID, $sName, $sEmail, $sPicture, str_replace(" ", ".", $sUser), "");
+        if ($registro != -1) {
+            CrearCookie($registro);
+            $json->Tupla = 1;
+            $json->Listo = "ok";
+        } else {
+            $json->Tupla = -1;
+            $json->sError = "no se pudo guardar los datos de facebook";
+        }
     }
 }
-$json->Tupla = $iResultado;
+
 echo json_encode($json);
 ?>
