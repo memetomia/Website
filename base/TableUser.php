@@ -28,10 +28,11 @@ class TableUser {
 
       @return type description
      */
-    public function Create($sFBID, $sName, $sEmail, $sDirPicture, $sUser, $sPass) {
+    public function Create( $sName, $sEmail, $sUser, $sPass) {
+       
         $query = sprintf("INSERT INTO `user` "
                 . "(`ID`, `FBID`, `NAME`, `EMAIL`, `PICTURE`, `VERIFY`, `USER`, `PASS`) VALUES "
-                . "(NULL, '%s', '%s', '%s', '%s', 0, '%s', md5('%s'));", $sFBID, $sName, $sEmail, $sDirPicture, $sUser, $sPass);
+                . "(NULL, '', '%s', '%s', '', 0, '%s', md5('%s'));", $sName, $sEmail, $sUser, $sPass);
         $this->bd->hacer_query($query);
         return $this->bd->ultimo_id_generado_por_la_bd();
     }
@@ -44,14 +45,33 @@ class TableUser {
         return $this->bd->ultimo_id_generado_por_la_bd();
     }
 
+    public function SearchCountExist($sEmail, $sUser, $sFBID) {
+        $query = sprintf("SELECT * FROM  `user` WHERE  `EMAIL` =  '%s' OR  `USER` =  '%s'"
+                . "  or `FBID`='%s'", $sEmail, $sUser, $sFBID);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+
+    public function SearchEmail($sParam) {
+        $query = sprintf("SELECT * FROM  `user` WHERE `EMAIL` =  '%s'", $sParam);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+
+    public function SearchUser($sParam) {
+        $query = sprintf("SELECT * FROM  `user` WHERE USER=  '%s'", $sParam);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+
     public function login($sName, $sPass) {
         $query = sprintf("SELECT * 
 FROM  `user` 
 WHERE (
-`NAME` =  '%s'
+`USER` =  '%s'
 OR  `EMAIL` =  '%s'
 )
-AND  `PASS` =  '%s'", $sName, $sPass);
+AND  `PASS` =  md5('%s')", $sName, $sName, $sPass);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }

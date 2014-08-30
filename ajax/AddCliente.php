@@ -1,8 +1,9 @@
 <?php
 
-include_once '../base/TableGallery.php';
-include_once '../base/ClassCookie.php';
+include_once '../base/TableUser.php';
+//include_once '../base/ClassCookie.php';
 $bd = new TableUser();
+$json = new stdClass();
 $bError = false;
 if (isset($_POST["sUser"])) {
     $sName = $_POST["sUser"];
@@ -19,16 +20,34 @@ if (isset($_POST["sPassword"])) {
 } else {
     $bError = true;
 }
+$iAcountExist = $bd->SearchEmail($sEmail);
+if ($iAcountExist > 0) {
+    $bError = true;
+    $json->Tupla = -1;
+    $json->sError = "El correo no esta disponible por favor use otro";
+}
+
+if ($bError == false) {
+    $iAcountExist = $bd->SearchUser($sName);
+    if ($iAcountExist > 0) {
+        $bError = true;
+        $json->Tupla = -1;
+        $json->sError = "El nombre de cuenta no esta disponible por favor use otro";
+    }
+}
 
 
 if ($bError == false) {
-    $iResultado = $bd->Create("", $sName, $sEmail, "", "", $sName, $sPass);
- 
+    
+    $iResultado = $bd->Create( $sName, $sEmail, $sName, $sPass);
 
-
-
-    $json = new stdClass();
+    if ($iResultado > 0) {
+        $json->Tupla = $iResultado;
+    } else {
+        $json->Tupla = -1;
+        $json->sError = "no se pudo guardar los datos; por favor intente mas tarde";
+    }
 }
-$json->Tupla = $iResultado;
+
 echo json_encode($json);
 ?>

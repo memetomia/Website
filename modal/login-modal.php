@@ -36,8 +36,10 @@
                 </form>
 
             </div>
+              <span id="login-total-Mensaje" class="help-block" style="display: none;">Este campo es requerido</span>
+                        
             <div class="modal-footer">                        
-                <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</button>
+                <button id="login-log" type="button" class="btn btn-success"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</button>
             </div>
         </div>
     </div>
@@ -54,11 +56,34 @@ $(function(){
     var $_form          = $('#' + MODAL_PREFIX + 'form');
     var $_usernameEmail = $('#' + MODAL_PREFIX + 'username-email');    
     var $_password      = $('#' + MODAL_PREFIX + 'password');    
+  var $_login      = $('#' + MODAL_PREFIX + 'log');    
 
     /*
      * Eventos que se ejecutan cuando el modal se carga
      * y ya es visible para el usuario
      */
+    var Dir="ajax/Login.php";
+
+    $_login.click(function() {
+
+        if ($_form.valid()) {
+            $.post(Dir, {
+                sUser: $_usernameEmail.val(),
+                sPassword: $_password.val()
+            }, function(o) {
+                    $("#login-total-Mensaje").css("display","none");
+                if(o.Tupla>1){
+                    location.href="./home.php";
+                }else{
+                    $("#login-total-Mensaje").html(o.sError);
+                     $("#login-total-Mensaje").css("display","block");
+                      $("#login-total-Mensaje").css("color","red");
+                }
+
+            }, "json");
+        }
+    });
+    
     $_modal.on('show.bs.modal', function()
     {        
         // Configurar las validaciones

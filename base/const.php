@@ -15,6 +15,7 @@ if ($usuario == "jaivic") {
     defined('ARTICLE') ? null : define("ARTICLE", "C:\wamp\www\Website\media\article");
     defined('MEME') ? null : define("MEME", "C:\wamp\www\memetomia\media\meme"); 
     defined('ARTICLE') ? null : define("ARTICLE", "C:\wamp\www\memetomia\media\article"); 
+    defined('ERROR_FILE') ? null : define("ERROR_FILE", "C:\wamp\www\memetomia\media\article"); 
    
     defined('JS') ? null : define("JS", "/js");
     defined('MODAL_CONTROLLER') ? null : define("MODAL_CONTROLLER", "/js/modal_controllers");
