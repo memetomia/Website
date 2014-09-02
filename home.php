@@ -26,54 +26,9 @@
         <![endif]-->
     </head>
     <body>       
-        <nav class="navbar navbar-static-top navbar-inverse" role="navigation">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#memetomia-navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Memetomía</a>
-                </div>
-                <div class="collapse navbar-collapse" id="bs-media/example-navbar-collapse-1">
-
-
-           
-
-                <div class="collapse navbar-collapse" id="memetomia-navbar">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Inicio</a></li>
-                        <li><a href="#">Top</a></li>
-                        <li><a href="#">Vídeos</a></li>
-                        <li><a href="#">GIF</a></li>
-                    </ul>                    
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-bell"></span> Notificaciones <span class="label label-danger">2</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#"><span class="not-readed"></span> <span class="glyphicon glyphicon-comment"></span> Alejandro123 comentó en tu post</a></li>                                
-                                <li><a href="#"><span class="not-readed"></span> <span class="glyphicon glyphicon-thumbs-up"></span> A Erika33 le gustó tu post</a></li>                                
-                                <li class="divider"></li>
-                                <li class="text-center"><a href="#" data-toggle="modal" data-target="#notifications-modal">Ver todas las notificaciones</a></li>                                
-                            </ul>
-                        </li>
-                        <li><a href="#" data-toggle="modal" data-target="#new-post-modal"><span class="glyphicon glyphicon-upload"></span> Nuevo Post</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Jaivic Villegas<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#" data-toggle="modal" data-target="#activity-modal"><span class="glyphicon glyphicon-tasks"></span> Actividad</a></li>                                
-                                <li><a href="#" data-toggle="modal" data-target="#settings-modal"><span class="glyphicon glyphicon-cog"></span> Ajustes</a></li>                                
-                                <li class="divider"></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>
-                            </ul>
-                        </li>
-                    </ul>                    
-                </div>
-            </div>
-        </nav>
-        
+  <?php
+  include_once 'frame/bar.php';
+  ?>
         <div id="main-content" class="container">
             <div id="timeline-container" class="col-md-12">
 
@@ -86,9 +41,54 @@
                 </div>
 
                 <div id="timeline" class="col-md-8">
+<?php
+                    include_once 'base/const.php';
+                    $paginador = "";
+                    $index = 0;
+                    if (isset($_GET["i"])) {
+                        $index = $_GET["i"];
+                    }
+                    if ($index <= 0) {
+                        $index = 0;
+                        $prev = $index - 1;
+                        $next = $index + 1;
+                        if ($index <= 0) {
+                            $paginador = '<li class="previous disabled"><a >&larr; Atrás</a></li><li class="next"><a href="' . SERVER . "/index.php?i=" . $next . '">Siguiente &rarr;</a></li>';
+                        } else {
+                            $paginador = '<li class="previous disabled"><a href="' . SERVER . "/index.php?i=" . $prev . '">&larr; Atrás</a></li><li class="next"><a href="' . SERVER . "/index.php?i=" . $next . '">Siguiente &rarr;</a></li>';
+                        }
+                    } else {
+                        $prev = $index - 1;
+                        $next = $index + 1;
+                        $paginador = '<li class="previous"><a href="' . SERVER . "/index.php?i=" . $prev . '">&larr; Atrás</a></li><li class="next"><a href="' . SERVER . "/index.php?i=" . $next . '">Siguiente &rarr;</a></li>';
+                    }
 
-               
-                    <?php include_once 'frame/TimeLineOut.php';?>
+                    include_once 'base/TableGallery.php';
+                    include_once 'base/TableUser_Gallery.php';
+                    $bd = new TableGallery();
+                    $bdtag = new TableUser_Gallery();
+                    if ($index != 0) {
+                        $index = $index * 5;
+                    }
+
+                    $todo = $bd->LastNArticle($index, 5);
+
+                    if ($todo > 0) {
+                        $html = "";
+                        for ($i = 0; $i < $todo; $i++) {
+
+                            $iState = $bd->bd->obtener_respuesta($i, "STATE");
+                            $iTipoMedia = $bd->bd->obtener_respuesta($i, "TYPEMEDIA");
+                            $sUrl = $bd->bd->obtener_respuesta($i, "URL");
+                            $iID = $bd->bd->obtener_respuesta($i, "ID");
+                            $sInfoMedia = $bd->bd->obtener_respuesta($i, "INFOMEDIA");
+                            $sName = $bd->bd->obtener_respuesta($i, "NAME");
+                            $sTitle = $bd->bd->obtener_respuesta($i, "TITLE");
+                            $iNMore = $bd->bd->obtener_respuesta($i, "N_MORE");
+                            $iNComment = $bd->bd->obtener_respuesta($i, "N_COMMENT");
+                            $ComentarioAdicional = $bd->bd->obtener_respuesta($i, "COMMENT_ADDITIONAL");
+                  include_once 'frame/TimeLineIn.php';
+                    }}?>
                  
 
                 </div>

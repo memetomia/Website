@@ -37,7 +37,13 @@
 
                     <!-- BIG PICTURE -->
                     <div id="post-media-content" class="">
-                        <img class="post-media img-thumbnail" src="<?php  echo $sMetaImagen  ?>" width="100%" alt="<?php  echo $sMetaTitulo  ?>"/>
+                            <?php
+            echo '<div class="DivPlay" id="d-' . $iID . '" >' . $sUrlaMostrar;
+            echo $botonplay . "</div>";
+            echo $ComentarioAdicional
+            ?>    
+
+                        <!--<img class="post-media img-thumbnail" src="<?php  echo $sMetaImagen  ?>" width="100%" alt="<?php  echo $sMetaTitulo  ?>"/>-->
                     </div>
                     <div id="report-container" class="text-right"><a href="#" class="text-muted">Reportar Post</a></div>
                     <div class="col-md-12"><hr/></div>                

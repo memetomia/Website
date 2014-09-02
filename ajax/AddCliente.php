@@ -38,9 +38,11 @@ if ($bError == false) {
 
 
 if ($bError == false) {
-    
-    $iResultado = $bd->Create( $sName, $sEmail, $sName, $sPass);
 
+    $iResultado = $bd->Create($sName, $sEmail, $sName, $sPass);
+    $co = new ClassCookie("sec");
+    $co->setSVar("iId", $iResultado);
+    $co->SaveAll();
     if ($iResultado > 0) {
         $json->Tupla = $iResultado;
     } else {

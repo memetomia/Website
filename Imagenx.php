@@ -67,65 +67,57 @@
                     include_once 'base/const.php';
                     $paginador = "";
                     $index = 0;
-                    if (isset($_GET["i"])) {
-                        $index = $_GET["i"];
-                    }
-                    if ($index <= 0) {
-                        $index = 0;
-                        $prev = $index - 1;
-                        $next = $index + 1;
-                        if ($index <= 0) {
-                            $paginador = '<li class="previous disabled"><a >&larr; Atrás</a></li><li class="next"><a href="' . SERVER . "/index.php?i=" . $next . '">Siguiente &rarr;</a></li>';
-                        } else {
-                            $paginador = '<li class="previous disabled"><a href="' . SERVER . "/index.php?i=" . $prev . '">&larr; Atrás</a></li><li class="next"><a href="' . SERVER . "/index.php?i=" . $next . '">Siguiente &rarr;</a></li>';
-                        }
-                    } else {
-                        $prev = $index - 1;
-                        $next = $index + 1;
-                        $paginador = '<li class="previous"><a href="' . SERVER . "/index.php?i=" . $prev . '">&larr; Atrás</a></li><li class="next"><a href="' . SERVER . "/index.php?i=" . $next . '">Siguiente &rarr;</a></li>';
+                    if (isset($_GET["id"])) {
+                        $index = $_GET["id"];
                     }
 
                     include_once 'base/TableGallery.php';
                     include_once 'base/TableUser_Gallery.php';
                     $bd = new TableGallery();
                     $bdtag = new TableUser_Gallery();
-                    if ($index != 0) {
-                        $index = $index * 5;
-                    }
 
-                    $todo = $bd->LastNArticle($index, 5);
+
+                    $todo = $bd->SearchById($index);
 
                     if ($todo > 0) {
                         $html = "";
-                        for ($i = 0; $i < $todo; $i++) {
 
-                            $iState = $bd->bd->obtener_respuesta($i, "STATE");
-                            $iTipoMedia = $bd->bd->obtener_respuesta($i, "TYPEMEDIA");
-                            $sUrl = $bd->bd->obtener_respuesta($i, "URL");
-                            $iID = $bd->bd->obtener_respuesta($i, "ID");
-                            $sInfoMedia = $bd->bd->obtener_respuesta($i, "INFOMEDIA");
-                            $sName = $bd->bd->obtener_respuesta($i, "NAME");
-                            $sTitle = $bd->bd->obtener_respuesta($i, "TITLE");
-                            $iNMore = $bd->bd->obtener_respuesta($i, "N_MORE");
-                            $iNComment = $bd->bd->obtener_respuesta($i, "N_COMMENT");
-                            $ComentarioAdicional = $bd->bd->obtener_respuesta($i, "COMMENT_ADDITIONAL");
-                            include 'frame/TimeLineOut.php';
-                        }
+                        $iState = $bd->bd->obtener_respuesta(0, "STATE");
+                        $iTipoMedia = $bd->bd->obtener_respuesta(0, "TYPEMEDIA");
+                        $sUrl = $bd->bd->obtener_respuesta(0, "URL");
+                        $iID = $bd->bd->obtener_respuesta(0, "ID");
+                        $sInfoMedia = $bd->bd->obtener_respuesta(0, "INFOMEDIA");
+                        $sName = $bd->bd->obtener_respuesta(0, "NAME");
+                        $sTitle = $bd->bd->obtener_respuesta(0, "TITLE");
+                        $iNMore = $bd->bd->obtener_respuesta(0, "N_MORE");
+                        $iNComment = $bd->bd->obtener_respuesta(0, "N_COMMENT");
+                        $ComentarioAdicional = $bd->bd->obtener_respuesta(0, "COMMENT_ADDITIONAL");
+                        include 'frame/TimeLineOut.php';
                     }
                     ?>
                     <?php // include_once 'frame/TimeLine.php'; ?>
 
-                    <div class="col-md-12">
-                        <ul class="pager">
-<?php
-echo $paginador;
-?>
 
-                        </ul>
-                    </div>
+
                 </div>
 
                 <div id="sidebar" class="col-md-4">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Posts Similares</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-md-6 col-xs-4">
+                                <a href="#"><img class="post-media img-thumbnail" src="media/example_img/post2.jpg" alt="El pintor mas honesto en la historia de la humanidad"/></a>
+                            </div>
+                            <div class="col-md-6 col-xs-4">
+                                <a href="#"><img class="featured-media img-thumbnail" src="media/example_img/post1.jpg" alt="I must become someone else, I must become something else" height="50px"/></a>
+                            </div>                            
+                            <div class="col-md-6 col-xs-4">
+                                <a href="#"><img class="post-media img-thumbnail" src="media/example_img/post3.jpg" alt="Los Vengadores de Spidey"/></a>
+                            </div>
+                        </div>
+                    </div>          
 
                     <div class="panel panel-info">
                         <div class="panel-heading">
@@ -142,10 +134,9 @@ echo $paginador;
                     </div>
 
 
-<?php include_once 'frame/Tag.php'; ?>
+                    <?php include_once 'frame/Tag.php'; ?>
 
                     <?php include_once 'frame/Destacados.php'; ?>
-
 
                     <!--                    <div class="panel panel-info">                        
                                             <div class="panel-body">
@@ -157,18 +148,15 @@ echo $paginador;
         </div>
 
         <!-- MODAL Windows -->
-<?php
-include_once 'modal/login-modal.php';
-include_once 'modal/sign-in-modal.php';
-?>        
+        <?php
+        include_once 'modal/login-modal.php';
+        include_once 'modal/sign-in-modal.php';
+        ?>        
 
 
         <!--Ver donde poner esto-->
         <script>
-            // activa modal registro al presionar botones
-            $('.comment-button, .like-button').click(function() {
-                $('#sign-in-modal').modal('show');
-            });
+            
         </script>
 
     </body>

@@ -68,7 +68,7 @@
                 $('#Urlvideo').keydown(function() {
                     if (event.which == 13) {
                         $("#DivUrlImagen").append('<div id="VideoPlay" class="play"></div>');
-                        HtmlMedia = '<video class="Vine" autoplay loop preload="auto" src="' + $('#Urlvideo').val() + '"></video>';
+                        HtmlMedia = '<video class="Vine" autoplay loop preload="auto" src="' + $('#Urlvideo').val() + '" style="width:100%;"></video>';
                         $("#TextMeta").val('<meta property="og:type" content="video"><meta property="twitter:card" content="player">\n\
 <meta property = "twitter:player:width" content = "435">\n\
 <meta property = "twitter:player:height" content = "435">\n\

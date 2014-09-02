@@ -72,7 +72,7 @@ $(function(){
                 sPassword: $_password.val()
             }, function(o) {
                     $("#login-total-Mensaje").css("display","none");
-                if(o.Tupla>1){
+                if(o.Tupla=1){
                     location.href="./home.php";
                 }else{
                     $("#login-total-Mensaje").html(o.sError);
