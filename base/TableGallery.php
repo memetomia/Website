@@ -176,7 +176,7 @@ LIMIT 0 , %s", $iN);
     }
 
     public function LastNArticle($iInicio, $iFin) {
-        $query = sprintf("Select g.ID, g.OWNER,g.TITLE,g.TYPEMEDIA,g.INFOMEDIA,g.URL,g.DATE,g.TAG,g.N_MORE,g.N_LESS,g.N_COMMENT,g.STATE,g.COMMENT_ADDITIONAL,u.NAME from gallery as g join user as u on (u.ID=g.OWNER) ORDER BY  g.`DATE`  DESC LIMIT %s,%s;", $iInicio, $iFin);
+        $query = sprintf("Select g.SENSURA, g.ID, g.OWNER,g.TITLE,g.TYPEMEDIA,g.INFOMEDIA,g.URL,g.DATE,g.TAG,g.N_MORE,g.N_LESS,g.N_COMMENT,g.STATE,g.COMMENT_ADDITIONAL,u.NAME from gallery as g join user as u on (u.ID=g.OWNER) ORDER BY  g.`DATE`  DESC LIMIT %s,%s;", $iInicio, $iFin);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }

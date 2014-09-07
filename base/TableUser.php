@@ -1,7 +1,7 @@
 <?php
 
-require ('conexion_mysql.php');
-require ('const.php');
+require_once ('conexion_mysql.php');
+require_once ('const.php');
 
 class TableUser {
 
@@ -63,7 +63,11 @@ class TableUser {
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
-
+   public function SearchById($sParam) {
+        $query = sprintf("SELECT * FROM  `user` WHERE ID=  '%s'", $sParam);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
     public function login($sName, $sPass) {
         $query = sprintf("SELECT * 
 FROM  `user` 

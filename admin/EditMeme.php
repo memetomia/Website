@@ -72,7 +72,7 @@
 
                             if (o.Tupla > 0) {
 
-                                $("#tabla tbody").append('<tr id="t' + $('#tabla >tbody >tr').length + '"><td>' + o.Tupla + '</td><td>' + $("#Name").val() + '</td><td><img id="" class="img-thumbnail img-small" src="http://localhost:8080/memetomia/media/meme/' + sDirImagen + '"></td><td>0</td>\n\
+                                $("#tabla tbody").append('<tr id="t' + $('#tabla >tbody >tr').length + '"><td>' + o.Tupla + '</td><td>' + $("#Name").val() + '</td><td><img id="" class="img-thumbnail img-small" src="'+SERVER+'/media/meme/' + sDirImagen + '"></td><td>0</td>\n\
                                 <td>\n\
                                     <button type="button" class="btn btn-default"  onclick="Modificar(\'' + $('#tabla >tbody >tr').length + '\',\'' + o.Tupla + '\')" >Modificar</button>\n\
                                     <button type="button" class="btn btn-default"  onclick="Eliminar(\'' + $('#tabla >tbody >tr').length + '\',\'' + o.Tupla + '\')" >Eliminar</button>\n\
@@ -128,7 +128,7 @@
                                 <div id="MsgName" class="msgbox Oculto"><span class="spanNoti"></span></div>
 
                             </div>
-                            <img id="ImgMeme" class="img-thumbnail img-small"  src="http://localhost:8080/memetomia/media/example_img/MemePredeterminado.jpg">
+                            <img id="ImgMeme" class="img-thumbnail img-small"  src="<?php echo SERVER;?>/media/example_img/MemePredeterminado.jpg">
                             <button id='BtSubir' type="button" class="btn btn-default"  >Subir</button>
                             <div id="MsgMeme" class="msgbox Oculto"><span class="spanNoti"></span></div>
 

@@ -1,4 +1,4 @@
-var SERVER = "http://localhost:8080/Website";
+var SERVER = "http://localhost/Website";
 //var SERVER          = "http://www.memetomia.com"
 var RESOURCES = "/resources";
 var FONTS = "/resources/fonts";
@@ -6,7 +6,7 @@ var MEDIA = "/media";
 var MEME = SERVER + MEDIA + "/meme";
 var DEFAULT = SERVER + MEDIA + "/default";
 var ARTICLE = SERVER + MEDIA + "/article";
-var IMAGE=SERVER +"/Imagen.php?id="
+var IMAGE = SERVER + "/Imagen.php?id="
 var JS = "/js";
 
 var CSS = "/css";
@@ -25,7 +25,7 @@ function TW(iId) {
     window.open($("#TW-" + iId).attr("d-link"), "nuevo", "directories=no, location=no, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=600, height=400");
 }
 function FunComment(iId) {
-window.location.href = IMAGE+iId;   
+    window.location.href = IMAGE + iId;
 }
 function FunLike(iId) {
     $.post("ajax/AddLike.php", {
@@ -38,4 +38,35 @@ function FunLike(iId) {
         }
 
     }, "json");
+}
+function LoginFB()
+{
+    fb.login(function() {
+
+        if (fb.logged) {
+            $.post("ajax/loginFB.php", {
+                iId: fb.user.id,
+                sUser: fb.user.name,
+                sName: fb.user.first_name,
+                sLName: fb.user.last_name,
+                sLink: fb.user.link,
+                sEmail: fb.user.email,
+                sPicture: fb.user.picture
+
+            }, function(o) {
+
+
+                if (o.iError == 1) {
+
+                    location.href = "index.php";
+
+                }/*end if o.valor==1 */
+                else {
+                    alert(o.sInfo);
+                }
+            }, "json");
+        } else {
+            alert("No se pudo identificar al usuario");
+        }
+    })
 }

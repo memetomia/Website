@@ -7,7 +7,7 @@ if ($usuario == "jaivic") {
     defined('DB_PASS') ? null : define("DB_PASS", "");
     defined('DB_NAME') ? null : define("DB_NAME", "Gallery");
     defined('MODO_DEBUG') ? null : define("MODO_DEBUG", false);
-    defined('SERVER') ? null : define("SERVER", "http://localhost:8080/Website");
+    defined('SERVER') ? null : define("SERVER", "http://localhost/Website");
     defined('RESOURCES') ? null : define("RESOURCES", "/resources");
     defined('FONTS') ? null : define("FONTS", "/resources/fonts");
     defined('MEDIA') ? null : define("MEDIA", "/media");

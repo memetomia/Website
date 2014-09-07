@@ -2,6 +2,8 @@
 
 include_once '../base/TableGallery.php';
 include_once '../base/ClassCookie.php';
+    
+
 $bd = new TableUser();
 $bError = false;
 //
@@ -12,6 +14,13 @@ $bError = false;
 //                      $this->GetRequest("sLink"),
 //                       $this->GetRequest("sPicture"),
 //                      $this->GetRequest("sEmail")
+
+
+                   
+                  
+                    
+                  
+             
 if (isset($_POST["sUser"])) {
     $sUser = $_POST["sUser"];
 } else {

@@ -1,27 +1,10 @@
-<div class="panel panel-info">
-    <div class="panel-heading">
-        <h3 class="panel-title">Destacados</h3>
-    </div>
-    <style type="text/css">
-        .thumbdestacados{
-            overflow: hidden; 
-            max-height: 100px;
-
-        }
-        .imagenOverFlow{
-
-            max-width: 318px;
-         
-
-        }
-        .titleImagenOverFlow{
-            font-size: 15px;
-            line-height: 1.1em;
-            margin-top: 10px;
-        }
-    </style>
-    <div class="panel-body">
-        <?php
+  <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Posts Similares</h3>
+                    </div>
+                    <div class="panel-body">
+                    
+                      <?php
         include_once 'base/TableGallery.php';
 
         $bd = new TableGallery();

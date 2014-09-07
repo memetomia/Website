@@ -1,44 +1,48 @@
 <div class="post col-md-12">   
     <?php
     $sClass = "";
-
-
-
     $sUrlaMostrar = "";
     $botonplay = "";
-    if ($iState == 0) {
-
+    if (($iState == 0)) {
+        if ($sensura == 0) {
 //IAMGEN NORMAL
-        if ($iTipoMedia == 0) {
+            if ($iTipoMedia == 0) {
 
-            $sUrlaMostrar = '<img class="img-thumbnail img-small" src="' . EXT_ARTICLE . "/" . $sUrl . '"/>';
-            $botonplay = "";
-        }
-        if ($iTipoMedia == 1) {
-            $sUrlaMostrar = '<img class="img-thumbnail img-small" src="' . $sUrl . '"/>';
+                $sUrlaMostrar = '<img class="img-thumbnail img-small" src="' . EXT_ARTICLE . "/" . $sUrl . '"/>';
+                $botonplay = "";
+            }
+            if ($iTipoMedia == 1) {
+                $sUrlaMostrar = '<img class="img-thumbnail img-small" src="' . $sUrl . '"/>';
 
-            $botonplay = '<div id="Video-' . $iID . '" class="play"></div>';
-            $botonplay .= '<script type="text/javascript">'
-                    . '$("#Video-' . $iID . '").click(function() {
+                $botonplay = '<div id="Video-' . $iID . '" class="play"></div>';
+                $botonplay .= '<script type="text/javascript">'
+                        . '$("#Video-' . $iID . '").click(function() {
                                                            $("#d-' . $iID . '").html(\'<div class="flex-video widescreen">' . $sInfoMedia . '</div>\');
                                                        });                               </script>';
-        }
-        //   VINE
-        if ($iTipoMedia == 2) {
-            $sUrlaMostrar = '<img class="img-thumbnail img-small" src="' . $sUrl . '"/>';
+            }
+            //   VINE
+            if ($iTipoMedia == 2) {
+                $sUrlaMostrar = '<img class="img-thumbnail img-small" src="' . $sUrl . '"/>';
 
-            $botonplay = '<div id="Vine-' . $iID . '" class="play"></div>';
-            $botonplay .= '<script type="text/javascript">'
-                    . '$("#Vine-' . $iID . '").click(function() {
+                $botonplay = '<div id="Vine-' . $iID . '" class="play"></div>';
+                $botonplay .= '<script type="text/javascript">'
+                        . '$("#Vine-' . $iID . '").click(function() {
                                                            $("#d-' . $iID . '").html(\'' . $sInfoMedia . '\');
                                                         $(".Vine").click(function() {
                                                             $(this).get(0).paused ? $(this).get(0).play() : $(this).get(0).pause();
                             });});                               </script>';
-        }
-        //EMB
-        if ($iTipoMedia == 3) {
-            $sUrlaMostrar = $sInfoMedia;
-            $botonplay = "";
+            }
+            //EMB
+            if ($iTipoMedia == 3) {
+                $sUrlaMostrar = $sInfoMedia;
+                $botonplay = "";
+            }
+        } else {
+            if ($sensura == 1) {
+                $sUrlaMostrar = '<img class="img-thumbnail img-small" src="' .EXT_MEDIA. '/example_img/INS.png" />';
+                $botonplay = "";
+          
+            }
         }
         ?>
         <div id="A<?php echo $iID ?>" class="post-header col-md-12">
@@ -52,7 +56,7 @@
         <div class="post-media-content col-md-9">
 
             <?php
-            echo '<div class="DivPlay" id="d-' . $iID . '" >' . $sUrlaMostrar;
+            echo '<div class = "DivPlay" id = "d-' . $iID . '" > ' . $sUrlaMostrar;
             echo $botonplay . "</div>";
             echo $ComentarioAdicional
             ?>    
@@ -62,12 +66,13 @@
             <button id="Like-<?php echo $iID ?>" type="button" class="btn btn-default btn-block like-button" data-toggle="button">
                 <span class="glyphicon glyphicon-thumbs-up"></span> Me gusta
             </button>
-           
+
             <button id="Comment-<?php echo $iID ?>" type="button" class="btn btn-default btn-block comment-button">
                 <span class="glyphicon glyphicon-comment"></span> Comentar
             </button>
-            <script type="text/javascript">$('#Comment-<?php echo $iID ?>').click(function() {
-                    FunComment(<?php echo $iID ?>);
+            <script type="text/javascript">$('#Comment-<?php echo $iID 
+                ?>').click(function() {
+                FunComment(<?php echo $iID ?>);
                 });</script>
 
             <button id="FB-<?php echo $iID ?>" d-link="http://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode("http://www.memetomia.com/Imagen.php?i=") . $iID . "&t=" . $sTitle ?>" type="button" class="btn btn-primary btn-block">Facebook</button>
@@ -80,22 +85,22 @@
                     TW(<?php echo $iID ?>);
                 });</script>
 
-        </div>
-        <div class="post-footer col-md-12">
-            <div class="post-tags">     
-                <?php
-                $tag = $bdtag->SearchArticlesTag($iID);
-                for ($j = 0; $j < $bdtag->bd->filas_retornadas_por_consulta(); $j++) {
-                    echo'  <a href="' . EXT_TAG . "?Name=" . $tag[$j]["NAME"] . '"><span class="label label-default">' . $tag[$j]["NAME"] . '</span></a>';
-                }
-                ?>
             </div>
-         
-        </div>
-        <?php
-    }
-    ?> 
+            <div class="post-footer col-md-12">
+                <div class="post-tags">     
+                    <?php
+                    $tag = $bdtag->SearchArticlesTag($iID);
+                    for ($j = 0; $j < $bdtag->bd->filas_retornadas_por_consulta(); $j++) {
+                        echo'  <a href="' . EXT_TAG . "?Name=" . $tag[$j]["NAME"] . '"><span class="label label-default">' . $tag[$j]["NAME"] . '</span></a>';
+                    }
+                    ?>
+                </div>
 
-  
+            </div>
+            <?php
+        }
+        ?> 
+
+
 </div>
 

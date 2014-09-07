@@ -18,7 +18,7 @@
 
                     <div class="col-md-6">
                         <p class="text-muted">Regístrate a través de tu correo electrónico</p><br/>
-                        <span id="sign-in-username-error" class="help-block">Este campo es requerido</span>
+<!--                        <span id="sign-in-username-error" class="help-block" style="display: none;">Este campo es requerido</span>-->
                         <form id="sign-in-form" role="form">
                             <div class="form-group">
                                 <label class="control-label" for="sign-in-username">Nombre de usuario</label>
@@ -38,7 +38,7 @@
                             </div>
                             <span id="sign-in-total-Mensaje" class="help-block" style="display: none;">Este campo es requerido</span>
                             <div class="text-right">
-                                
+
                                 <button id="sign-in-Registrar" type="button" class="btn btn-success">Registrarme</button>    
                             </div>                                                                                  
                         </form>
@@ -62,8 +62,12 @@
     var $_password = $('#' + MODAL_PREFIX + 'password');
     var $_confirmPassword = $('#' + MODAL_PREFIX + 'confirm-password');
     var $_registrar = $('#' + MODAL_PREFIX + 'Registrar');
-var Dir="ajax/AddCliente.php";
-
+    var $_registrarFB = $('#' + MODAL_PREFIX + 'facebook');
+    var Dir = "ajax/AddCliente.php";
+$_registrarFB.click(function() {
+     LoginFB();
+    
+});
     $_registrar.click(function() {
 
         if ($_form.valid()) {
@@ -72,13 +76,13 @@ var Dir="ajax/AddCliente.php";
                 sEmail: $_email.val(),
                 sPassword: $_password.val()
             }, function(o) {
-                    $("#sign-in-total-Mensaje").css("display","none");
-                if(o.Tupla>1){
-                    location.href="./home.php";
-                }else{
+                $("#sign-in-total-Mensaje").css("display", "none");
+                if (o.Tupla > 1) {
+                    location.href = "./index.php";
+                } else {
                     $("#sign-in-total-Mensaje").html(o.sError);
-                     $("#sign-in-total-Mensaje").css("display","block");
-                      $("#sign-in-total-Mensaje").css("color","red");
+                    $("#sign-in-total-Mensaje").css("display", "block");
+                    $("#sign-in-total-Mensaje").css("color", "red");
                 }
 
             }, "json");
@@ -129,5 +133,7 @@ var Dir="ajax/AddCliente.php";
         $_form.get(0).reset();
         $_form.children().removeClass('has-error has-success');
     });
+
+   
 
 </script>

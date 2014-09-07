@@ -1,7 +1,7 @@
 <?php
 
 include_once '../base/TableUser.php';
-//include_once '../base/ClassCookie.php';
+include_once '../base/ClassCookie.php';
 $bd = new TableUser();
 $json = new stdClass();
 $bError = false;
@@ -44,6 +44,22 @@ if ($bError == false) {
     $co->setSVar("iId", $iResultado);
     $co->SaveAll();
     if ($iResultado > 0) {
+        $link = "http://memetomia.com/verificar.php?code=" . md5($iResultado) . md5($sName);
+        ini_set('sendmail_path', '/usr/sbin/sendmail');
+
+
+        ini_set('sendmail_from', 'info@memetomia.com');
+        $mens = sprintf("Estimado(a) Usuario(a) (%s), reciba un cordial saludo por parte del equipo de Memetomia.
+    Su cuenta ha sido creada satisfactoriamente. 
+
+    Haz clic en el siguiente enlace para verificar la dirección de correo electrónico en tu cuenta de Memetomia.com:
+    %s
+    
+    Este correo electrónico ha sido generado automáticamente y una respuesta al mismo no sera atendida.", $sName, $link);
+        mail($sEmail, "Memetomia - Activacion de cuenta", $mens);
+
+
+
         $json->Tupla = $iResultado;
     } else {
         $json->Tupla = -1;
