@@ -1,5 +1,3 @@
-<?php //header ("Location: coming-soon.php"); ?>
-
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -7,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Memetomía</title>
-        
+
         <!--STYLES-->
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/jqueryUI.custom.min.css" rel="stylesheet">        
@@ -17,8 +15,9 @@
         <script src="js/jquery-2.1.0.min.js"></script>        
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jqueryUI.custom.min.js"></script>  
-       <script src="js/bootstrap-switch.min.js"></script>  
-        <script src="js/jquery.validate.min.js"></script>    
+        <script src="js/bootstrap-switch.min.js"></script>  
+        <script src="js/jquery.validate.min.js"></script>
+        <script src="js/fb.js"></script>
 
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -26,9 +25,8 @@
         <![endif]-->
     </head>
     <body>       
-  <?php
-  include_once 'frame/bar.php';
-  ?>
+        <?php include_once 'frame/bar.php'; ?>
+
         <div id="main-content" class="container">
             <div id="timeline-container" class="col-md-12">
 
@@ -41,7 +39,8 @@
                 </div>
 
                 <div id="timeline" class="col-md-8">
-<?php
+
+                    <?php
                     include_once 'base/const.php';
                     $paginador = "";
                     $index = 0;
@@ -87,10 +86,27 @@
                             $iNMore = $bd->bd->obtener_respuesta($i, "N_MORE");
                             $iNComment = $bd->bd->obtener_respuesta($i, "N_COMMENT");
                             $ComentarioAdicional = $bd->bd->obtener_respuesta($i, "COMMENT_ADDITIONAL");
-                  include_once 'frame/TimeLineIn.php';
-                    }}?>
-                 
+                            $sensura = $bd->bd->obtener_respuesta($i, "SENSURA");
 
+                            if ($sensura == 1) {
+                                if ($co->IsSession()) {
+                                    $sensura = 0;
+                                }
+                            }
+                            include 'frame/TimeLineOut.php';
+                        }
+                    }
+                    ?>
+                    <?php // include_once 'frame/TimeLine.php'; ?>
+
+                    <div class="col-md-12">
+                        <ul class="pager">
+                            <?php
+                            echo $paginador;
+                            ?>
+
+                        </ul>
+                    </div>
                 </div>
 
                 <div id="sidebar" class="col-md-4">
@@ -109,35 +125,52 @@
                         </div>
                     </div>
 
-                   
-                    <?php include_once 'frame/Tag.php';?>
-                    
-                            <?php include_once 'frame/Destacados.php';?>
 
-                    <div class="panel panel-info">                        
-                        <div class="panel-body">
-                            publicidad aqui
-                        </div>
-                    </div>
+                    <?php include_once 'frame/Tag.php'; ?>
+
+                    <?php include_once 'frame/Destacados.php'; ?>
+
+
+                    <!--                    <div class="panel panel-info">                        
+                                            <div class="panel-body">
+                                                publicidad aqui
+                                            </div>
+                                        </div>-->
                 </div>
             </div>
         </div>
 
         <!-- MODAL Windows -->
-        <?php             
-        include_once 'modal/notifications-modal.php';
-        include_once 'modal/new-post-modal.php'; 
-        include_once 'modal/activity-modal.php';  
-        include_once 'modal/settings-modal.php';                    
-        ?>        
-        
-      
-      
+        <?php
+        if ($co->IsSession()) {
+            include_once 'modal/notifications-modal.php';
+            include_once 'modal/new-post-modal.php';
+            include_once 'modal/activity-modal.php';
+            include_once 'modal/settings-modal.php';
+            ?> 
+            <script>
+                // Activating All Switches
+                $(".settings-switch").bootstrapSwitch();
+            </script>
+            <?php
+        } else {
+            include_once 'modal/login-modal.php';
+            include_once 'modal/sign-in-modal.php';
+            ?>
+            <script>
+                // activa modal registro al presionar botones
+                $('.comment-button, .like-button').click(function() {
+                    $('#sign-in-modal').modal('show');
+                });
+            </script>
+            <?php
+        }
+        ?>
+        <!-- MODAL Windows -->
 
-        <!--Ver donde poner esto-->
-        <script>
-            // Activating All Switches
-            $(".settings-switch").bootstrapSwitch();            
-        </script>
+
+
+
+
     </body>
 </html>

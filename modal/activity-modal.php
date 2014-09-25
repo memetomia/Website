@@ -32,7 +32,7 @@
                     <div class="list-group">
                         <a href="#" class="list-group-item">
                             <div class="col-md-2">
-                                <img src="media/example_img/post3.jpg" width="90" height="90"/>                        
+                                <img src="media/default/post3.jpg" width="90" height="90"/>                        
                             </div>
                             <div class="col-md-10">
                                 <h3 class="list-group-item-heading">Los Vengadores de Spidey</h3>
@@ -44,7 +44,7 @@
                         </a>
                         <a href="#" class="list-group-item">
                             <div class="col-md-2">
-                                <img src="media/example_img/post3.jpg" width="90" height="90"/>                        
+                                <img src="media/default/post3.jpg" width="90" height="90"/>                        
                             </div>
                             <div class="col-md-10">
                                 <h3 class="list-group-item-heading">Los Vengadores de Spidey</h3>
@@ -56,7 +56,7 @@
                         </a>
                         <a href="#" class="list-group-item">
                             <div class="col-md-2">
-                                <img src="media/example_img/post3.jpg" width="90" height="90"/>                        
+                                <img src="media/default/post3.jpg" width="90" height="90"/>                        
                             </div>
                             <div class="col-md-10">
                                 <h3 class="list-group-item-heading">Los Vengadores de Spidey</h3>
@@ -74,7 +74,7 @@
                     <div class="list-group">
                         <a href="#" class="list-group-item">
                             <div class="col-md-2">
-                                <img src="media/example_img/post2.jpg" width="90" height="90"/>                        
+                                <img src="media/default/post2.jpg" width="90" height="90"/>                        
                             </div>
                             <div class="col-md-10">
                                 <h3 class="list-group-item-heading">El pintor mas honesto en la historia de la humanidad</h3>
@@ -92,7 +92,7 @@
                     <div class="list-group">
                         <a href="#" class="list-group-item">
                             <div class="col-md-2">
-                                <img src="media/example_img/post1.jpg" width="90" height="90"/>                        
+                                <img src="media/default/post1.jpg" width="90" height="90"/>                        
                             </div>
                             <div class="col-md-10">
                                 <h3 class="list-group-item-heading">I must become someone else, I must become something else</h3>

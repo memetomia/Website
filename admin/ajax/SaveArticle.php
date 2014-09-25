@@ -11,14 +11,11 @@ $sComentario = $_POST["sComentario"];
 $aEtiqueta = $_POST["aEtiquetas"];
 $sImagen = $_POST["sImagen"];
 $infomedia = $_POST["sinfo"];
+$sMetaData=$_POST["sMetaData"];
 $json = new stdClass();
 $json->Error = "";
-
-
-
-
 if ($bError == false) {
-    $iResultado = $bd->Create($sTitulo, 0, $infomedia, $sImagen, $aEtiqueta, $sComentario);
+    $iResultado = $bd->Create($sTitulo, 0, $infomedia, $sImagen, $aEtiqueta, $sComentario,$sMetaData);
     $json = new stdClass();
 }
 if ($iResultado > 0) {

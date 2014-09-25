@@ -190,6 +190,7 @@ LIMIT 0 , %s", $iN);
             g.URL,
             g.DATE,
             g.TAG,
+            g.SENSURA,
             g.N_MORE,
             g.N_LESS,
             g.N_COMMENT,

@@ -1,9 +1,9 @@
 <html lang="en">
     <head>
-         <title>Gestionar Articulo</title>
+        <title>Gestionar Articulo</title>
         <?php include_once 'frames/head.php'; ?>
         <script src="../js/const.js"></script>
- <link rel="stylesheet" type="text/css" href="css/videoprueba.css" />
+        <link rel="stylesheet" type="text/css" href="css/videoprueba.css" />
         <link rel="stylesheet" type="text/css" href="js/jquery.cleditor.css" />
         <link rel="stylesheet" type="text/css" href="js/autocomplete/jquery.autocomplete.css" />
         <script type="text/javascript" src="js/jq.js"></script>
@@ -38,11 +38,18 @@
                         sDirImagen = "";
                         msj("#MsgUrlPg", responseJSON.error, "Error")
                     } else {
-                        $('#Imagen').attr('src', ARTICLE + "/" + responseJSON.info);
+                        $vardirImag= ARTICLE + "/" + responseJSON.info;
+                        $('#Imagen').attr('src',$vardirImag);
                         sDirImagen = responseJSON.info;
                         msj("#MsgUrlPg", "La imagen fue subida con exito", "Exito");
+                        $("#TextMeta").val('<meta property="og:type" content="photo"><meta property="twitter:card" content="photo">\n\
+<meta name="twitter:title" content="" />\n\
+<meta name="twitter:image" content="'+$vardirImag+'" />\n\
+<meta name="twitter:url" content="'+$vardirImag+'" />';
+
                     }
                 }
+
 
                 $("#TextAdicional").cleditor();
 
@@ -94,7 +101,8 @@
                             sComentario: sComentario,
                             aEtiquetas: string,
                             sImagen: sDirImagen,
-                            sinfo: sInfo
+                            sinfo: sInfo,
+                            sMetaData: $("#TextMeta").val()
                         }, function(o) {
                             if (o.Tupla > 0) {
                                 msj("#MsgBtGuardar", "Todo ok", "Exito");
@@ -152,7 +160,7 @@
                         q: palabra
                     }, function(o) {
                         if (o) {
-                            $('#ImgMeme').attr('src',  MEME + "/" + o[0]["URL"]);
+                            $('#ImgMeme').attr('src', MEME + "/" + o[0]["URL"]);
                             msj("#MsgBtAgregar", "Meme predeterminado encontrado", "Exito");
                         } else {
                             msj("#MsgBtAgregar", "No se ha encontrado el meme", "Error");
@@ -172,7 +180,7 @@
                     command: "inserthtml",
                     popupName: "hello",
                     popupClass: "cleditorPrompt",
-                    popupContent: "meme:<br><input id=meme type=text size=50><br><img id=ImgMeme src="+DEFAULT +"/MemePredeterminado.jpg height=200 width=200 /><br><input type=button value=Agregar>",
+                    popupContent: "meme:<br><input id=meme type=text size=50><br><img id=ImgMeme src=" + DEFAULT + "/MemePredeterminado.jpg height=200 width=200 /><br><input type=button value=Agregar>",
                     buttonClick: helloClick
                 };
 
@@ -275,7 +283,14 @@
                                 <div id="MsgUrlPg" class="msgbox Oculto"><span class="spanNoti"></span></div>
 
                             </div>
+                            <div class="form-group">
+                                <label for="inputTag">Metas datas</label><br>
+                                <textarea id="TextMeta" style="width:500px; height: 100px">                                
 
+
+                                </textarea>
+
+                            </div>
                             <div class="form-group">
                                 <label for="inputTag">Etiqueta</label>
                                 <input type="text" class="form-control" id="inputTag" placeholder="Agrega una pagina nueva">
@@ -284,7 +299,11 @@
                             </div>
 
                             <textarea id="TextAdicional" style="width:400px; height: 500px"></textarea>
+                            <div class="form-group">
+                                <label for="UrlPg">Imagen</label>
+                                <select id="sensura"><option selected>sin cuenta</option><option>con cuenta</option></select>
 
+                            </div>
 
                             <button id='BtAgregar' type="button" class="btn btn-default"  >Agregar</button>
                             <div id="MsgBtAgregar" class="msgbox Oculto"><span class="spanNoti"></span></div>
@@ -297,7 +316,7 @@
 
                     </div>
                     <!--tabla para verficiar-->
-              <?php include_once 'frames/tabla.php';?>
+                    <?php include_once 'frames/tabla.php'; ?>
                 </div>
                 <div class="col-sm-5  col-md-5 ">
 

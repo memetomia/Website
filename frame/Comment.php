@@ -1,8 +1,8 @@
 
 
 <?php
-$imagenUserCurrent = "media/example_img/profile-example.jpg";
-$imagenUserComment="media/example_img/profile-example.jpg";
+$imagenUserCurrent = "media/default/profile-example.jpg";
+$imagenUserComment="media/default/profile-example.jpg";
 $UserName="María Rodríguez";
 $UserComment="jajajajaja!, que divertida la foto!"
 ?>

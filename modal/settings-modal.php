@@ -110,7 +110,7 @@
                         <div class="form-group">
                             <label for="settings-picture">Imágen de perfil</label>
                             <div class="well well-sm text-center">
-                                <label for="settings-picture"><img src="media/example_img/post1.jpg" alt="user_pic" class="img-thumbnail" width="128" height="128"></label>
+                                <label for="settings-picture"><img src="media/default/post1.jpg" alt="user_pic" class="img-thumbnail" width="128" height="128"></label>
                                 <input type="file" class="form-control hidden" id="settings-picture" accept="image/jpeg, image/png">
                             </div>
                         </div>

@@ -108,13 +108,13 @@
                         </div>
                         <div class="panel-body">
                             <div class="col-md-6 col-xs-4">
-                                <a href="#"><img class="post-media img-thumbnail" src="media/example_img/post2.jpg" alt="El pintor mas honesto en la historia de la humanidad"/></a>
+                                <a href="#"><img class="post-media img-thumbnail" src="media/default/post2.jpg" alt="El pintor mas honesto en la historia de la humanidad"/></a>
                             </div>
                             <div class="col-md-6 col-xs-4">
-                                <a href="#"><img class="featured-media img-thumbnail" src="media/example_img/post1.jpg" alt="I must become someone else, I must become something else" height="50px"/></a>
+                                <a href="#"><img class="featured-media img-thumbnail" src="media/default/post1.jpg" alt="I must become someone else, I must become something else" height="50px"/></a>
                             </div>                            
                             <div class="col-md-6 col-xs-4">
-                                <a href="#"><img class="post-media img-thumbnail" src="media/example_img/post3.jpg" alt="Los Vengadores de Spidey"/></a>
+                                <a href="#"><img class="post-media img-thumbnail" src="media/default/post3.jpg" alt="Los Vengadores de Spidey"/></a>
                             </div>
                         </div>
                     </div>          

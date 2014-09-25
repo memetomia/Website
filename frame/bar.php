@@ -1,15 +1,10 @@
 <?php
-include_once 'base/const.php';
-include_once 'base/ClassCookie.php';
-include_once 'base/TableUser.php';
 
-  $co = new ClassCookie("sec");
-  
-$bdUser=new TableUser();
+if ($bTodoSimple!=true){
 if ($co->IsSession()) {
    
-   $bdUser->SearchByID($co->getSVar("iId"));
-   $user=$bdUser->bd->obtener_respuesta(0,"NAME");
+//   $bdUser->SearchByID($co->getSVar("iId"));
+//   $user=$bdUser->bd->obtener_respuesta(0,"NAME");
 ?>
 <nav class="navbar navbar-static-top navbar-inverse" role="navigation">
     <div class="container-fluid">
@@ -20,12 +15,12 @@ if ($co->IsSession()) {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Memetomía</a>
+            <a class="navbar-brand" href=".">Memetomía</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-media/example-navbar-collapse-1">
             <div class="collapse navbar-collapse" id="memetomia-navbar">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Inicio</a></li>
+                    <li class="active"><a href="./">Inicio</a></li>
                     <li><a href="#">Top</a></li>
 
                 </ul>                    
@@ -72,14 +67,36 @@ if ($co->IsSession()) {
                 <div class="collapse navbar-collapse" id="memetomia-navbar">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#">Inicio</a></li>
-                        <li><a href="#">Top</a></li>
-                        <li><a href="#">Vídeos</a></li>
-                        <li><a href="#">GIF</a></li>
                     </ul>                    
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#" data-toggle="modal" data-target="#sign-in-modal">¡Regístrate en Memetomía!</a></li>
                         <li><a href="#" data-toggle="modal" data-target="#login-modal">Iniciar sesión</a></li>                        
                     </ul>                    
+
+                </div>
+        </nav>
+<?php }
+}else{
+    
+
+?>
+ <nav class="navbar navbar-static-top navbar-inverse" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#memetomia-navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Memetomía</a>
+                </div>
+                <div class="collapse navbar-collapse" id="memetomia-navbar">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Inicio</a></li>
+                    </ul>                    
+                    <ul class="nav navbar-nav navbar-right">
+                         </ul>                    
 
                 </div>
         </nav>

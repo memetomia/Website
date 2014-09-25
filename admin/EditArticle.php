@@ -171,7 +171,7 @@
                     command: "inserthtml",
                     popupName: "hello",
                     popupClass: "cleditorPrompt",
-                    popupContent: "meme:<br><input id=meme type=text size=50><br><img id=ImgMeme src=../media/example_img/MemePredeterminado.jpg height=200 width=200 /><br><input type=button value=Agregar>",
+                    popupContent: "meme:<br><input id=meme type=text size=50><br><img id=ImgMeme src=../media/default/MemePredeterminado.jpg height=200 width=200 /><br><input type=button value=Agregar>",
                     buttonClick: helloClick
                 };
 

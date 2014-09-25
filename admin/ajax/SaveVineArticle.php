@@ -11,7 +11,7 @@ $sComentario = $_POST["sComentario"];
 $aEtiqueta = $_POST["aEtiquetas"];
 $sImagen = $_POST["sImagen"];
 $sHtmlMedia=$_POST["sHtmlMedia"];
-
+$sMetaData=$_POST["sMetaData"];
 
 $json = new stdClass();
 $json->Error = "";
@@ -20,7 +20,7 @@ $json->Error = "";
 
 
 if ($bError == false) {
-    $iResultado = $bd->Create($sTitulo, 2, $sHtmlMedia, $sImagen, $aEtiqueta, $sComentario);
+    $iResultado = $bd->Create($sTitulo, 2, $sHtmlMedia, $sImagen, $aEtiqueta, $sComentario,$sMetaData);
     $json = new stdClass();
 }
 if ($iResultado > 0) {

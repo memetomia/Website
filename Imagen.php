@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
+        
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <?php
+        include_once 'frame/init.php';
         include_once 'base/TableGallery.php';
         $bdGallery = new TableGallery();
         $iID = 0;
@@ -128,7 +130,7 @@
         </style>
     </head>
     <body>       
-<?php include_once 'frame/bar.php'; ?>
+        <?php include_once 'frame/bar.php'; ?>
 
         <div id="main-content" class="container">            
 
@@ -139,18 +141,18 @@
                                 </div>
                             </div>
                         </div>-->
-<?php
-$html = "";
+            <?php
+            $html = "";
 
-include_once 'frame/Imagen.php';
-?>
+            include_once 'frame/Imagen.php';
+            ?>
 
 
             <div id="sidebar" class="col-md-4">
 
-          <?php include_once 'frame/PostSimilares.php'; ?>            
+                <?php include_once 'frame/PostSimilares.php'; ?>            
 
-<?php include_once 'frame/Destacados.php'; ?>
+                <?php include_once 'frame/Destacados.php'; ?>
 
                 <div class="panel panel-info">
                     <div class="panel-heading">
@@ -167,7 +169,7 @@ include_once 'frame/Imagen.php';
                 </div>
 
 
-<?php include_once 'frame/Tag.php'; ?>
+                <?php include_once 'frame/Tag.php'; ?>
 
 
 
@@ -188,38 +190,42 @@ include_once 'frame/Imagen.php';
         </footer>
 
 
-  <?php
-        if ($co->IsSession()) {
-            include_once 'modal/notifications-modal.php';
-            include_once 'modal/new-post-modal.php';
-            include_once 'modal/activity-modal.php';
-            include_once 'modal/settings-modal.php';
-            ?> 
-            <script>
-                // Activating All Switches
-                $(".settings-switch").bootstrapSwitch();
-            </script>
-            <?php
-        } else {
-            include_once 'modal/login-modal.php';
-            include_once 'modal/sign-in-modal.php';
-            ?>
-            <script>
-                // activa modal registro al presionar botones
-                $('.comment-button, .like-button').click(function() {
-                    $('#sign-in-modal').modal('show');
-                });
-            </script>
-            <?php
-        }
+        <?php
+        if ($bTodoSimple != true) {
+            if ($co->IsSession()) {
+                include_once 'modal/notifications-modal.php';
+                include_once 'modal/new-post-modal.php';
+                include_once 'modal/activity-modal.php';
+                include_once 'modal/settings-modal.php';
+                ?> 
+                <script>
+                    // Activating All Switches
+                    $(".settings-switch").bootstrapSwitch();
+                </script>
+                <?php
+            } else {
+                include_once 'modal/login-modal.php';
+                include_once 'modal/sign-in-modal.php';
+                ?>
+                <script>
+                    // activa modal registro al presionar botones
+                    $('.comment-button, .like-button').click(function() {
+                        $('#sign-in-modal').modal('show');
+                    });
+                </script>
+                <?php
+            }
+        }else{
         ?>
-      
-        
-        
-        
-        
-        
-        
-      
+                
+               <?php }?>
+
+
+
+
+
+
+
+
     </body>
 </html>

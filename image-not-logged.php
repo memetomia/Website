@@ -116,7 +116,7 @@
 
                 <!-- BIG PICTURE -->
                 <div id="post-media-content" class="">
-                    <img class="post-media img-thumbnail" src="media/example_img/post3.jpg" width="100%" alt="Los Vengadores de Spidey"/>
+                    <img class="post-media img-thumbnail" src="media/default/post3.jpg" width="100%" alt="Los Vengadores de Spidey"/>
                 </div>
                 <div id="report-container" class="text-right"><a href="#" class="text-muted">Reportar Post</a></div>
                 <div class="col-md-12"><hr/></div>                
@@ -124,7 +124,7 @@
                 <!-- COMMENT SECTION -->                                            
                 <form action="#" method="POST" class="form-inline" role="form">                                
                     <div class="user-picture col-md-2 form-group">                            
-                        <img src="media/example_img/profile-example.jpg" class="img-rounded">
+                        <img src="media/default/profile-example.jpg" class="img-rounded">
                     </div>
                     <div id="user-comment" class="col-md-10 form-group">                            
                         <textarea id="user-comment-input" class="form-control" placeholder="Deja un comentario"></textarea>
@@ -141,7 +141,7 @@
                     <p id="comment-count" class="text-right text-muted">451 comentarios</p>
                     <div class="comment-block row">
                         <div class="user-picture col-md-2 form-group">                            
-                            <img src="media/example_img/profile-example.jpg" class="img-rounded">
+                            <img src="media/default/profile-example.jpg" class="img-rounded">
                         </div>
 
                         <div class="col-md-10 form-group">                            
@@ -152,7 +152,7 @@
 
                     <div class="comment-block row">
                         <div class="user-picture col-md-2 form-group">                            
-                            <img src="media/example_img/profile-example.jpg" class="img-rounded">
+                            <img src="media/default/profile-example.jpg" class="img-rounded">
                         </div>
 
                         <div class="col-md-10 form-group">                            
@@ -163,7 +163,7 @@
 
                     <div class="comment-block row">
                         <div class="user-picture col-md-2 form-group">                            
-                            <img src="media/example_img/profile-example.jpg" class="img-rounded">
+                            <img src="media/default/profile-example.jpg" class="img-rounded">
                         </div>
 
                         <div class="col-md-10 form-group">                            
@@ -183,13 +183,13 @@
                     </div>
                     <div class="panel-body">
                         <div class="col-md-6 col-xs-4">
-                            <a href="#"><img class="post-media img-thumbnail" src="media/example_img/post2.jpg" alt="El pintor mas honesto en la historia de la humanidad"/></a>
+                            <a href="#"><img class="post-media img-thumbnail" src="media/default/post2.jpg" alt="El pintor mas honesto en la historia de la humanidad"/></a>
                         </div>
                         <div class="col-md-6 col-xs-4">
-                            <a href="#"><img class="featured-media img-thumbnail" src="media/example_img/post1.jpg" alt="I must become someone else, I must become something else" height="50px"/></a>
+                            <a href="#"><img class="featured-media img-thumbnail" src="media/default/post1.jpg" alt="I must become someone else, I must become something else" height="50px"/></a>
                         </div>                            
                         <div class="col-md-6 col-xs-4">
-                            <a href="#"><img class="post-media img-thumbnail" src="media/example_img/post3.jpg" alt="Los Vengadores de Spidey"/></a>
+                            <a href="#"><img class="post-media img-thumbnail" src="media/default/post3.jpg" alt="Los Vengadores de Spidey"/></a>
                         </div>
                     </div>
                 </div>                      
