@@ -4,7 +4,7 @@ include_once 'base/ClassCookie.php';
 include_once 'base/TableUser.php';
 
 $co = new ClassCookie("sec");
-$bTodoSimple = true;
+$bTodoSimple = false;
 $bdUser = new TableUser();
 
     if ($co->IsSession()) {

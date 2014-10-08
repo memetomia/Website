@@ -31,40 +31,30 @@
                     debug: false,
                     onComplete: nombreFun
                 });
-
                 function nombreFun(id, fileName, responseJSON) {
                     //$('#imgSubirid').attr('src','/OnionFW/means/'+responseJSON.info);
                     if (responseJSON.error) {
                         sDirImagen = "";
                         msj("#MsgUrlPg", responseJSON.error, "Error")
                     } else {
-                        $vardirImag= ARTICLE + "/" + responseJSON.info;
-                        $('#Imagen').attr('src',$vardirImag);
+                        $vardirImag = ARTICLE + "/" + responseJSON.info;
+                        $('#Imagen').attr('src', $vardirImag);
                         sDirImagen = responseJSON.info;
                         msj("#MsgUrlPg", "La imagen fue subida con exito", "Exito");
-                        $("#TextMeta").val('<meta property="og:type" content="photo"><meta property="twitter:card" content="photo">\n\
-<meta name="twitter:title" content="" />\n\
-<meta name="twitter:image" content="'+$vardirImag+'" />\n\
-<meta name="twitter:url" content="'+$vardirImag+'" />';
-
+                        $("#TextMeta").val('<meta property="og:type" content="photo"><meta property="twitter:card" content="photo"><meta name="twitter:title" content="" /><meta name="twitter:image" content="' + $vardirImag + '" /><meta name="twitter:url" content="' + $vardirImag + '" />');
                     }
                 }
 
 
                 $("#TextAdicional").cleditor();
-
                 $('#BtAgregar').bind('click', function() {
                     var $algo = $("#TextAdicional").cleditor()[0].$area[0].value;
-
                     $("#ContentAdicional").html($algo);
                     sComentario = $algo;
-
                 });
-
                 $('#NombrePg').keydown(function() {
                     CargarTitulo(event, this);
                 });
-
                 function CargarTitulo(event, t) {
                     if (event.which == 13) {
                         $("#Titulo").html($(t).val());
@@ -73,8 +63,7 @@
                     }
                 }
 
-                $('#inputTag').autocomplete('../buscarTag', {width: 200, matchContains: true, selectFirst: false, funtion: AgregarTag});
-
+                $('#inputTag').autocomplete('ajax/SearchTag.php', {width: 200, matchContains: true, selectFirst: false, funtion: AgregarTag});
                 $('#inputTag').keydown(function() {
                     AgregarTagWithEnter(event, this)
                 });
@@ -102,7 +91,8 @@
                             aEtiquetas: string,
                             sImagen: sDirImagen,
                             sinfo: sInfo,
-                            sMetaData: $("#TextMeta").val()
+                            sMetaData: $("#TextMeta").val(),
+                            bCensura: $("#censura").val()
                         }, function(o) {
                             if (o.Tupla > 0) {
                                 msj("#MsgBtGuardar", "Todo ok", "Exito");
@@ -128,18 +118,20 @@
                 }
                 function AgregarTag()
                 {
-                    var newTag = $("#inputTag").val();
-                    $("#inputTag").val("");
-                    $("#post-tags").data("count", $("#post-tags").data("count") + 1);
-                    //$("#post-tags-"+id).data("count",++);
+                    if ($("#inputTag").val() != "") {
+                        var newTag = $("#inputTag").val();
+                        $("#inputTag").val("");
+                        $("#post-tags").data("count", $("#post-tags").data("count") + 1);
+                        //$("#post-tags-"+id).data("count",++);
 
-                    var input = "<a href='#' class='label label-default'>" + newTag + "</a><span id='eliminartag-" + $("#post-tags").data("count") + "'>X</span>";
-                    $("#post-tags").append(input);
-                    $("#eliminartag-" + $("#post-tags").data("count")).click(function() {
-                        $("#post-tags").data("count", $("#post-tags").data("count") - 1);
-                        $(this).prev().remove();
-                        $(this).remove();
-                    });
+                        var input = "<a href='#' class='label label-default'>" + newTag + "</a><span id='eliminartag-" + $("#post-tags").data("count") + "'>X</span>";
+                        $("#post-tags").append(input);
+                        $("#eliminartag-" + $("#post-tags").data("count")).click(function() {
+                            $("#post-tags").data("count", $("#post-tags").data("count") - 1);
+                            $(this).prev().remove();
+                            $(this).remove();
+                        });
+                    }
                 }
                 function EliminarTag(t) {
                     $("#post-tags").data("count", $("#post-tags").data("count") - 1);
@@ -183,11 +175,9 @@
                     popupContent: "meme:<br><input id=meme type=text size=50><br><img id=ImgMeme src=" + DEFAULT + "/MemePredeterminado.jpg height=200 width=200 /><br><input type=button value=Agregar>",
                     buttonClick: helloClick
                 };
-
                 // Add the button to the default controls before the bold button
                 $.cleditor.defaultOptions.controls = $.cleditor.defaultOptions.controls
                         .replace("bold", "hello bold");
-
                 // Handle the hello button click event
                 function helloClick(e, data) {
 
@@ -198,10 +188,8 @@
 
                                 // Get the editor
                                 var editor = data.editor;
-
                                 // Get the entered name
                                 var name = $("#ImgMeme").attr("src");
-
                                 // Insert some html into the document
                                 var html = "<img src=" + name + " height='467' width='460' class='img-thumbnail'>";
                                 editor.execCommand(data.command, html, null, data.button);
@@ -209,9 +197,7 @@
                                 // Hide the popup and set focus back to the editor
                                 editor.hidePopups();
                                 editor.focus();
-
                             });
-
                 }
 
             })(jQuery);
@@ -301,7 +287,8 @@
                             <textarea id="TextAdicional" style="width:400px; height: 500px"></textarea>
                             <div class="form-group">
                                 <label for="UrlPg">Imagen</label>
-                                <select id="sensura"><option selected>sin cuenta</option><option>con cuenta</option></select>
+                                <select id="censura"><option selected value="0">sin cuenta</option>
+                                    <option value="1">con cuenta</option></select>
 
                             </div>
 

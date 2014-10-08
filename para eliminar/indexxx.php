@@ -24,7 +24,9 @@
           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body>       
+    <body>
+        <?php include_once 'frame/init.php'; ?>
+
         <?php include_once 'frame/bar.php'; ?>
 
         <div id="main-content" class="container">
@@ -86,11 +88,11 @@
                             $iNMore = $bd->bd->obtener_respuesta($i, "N_MORE");
                             $iNComment = $bd->bd->obtener_respuesta($i, "N_COMMENT");
                             $ComentarioAdicional = $bd->bd->obtener_respuesta($i, "COMMENT_ADDITIONAL");
-                            $sensura = $bd->bd->obtener_respuesta($i, "SENSURA");
+                            $bCensura = $bd->bd->obtener_respuesta($i, "CENSURA");
 
-                            if ($sensura == 1) {
+                            if ($bCensura == 1) {
                                 if ($co->IsSession()) {
-                                    $sensura = 0;
+                                    $bCensura = 0;
                                 }
                             }
                             include 'frame/TimeLineOut.php';
