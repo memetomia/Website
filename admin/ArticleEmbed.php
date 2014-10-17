@@ -25,13 +25,13 @@
              https://vimeo.com/
              */
             $(document).ready(function() {
-   $("#TextMeta").val('<meta property="og:type" content="video"><meta property="twitter:card" content="player">\n\
+                $("#TextMeta").val('<meta property="og:type" content="video"><meta property="twitter:card" content="player">\n\
 <meta property = "twitter:player:width" content = "435">\n\
 <meta property = "twitter:player:height" content = "435">\n\
 <meta property = "twitter:player" content ="">\n\
 <meta property = "og:video" content ="">');
-               algo= $("#TextEmbed").cleditor();
-                
+                algo = $("#TextEmbed").cleditor();
+
                 $("#TextAdicional").cleditor();
 
                 $('#BtAgregar').bind('click', function() {
@@ -90,8 +90,8 @@
                             sComentario: sComentario,
                             aEtiquetas: string,
                             sImagen: "",
-                            sHtmlMedia: sInfoMedia
-
+                            sHtmlMedia: sInfoMedia,
+                            bCensura: $("#censura").val()
                         }, function(o) {
                             if (o.Tupla > 0) {
                                 msj("#MsgBtGuardar", "Todo ok", "Exito");
@@ -283,7 +283,7 @@
 
 
                             <button id='BtAgregar' type="button" class="btn btn-default"  >Agregar</button>
-                                   <div class="form-group">
+                            <div class="form-group">
                                 <label for="inputTag">Metas datas</label><br>
                                 <textarea id="TextMeta" style="width:500px; height: 100px">                                
 
@@ -291,6 +291,14 @@
                                 </textarea>
 
                             </div>
+
+                            <div class="form-group">
+                                <label for="UrlPg">Imagen</label>
+                                <select id="censura"><option selected value="0">sin cuenta</option>
+                                    <option value="1">con cuenta</option></select>
+
+                            </div>
+
                             <div id="MsgBtAgregar" class="msgbox Oculto"><span class="spanNoti"></span></div>
 
                             <br/>

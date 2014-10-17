@@ -28,6 +28,7 @@ if ($bError == false) {
         if ($bd->bd->obtener_respuesta(0, "VERIFY") == 1) {
             $co = new ClassCookie("sec");
             $co->setSVar("iId", $bd->bd->obtener_respuesta(0, "ID"));
+           
            $co->SaveAll();
             $json->Listo="ok";
         } else {

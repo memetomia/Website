@@ -31,6 +31,11 @@
                     debug: false,
                     onComplete: nombreFun
                 });
+                
+                function ConstruirMetaData(){
+                      $("#TextMeta").val('<meta property="og:type" content="photo"><meta property="twitter:card" content="photo"><meta name="twitter:title" content="'+sTitulo+'" /><meta name="twitter:image" content="' + $vardirImag + '" /><meta name="twitter:url" content="' + $vardirImag + '" />');
+                    
+                }
                 function nombreFun(id, fileName, responseJSON) {
                     //$('#imgSubirid').attr('src','/OnionFW/means/'+responseJSON.info);
                     if (responseJSON.error) {
@@ -41,8 +46,8 @@
                         $('#Imagen').attr('src', $vardirImag);
                         sDirImagen = responseJSON.info;
                         msj("#MsgUrlPg", "La imagen fue subida con exito", "Exito");
-                        $("#TextMeta").val('<meta property="og:type" content="photo"><meta property="twitter:card" content="photo"><meta name="twitter:title" content="" /><meta name="twitter:image" content="' + $vardirImag + '" /><meta name="twitter:url" content="' + $vardirImag + '" />');
-                    }
+                         ConstruirMetaData();
+                       }
                 }
 
 
@@ -60,6 +65,7 @@
                         $("#Titulo").html($(t).val());
                         sTitulo = $(t).val();
                         msj("#MsgNombrePg", "Titulo agregado correctamente", "Exito");
+                         ConstruirMetaData()
                     }
                 }
 

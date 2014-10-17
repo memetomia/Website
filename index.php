@@ -84,12 +84,16 @@ include_once 'frame/init.php';
                             $ComentarioAdicional = $bd->bd->obtener_respuesta($i, "COMMENT_ADDITIONAL");
                             $bCensura = $bd->bd->obtener_respuesta($i, "CENSURA");
 
-                            if ($bCensura == 1) {
+                           
                                 if ($co->IsSession()) {
                                     $bCensura = 0;
+                                      include 'frame/TimeLineIn.php';
+                                }else{
+                                      $bCensura = 1;
+                                        include 'frame/TimeLineOut.php';
                                 }
-                            }
-                            include 'frame/TimeLineOut.php';
+                            
+                          
                         }
                     }
                     ?>
@@ -106,12 +110,7 @@ include_once 'frame/init.php';
                 </div>
 
                 <div id="sidebar" class="col-md-4">
-
-
-
-
                     <?php include_once 'frame/Tag.php'; ?>
-
                     <?php include_once 'frame/Destacados.php'; ?>
 
 
@@ -137,6 +136,9 @@ include_once 'frame/init.php';
                 <script>
                     // Activating All Switches
                     $(".settings-switch").bootstrapSwitch();
+                    function FunComment(iId) {
+                        window.location.href = IMAGE + iId;
+                    }
                 </script>
                 <?php
             } else {

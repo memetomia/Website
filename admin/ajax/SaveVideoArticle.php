@@ -12,7 +12,7 @@ $aEtiqueta = $_POST["aEtiquetas"];
 $sImagen = $_POST["sImagen"];
 $sHtmlMedia=$_POST["sHtmlMedia"];
 $sMetaData=$_POST["sMetaData"];
-
+$bCensura=$_POST["bCensura"];
 $json = new stdClass();
 $json->Error = "";
 
@@ -20,7 +20,7 @@ $json->Error = "";
 
 
 if ($bError == false) {
-    $iResultado = $bd->Create($sTitulo, 1, $sHtmlMedia, $sImagen, $aEtiqueta, $sComentario,$sMetaData);
+    $iResultado = $bd->Create($sTitulo, 1, $sHtmlMedia, $sImagen, $aEtiqueta, $sComentario,$sMetaData,$bCensura);
     $json = new stdClass();
 }
 if ($iResultado > 0) {

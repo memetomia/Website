@@ -1,18 +1,19 @@
-  <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Posts Similares</h3>
-                    </div>
-                    <div class="panel-body">
+ 
                     
                       <?php
         include_once 'base/TableGallery.php';
 
         $bd = new TableGallery();
-        $todo = $bd->Trending(5);
+        $todo = $bd->postSimilar($iID);
         $html = "";
         if ($todo > 0) {
             $sClass = "";
             ?>
+ <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Posts Similares</h3>
+                    </div>
+                    <div class="panel-body">
             <?php
             for ($i = 0; $i < $todo; $i++) {
                 $SePuedeImprimir = false;
@@ -42,9 +43,12 @@
                     }
                 }
             }
+            ?>
+                   </div></div>   
+                <?php
         }
         ?>
 
 
-    </div>
-</div>        
+ 
+     

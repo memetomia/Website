@@ -52,7 +52,7 @@
                     }
                 }
 
-                $('#inputTag').autocomplete('../buscarTag', {width: 200, matchContains: true, selectFirst: false, funtion: AgregarTag});
+                $('#inputTag').autocomplete('ajax/SearchTag.php', {width: 200, matchContains: true, selectFirst: false, funtion: AgregarTag});
 
                 $('#inputTag').keydown(function() {
                     AgregarTagWithEnter(event, this)
@@ -101,7 +101,8 @@
                             aEtiquetas: string,
                             sImagen: sDirImagen,
                             sHtmlMedia: HtmlMedia,
-                            sMetaData: $("#TextMeta").val()
+                            sMetaData: $("#TextMeta").val(),                             
+                            bCensura: $("#censura").val()
 
                         }, function(o) {
                             if (o.Tupla > 0) {
@@ -293,7 +294,7 @@
 
 
                             <div class="form-group">
-                                <label for="inputTag">Metas datas</label><br>
+                                <label for="TextMeta">Metas datas</label><br>
                                 <textarea id="TextMeta" style="width:500px; height: 100px">                                
 
 
@@ -301,6 +302,14 @@
 
                             </div>
                             <textarea id="TextAdicional" style="width:400px; height: 500px"></textarea>
+                            
+                               <div class="form-group">
+                                <label for="UrlPg">Imagen</label>
+                                <select id="censura">
+                                    <option selected value="0">sin cuenta</option>
+                                    <option value="1">con cuenta</option></select>
+
+                            </div>
                             <button id='BtAgregar' type="button" class="btn btn-default"  >Agregar</button>
                             <div id="MsgBtAgregar" class="msgbox Oculto"><span class="spanNoti"></span></div>
 

@@ -4,7 +4,7 @@
     $sUrlaMostrar = "";
     $botonplay = "";
     if (($iState == 0)) {
-        if ($sensura == 0) {
+        if ($bCensura == 0) {
 //IAMGEN NORMAL
             if ($iTipoMedia == 0) {
 
@@ -38,7 +38,7 @@
                 $botonplay = "";
             }
         } else {
-            if ($sensura == 1) {
+            if ($bCensura == 1) {
                 $sUrlaMostrar = '<img class="img-thumbnail img-small" src="' . EXT_MEDIA . '/default/INS.png" />';
                 $botonplay = "";
             }
@@ -69,10 +69,7 @@
             <button id="Comment-<?php echo $iID ?>" type="button" class="btn btn-default btn-block comment-button">
                 <span class="glyphicon glyphicon-comment"></span> Comentar
             </button>
-            <script type="text/javascript">$('#Comment-<?php echo $iID
-        ?>').click(function() {
-                    FunComment(<?php echo $iID ?>);
-                });</script>
+           
 
             <button id="FB-<?php echo $iID ?>" d-link="http://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode("http://www.memetomia.com/Imagen.php?i=") . $iID . "&t=" . $sTitle ?>" type="button" class="btn btn-primary btn-block">Facebook</button>
             <script type="text/javascript">$('#FB-<?php echo $iID ?>').click(function() {

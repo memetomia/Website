@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        
+
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,7 +9,9 @@
         <?php
         include_once 'frame/init.php';
         include_once 'base/TableGallery.php';
+         include_once 'base/TableComment.php';
         $bdGallery = new TableGallery();
+        $bdComment = new TableComment();
         $iID = 0;
         $sMetaTitulo = "";
         $sMetaImagen = "";
@@ -19,6 +21,16 @@
         $sUrlaMostrar = "";
         $botonplay = "";
         $ComentarioAdicional = "";
+        $bCensura = 1;
+        
+        $imagenUserCurrent = "media/default/profile-example.jpg";
+        if ($co->IsSession()) {
+            $bCensura = 0;
+              $imagenUserCurrent = "media/default/profile-example.jpg";
+        } else {
+            $bCensura = 1;
+        }
+
         if (isset($_GET["id"])) {
             $iID = $_GET["id"];
 
@@ -27,7 +39,7 @@
             $iState = $bdGallery->bd->obtener_respuesta(0, "STATE");
             $iTipoMedia = $bdGallery->bd->obtener_respuesta(0, "TYPEMEDIA");
             $sUrl = $bdGallery->bd->obtener_respuesta(0, "URL");
-            $iID = $bdGallery->bd->obtener_respuesta(0, "ID");
+          //  $iID = $bdGallery->bd->obtener_respuesta(0, "ID");
             $sInfoMedia = $bdGallery->bd->obtener_respuesta(0, "INFOMEDIA");
             $sUser = $bdGallery->bd->obtener_respuesta(0, "NAME");
             $sTitle = $bdGallery->bd->obtener_respuesta(0, "TITLE");
@@ -38,45 +50,50 @@
 
 
             if ($iState == 0) {
-
+                if ($bCensura == 0) {
 //IAMGEN NORMAL
-                if ($iTipoMedia == 0) {
-                    $sMetaImagen = EXT_ARTICLE . "/" . $sUrl;
-                    ECHO '<meta name="twitter:card" value="photo"><meta property="twitter:card" content="photo">';
-                    $sUrlaMostrar = '<img class="img-thumbnail img-small" src="' . EXT_ARTICLE . "/" . $sUrl . '"/>';
-                    $botonplay = "";
-                }
-                //VIDEO YOTUBE
-                if ($iTipoMedia == 1) {
-                    $sMetaImagen = $sUrl;
-                    echo $sMeta;
+                    if ($iTipoMedia == 0) {
+                        $sMetaImagen = EXT_ARTICLE . "/" . $sUrl;
+                        ECHO '<meta name="twitter:card" value="photo"><meta property="twitter:card" content="photo">';
+                        $sUrlaMostrar = '<img class="img-thumbnail img-small" src="' . EXT_ARTICLE . "/" . $sUrl . '"/>';
+                        $botonplay = "";
+                    }
+                    //VIDEO YOTUBE
+                    if ($iTipoMedia == 1) {
+                        $sMetaImagen = $sUrl;
+                        echo $sMeta;
 
 
-                    $sUrlaMostrar = '<img class="post-media img-thumbnail" src="' . $sMetaImagen . '" width="100%" alt="' . $sMetaTitulo . '"/>';
+                        $sUrlaMostrar = '<img class="post-media img-thumbnail" src="' . $sMetaImagen . '" width="100%" alt="' . $sMetaTitulo . '"/>';
 
-                    $botonplay = '<div id="Video-' . $iID . '" class="play"></div>';
-                    $botonplay .= '<script type="text/javascript">'
-                            . '$("#Video-' . $iID . '").click(function() {
+                        $botonplay = '<div id="Video-' . $iID . '" class="play"></div>';
+                        $botonplay .= '<script type="text/javascript">'
+                                . '$("#Video-' . $iID . '").click(function() {
                                                            $("#d-' . $iID . '").html(\'<div class="flex-video widescreen">' . $sInfoMedia . '</div>\');
                                                        });                               </script>';
-                }
-                //   VINE
-                if ($iTipoMedia == 2) {
-                    $sMetaImagen = $sUrl;
-                    echo $sMeta;
-                    $sUrlaMostrar = '<img class="post-media img-thumbnail" src="' . $sMetaImagen . '" width="100%" alt="' . $sMetaTitulo . '"/>';
+                    }
+                    //   VINE
+                    if ($iTipoMedia == 2) {
+                        $sMetaImagen = $sUrl;
+                        echo $sMeta;
+                        $sUrlaMostrar = '<img class="post-media img-thumbnail" src="' . $sMetaImagen . '" width="100%" alt="' . $sMetaTitulo . '"/>';
 
-                    $botonplay = '';
-                    $botonplay .= '<script type="text/javascript">'
-                            . '                                    $("#d-' . $iID . '").html(\'' . $sInfoMedia . '\');
+                        $botonplay = '';
+                        $botonplay .= '<script type="text/javascript">'
+                                . '                                    $("#d-' . $iID . '").html(\'' . $sInfoMedia . '\');
                                                         $(".Vine").click(function() {
                                                         
                                                             $(this).get(0).paused ? $(this).get(0).play() : $(this).get(0).pause();
                        });                               </script>';
-                }
-                //EMB
-                if ($iTipoMedia == 3) {
-                    $sUrlaMostrar = $sInfoMedia;
+                    }
+                    //EMB
+                    if ($iTipoMedia == 3) {
+                        $sUrlaMostrar = $sInfoMedia;
+                        $botonplay = "";
+                    }
+                } else {
+                    $sUrlaMostrar = '<img class="post-media img-thumbnail" src="' . EXT_MEDIA . '/default/INS.png" width="100%" alt="' . $sMetaTitulo . '"/>';
+
                     $botonplay = "";
                 }
             }
@@ -173,11 +190,11 @@
 
 
 
-                <div class="panel panel-info">                        
-                    <div class="panel-body">
-                        publicidad aqui
-                    </div>
-                </div>
+                <!--                <div class="panel panel-info">                        
+                                    <div class="panel-body">
+                                        publicidad aqui
+                                    </div>
+                                </div>-->
             </div>
 
 
@@ -215,10 +232,10 @@
                 </script>
                 <?php
             }
-        }else{
-        ?>
-                
-               <?php }?>
+        } else {
+            ?>
+
+        <?php } ?>
 
 
 

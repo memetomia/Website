@@ -15,12 +15,12 @@ if ($co->IsSession()) {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href=".">Memetomía</a>
+            <a class="navbar-brand" href="<?php echo SERVER; ?>">Memetomía</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-media/example-navbar-collapse-1">
             <div class="collapse navbar-collapse" id="memetomia-navbar">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="./">Inicio</a></li>
+                    <li class="active"><a href="<?php echo SERVER; ?>">Inicio</a></li>
                     <li><a href="#">Top</a></li>
 
                 </ul>                    
@@ -62,11 +62,11 @@ if ($co->IsSession()) {
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Memetomía</a>
+                    <a class="navbar-brand" href="<?php echo SERVER; ?>">Memetomía</a>
                 </div>
                 <div class="collapse navbar-collapse" id="memetomia-navbar">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Inicio</a></li>
+                        <li class="active"><a href="<?php echo SERVER; ?>">Inicio</a></li>
                     </ul>                    
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#" data-toggle="modal" data-target="#sign-in-modal">¡Regístrate en Memetomía!</a></li>
@@ -89,11 +89,11 @@ if ($co->IsSession()) {
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Memetomía</a>
+                    <a class="navbar-brand" href="<?php echo SERVER; ?>">Memetomía</a>
                 </div>
                 <div class="collapse navbar-collapse" id="memetomia-navbar">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Inicio</a></li>
+                        <li class="active"><a href="<?php echo SERVER; ?>">Inicio</a></li>
                     </ul>                    
                     <ul class="nav navbar-nav navbar-right">
                          </ul>                    

@@ -24,9 +24,7 @@ function FB(id) {
 function TW(iId) {
     window.open($("#TW-" + iId).attr("d-link"), "nuevo", "directories=no, location=no, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=600, height=400");
 }
-function FunComment(iId) {
-    window.location.href = IMAGE + iId;
-}
+
 function FunLike(iId) {
     $.post("ajax/AddLike.php", {
         iID: iId

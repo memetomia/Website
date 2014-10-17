@@ -30,10 +30,10 @@ class TableGallery {
 
       @return integer numero de tupla o -1 si falla la creacion
      */
-    public function Create($sTitle, $iTypeMedia, $sInfoMedia, $sUrl, $sTag, $sComment, $sMeta = "",$bCensura) {
+    public function Create($sTitle, $iTypeMedia, $sInfoMedia, $sUrl, $sTag, $sComment, $sMeta = "", $bCensura) {
         $query = sprintf("INSERT INTO `gallery` "
                 . "(`ID`, `TITLE`, `TYPEMEDIA`, `INFOMEDIA`, `URL`, `DATE`, `TAG`, `N_MORE`, `N_LESS`, `N_COMMENT`, `COMMENT_ADDITIONAL`,STATE,META,CENSURA) "
-                . "VALUES (NULL, '%s', '%s', '%s', '%s', CURRENT_TIMESTAMP, '%s', 0, 0, 0, '%s','1','%s','%s');", $sTitle, $iTypeMedia, $sInfoMedia, $sUrl, $sTag, $sComment, $sMeta,$bCensura);
+                . "VALUES (NULL, '%s', '%s', '%s', '%s', CURRENT_TIMESTAMP, '%s', 0, 0, 0, '%s','1','%s','%s');", $sTitle, $iTypeMedia, $sInfoMedia, $sUrl, $sTag, $sComment, $sMeta, $bCensura);
         $this->bd->hacer_query($query);
 
         return $this->bd->ultimo_id_generado_por_la_bd();
@@ -151,8 +151,28 @@ LIMIT 0 , %s", $iN);
         return $this->bd->filas_retornadas_por_consulta();
     }
 
+    public function postSimilar($iIdGallery) {
+        $query = sprintf("SELECT rgt.ID_TAG 
+FROM  `gallery` as g join gallery_tag as rgt on rgt.ID_GALLERY=g.ID where g.ID='%s' limit 5", $iIdGallery);
+        $this->bd->hacer_query($query);
+        $sTag = "";
+        $bandera = false;
+        for ($i = 0; $i > $this->bd->filas_retornadas_por_consulta(); $i++) {
+            if ($bandera == true) {
+                $sTag.=" or ";
+            }
+            $sTag.="rgt.ID_TAG='" . $this->bd->obtener_respuesta($i, "ID_TAG") . "'";
+            $bandera = true;
+        }
+        $query = sprintf("SELECT g.*
+FROM  `gallery` as g join gallery_tag as rgt on rgt.ID_GALLERY=g.ID where %s ", $sTag);
+        $this->bd->hacer_query($query);
+
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+
     public function SearchById($iID) {
-        $query = sprintf("Select g.ID, g.OWNER,g.TITLE,g.TYPEMEDIA,g.INFOMEDIA,g.URL,g.DATE,g.TAG,g.N_MORE,g.N_LESS,g.N_COMMENT,g.STATE,g.COMMENT_ADDITIONAL,u.NAME from gallery as g join user as u on (u.ID=g.OWNER) where g.ID='%s'", $iID);
+        $query = sprintf("Select g.ID, g.OWNER,g.TITLE,g.TYPEMEDIA,g.INFOMEDIA,g.URL,g.DATE,g.TAG,g.N_MORE,g.N_LESS,g.N_COMMENT,g.STATE,g.COMMENT_ADDITIONAL,u.NAME, g.META from gallery as g join user as u on (u.ID=g.OWNER) where g.ID='%s'", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->obtener_respuesta_completa();
     }
@@ -175,6 +195,7 @@ LIMIT 0 , %s", $iN);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
+
 // TODO ARREGLARAQUI UN PROBLEMA
     public function LastNArticle($iInicio, $iFin) {
         $query = sprintf("Select g.CENSURA,g.ID, g.OWNER,g.TITLE,g.TYPEMEDIA,g.INFOMEDIA,g.URL,g.DATE,g.TAG,g.N_MORE,g.N_LESS,g.N_COMMENT,g.STATE,g.COMMENT_ADDITIONAL,u.NAME from gallery as g join user as u on (u.ID=g.OWNER) WHERE STATE=0 ORDER BY  g.`DATE`  DESC LIMIT %s,%s;", $iInicio, $iFin);

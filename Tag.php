@@ -86,7 +86,7 @@ include_once 'frame/init.php';
                             $iNMore = $bd->bd->obtener_respuesta($i, "N_MORE");
                             $iNComment = $bd->bd->obtener_respuesta($i, "N_COMMENT");
                             $ComentarioAdicional = $bd->bd->obtener_respuesta($i, "COMMENT_ADDITIONAL");
-                             $sensura = $bd->bd->obtener_respuesta($i, "SENSURA");
+                             $bCensura = $bd->bd->obtener_respuesta($i, "CENSURA");
 
                             include_once 'frame/TimeLineOut.php';
                         }
