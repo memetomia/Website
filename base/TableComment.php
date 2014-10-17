@@ -29,6 +29,7 @@ class TableComment {
                 . " VALUES ('%s', '%s', '%s', CURRENT_TIMESTAMP);", $iIDGallery, $iIDUser, $sComment);
         $this->bd->hacer_query($query);
         return $this->bd->ultimo_id_generado_por_la_bd();
+           
     }
 
     public function SeeComment($iIDGallery) {
@@ -36,5 +37,9 @@ class TableComment {
             $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
-
+  public function SeeCommentbyUser($iIDUser) {
+            $query = sprintf("select g.TITLE, u.PICTURE,u.NAME,c.ID_GALLERY, c.ID_USER,c.COMMENT,c.DATE from `comment` as c join user as u on u.id=c.ID_USER JOIN gallery as g on g.ID=c.ID_GALLERY where c.ID_USER='%s'", $iIDUser);
+            $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
 }
