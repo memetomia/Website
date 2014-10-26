@@ -277,7 +277,7 @@ $(function()
      * de la opción seleccionada.
      */
     $_menu.find('label').click(function()
-    {
+    {  alert($(this).attr('id').toString());
         /*
          * 1- captura el ID de la opción seleccionada.
          * 2- reemplaza el 'option' del ID por 'content'.

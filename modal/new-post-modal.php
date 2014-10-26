@@ -109,6 +109,7 @@ $(function(){
      */
     $_menu.find('label').click(function()
     {
+          alert($(this).attr('id').toString());
         // obtiene el id de la opción del menú al que se le dió click
         var selectedMode = $(this).attr('id').toString();
         // oculta y muestra los campos dependiendo de la opción seleccionada
@@ -228,6 +229,7 @@ $(function(){
     $_modal.on('show.bs.modal', function()
     {                   
         // reinicia lo valores del formulario por default
+        
         $_form.get(0).reset();
         $_form.children().removeAttr('has-error has-success');
         // remueve la clase .active del menú que lo posea actualmente

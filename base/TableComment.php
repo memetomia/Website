@@ -38,7 +38,7 @@ class TableComment {
         return $this->bd->filas_retornadas_por_consulta();
     }
   public function SeeCommentbyUser($iIDUser) {
-            $query = sprintf("select g.TITLE, u.PICTURE,u.NAME,c.ID_GALLERY, c.ID_USER,c.COMMENT,c.DATE from `comment` as c join user as u on u.id=c.ID_USER JOIN gallery as g on g.ID=c.ID_GALLERY where c.ID_USER='%s'", $iIDUser);
+            $query = sprintf("select g.TITLE, u.PICTURE,u.NAME,c.SEE_IT_BY_OWNER,c.ID_GALLERY, c.ID_USER,c.COMMENT,c.DATE from `comment` as c join user as u on u.id=c.ID_USER JOIN gallery as g on g.ID=c.ID_GALLERY where c.ID_USER='%s'", $iIDUser);
             $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }

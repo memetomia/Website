@@ -134,6 +134,7 @@ $(function(){
          * 2- reemplaza el 'option' del ID por 'content'.
          * 3- agrega el signo # al inicio de la cadena.
          */
+        alert($(this).attr('id').toString());
         var idContent = '#'.concat($(this).attr('id').toString().replace('option', 'content'));
         // oculta todos los contenidos del modal
         $_contents.hide();
