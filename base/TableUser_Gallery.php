@@ -32,12 +32,18 @@ class TableUser_Gallery {
         return $this->bd->ultimo_id_generado_por_la_bd();
     }
 
-  public function SearchArticlesTag($iID) {
+    public function SearchArticlesTag($iID) {
         $query = sprintf("SELECT * FROM `gallery_tag` as gt  join tag as t on (gt.`ID_TAG`=t.ID) where
 gt.`ID_GALLERY`=%s", $iID);
         $this->bd->hacer_query($query);
-        
+
         return $this->bd->obtener_respuesta_completa();
+    }
+
+    public function SeeLikeByUser($iIDUser) {
+        $query = sprintf("select g.TITLE, u.PICTURE,u.NAME,c.SEE_IT_BY_OWNER,c.ID_GALLARY, c.ID_USER,c.INFO_IMAGEN,c.DATE from `user_gallery` as c join user as u on u.id=c.ID_USER JOIN gallery as g on g.ID=c.ID_GALLARY where c.ID_USER='%s'", $iIDUser);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
     }
 
 }

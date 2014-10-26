@@ -9,7 +9,7 @@
         <?php
         include_once 'frame/init.php';
         include_once 'base/TableGallery.php';
-         include_once 'base/TableComment.php';
+        include_once 'base/TableComment.php';
         $bdGallery = new TableGallery();
         $bdComment = new TableComment();
         $iID = 0;
@@ -22,11 +22,11 @@
         $botonplay = "";
         $ComentarioAdicional = "";
         $bCensura = 1;
-        
+
         $imagenUserCurrent = "media/default/profile-example.jpg";
         if ($co->IsSession()) {
             $bCensura = 0;
-              $imagenUserCurrent = "media/default/profile-example.jpg";
+            $imagenUserCurrent = "media/default/profile-example.jpg";
         } else {
             $bCensura = 1;
         }
@@ -39,7 +39,7 @@
             $iState = $bdGallery->bd->obtener_respuesta(0, "STATE");
             $iTipoMedia = $bdGallery->bd->obtener_respuesta(0, "TYPEMEDIA");
             $sUrl = $bdGallery->bd->obtener_respuesta(0, "URL");
-          //  $iID = $bdGallery->bd->obtener_respuesta(0, "ID");
+            //  $iID = $bdGallery->bd->obtener_respuesta(0, "ID");
             $sInfoMedia = $bdGallery->bd->obtener_respuesta(0, "INFOMEDIA");
             $sUser = $bdGallery->bd->obtener_respuesta(0, "NAME");
             $sTitle = $bdGallery->bd->obtener_respuesta(0, "TITLE");
@@ -229,6 +229,16 @@
                     $('.comment-button, .like-button').click(function() {
                         $('#sign-in-modal').modal('show');
                     });
+
+
+
+
+
+
+
+
+
+
                 </script>
                 <?php
             }

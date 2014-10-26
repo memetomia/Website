@@ -54,15 +54,15 @@
         <p id="comment-count" class="text-right text-muted"><?php echo $RComentarios; ?> comentarios</p>
 
         <?php
-        for ($iComment = 0; $iComment < $RComentarios; $iComment++) {
-            $imagenUserComment = $bdComment->bd->obtener_respuesta($iComment, "PICTURE");
-            $UserName = $bdComment->bd->obtener_respuesta($iComment, "NAME");
-            $UserComment = $bdComment->bd->obtener_respuesta($iComment, "COMMENT");
-//$imagenUserComment="media/default/profile-example.jpg";
-//$UserName="María Rodríguez";
-//$UserComment="jajajajaja!, que divertida la foto!"
-            include 'frame/Comment.php';
-        }
+//        for ($iComment = 0; $iComment < $RComentarios; $iComment++) {
+//            $imagenUserComment = $bdComment->bd->obtener_respuesta($iComment, "PICTURE");
+//            $UserName = $bdComment->bd->obtener_respuesta($iComment, "NAME");
+//            $UserComment = $bdComment->bd->obtener_respuesta($iComment, "COMMENT");
+////$imagenUserComment="media/default/profile-example.jpg";
+////$UserName="María Rodríguez";
+////$UserComment="jajajajaja!, que divertida la foto!"
+//            include 'frame/Comment.php';
+//        }
         ?>        
     </div>  
 
@@ -87,24 +87,95 @@
 
         <script type="text/javascript">
             $(document).ready(function() {
-                $('#btComment').click(
-                        function() {
-
-                            $.post("ajax/AddComment.php", {
-                                //iID:  $('#btComment').attr("data-id"),
-                                iID:<?php echo $iID; ?>,
-                                iIDUser: <?php echo $co->getSVar("iId"); ?>,
-                                sComment: $('#user-comment-input').val()
-                            }, function(o) {
-                                if (o.Tupla==0){
-                                    
-                                    $('#user-comment-input').val("");
-                                }
-                            }, "json");
-                        }
-                );
+                Comment.Iniciar();
+                Comment.MostrarMensajes();
             });
 
+            /*
+             TODO obj memetomia-notificaciones para mostrar las notificaciones en el menu  
+             */
+
+            /**
+             * Clase carga las notificaciones de comentarios y megustas de menu notificaciones
+             * 
+             * @author jaivic villegas
+             * @copyright 10-octubre-2012, 
+             * @version 1
+             * @access public
+             */
+            Comment = function() {
+
+                var $_divComment;
+                var $_NumeroDeComentario;
+                var $_htmlImg;
+                var $_htmlCommentario;
+                var $_DivDeCommentario;
+                var $_inputComment;
+                var $_btComment;
+
+                /**
+                 * 
+                 *   carga lo necesario para tener lista la parte grafica de los mensajes
+                 *
+                 */
+                function Iniciar() {
+                    $_divComment = $('#post-comments-section');
+                    $_inputComment = $('#user-comment-input');
+                    $_btComment = $('#btComment');
+                    $_btComment.click(AddComment);
+                }
+                /**
+                 * 
+                 *      muestra todo los mensaje en la parte de abajo de el articulo en imagen.php
+                 */
+                function MostrarMensajes() {
+                    $.post("ajax/ShowComment.php", {idGallery:<?php echo $iID; ?>}, function(o) {
+                        if (o.Tupla > 0) {
+                            $_divComment.html("");
+                            $_NumeroDeComentario = '<p id="comment-count" class="text-right text-muted">' + o.Tupla + ' Comentarios</p>';
+                            $_divComment.append($_NumeroDeComentario);
+
+                            var i;
+                            //o.aComment[i]["iIDUser"]
+                            for (i = 0; i < o.Tupla; i++) {
+                                $_htmlImg = ' <img src="' + o.aComment[i]["iDirImagen"] +
+                                        '" class="img-rounded">';
+                                $_htmlCommentario = ' <b class="username">' + o.aComment[i]["sName"] + '</b><p>' + o.aComment[i]["sComment"] +
+                                        '</p>';
+                                $_DivDeCommentario = '<div class="comment-block row"><div class="user-picture col-md-2 form-group">' + $_htmlImg + '</div> <div class="col-md-10 form-group">' + $_htmlCommentario + '</div>';
+                                $_divComment.append($_DivDeCommentario);
+                            }
+                        }
+                    }, "json");
+                }
+
+                /**
+                 * agregar los comentarios en al bd y en la parte grafica
+                 */
+                function AddComment() {
+
+                    $.post("ajax/AddComment.php", {
+                        //iID:  $('#btComment').attr("data-id"),
+                        iID:<?php echo $iID; ?>,
+                        iIDUser: <?php echo $co->getSVar("iId"); ?>,
+                        sComment: $('#user-comment-input').val()
+                    }, function(o) {
+                        if (o.Tupla == 0) {
+
+                            $('#user-comment-input').val("");
+                            MostrarMensajes();
+                        }
+                    }, "json");
+                }/* fin de funcion MensajeExito*/
+
+                return {
+                    Iniciar: Iniciar,
+                    MostrarMensajes: MostrarMensajes
+
+                }
+            }();
+
+   
 
 
         </script>

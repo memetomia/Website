@@ -17,8 +17,8 @@
 
                 </ul>    
 
-                <ul class="list-group">
-                    <p class="text-muted">Me gusta</p>                  
+                <ul id="notifications-ul-like" class="list-group">
+<!--                    <p class="text-muted">Me gusta</p>                  
                     <li class="list-group-item">
                         <span class="not-readed"></span> 
                         <span class="glyphicon glyphicon-thumbs-up"></span>
@@ -27,7 +27,7 @@
                     <li class="list-group-item">                        
                         <span class="glyphicon glyphicon-thumbs-up"></span>
                         <a href="#">Erika33</a> le gustó tu post: <a href="#">Los Vengadores de Spidey</a>
-                    </li>                    
+                    </li>                    -->
                 </ul>        
 
             </div>
@@ -56,7 +56,8 @@
 
         // Variables cacheadas
         var $_modal;
-        var $_ulComentarios
+        var $_ulComentarios;
+        var $_ulLike;
         var $_markAsReadButton;
         /**
          * 
@@ -74,6 +75,7 @@
 
             $_modal = $('#' + MODAL_PREFIX + 'modal');
             $_ulComentarios = $('#' + MODAL_PREFIX + 'ul-comment');
+            $_ulLike = $('#' + MODAL_PREFIX + 'ul-like');
             $_markAsReadButton = $('#' + MODAL_PREFIX + 'mark-as-read');
             $_markAsReadButton.click(NotReaded);
         }
@@ -93,9 +95,9 @@
                     var i;
                     for (i = 0; i < o.Tupla; i++) {
                         if (o.aComment[i]["bSeeByOwner"] == 0) {
-                            comment = CONST_NOT_READ +"   "+ CONST_ICON_GLY;
+                            comment = CONST_NOT_READ + "   " + CONST_ICON_GLY;
                         } else {
-                            comment = "   "+ CONST_ICON_GLY;
+                            comment = "   " + CONST_ICON_GLY;
                         }
                         comment += ' <a href="' + o.aComment[i]["iIDUser"] + '">' + o.aComment[i]["sNameUser"] + '</a>'
                         comment += " hizo un comentario en tu post: ";
@@ -106,7 +108,25 @@
 
                 }
             }, "json");
-
+            $.post("ajax/LikeComment.php", function(o) {
+                if (o.Tupla > 0) {
+                    $_ulLike.html("");
+                    $_ulLike.append('<p class="text-muted">Me Gusta</p>');
+                    var comment = "";
+                    var i;
+                    for (i = 0; i < o.Tupla; i++) {
+                        if (o.aComment[i]["bSeeByOwner"] == 0) {
+                            comment = CONST_NOT_READ + "   " + CONST_ICON_GLY;
+                        } else {
+                            comment = "   " + CONST_ICON_GLY;
+                        }
+                        comment += ' <a href="' + o.aComment[i]["iIDUser"] + '">' + o.aComment[i]["sNameUser"] + '</a>'
+                        comment += " le gustó tu post: ";
+                        comment += ' <a href="' + o.aComment[i]["iIDGalery"] + '">' + o.aComment[i]["sTitleImagen"] + '</a>'
+                        $_ulLike.append('<li id="notifications-li-comment" class="list-group-item">' + comment + '</li>');
+                    }
+                }
+            }, "json");
         }/* fin de funcion Guardar*/
 
         /**
@@ -137,7 +157,7 @@
     $(function()
     {
         modalNotifications.Iniciar();
- modalNotifications.Cargar();
+        modalNotifications.Cargar();
 
 
     });
