@@ -255,6 +255,7 @@ class qqFileUploader
 
         if (!$replaceOldFile)
         {
+
                         while (file_exists($uploadDirectory . $filename . '.' . $ext))
             {
                 $filename .= rand(10, 99);
@@ -281,7 +282,7 @@ $sizeLimit = 2 * 1024 * 1024;
 
 $uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
 
-$result = $uploader->handleUpload(ARTICLE ."/", true);
+$result = $uploader->handleUpload(ARTICLE ."/user/", true);
 
 
 

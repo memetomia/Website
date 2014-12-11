@@ -14,6 +14,7 @@
         <!-- Custom styles for this template -->
         <link href="css/dashboard.css" rel="stylesheet">
         <script src="../js/jquery-2.1.0.min.js"></script>
+            <script type="text/javascript" src="js/jquery.cleditor.js"></script>
 <script src="js/msg.js"></script>
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->

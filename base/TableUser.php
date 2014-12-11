@@ -28,8 +28,8 @@ class TableUser {
 
       @return type description
      */
-    public function Create( $sName, $sEmail, $sUser, $sPass) {
-       
+    public function Create($sName, $sEmail, $sUser, $sPass) {
+
         $query = sprintf("INSERT INTO `user` "
                 . "(`ID`, `FBID`, `NAME`, `EMAIL`, `PICTURE`, `VERIFY`, `USER`, `PASS`) VALUES "
                 . "(NULL, '', '%s', '%s', '', 0, '%s', md5('%s'));", $sName, $sEmail, $sUser, $sPass);
@@ -63,11 +63,13 @@ class TableUser {
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
-   public function SearchById($sParam) {
+
+    public function SearchById($sParam) {
         $query = sprintf("SELECT * FROM  `user` WHERE ID=  '%s'", $sParam);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
+
     public function login($sName, $sPass) {
         $query = sprintf("SELECT * 
 FROM  `user` 
@@ -138,6 +140,54 @@ WHERE (
      */
     public function UpdateUserLogin($sData, $iID) {
         $query = sprintf("UPDATE  `user` SET  `USER` =  '%s' WHERE  `user`.`ID` ='%s';", $sData, $iID);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+
+    public function UpdateUserEmail($sData, $iID) {
+        $query = sprintf("UPDATE  `user` SET  `EMAIL` =  '%s' WHERE  `user`.`ID` ='%s';", $sData, $iID);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+
+    public function UpdateUserCheckVideo($sData, $iID) {
+        $query = sprintf("UPDATE  `user` SET  `CHECKVIDEO` =  '%s' WHERE  `user`.`ID` ='%s';", $sData, $iID);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+
+    public function UpdateUserCheckGif($sData, $iID) {
+        $query = sprintf("UPDATE  `user` SET  `CHECKGIF` =  '%s' WHERE  `user`.`ID` ='%s';", $sData, $iID);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+
+    public function UpdateUserName($sData, $iID) {
+        $query = sprintf("UPDATE  `user` SET  `NAME` =  '%s' WHERE  `user`.`ID` ='%s';", $sData, $iID);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+
+    public function UpdateUserGenero($sData, $iID) {
+        $query = sprintf("UPDATE  `user` SET  `GENERO` =  '%s' WHERE  `user`.`ID` ='%s';", $sData, $iID);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+
+    public function UpdateUserFecha($sData, $iID) {
+        $query = sprintf("UPDATE  `user` SET  `FECHA` =  '%s' WHERE  `user`.`ID` ='%s';", $sData, $iID);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+
+    public function UpdateUserPais($sData, $iID) {
+        $query = sprintf("UPDATE  `user` SET  `PAIS` =  '%s' WHERE  `user`.`ID` ='%s';", $sData, $iID);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+
+    public function UpdateUserAcercaDeTi($sData, $iID) {
+        $query = sprintf("UPDATE  `user` SET  `ACERCADETI` =  '%s' WHERE  `user`.`ID` ='%s';", $sData, $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }

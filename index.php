@@ -20,6 +20,7 @@ include_once 'frame/init.php';
         <script src="js/jqueryUI.custom.min.js"></script>  
         <script src="js/bootstrap-switch.min.js"></script>  
         <script src="js/jquery.validate.min.js"></script>
+           <script src="js/fileuploader.js"></script>
         <script src="js/fb.js"></script>
 
         <!--[if lt IE 9]>
@@ -89,7 +90,7 @@ include_once 'frame/init.php';
                                     $bCensura = 0;
                                       include 'frame/TimeLineIn.php';
                                 }else{
-                                      $bCensura = 1;
+                                    //  $bCensura = 1;
                                         include 'frame/TimeLineOut.php';
                                 }
                             
