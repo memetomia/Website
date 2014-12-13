@@ -165,10 +165,10 @@ class TableGallery {
     }
 
     public function Trending($iN) {
-        $query = sprintf("SELECT * 
-FROM  `gallery` 
-WHERE STATE=0
-ORDER BY  `N_MORE` ASC 
+        $query = sprintf("SELECT g.*,u.NAME,u.PICTURE 
+FROM  `gallery` as g join user as u
+WHERE g.STATE=0
+ORDER BY  g.`N_MORE` ASC 
 LIMIT 0 , %s", $iN);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
