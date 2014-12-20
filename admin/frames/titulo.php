@@ -30,19 +30,20 @@
         return(JSON.stringify(string));
     }
     function PostGuardar(numero) {
-        alert("guardo");
+
         var string = crearjson(numero);
-       
+
         $.post("ajax/SaveArticlerobado.php", {
+            iNumero:numero,
             sTitulo: $("#Nombre-" + numero).val(),
             aEtiquetas: string,
             sImagen: $("#Imagen-" + numero).attr("src"),
             bCensura: $("#censura-" + numero).val()
-          
+
         }, function(o) {
             if (o.Tupla > 0) {
-
-
+                alert("guardo");
+                $("#art-" + o.Numero).hide();
             } else {
 
             }
@@ -50,4 +51,13 @@
         }, "json");
 
         //   alert("espera falta algo");
-    }</script>
+    }
+    function PostEliminar(numero) {
+
+        $("#art-" + numero).hide();
+         $("#botonera-" + numero).hide();
+        
+        //   alert("espera falta algo");
+    }
+
+</script>

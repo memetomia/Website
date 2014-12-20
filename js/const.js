@@ -1,5 +1,5 @@
-var SERVER = "http://localhost/Website";
-//var SERVER          = "http://www.memetomia.com"
+//var SERVER = "http://localhost/Website";
+var SERVER          = "http://www.memetomia.com";
 var RESOURCES = "/resources";
 var FONTS = "/resources/fonts";
 var MEDIA = "/media";

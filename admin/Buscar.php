@@ -80,10 +80,10 @@
 
             }
             function Buscar(iPosicionEnPantalla, iIdEnTabla) {
-                location.href = SERVER + ADMIN + "/memetomizar.php?IDPage=" + iIdEnTabla;
+                location.href = SERVER + ADMIN + "/memetomizar.php?N=" + iIdEnTabla;
             }
             function Modificar(iPosicionEnPantalla, iIdEnTabla) {
-                location.href = SERVER + ADMIN + "/buscar.php?IDPage=" + iIdEnTabla;
+               // location.href = SERVER + ADMIN + "/buscar.php?IDPage=" + iIdEnTabla;
             }
         </script>
     </head>

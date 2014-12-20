@@ -1,8 +1,8 @@
    <div class="col-sm-3 col-md-2 sidebar">
                     <ul class="nav nav-sidebar">
-                        <li class="active"><a href="#">Articulo </a></li>
+                         <li class="active"><a href="Article.php">Subir un Articulo</a></li>
                         <li><a href="Buscar.php">Buscar</a></li>
-                        <li><a href="Article.php">Subir un Articulo</a></li>
+                      
                         <li><a href="ArticleVideo.php">Subir un Articulo (video)</a></li>
                          <li><a href="ArticleVine.php">Subir un Articulo (vine)</a></li>
                             <li><a href="ArticleEmbed.php">Subir un Articulo (Embed)</a></li>

@@ -7,6 +7,7 @@ $bd = new TableGallery();
 $bdTag = new TableTag();
 $bError = false;
 $sTitulo = $_POST["sTitulo"];
+$iNumero = $_POST["iNumero"];
 //$sComentario = $_POST["sComentario"];
 $sComentario = "";
 $aEtiqueta = $_POST["aEtiquetas"];
@@ -21,6 +22,7 @@ $json = new stdClass();
 $json->Error = "";
 
 $contents = file_get_contents($sImagen);
+
 
 $filename = "";
 $ext="";
@@ -48,6 +50,7 @@ while (file_exists($filename.$ext)){
      $filename .= rand(10, 99);
 }
 $filename.=$ext;
+
 //   $filename .="." . end($trozos);
 $savefile = fopen(ARTICLE . "/" . $filename, 'w');
 fwrite($savefile, $contents);
@@ -70,9 +73,11 @@ if ($iResultado > 0) {
     }
 } else {
     $json->Error = $bd->bd->obtener_error();
+   
 }
 
 
 $json->Tupla = $iResultado;
+ $json->Numero=$iNumero;
 echo json_encode($json);
 ?>

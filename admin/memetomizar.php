@@ -1,6 +1,16 @@
 <html lang="en">
     <head>
         <?php
+        if (isset($_GET["N"])) {
+            $sURL = $_GET["N"];
+
+            include_once '../base/TablePage.php';
+            $bd = new TablePage();
+            $bd->SearchPage($sURL);
+           $sURL=$bd->bd->obtener_respuesta(0,"URL");
+        } else {
+            $sURL = "http://www.cuantarazon.com/";
+        }
         include_once 'frames/head.php';
 
         function get_image($content, $url) {
@@ -48,11 +58,7 @@
             return $resultado;
         }
 
-//          if (isset($_GET["N"])) {
-//                    $sURL = $_GET["N"];
-//                } else {
-        $sURL = "http://www.cuantarazon.com/";
-//                }
+//      
 
 
 
@@ -74,33 +80,34 @@
     <body>
 
 
-        <?php include_once 'frames/titulo.php'; ?>
+<?php include_once 'frames/titulo.php'; ?>
 
         <div class="container-fluid">
             <div class="row">
-                <?php include_once 'frames/menu.php'; ?>
-                <?php
-                $id = 0;
-                for ($i = 0; $i < count($supervector); $i++) {
-                    $id = $i;
-                    $error = false;
-                    $LinkImagen = $supervector[$i];
+<?php include_once 'frames/menu.php'; ?>
+<?php
+$id = 0;
+for ($i = 0; $i < count($supervector); $i++) {
+    $id = $i;
+    $error = false;
+    $LinkImagen = $supervector[$i];
 
-                    $arreglo = parse_url($LinkImagen);
-                    $LinkImagen = "http://" . $arreglo["host"] . $arreglo["path"];
-                    ?>
-                    <div class="col-sm-10 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    $arreglo = parse_url($LinkImagen);
+    $LinkImagen = "http://" . $arreglo["host"] . $arreglo["path"];
+    ?>
+                    <div class="col-sm-10 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="art-<?php echo $id; ?>">
 
                         <div class="row col-sm-5 col-md-5">
 
-                            <h1 class="page-header">chiste </h1>
+                            <h1 class="page-header">chiste   <button id='BtEliminar-<?php echo $id; ?>' type="button" class="btn btn-default"  >Eliminar </button></h1>
+
                             <form role="form">
                                 <div class="form-group">
                                     <label for="Nombre-<?php echo $id; ?>">Título</label>
                                     <input type="text" class="form-control" id="Nombre-<?php echo $id; ?>" placeholder="Agrega una pagina nueva">
                                     <div id="MsgNombre-<?php echo $id; ?>" class="msgbox Oculto "></div>
                                     <script type="text/javascript">
-                                        
+
                                         $(document).ready(function() {
 
                                             $("#Nombre-<?php echo $id; ?>").keydown(function() {
@@ -199,7 +206,7 @@
                         </div>
 
                     </div>
-                    <div class="col-sm-10 col-sm-offset-3 col-md-10 col-md-offset-2"> 
+                    <div class="col-sm-10 col-sm-offset-3 col-md-10 col-md-offset-2" id='botonera-<?php echo $id; ?>'> 
                         <div class="form-group">
                             <label for="censura-<?php echo $id; ?>">Imagen</label>
                             <select id="censura-<?php echo $id; ?>"><option selected value="0">sin cuenta</option>
@@ -211,21 +218,21 @@
                         <div id="MsgBtGuardar-<?php echo $id; ?>" class="msgbox Oculto"><span class="spanNoti"></span></div>
                         <br/>
                         <script type="text/javascript">
-
                             $(document).ready(function() {
                                 $("#BtGuardar-<?php echo $id; ?>").click(
                                         function() {
                                             PostGuardar(<?php echo $id; ?>);
                                         });
-
-
                             });
-
-
-
+                            $(document).ready(function() {
+                                $("#BtEliminar-<?php echo $id; ?>").click(
+                                        function() {
+                                            PostEliminar(<?php echo $id; ?>);
+                                        });
+                            });
                         </script>
                     </div>
-                <?php } ?>
+<?php } ?>
             </div>
             <!--            fin de class row-->
 

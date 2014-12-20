@@ -14,6 +14,7 @@
             sTitulo = "";
             sComentario = "";
             sDirImagen = "";
+            $vardirImag="";
             /*
              MsgNombrePg
              MsgUrlPg
@@ -25,7 +26,7 @@
 
                 var uploader = new qq.FileUploader({
                     element: document.getElementById('BtSubir'),
-                    action: 'ajax/subirImagenArticle.php',
+                    action: 'ajax/SubirImagenArticle.php',
                     uploadButtonText: 'subir',
                     dragText: 'Suelta aqui',
                     debug: false,
@@ -51,12 +52,20 @@
                 }
 
 
-                $("#TextAdicional").cleditor();
-                $('#BtAgregar').bind('click', function() {
-                    var $algo = $("#TextAdicional").cleditor()[0].$area[0].value;
+               // $("#TextAdicional").cleditor();
+//                $('#BtAgregar').bind('click', function() {
+//                    var $algo = $("#TextAdicional").cleditor()[0].$area[0].value;
+//                    $("#ContentAdicional").html($algo);
+//                    sComentario = $algo;
+//                });
+                 $("#TextAdicional").cleditor().change(function(){
+                   
+                       var $algo = $("#TextAdicional").cleditor()[0].$area[0].value;
                     $("#ContentAdicional").html($algo);
                     sComentario = $algo;
-                });
+                     
+                 } );
+                
                 $('#NombrePg').keydown(function() {
                     CargarTitulo(event, this);
                 });
@@ -275,14 +284,7 @@
                                 <div id="MsgUrlPg" class="msgbox Oculto"><span class="spanNoti"></span></div>
 
                             </div>
-                            <div class="form-group">
-                                <label for="inputTag">Metas datas</label><br>
-                                <textarea id="TextMeta" style="width:500px; height: 100px">                                
-
-
-                                </textarea>
-
-                            </div>
+                        
                             <div class="form-group">
                                 <label for="inputTag">Etiqueta</label>
                                 <input type="text" class="form-control" id="inputTag" placeholder="Agrega una pagina nueva">
@@ -292,14 +294,14 @@
 
                             <textarea id="TextAdicional" style="width:400px; height: 500px"></textarea>
                             <div class="form-group">
-                                <label for="UrlPg">Imagen</label>
+                                <label for="UrlPg">censura?</label>
                                 <select id="censura"><option selected value="0">sin cuenta</option>
                                     <option value="1">con cuenta</option></select>
 
                             </div>
 
-                            <button id='BtAgregar' type="button" class="btn btn-default"  >Agregar</button>
-                            <div id="MsgBtAgregar" class="msgbox Oculto"><span class="spanNoti"></span></div>
+<!--                            <button id='BtAgregar' type="button" class="btn btn-default"  >Agregar</button>
+                            <div id="MsgBtAgregar" class="msgbox Oculto"><span class="spanNoti"></span></div>-->
 
                             <br/>
                             <button id='BtGuardar' type="button" class="btn btn-default"  >Guardar</button>
@@ -316,7 +318,14 @@
                     <h2 class="sub-header">Así deberia quedar el articulo</h2>
                     <div class="table-responsive">
                         <div class="post col-md-12">
-                            <div class="post-header col-md-12">
+                            <div class="post-header col-md-12">    <div class="form-group">
+                                <label for="inputTag">Metas datas</label><br>
+                                <textarea id="TextMeta" style="width:500px; height: 100px">                                
+
+
+                                </textarea>
+
+                            </div>
                                 <h3 id="Titulo" class="post-title text-info">Ingrese nombre del articulo</h3>
                                 <h5 class="post-subtitle text-muted">
                                     Publicado por: <a href="#">Memetomia</a> <b>·</b> 
