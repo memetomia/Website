@@ -254,6 +254,10 @@
             function Modificar(iPosicionEnPantalla, iIdEnTabla) {
                 location.href = SERVER + ADMIN + "/EditArticle.php?IDPage=" + iIdEnTabla;
             }
+
+            function toggleMetadata(){                
+                $("#metadata-container").toggle();
+            }
         </script>
 
     </head>
@@ -318,14 +322,13 @@
                     <h2 class="sub-header">Así deberia quedar el articulo</h2>
                     <div class="table-responsive">
                         <div class="post col-md-12">
-                            <div class="post-header col-md-12">    <div class="form-group">
-                                <label for="inputTag">Metas datas</label><br>
-                                <textarea id="TextMeta" style="width:500px; height: 100px">                                
+                            <div class="post-header col-md-12">    
+                                <button class="btn btn-default" onclick="toggleMetadata()">Show/Hide Metadata</button><br/>                                    
+                                <div id="metadata-container" class="form-group" style="display: none">                                    
+                                    <label for="inputTag">Metas datas</label><br>
+                                    <textarea id="TextMeta" style="width:500px; height: 100px"></textarea>                                    
 
-
-                                </textarea>
-
-                            </div>
+                                </div>
                                 <h3 id="Titulo" class="post-title text-info">Ingrese nombre del articulo</h3>
                                 <h5 class="post-subtitle text-muted">
                                     Publicado por: <a href="#">Memetomia</a> <b>·</b> 
