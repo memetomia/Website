@@ -1,9 +1,8 @@
 <html lang="en">
     <head>
-        <title>Gestionar Articulo</title>
         <?php include_once 'frames/head.php'; ?>
         <script src="../js/const.js"></script>
-        <link rel="stylesheet" type="text/css" href="css/videoprueba.css" />
+
         <link rel="stylesheet" type="text/css" href="js/jquery.cleditor.css" />
         <link rel="stylesheet" type="text/css" href="js/autocomplete/jquery.autocomplete.css" />
         <script type="text/javascript" src="js/jq.js"></script>
@@ -14,7 +13,6 @@
             sTitulo = "";
             sComentario = "";
             sDirImagen = "";
-            $vardirImag="";
             /*
              MsgNombrePg
              MsgUrlPg
@@ -26,59 +24,49 @@
 
                 var uploader = new qq.FileUploader({
                     element: document.getElementById('BtSubir'),
-                    action: 'ajax/SubirImagenArticle.php',
+                    action: 'ajax/subirImagenArticle.php',
                     uploadButtonText: 'subir',
                     dragText: 'Suelta aqui',
                     debug: false,
                     onComplete: nombreFun
                 });
-                
-                function ConstruirMetaData(){
-                      $("#TextMeta").val('<meta property="og:type" content="photo"><meta property="twitter:card" content="photo"><meta name="twitter:title" content="'+sTitulo+'" /><meta name="twitter:image" content="' + $vardirImag + '" /><meta name="twitter:url" content="' + $vardirImag + '" />');
-                    
-                }
+
                 function nombreFun(id, fileName, responseJSON) {
                     //$('#imgSubirid').attr('src','/OnionFW/means/'+responseJSON.info);
                     if (responseJSON.error) {
                         sDirImagen = "";
                         msj("#MsgUrlPg", responseJSON.error, "Error")
                     } else {
-                        $vardirImag = ARTICLE + "/" + responseJSON.info;
-                        $('#Imagen').attr('src', $vardirImag);
+                        $('#Imagen').attr('src', ARTICLE + "/" + responseJSON.info);
                         sDirImagen = responseJSON.info;
                         msj("#MsgUrlPg", "La imagen fue subida con exito", "Exito");
-                         ConstruirMetaData();
-                       }
+                    }
                 }
 
+                $("#TextAdicional").cleditor();
 
-               // $("#TextAdicional").cleditor();
-//                $('#BtAgregar').bind('click', function() {
-//                    var $algo = $("#TextAdicional").cleditor()[0].$area[0].value;
-//                    $("#ContentAdicional").html($algo);
-//                    sComentario = $algo;
-//                });
-                 $("#TextAdicional").cleditor().change(function(){
-                   
-                       var $algo = $("#TextAdicional").cleditor()[0].$area[0].value;
+                $('#BtAgregar').bind('click', function() {
+                    var $algo = $("#TextAdicional").cleditor()[0].$area[0].value;
+
                     $("#ContentAdicional").html($algo);
                     sComentario = $algo;
-                     
-                 } );
-                
+
+                });
+
                 $('#NombrePg').keydown(function() {
                     CargarTitulo(event, this);
                 });
+
                 function CargarTitulo(event, t) {
                     if (event.which == 13) {
                         $("#Titulo").html($(t).val());
                         sTitulo = $(t).val();
                         msj("#MsgNombrePg", "Titulo agregado correctamente", "Exito");
-                         ConstruirMetaData()
                     }
                 }
 
-                $('#inputTag').autocomplete('ajax/SearchTag.php', {width: 200, matchContains: true, selectFirst: false, funtion: AgregarTag});
+                $('#inputTag').autocomplete('../buscarTag', {width: 200, matchContains: true, selectFirst: false, funtion: AgregarTag});
+
                 $('#inputTag').keydown(function() {
                     AgregarTagWithEnter(event, this)
                 });
@@ -105,13 +93,11 @@
                             sComentario: sComentario,
                             aEtiquetas: string,
                             sImagen: sDirImagen,
-                            sinfo: sInfo,
-                            sMetaData: $("#TextMeta").val(),
-                            bCensura: $("#censura").val()
+                            sinfo: sInfo
                         }, function(o) {
                             if (o.Tupla > 0) {
                                 msj("#MsgBtGuardar", "Todo ok", "Exito");
-                                $("#tabla tbody").prepend('<tr id="t' + $('#tabla >tbody >tr').length + '" class="trDel"><td>' + o.Tupla + '</td><td>' + $("#NombrePg").val() + '<br>Tag:<br>' + string + '</td><td><img id="" class="img-thumbnail img-small" src="' + ARTICLE + '/' + sDirImagen + '">' + sComentario + '</td>\n\
+                                $("#tabla tbody").prepend('<tr id="t' + $('#tabla >tbody >tr').length + '"><td>' + o.Tupla + '</td><td>' + $("#NombrePg").val() + '<br>Tag:<br>' + string + '</td><td><img id="" class="img-thumbnail img-small" src="' + ARTICLE + '/' + sDirImagen + '">' + sComentario + '</td>\n\
                                 <td> <button type="button" class="btn btn-default"  onclick="Activar(\'' + $('#tabla >tbody >tr').length + '\',\'' + o.Tupla + '\')" >Activar</button>\n\
                                     <button type="button" class="btn btn-default"  onclick="Desactivar(\'' + $('#tabla >tbody >tr').length + '\',\'' + o.Tupla + '\')" >Desactivar</button>\n\
                                     <button type="button" class="btn btn-default"  onclick="Modificar(\'' + $('#tabla >tbody >tr').length + '\',\'' + o.Tupla + '\')" >Modificar</button>\n\
@@ -133,20 +119,18 @@
                 }
                 function AgregarTag()
                 {
-                    if ($("#inputTag").val() != "") {
-                        var newTag = $("#inputTag").val();
-                        $("#inputTag").val("");
-                        $("#post-tags").data("count", $("#post-tags").data("count") + 1);
-                        //$("#post-tags-"+id).data("count",++);
+                    var newTag = $("#inputTag").val();
+                    $("#inputTag").val("");
+                    $("#post-tags").data("count", $("#post-tags").data("count") + 1);
+                    //$("#post-tags-"+id).data("count",++);
 
-                        var input = "<a href='#' class='label label-default'>" + newTag + "</a><span id='eliminartag-" + $("#post-tags").data("count") + "'>X</span>";
-                        $("#post-tags").append(input);
-                        $("#eliminartag-" + $("#post-tags").data("count")).click(function() {
-                            $("#post-tags").data("count", $("#post-tags").data("count") - 1);
-                            $(this).prev().remove();
-                            $(this).remove();
-                        });
-                    }
+                    var input = "<a href='#' class='label label-default'>" + newTag + "</a><span id='eliminartag-" + $("#post-tags").data("count") + "'>X</span>";
+                    $("#post-tags").append(input);
+                    $("#eliminartag-" + $("#post-tags").data("count")).click(function() {
+                        $("#post-tags").data("count", $("#post-tags").data("count") - 1);
+                        $(this).prev().remove();
+                        $(this).remove();
+                    });
                 }
                 function EliminarTag(t) {
                     $("#post-tags").data("count", $("#post-tags").data("count") - 1);
@@ -167,7 +151,7 @@
                         q: palabra
                     }, function(o) {
                         if (o) {
-                            $('#ImgMeme').attr('src', MEME + "/" + o[0]["URL"]);
+                            $('#ImgMeme').attr('src', "" + MEME + "/" + o[0]["URL"]);
                             msj("#MsgBtAgregar", "Meme predeterminado encontrado", "Exito");
                         } else {
                             msj("#MsgBtAgregar", "No se ha encontrado el meme", "Error");
@@ -187,12 +171,14 @@
                     command: "inserthtml",
                     popupName: "hello",
                     popupClass: "cleditorPrompt",
-                    popupContent: "meme:<br><input id=meme type=text size=50><br><img id=ImgMeme src=" + DEFAULT + "/MemePredeterminado.jpg height=200 width=200 /><br><input type=button value=Agregar>",
+                    popupContent: "meme:<br><input id=meme type=text size=50><br><img id=ImgMeme src=../media/default/MemePredeterminado.jpg height=200 width=200 /><br><input type=button value=Agregar>",
                     buttonClick: helloClick
                 };
+
                 // Add the button to the default controls before the bold button
                 $.cleditor.defaultOptions.controls = $.cleditor.defaultOptions.controls
                         .replace("bold", "hello bold");
+
                 // Handle the hello button click event
                 function helloClick(e, data) {
 
@@ -203,8 +189,10 @@
 
                                 // Get the editor
                                 var editor = data.editor;
+
                                 // Get the entered name
                                 var name = $("#ImgMeme").attr("src");
+
                                 // Insert some html into the document
                                 var html = "<img src=" + name + " height='467' width='460' class='img-thumbnail'>";
                                 editor.execCommand(data.command, html, null, data.button);
@@ -212,7 +200,9 @@
                                 // Hide the popup and set focus back to the editor
                                 editor.hidePopups();
                                 editor.focus();
+
                             });
+
                 }
 
             })(jQuery);
@@ -254,10 +244,6 @@
             function Modificar(iPosicionEnPantalla, iIdEnTabla) {
                 location.href = SERVER + ADMIN + "/EditArticle.php?IDPage=" + iIdEnTabla;
             }
-
-            function toggleMetadata(){                
-                $("#metadata-container").toggle();
-            }
         </script>
 
     </head>
@@ -288,7 +274,7 @@
                                 <div id="MsgUrlPg" class="msgbox Oculto"><span class="spanNoti"></span></div>
 
                             </div>
-                        
+
                             <div class="form-group">
                                 <label for="inputTag">Etiqueta</label>
                                 <input type="text" class="form-control" id="inputTag" placeholder="Agrega una pagina nueva">
@@ -297,15 +283,10 @@
                             </div>
 
                             <textarea id="TextAdicional" style="width:400px; height: 500px"></textarea>
-                            <div class="form-group">
-                                <label for="UrlPg">censura?</label>
-                                <select id="censura"><option selected value="0">sin cuenta</option>
-                                    <option value="1">con cuenta</option></select>
 
-                            </div>
 
-<!--                            <button id='BtAgregar' type="button" class="btn btn-default"  >Agregar</button>
-                            <div id="MsgBtAgregar" class="msgbox Oculto"><span class="spanNoti"></span></div>-->
+                            <button id='BtAgregar' type="button" class="btn btn-default"  >Agregar</button>
+                            <div id="MsgBtAgregar" class="msgbox Oculto"><span class="spanNoti"></span></div>
 
                             <br/>
                             <button id='BtGuardar' type="button" class="btn btn-default"  >Guardar</button>
@@ -315,20 +296,88 @@
 
                     </div>
                     <!--tabla para verficiar-->
-                    <?php include_once 'frames/tabla.php'; ?>
+                    <div class="table-responsive">
+                        <h2 class="sub-header">Lista de Articulo </h2>
+                        <table id="tabla" class="table ">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Titulo</th>
+                                    <th>Articulo</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <?php
+                                include_once '../base/TableGallery.php';
+                                $bd = new TableGallery();
+                                $todo = $bd->All();
+                                $html = "";
+                                  $sUrlaMostrar = "";
+                                   if ($todo > 0) {
+                                    $sClass = "";
+                                    for ($i = 0; $i < $todo; $i++) {
+                                        if ($bd->bd->obtener_respuesta($i, "STATE") == "1") {
+                                            $sClass = "trDel";
+                                        } else {
+                                            $sClass = "";
+                                        }
+                                        $sUrlaMostrar = "";
+                                        $botonplay = "";
+                                        if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 0) {
+                                         
+                                             $sUrlaMostrar = '<img class="img-thumbnail img-small" src="' . EXT_ARTICLE . "/" . $bd->bd->obtener_respuesta($i, "URL"). '"/>';
+                                            $botonplay = "";
+                                        }
+                                        if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 1) {
+                                              $sUrlaMostrar = '<img class="img-thumbnail img-small" src="' . $bd->bd->obtener_respuesta($i, "URL"). '"/>';
+                                        
+                                            $botonplay = '<div id="Video-' . $bd->bd->obtener_respuesta($i, "ID") . '" class="play"></div>';
+                                            $botonplay .= '<script type="text/javascript">'
+                                                    . '$("#Video-' . $bd->bd->obtener_respuesta($i, "ID") . '").click(function() {
+                                                           $("#d-' . $bd->bd->obtener_respuesta($i, "ID") . '").html(\'' . $bd->bd->obtener_respuesta($i, "INFOMEDIA") . '\');
+                                                       });                               </script>';
+                                        }
+                                        if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 2) {
+                                         $sUrlaMostrar = '<img class="img-thumbnail img-small" src="' . $bd->bd->obtener_respuesta($i, "URL"). '"/>';
+                                        
+                                            $botonplay = '<div id="Vine-' . $bd->bd->obtener_respuesta($i, "ID") . '" class="play"></div>';
+                                            $botonplay .= '<script type="text/javascript">'
+                                                    . '$("#Vine-' . $bd->bd->obtener_respuesta($i, "ID") . '").click(function() {
+                                                           $("#d-' . $bd->bd->obtener_respuesta($i, "ID") . '").html(\'' . $bd->bd->obtener_respuesta($i, "INFOMEDIA") . '\');
+                                                        $(".Vine").click(function() {
+                                                            $(this).get(0).paused ? $(this).get(0).play() : $(this).get(0).pause();
+                            });});                               </script>';
+                                        }
+                                        if ($bd->bd->obtener_respuesta($i, "TYPEMEDIA") == 3) {
+                                            $sUrlaMostrar = $bd->bd->obtener_respuesta($i, "INFOMEDIA");
+                                            $botonplay ="" ;
+                                          
+                                        }
+                                        $html .= '<tr id="t' . $i . '" class="' . $sClass . '"><td>' . $bd->bd->obtener_respuesta($i, "ID") . '</td>'
+                                                . '<td>' . $bd->bd->obtener_respuesta($i, "TITLE") . '<br><strong>Tag:</strong><br>' . $bd->bd->obtener_respuesta($i, "TAG") . '</td>'
+                                                . '<td><div id="d-' . $bd->bd->obtener_respuesta($i, "ID") . '">' . $sUrlaMostrar   . $botonplay . "</div>" . $bd->bd->obtener_respuesta($i, "COMMENT_ADDITIONAL") . '</td>'
+                                                . '<td>   '
+                                                . '    <button type="button" class="btn btn-default"  onclick="Activar(\'' . $i . '\',\'' . $bd->bd->obtener_respuesta($i, "ID") . '\')" >Activar</button>    '
+                                                . '    <button type="button" class="btn btn-default"  onclick="Desactivar(\'' . $i . '\',\'' . $bd->bd->obtener_respuesta($i, "ID") . '\')" >Desactivar</button>    '
+                                                . '    <button type="button" class="btn btn-default"  onclick="Modificar(\'' . $i . '\',\'' . $bd->bd->obtener_respuesta($i, "ID") . '\')" >Modificar</button>    '
+                                                . '    <button type="button" class="btn btn-default"  onclick="Eliminar(\'' . $i . '\',\'' . $bd->bd->obtener_respuesta($i, "ID") . '\')" >Eliminar</button>      </td></tr>';
+                                    }
+                                    echo $html;
+                                }
+                                ?>
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="col-sm-5  col-md-5 ">
 
                     <h2 class="sub-header">Así deberia quedar el articulo</h2>
                     <div class="table-responsive">
                         <div class="post col-md-12">
-                            <div class="post-header col-md-12">    
-                                <button class="btn btn-default" onclick="toggleMetadata()">Show/Hide Metadata</button><br/>                                    
-                                <div id="metadata-container" class="form-group" style="display: none">                                    
-                                    <label for="inputTag">Metas datas</label><br>
-                                    <textarea id="TextMeta" style="width:500px; height: 100px"></textarea>                                    
-
-                                </div>
+                            <div class="post-header col-md-12">
                                 <h3 id="Titulo" class="post-title text-info">Ingrese nombre del articulo</h3>
                                 <h5 class="post-subtitle text-muted">
                                     Publicado por: <a href="#">Memetomia</a> <b>·</b> 
@@ -354,7 +403,10 @@
                             <div id="ContentAdicional" class="post-media-content col-md-9">
                             </div>
                             <div class="post-footer col-md-12">
+
                                 <div id="post-tags" data-count="0">                                
+
+
                                 </div>
                             </div>
                         </div>
@@ -364,6 +416,11 @@
             </div>
 
         </div>
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+
 
     </body>
 </html>
