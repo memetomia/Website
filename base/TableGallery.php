@@ -39,6 +39,9 @@ class TableGallery {
         return $this->bd->ultimo_id_generado_por_la_bd();
     }
 
+    
+    
+    
     /**
       Crea una tupla en la base de dato gallery ; agrega una imagen en la tabla gallery y a un usuario dueño de la tupla
       @param String $sTitle almacena el titulo maximo 255 caracteristica .
@@ -195,7 +198,7 @@ FROM  `gallery` as g join gallery_tag as rgt on rgt.ID_GALLERY=g.ID where %s ", 
     }
 
     public function SearchById($iID) {
-        $query = sprintf("Select g.ID, g.OWNER,g.TITLE,g.TYPEMEDIA,g.INFOMEDIA,g.URL,g.DATE,g.TAG,g.N_MORE,g.N_LESS,g.N_COMMENT,g.STATE,g.COMMENT_ADDITIONAL,u.NAME, g.META from gallery as g join user as u on (u.ID=g.OWNER) where g.ID='%s'", $iID);
+        $query = sprintf("Select g.ID, g.OWNER,g.TITLE,g.TYPEMEDIA,g.INFOMEDIA,g.URL,g.DATE,g.TAG,g.N_MORE,g.N_LESS,g.N_COMMENT,g.STATE,g.COMMENT_ADDITIONAL,u.NAME, g.META , g.CENSURA from gallery as g join user as u on (u.ID=g.OWNER) where g.ID='%s'", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->obtener_respuesta_completa();
     }
@@ -225,6 +228,15 @@ FROM  `gallery` as g join gallery_tag as rgt on rgt.ID_GALLERY=g.ID where %s ", 
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
+
+    /*
+     * Busca articulos por el tag
+     * 
+     * @param $sTag nombre del tag a buscar
+     * @param $iInicio numero de inicio del limit
+     * @param $iFin numero de fin del limit
+     * 
+     */
 
     public function ArticleForTAg($sTag, $iInicio, $iFin) {
         $query = sprintf("SELECT g.ID,
@@ -258,4 +270,35 @@ WHERE t.NAME =  '%s' LIMIT %s,%s ;", $sTag, $iInicio, $iFin);
         return $this->bd->ultimo_id_generado_por_la_bd();
     }
 
+    public function GetTagOfArticleForId($iID) {
+        $query = sprintf("SELECT 
+t.NAME,
+t.COUNT,
+t.VISIT,
+g_t.ID_GALLERY,
+g_t.ID_TAG
+FROM  `tag` AS t
+JOIN gallery_tag AS g_t ON g_t.ID_TAG = t.ID
+WHERE g_t.`ID_GALLERY` ='%s'", $iID);
+        $this->bd->hacer_query($query);
+         return $this->bd->filas_retornadas_por_consulta();
+    }
+  public function ModArticle($sTitle,$sTag, $sComment,$bCensura,$iId) {
+        $query = sprintf("UPDATE  `gallery`.`gallery` SET  
+            `TITLE` =  '%s',
+            `TAG` =  '%s',
+            `COMMENT_ADDITIONAL` =  '%s',
+            `CENSURA` =  '%s'
+WHERE  `gallery`.`ID` ='%s';", $sTitle,$sTag, $sComment,$bCensura,$iId);
+        $this->bd->hacer_query($query);
+
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+    public function DelAllTagForArticleId($iID){
+       $query = sprintf("delete from gallery_tag where ID_GALLERY='%s'",$iID);
+        $this->bd->hacer_query($query);
+
+        return $this->bd->filas_retornadas_por_consulta(); 
+    }
+    
 }

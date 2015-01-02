@@ -21,16 +21,13 @@
         $sUrlaMostrar = "";
         $botonplay = "";
         $ComentarioAdicional = "";
-        $bCensura = 1;
+        $bCuenta = 0;
 
         $imagenUserCurrent = "media/default/profile-example.jpg";
         if ($co->IsSession()) {
-            $bCensura = 0;
+            $bCuenta = 1;
             $imagenUserCurrent = "media/default/profile-example.jpg";
-        } else {
-            $bCensura = 1;
         }
-
         if (isset($_GET["id"])) {
             $iID = $_GET["id"];
 
@@ -47,8 +44,10 @@
             $iComment = $bdGallery->bd->obtener_respuesta(0, "N_COMMENT");
             $ComentarioAdicional = $bdGallery->bd->obtener_respuesta(0, "COMMENT_ADDITIONAL");
             $sMeta = $bdGallery->bd->obtener_respuesta(0, "META");
-
-
+            $bCensura = $bdGallery->bd->obtener_respuesta(0, "CENSURA");
+            if ($bCuenta == 1) {
+                $bCensura = 0;
+            }
             if ($iState == 0) {
                 if ($bCensura == 0) {
 //IAMGEN NORMAL

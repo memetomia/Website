@@ -1,5 +1,16 @@
 <html lang="en">
     <head>
+        <?php
+        $aArticle = null;
+        if (isset($_GET["IDPage"])) {
+            $iIDImagen = $_GET["IDPage"];
+            include_once '../base/TableGallery.php';
+            $bd = new TableGallery();
+            $aArticle = $bd->SearchById($iIDImagen);
+        } else {
+            
+        }
+        ?>
         <title>Gestionar Articulo</title>
         <?php include_once 'frames/head.php'; ?>
         <script src="../js/const.js"></script>
@@ -11,10 +22,11 @@
         <script type="text/javascript" src="js/autocomplete/jquery.autocomplete.js"></script>
         <script src="../js/fileuploader.js"></script>
         <script type="text/javascript">
+            iID =<?php echo $iIDImagen; ?>;
             sTitulo = "";
             sComentario = "";
-            sDirImagen = "";
-            $vardirImag="";
+            sDirImagen =  ARTICLE + "/" + '<?php echo $aArticle[0]["URL"]; ?>';
+            $vardirImag = "";
             /*
              MsgNombrePg
              MsgUrlPg
@@ -22,50 +34,26 @@
              MsgBtAgregar
              MsgBtGuardar
              */
+            function EliminarTag(t) {
+                $("#post-tags").data("count", $("#post-tags").data("count") - 1);
+                $(t).prev().remove();
+                $(t).remove();
+            }
             $(document).ready(function() {
+                function ConstruirMetaData() {
+                    $("#TextMeta").val('<meta property="og:type" content="photo"><meta property="twitter:card" content="photo"><meta name="twitter:title" content="' + sTitulo + '" /><meta name="twitter:image" content="' + $vardirImag + '" /><meta name="twitter:url" content="' + $vardirImag + '" />');
 
-                var uploader = new qq.FileUploader({
-                    element: document.getElementById('BtSubir'),
-                    action: 'ajax/SubirImagenArticle.php',
-                    uploadButtonText: 'subir',
-                    dragText: 'Suelta aqui',
-                    debug: false,
-                    onComplete: nombreFun
-                });
-                
-                function ConstruirMetaData(){
-                      $("#TextMeta").val('<meta property="og:type" content="photo"><meta property="twitter:card" content="photo"><meta name="twitter:title" content="'+sTitulo+'" /><meta name="twitter:image" content="' + $vardirImag + '" /><meta name="twitter:url" content="' + $vardirImag + '" />');
-                    
                 }
-                function nombreFun(id, fileName, responseJSON) {
-                    //$('#imgSubirid').attr('src','/OnionFW/means/'+responseJSON.info);
-                    if (responseJSON.error) {
-                        sDirImagen = "";
-                        msj("#MsgUrlPg", responseJSON.error, "Error")
-                    } else {
-                        $vardirImag = ARTICLE + "/" + responseJSON.info;
-                        $('#Imagen').attr('src', $vardirImag);
-                        sDirImagen = responseJSON.info;
-                        msj("#MsgUrlPg", "La imagen fue subida con exito", "Exito");
-                         ConstruirMetaData();
-                       }
-                }
+               
+              
+                $("#TextAdicional").cleditor().change(function() {
 
-
-               // $("#TextAdicional").cleditor();
-//                $('#BtAgregar').bind('click', function() {
-//                    var $algo = $("#TextAdicional").cleditor()[0].$area[0].value;
-//                    $("#ContentAdicional").html($algo);
-//                    sComentario = $algo;
-//                });
-                 $("#TextAdicional").cleditor().change(function(){
-                   
-                       var $algo = $("#TextAdicional").cleditor()[0].$area[0].value;
+                    var $algo = $("#TextAdicional").cleditor()[0].$area[0].value;
                     $("#ContentAdicional").html($algo);
                     sComentario = $algo;
-                     
-                 } );
-                
+
+                });
+
                 $('#NombrePg').keydown(function() {
                     CargarTitulo(event, this);
                 });
@@ -74,7 +62,7 @@
                         $("#Titulo").html($(t).val());
                         sTitulo = $(t).val();
                         msj("#MsgNombrePg", "Titulo agregado correctamente", "Exito");
-                         ConstruirMetaData()
+                        ConstruirMetaData()
                     }
                 }
 
@@ -92,34 +80,16 @@
                         bool = false;
                         msj("#MsgBtGuardar", "Ingrese titulo", "Error");
                     }
-                    if (sDirImagen == "") {
-                        bool = false;
-                        msj("#MsgBtGuardar", "Suba una imagen", "Error");
-                    }
-
-
                     if (bool == true) {
-                        var sInfo = '<img class="post-media img-thumbnail" src="' + ARTICLE + '/' + sDirImagen + '" alt="' + sTitulo + '">'
-                        $.post("ajax/SaveArticle.php", {
+                         $.post("ajax/ModArticle.php", {
+                            iId:iID,
                             sTitulo: sTitulo,
                             sComentario: sComentario,
                             aEtiquetas: string,
-                            sImagen: sDirImagen,
-                            sinfo: sInfo,
                             sMetaData: $("#TextMeta").val(),
                             bCensura: $("#censura").val()
                         }, function(o) {
-                            if (o.Tupla > 0) {
-                                msj("#MsgBtGuardar", "Todo ok", "Exito");
-                                $("#tabla tbody").prepend('<tr id="t' + $('#tabla >tbody >tr').length + '" class="trDel"><td>' + o.Tupla + '</td><td>' + $("#NombrePg").val() + '<br>Tag:<br>' + string + '</td><td><img id="" class="img-thumbnail img-small" src="' + ARTICLE + '/' + sDirImagen + '">' + sComentario + '</td>\n\
-                                <td> <button type="button" class="btn btn-default"  onclick="Activar(\'' + $('#tabla >tbody >tr').length + '\',\'' + o.Tupla + '\')" >Activar</button>\n\
-                                    <button type="button" class="btn btn-default"  onclick="Desactivar(\'' + $('#tabla >tbody >tr').length + '\',\'' + o.Tupla + '\')" >Desactivar</button>\n\
-                                    <button type="button" class="btn btn-default"  onclick="Modificar(\'' + $('#tabla >tbody >tr').length + '\',\'' + o.Tupla + '\')" >Modificar</button>\n\
-                                    <button type="button" class="btn btn-default"  onclick="Eliminar(\'' + $('#tabla >tbody >tr').length + '\',\'' + o.Tupla + '\')" >Eliminar</button>\n\
-</td></tr>');
-                            } else {
-                                msj("#MsgBtGuardar", o.Error, "Error");
-                            }
+
 
                         }, "json");
                     }
@@ -148,11 +118,7 @@
                         });
                     }
                 }
-                function EliminarTag(t) {
-                    $("#post-tags").data("count", $("#post-tags").data("count") - 1);
-                    $(t).prev().remove();
-                    $(t).remove();
-                }
+
                 function crearjson() {
                     var string = new Array();
                     i = 0;
@@ -255,7 +221,7 @@
                 location.href = SERVER + ADMIN + "/EditArticle.php?IDPage=" + iIdEnTabla;
             }
 
-            function toggleMetadata(){                
+            function toggleMetadata() {
                 $("#metadata-container").toggle();
             }
         </script>
@@ -278,17 +244,13 @@
 
                             <div class="form-group">
                                 <label for="NombrePg">Título</label>
-                                <input type="text" class="form-control" id="NombrePg" placeholder="Agrega una pagina nueva">
+                                <input type="text" class="form-control" id="NombrePg" placeholder="Agrega una pagina nueva" value="<?php if ($aArticle != null) {
+                    echo $aArticle[0]["TITLE"];
+                } ?>">
                                 <div id="MsgNombrePg" class="msgbox Oculto "></div>
 
                             </div>
-                            <div class="form-group">
-                                <label for="UrlPg">Imagen</label>
-                                <button id='BtSubir' type="button" class="btn btn-default"  >Subir</button>
-                                <div id="MsgUrlPg" class="msgbox Oculto"><span class="spanNoti"></span></div>
 
-                            </div>
-                        
                             <div class="form-group">
                                 <label for="inputTag">Etiqueta</label>
                                 <input type="text" class="form-control" id="inputTag" placeholder="Agrega una pagina nueva">
@@ -296,7 +258,13 @@
 
                             </div>
 
-                            <textarea id="TextAdicional" style="width:400px; height: 500px"></textarea>
+                            <textarea id="TextAdicional" style="width:400px; height: 500px">
+                                <?php if ($aArticle != null) {
+                                    echo $aArticle[0]["COMMENT_ADDITIONAL"];
+                                } ?>                                
+
+
+                            </textarea>
                             <div class="form-group">
                                 <label for="UrlPg">censura?</label>
                                 <select id="censura"><option selected value="0">sin cuenta</option>
@@ -304,8 +272,8 @@
 
                             </div>
 
-<!--                            <button id='BtAgregar' type="button" class="btn btn-default"  >Agregar</button>
-                            <div id="MsgBtAgregar" class="msgbox Oculto"><span class="spanNoti"></span></div>-->
+                            <!--                            <button id='BtAgregar' type="button" class="btn btn-default"  >Agregar</button>
+                                                        <div id="MsgBtAgregar" class="msgbox Oculto"><span class="spanNoti"></span></div>-->
 
                             <br/>
                             <button id='BtGuardar' type="button" class="btn btn-default"  >Guardar</button>
@@ -315,7 +283,7 @@
 
                     </div>
                     <!--tabla para verficiar-->
-                    <?php include_once 'frames/tabla.php'; ?>
+<?php include_once 'frames/tabla.php'; ?>
                 </div>
                 <div class="col-sm-5  col-md-5 ">
 
@@ -326,18 +294,30 @@
                                 <button class="btn btn-default" onclick="toggleMetadata()">Show/Hide Metadata</button><br/>                                    
                                 <div id="metadata-container" class="form-group" style="display: none">                                    
                                     <label for="inputTag">Metas datas</label><br>
-                                    <textarea id="TextMeta" style="width:500px; height: 100px"></textarea>                                    
+                                    <textarea id="TextMeta" style="width:500px; height: 100px"><?php
+echo $aArticle[0]["META"];
+?></textarea>                                    
 
                                 </div>
-                                <h3 id="Titulo" class="post-title text-info">Ingrese nombre del articulo</h3>
+                                <h3 id="Titulo" class="post-title text-info"><?php if ($aArticle != null) {
+    echo $aArticle[0]["TITLE"];
+} ?></h3>
                                 <h5 class="post-subtitle text-muted">
                                     Publicado por: <a href="#">Memetomia</a> <b>·</b> 
-                                    <span class="like-counter"><span class="glyphicon glyphicon-thumbs-up"></span> 93 me gusta</span> <b>·</b> 
-                                    <span class="comment-counter"><span class="glyphicon glyphicon-comment"></span> 341 comentarios</span>
+                                    <span class="like-counter"><span class="glyphicon glyphicon-thumbs-up"></span> <?php if ($aArticle != null) {
+    echo $aArticle[0]["N_MORE"];
+} ?> me gusta</span> <b>·</b> 
+                                    <span class="comment-counter"><span class="glyphicon glyphicon-comment"></span> <?php if ($aArticle != null) {
+    echo $aArticle[0]["N_COMMENT"];
+} ?> comentarios</span>
                                 </h5>                        
                             </div>
                             <div class="post-media-content col-md-9">
-                                <img id="Imagen" class="post-media img-thumbnail" src="../media/default/ArticlePredeterminado.jpg" height="467" width="460" alt="I must become someone else, I must become something else">
+                                <img id="Imagen" class="post-media img-thumbnail" src="<?php if ($aArticle != null) {
+    echo "../media/article/" . $aArticle[0]["URL"];
+} else {
+    echo "../media/default/ArticlePredeterminado.jpg";
+} ?>" height="467" width="460" alt="I must become someone else, I must become something else">
                             </div>
 
                             <div class="post-options col-md-3">
@@ -352,10 +332,24 @@
 
                             </div> 
                             <div id="ContentAdicional" class="post-media-content col-md-9">
+<?php if ($aArticle != null) {
+    echo $aArticle[0]["COMMENT_ADDITIONAL"];
+} ?>
                             </div>
                             <div class="post-footer col-md-12">
-                                <div id="post-tags" data-count="0">                                
-                                </div>
+<?php
+echo' <div id="post-tags" data-count="' . $bd->GetTagOfArticleForId($iIDImagen) . '"> ';
+for ($i = 0; $i < $bd->bd->filas_retornadas_por_consulta(); $i++) {
+    echo '<a href="#" class="label label-default">' . $bd->bd->obtener_respuesta($i, "NAME") . '</a><span id="eliminartag-' . $i . '" onclick="EliminarTag(\'#eliminartag-' . $i . '\')">X</span>';
+}
+//
+
+echo '</div>';
+?>
+
+
+
+
                             </div>
                         </div>
                     </div>

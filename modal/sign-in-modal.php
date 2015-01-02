@@ -78,7 +78,7 @@ $_registrarFB.click(function() {
             }, function(o) {
                 $("#sign-in-total-Mensaje").css("display", "none");
                 if (o.Tupla > 1) {
-                    location.href = "./index.php";
+                   // location.href = "./index.php";
                 } else {
                     $("#sign-in-total-Mensaje").html(o.sError);
                     $("#sign-in-total-Mensaje").css("display", "block");
