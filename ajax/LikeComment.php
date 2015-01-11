@@ -1,10 +1,10 @@
 <?php
 
 include_once '../base/TableUser_Gallery.php';
-include_once '../base/ClassCookie.php';
-$co = new ClassCookie("sec");
+include_once '../base/classSession.php';
+$co = new oSession();
 $bdCommentNotificaciones = new TableUser_Gallery();
-$bdCommentNotificaciones->SeeLikeByUser($co->getSVar("iId"));
+$bdCommentNotificaciones->SeeLikeByUser($co->GetVar("iId"));
 
 $json = new stdClass();
 $json->Tupla = -1;

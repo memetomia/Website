@@ -1,7 +1,7 @@
 <?php
 
 include_once '../base/TableUser.php';
-include_once '../base/ClassCookie.php';
+
 $bd = new TableUser();
 $json = new stdClass();
 $bError = false;

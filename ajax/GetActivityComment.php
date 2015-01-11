@@ -1,10 +1,10 @@
 <?php
 
 include_once '../base/TableComment.php';
-include_once '../base/ClassCookie.php';
-$co = new ClassCookie("sec");
+include_once '../base/classSession.php';
+$co = new oSession();
 $bd = new TableComment();
-$bd->GetActivityMyComment($co->getSVar("iId"));
+$bd->GetActivityMyComment($co->GetVar("iId"));
 //$bd->GetActivityMyComment(0);
 
 $json = new stdClass();

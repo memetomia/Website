@@ -1,10 +1,10 @@
 <?php
 
 include_once '../base/TableUser_Gallery.php';
-include_once '../base/ClassCookie.php';
-$co = new ClassCookie("sec");
+include_once '../base/classSession.php';
+$co = new oSession();
 $bd = new TableUser_Gallery();
-$bd->GetActivityMyLike($co->getSVar("iId"));
+$bd->GetActivityMyLike($co->GetVar("iId"));
 //$bd->GetActivityMyLike(0);
 
 $json = new stdClass();

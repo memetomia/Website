@@ -1,10 +1,10 @@
 <?php
 
 include_once '../base/TableComment.php';
-include_once '../base/ClassCookie.php';
-$co = new ClassCookie("sec");
+include_once '../base/classSession.php';
+$co = new oSession();
 $bdCommentNotificaciones = new TableComment();
-$bdCommentNotificaciones->SeeCommentbyUser($co->getSVar("iId"));
+$bdCommentNotificaciones->SeeCommentbyUser($co->GetVar("iId"));
 
 $json = new stdClass();
 $json->Tupla = -1;

@@ -86,4 +86,3 @@ class oSession
         return $this->bIsSession;
     }
 }
-?>

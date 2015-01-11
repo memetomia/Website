@@ -4,8 +4,8 @@ include_once '../../base/TableUser.php';
 
 
 $bd = new TableUser();
-include_once '../base/ClassCookie.php';
-$co = new ClassCookie("sec");
+include_once '../base/classSession.php';
+$co = new oSession();
 
 $sUser = $_POST["sUser"];
 $sEmail = $_POST["sMail"];
@@ -13,7 +13,7 @@ $bVideo = $_POST["bCheckVideo"];
 $bGif = $_POST["bCheckGif"];
 $json = new stdClass();
 $json->Error = "";
-$bd->SearchById($co->getSVar("iId"));
+$bd->SearchById($co->GetVar("iId"));
 $CurrentUser = $bd->bd->obtener_respuesta(0, "USER");
 $CurrentEmail = $bd->bd->obtener_respuesta(0, "EMAIL");
 $CurrentVideo = $bd->bd->obtener_respuesta(0, "VIDEO");

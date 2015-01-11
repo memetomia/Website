@@ -1,9 +1,6 @@
 <?php
-if ($bTodoSimple != true) {
     if ($co->isEmpty()) {
 
-//   $bdUser->SearchByID($co->getSVar("iId"));
-//   $user=$bdUser->bd->obtener_respuesta(0,"NAME");
         ?>
         <nav class="navbar navbar-static-top navbar-inverse" role="navigation">
             <div class="container-fluid">
@@ -89,26 +86,3 @@ if ($bTodoSimple != true) {
         </nav>
         <?php
     }
-} else {
-    ?>
-    <nav class="navbar navbar-static-top navbar-inverse" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#memetomia-navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="<?php echo SERVER; ?>">Memetomía</a>
-            </div>
-            <div class="collapse navbar-collapse" id="memetomia-navbar">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="<?php echo SERVER; ?>">Inicio</a></li>
-                </ul>                    
-                <ul class="nav navbar-nav navbar-right">
-                </ul>                    
-
-            </div>
-    </nav>
-<?php } ?>

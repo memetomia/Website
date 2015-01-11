@@ -118,19 +118,19 @@
         
         function Cargar() {
 
-//            if (this.$_DirUrl != "") {
-//                this.$_DirUrl = $_sTitle.val();
-//            }
-//
-//            if ($_DirUrl != "") {
-//                $.post("ajax/SaveArticleByUser.php", {
-//                    sTitle: $_sTitle.val(),
-//                    sUrl: $_DirUrl
-//                 
-//                }, function(o) {
-//
-//                }, "json");
-//            }
+            if ($_DirUrl != "") {
+                $_DirUrl = $_sTitle.val();
+            }
+
+            if ($_DirUrl != "") {
+                $.post("ajax/SaveArticleByUser.php", {
+                    sTitle: $_sTitle.val(),
+                    sUrl: $_DirUrl
+                 
+                }, function(o) {
+
+                }, "json");
+            }
         }/* fin de funcion Cargar*/
         function GuardarDir(DirUrl) {
             this.$_DirUrl= DirUrl;

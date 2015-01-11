@@ -2,8 +2,8 @@
 
 include_once '../../base/TableGallery.php';
 include_once '../../base/TableTag.php';
-include_once '../base/ClassCookie.php';
-$co = new ClassCookie("sec");
+include_once '../base/classSession.php';
+$co = new oSession();
 
 $bd = new TableGallery();
 $bdTag = new TableTag();
@@ -20,7 +20,7 @@ $bCensura=1;
 $json = new stdClass();
 $json->Error = "";
 if ($bError == false) {
-    $iResultado = $bd->CreateWithUser($sTitle,$co->getSVar("iId"), 0, $infomedia, $sUrl, $aTag, $sComentario,$sMetaData,$bCensura);
+    $iResultado = $bd->CreateWithUser($sTitle,$co->GetVar("iId"), 0, $infomedia, $sUrl, $aTag, $sComentario,$sMetaData,$bCensura);
     $json = new stdClass();
 }
 if ($iResultado > 0) {

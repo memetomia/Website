@@ -44,7 +44,7 @@
         $RComentarios = $bdComment->SeeComment($iID);
         ?>    
 
-                        <!--<img class="post-media img-thumbnail" src="<?php echo $sMetaImagen ?>" width="100%" alt="<?php echo $sMetaTitulo ?>"/>-->
+                       
     </div>
     <div id="report-container" class="text-right"><a href="#" class="text-muted">Reportar Post</a></div>
     <div class="col-md-12"><hr/></div>                
@@ -86,7 +86,9 @@
         </div>
 
         <script type="text/javascript">
+ 
             $(document).ready(function() {
+               
                 Comment.Iniciar();
                 Comment.MostrarMensajes();
               
@@ -158,7 +160,7 @@ alert("hola");
                     $.post("ajax/AddComment.php", {
                         //iID:  $('#btComment').attr("data-id"),
                         iID:<?php echo $iID; ?>,
-                        iIDUser: <?php echo $co->getSVar("iId"); ?>,
+                        iIDUser: <?php echo $co->GetVar("iId"); ?>,
                         sComment: $('#user-comment-input').val()
                     }, function(o) {
                         if (o.Tupla == 0) {
