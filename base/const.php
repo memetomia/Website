@@ -91,6 +91,7 @@ if ($usuario == "hector") {
     defined('EXT_IMAGEN') ? null : define("EXT_IMAGEN", EXT_MEDIA . "/Imagen.php");
     defined('EXT_DEFAULT') ? null : define("EXT_DEFAULT", EXT_MEDIA . "/default");
 }
+
 if ($usuario == "luis") {
     defined('DB_SERVER') ? null : define("DB_SERVER", "localhost");
     defined('DB_USER') ? null : define("DB_USER", "root");
