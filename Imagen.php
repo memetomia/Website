@@ -24,7 +24,7 @@
         $bCuenta = 0;
 
         $imagenUserCurrent = "media/default/profile-example.jpg";
-        if ($co->IsSession()) {
+        if ($co->isEmpty()) {
             $bCuenta = 1;
             $imagenUserCurrent = "media/default/profile-example.jpg";
         }
@@ -208,7 +208,7 @@
 
         <?php
         if ($bTodoSimple != true) {
-            if ($co->IsSession()) {
+            if ($co->isEmpty()) {
                 include_once 'modal/notifications-modal.php';
                 include_once 'modal/new-post-modal.php';
                 include_once 'modal/activity-modal.php';
@@ -228,16 +228,6 @@
                     $('.comment-button, .like-button').click(function() {
                         $('#sign-in-modal').modal('show');
                     });
-
-
-
-
-
-
-
-
-
-
                 </script>
                 <?php
             }

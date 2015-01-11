@@ -117,7 +117,7 @@
 
         
         function Cargar() {
-alert("aaaa");
+
 //            if (this.$_DirUrl != "") {
 //                this.$_DirUrl = $_sTitle.val();
 //            }

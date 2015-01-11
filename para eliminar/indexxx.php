@@ -144,7 +144,7 @@
 
         <!-- MODAL Windows -->
         <?php
-        if ($co->IsSession()) {
+        if ($co->isEmpty()) {
             include_once 'modal/notifications-modal.php';
             include_once 'modal/new-post-modal.php';
             include_once 'modal/activity-modal.php';

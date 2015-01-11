@@ -69,7 +69,7 @@
 
     <!-- COMMENT SECTION -->  
     <?php
-    if ($co->IsSession()) {
+    if ($co->isEmpty()) {
 
         $imagenUserCurrent = "media/default/profile-example.jpg";
         ?>
@@ -82,13 +82,14 @@
             <textarea id="user-comment-input" class="form-control" placeholder="Deja un comentario"></textarea>
         </div>
         <div id="comment-button-container" class="text-right col-md-12">
-            <button class="btn btn-sm " id="btComment" data-id="" >Comentar</button>                                
+            <button class="btn btn-sm " id="btComment" data-id="" >Comentar!!!</button>                                
         </div>
 
         <script type="text/javascript">
             $(document).ready(function() {
                 Comment.Iniciar();
                 Comment.MostrarMensajes();
+              
             });
 
             /*
@@ -153,7 +154,7 @@
                  * agregar los comentarios en al bd y en la parte grafica
                  */
                 function AddComment() {
-
+alert("hola");
                     $.post("ajax/AddComment.php", {
                         //iID:  $('#btComment').attr("data-id"),
                         iID:<?php echo $iID; ?>,
@@ -186,7 +187,7 @@
         $imagenUserCurrent = "media/default/profile-example.jpg";
         ?>  
         <div class="col-md-12"><hr/></div>    
-        <form action="#" method="POST" class="form-inline" role="form">                                
+        <!--<form action="#" method="POST" class="form-inline" role="form">-->                                
             <div class="user-picture col-md-2 form-group">                            
                 <img src="<?php echo $imagenUserCurrent; ?>" class="img-rounded">
             </div>
@@ -194,9 +195,9 @@
                 <textarea id="user-comment-input" class="form-control" placeholder="Deja un comentario"></textarea>
             </div>
             <div id="comment-button-container" class="text-right col-md-12">
-                <button class="btn btn-sm btn-success">Comentar</button>                                
+                <button class="btn btn-sm btn-success" >Comentar</button>                                
             </div>
-        </form>    
+        <!--</form>-->    
         <div class="col-md-12"><hr/></div>    
             <?php
         }
