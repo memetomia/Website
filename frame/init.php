@@ -1,15 +1,15 @@
 <?php
 include_once 'base/const.php';
-include_once 'base/ClassCookie.php';
+include_once 'base/classSession.php';
 include_once 'base/TableUser.php';
 
-$co = new ClassCookie("sec");
+$co = new oSession();
 $bTodoSimple = false;
 $bdUser = new TableUser();
 
-    if ($co->IsSession()) {
+    if ($co->isEmpty()) {
 
-        $bdUser->SearchByID($co->getSVar("iId"));
+        $bdUser->SearchByID($co->GetVar("iId"));
         $user = $bdUser->bd->obtener_respuesta(0, "NAME");
     }
     ?>

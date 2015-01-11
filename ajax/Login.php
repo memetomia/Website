@@ -1,43 +1,40 @@
 <?php
 
+include_once '../base/classSession.php';
+$co = new oSession();
 include_once '../base/TableUser.php';
-include_once '../base/ClassCookie.php';
 $bd = new TableUser();
-$bError = false;
- $iResultado=-1;
- $json = new stdClass();
+$bError=false;
 if (isset($_POST["sUser"])) {
-    $sName = $_POST["sUser"];
+    $sUser = $_POST["sUser"];
 } else {
     $bError = true;
 }
-//if (isset($_POST["sRecordarme"])) {
-//    $sEmail = $_POST["sRecordarme"];
-//} else {
-//    $bError = true;
-//}
 if (isset($_POST["sPassword"])) {
-    $sPass = $_POST["sPassword"];
+    $sPassword = $_POST["sPassword"];
 } else {
     $bError = true;
 }
 
+$json = new stdClass();
 if ($bError == false) {
-    $iResultado = $bd->login($sName, $sPass);
+    $iResultado = $bd->login($sUser, $sPassword);
     if ($iResultado == 1) {
         if ($bd->bd->obtener_respuesta(0, "VERIFY") == 1) {
-            $co = new ClassCookie("sec");
-            $co->setSVar("iId", $bd->bd->obtener_respuesta(0, "ID"));
-           
-           $co->SaveAll();
-            $json->Listo="ok";
+            $resultado = $bd->bd->obtener_respuesta(0, "ID");
+            $co->PutVar("iId", $resultado);
+            $json->Tupla = 1;
+            $json->iError = 1;
         } else {
-            $json->sError = "falta verificar la cuenta";
+            $json->Tupla = -1;
+            $json->sError = "Falta verificar la cuenta";
         }
     } else {
-        $json->sError = "Clave y nombre de cuenta incorrecto";
+        $json->Tupla = -1;
+        $json->sError = "cuenta o contraseña incorrecta";
     }
 }
-$json->Tupla = $iResultado;
+
+
 echo json_encode($json);
 ?>

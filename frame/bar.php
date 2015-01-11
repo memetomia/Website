@@ -1,6 +1,6 @@
 <?php
 if ($bTodoSimple != true) {
-    if ($co->IsSession()) {
+    if ($co->isEmpty()) {
 
 //   $bdUser->SearchByID($co->getSVar("iId"));
 //   $user=$bdUser->bd->obtener_respuesta(0,"NAME");

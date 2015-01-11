@@ -77,8 +77,8 @@
                     sPassword: $_password.val()
                 }, function(o) {
                     $("#login-total-Mensaje").css("display", "none");
-                    if (o.Tupla = 1) {
-                       // location.href = "./index.php";
+                    if (o.iError == 1) {
+                      location.href = "./index.php";
                     } else {
                         $("#login-total-Mensaje").html(o.sError);
                         $("#login-total-Mensaje").css("display", "block");

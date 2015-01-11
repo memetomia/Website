@@ -144,6 +144,7 @@ class ClassCookie
     public function setSVar($sName, $sValue)
     {
         $this->sVar[$sName] = $sValue;
+      $this->bHaveInfo=true;
     }
 
     public function SaveAll()

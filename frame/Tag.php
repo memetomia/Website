@@ -14,7 +14,7 @@ if ($todo > 0) {
         </div>
         <div class="panel-body">
             <?php
-            for ($i = 0; $i < $todo; $i++) {
+            for ($i = 0; ($i < $todo)&&($i<30); $i++) {
                 echo '<a href="' . SERVER . '/Tag.php?Name=' . $bd->bd->obtener_respuesta($i, "NAME") . '"><span class="label label-warning">' . $bd->bd->obtener_respuesta($i, "NAME") . '</span></a> ' . '';
             }
         }

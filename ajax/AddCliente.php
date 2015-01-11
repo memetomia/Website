@@ -40,9 +40,9 @@ if ($bError == false) {
 if ($bError == false) {
 
     $iResultado = $bd->Create($sName, $sEmail, $sName, $sPass);
-    $co = new ClassCookie("sec");
-    $co->setSVar("iId", $iResultado);
-    $co->SaveAll();
+//    $co = new ClassCookie("sec");
+//    $co->setSVar("iId", $iResultado);
+//    $co->SaveAll();
     if ($iResultado > 0) {
         $link = "http://memetomia.com/verificar.php?code=" . md5($iResultado) . md5($sName);
         ini_set('sendmail_path', '/usr/sbin/sendmail');

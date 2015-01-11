@@ -284,7 +284,7 @@ WHERE g_t.`ID_GALLERY` ='%s'", $iID);
          return $this->bd->filas_retornadas_por_consulta();
     }
   public function ModArticle($sTitle,$sTag, $sComment,$bCensura,$iId) {
-        $query = sprintf("UPDATE  `gallery`.`gallery` SET  
+        $query = sprintf("UPDATE  `gallery` SET  
             `TITLE` =  '%s',
             `TAG` =  '%s',
             `COMMENT_ADDITIONAL` =  '%s',

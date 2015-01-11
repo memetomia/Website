@@ -69,7 +69,18 @@ class TableUser {
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
-
+ public function SearchaVarifyUserByCode($sParam) {
+        $query = sprintf("UPDATE  `user` SET  `VERIFY` =  '1' WHERE   CONCAT(  md5(`ID`) ,  md5(`NAME`) ) ='%s'; ", $sParam);
+        
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+public function SearchUserByCode($sParam) {
+        $query = sprintf("select  * from `user`  WHERE   CONCAT(  md5(`ID`) ,  md5(`NAME`) ) ='%s'; ", $sParam);
+        
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
     public function login($sName, $sPass) {
         $query = sprintf("SELECT * 
 FROM  `user` 

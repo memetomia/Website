@@ -86,7 +86,7 @@ include_once 'frame/init.php';
                             $bCensura = $bd->bd->obtener_respuesta($i, "CENSURA");
 
                            
-                                if ($co->IsSession()) {
+                                if ($co->isEmpty()) {
                                     $bCensura = 0;
                                       include 'frame/TimeLineIn.php';
                                 }else{
@@ -128,7 +128,7 @@ include_once 'frame/init.php';
         <!-- MODAL Windows -->
         <?php
         if ($bTodoSimple != true) {
-            if ($co->IsSession()) {
+            if ($co->isEmpty()) {
                 include_once 'modal/notifications-modal.php';
                 include_once 'modal/new-post-modal.php';
                 include_once 'modal/activity-modal.php';
