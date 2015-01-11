@@ -39,7 +39,23 @@ if ($bTodoSimple != true) {
                                     <li><a href="#" data-toggle="modal" data-target="#activity-modal"><span class="glyphicon glyphicon-tasks"></span> Actividad</a></li>                                
                                     <li><a href="#" data-toggle="modal" data-target="#settings-modal"><span class="glyphicon glyphicon-cog"></span> Ajustes</a></li>                                
                                     <li class="divider"></li>
-                                    <li><a href="LogOut.php"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>
+        <!--                                    <li><a href="LogOut.php"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>-->
+                                    <li><a id="alogout"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>
+                                    <script type="text/javascript">
+
+
+                                        $(function()
+                                        {
+                                            $("#alogout").click(function() {
+                                                $.post("LogOut.php", function() {
+
+                                                });
+                                                 location.reload();
+                                            });
+
+                                        });
+
+                                    </script>
                                 </ul>
                             </li>
                         </ul>                    
@@ -71,7 +87,7 @@ if ($bTodoSimple != true) {
 
                 </div>
         </nav>
-    <?php
+        <?php
     }
 } else {
     ?>
