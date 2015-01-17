@@ -1,5 +1,5 @@
       <div class="table-responsive">
-                        <h2 class="sub-header">Lista de Articulo  </h2>
+                        <h2 class="sub-header">Lista de Articulo </h2>
                         <table id="tabla" class="table ">
                             <thead>
                                 <tr>
@@ -15,7 +15,7 @@
                                 <?php
                                 include_once '../base/TableGallery.php';
                                 $bd = new TableGallery();
-                                $todo = $bd->TodoNOAceptados();
+                                $todo = $bd->All();
                                 $html = "";
                                    if ($todo > 0) {
                                     $sClass = "";

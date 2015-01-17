@@ -166,7 +166,11 @@ class TableGallery {
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
-
+ public function TodoNOAceptados() {
+        $query = sprintf("Select * from gallery  where STATE=1 ORDER BY `ID` DESC");
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
     public function Trending($iN) {
         $query = sprintf("SELECT g.*,u.NAME,u.PICTURE 
 FROM  `gallery` as g join user as u
