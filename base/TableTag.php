@@ -59,7 +59,7 @@ class TableTag {
       @return type description
      */
     public function UpdateVisitPlus($iID) {
-        $query = sprintf("UPDATE  `tag` SET  `VISIT` =  VISIT+1 WHERE  `ID` ='%s';", $iID);
+        $query = sprintf("UPDATE  `tag` SET  `VISIT` =  VISIT+1 WHERE  `NAME` ='%s';", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
@@ -106,7 +106,7 @@ FROM  `tag` where NAME='%s'", $sName);
     }
 
     public function All() {
-        $query = sprintf("Select * from tag ORDER BY  `tag`.`COUNT` DESC ;");
+        $query = sprintf("Select * from tag ORDER BY  `tag`.`VISIT` DESC ;");
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }

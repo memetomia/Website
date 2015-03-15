@@ -97,14 +97,14 @@ for ($i = 0; $i < count($supervector); $i++) {
     ?>
                     <div class="col-sm-10 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="art-<?php echo $id; ?>">
 
-                        <div class="row col-sm-5 col-md-5">
+                        <div class="row col-sm-7 col-md-7">
 
                             <h1 class="page-header">chiste   <button id='BtEliminar-<?php echo $id; ?>' type="button" class="btn btn-default"  >Eliminar </button></h1>
 
                             <form role="form">
                                 <div class="form-group">
                                     <label for="Nombre-<?php echo $id; ?>">Título</label>
-                                    <input type="text" class="form-control" id="Nombre-<?php echo $id; ?>" placeholder="Agrega una pagina nueva">
+                                    <input  type="text" class="form-control" id="Nombre-<?php echo $id; ?>" placeholder="Agrega una pagina nueva">
                                     <div id="MsgNombre-<?php echo $id; ?>" class="msgbox Oculto "></div>
                                     <script type="text/javascript">
 
@@ -123,12 +123,12 @@ for ($i = 0; $i < count($supervector); $i++) {
 
                                 <div class="form-group">
                                     <label for="Url-<?php echo $id; ?>">Imagen</label><br>
-                                    <img id="Url-<?php echo $id; ?>" class="post-media img-thumbnail" src="<?php echo $LinkImagen; ?>"  width="405" alt="I must become someone else, I must become something else">
+                                    <img style='width:100%' id="Url-<?php echo $id; ?>" class="post-media img-thumbnail" src="<?php echo $LinkImagen; ?>"  width="405" alt="No se pudo cargar la imagen">
                                     <div id="MsgUrl-<?php echo $id; ?>" class="msgbox Oculto"><span class="spanNoti"></span></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputTag-<?php echo $id; ?>">Etiqueta</label>
-                                    <input type="text" class="form-control" id="inputTag-<?php echo $id; ?>" placeholder="Agrega una pagina nueva">
+                                    <input type="text" class="form-control" id="inputTag-<?php echo $id; ?>" placeholder="Agrega una etiqueta a la imagen">
                                     <div id="MsginputTag-<?php echo $id; ?>" class="msgbox Oculto"><span class="spanNoti"></span></div>
                                     <script type="text/javascript">
 
@@ -169,7 +169,7 @@ for ($i = 0; $i < count($supervector); $i++) {
                             </form>
                         </div>
                         <!--tabla para verficiar-->
-                        <div class="col-sm-7 col-md-7  ">
+                        <div class="col-sm-5 col-md-5  ">
                             <div class="table-responsive">
                                 <div class="post col-md-12">
                                     <div class="post-header col-md-12">
@@ -181,23 +181,13 @@ for ($i = 0; $i < count($supervector); $i++) {
                                         </h5>                        
                                     </div>
                                     <div class="post-media-content col-md-9">
-                                        <img id="Imagen-<?php echo $id; ?>" class="post-media img-thumbnail" src="<?php echo $LinkImagen; ?>" alt="I must become someone else, I must become something else">
+                                        <img id="Imagen-<?php echo $id; ?>" class="post-media img-thumbnail" src="<?php echo $LinkImagen; ?>" alt="No se encontro la imagen">
                                     </div>
 
-                                    <div class="post-options col-md-3">
-                                        <button type="button" class="btn btn-default btn-block" data-toggle="button">
-                                            <span class="glyphicon glyphicon-thumbs-up"></span> Me gusta
-                                        </button>
-                                        <button type="button" class="btn btn-default btn-block">
-                                            <span class="glyphicon glyphicon-comment"></span> Comentar
-                                        </button>
-                                        <button type="button" class="btn btn-primary btn-block">Facebook</button>
-                                        <button type="button" class="btn btn-info btn-block">Twitter</button>
-
-                                    </div> 
+                               
                                     <div id="ContentAdicional-<?php echo $id; ?>" class="post-media-content col-md-9">
                                     </div>
-                                    <div class="post-footer col-md-12">
+                                    <div class="post-footer col-md-9">
                                         <div id="post-tags-<?php echo $id; ?>" data-count="0">                                
                                         </div>
                                     </div>

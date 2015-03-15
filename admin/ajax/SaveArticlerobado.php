@@ -2,12 +2,21 @@
 
 include_once '../../base/TableGallery.php';
 include_once '../../base/TableTag.php';
+include_once '../../base/funciones.php';
+//sTitulo 
+//iNumero  
+//aEtiqueta
+//$sImagen 
+//bCensura
+//id
+//Error 
+//filename 
 
 $bd = new TableGallery();
 $bdTag = new TableTag();
 $bError = false;
 $sTitulo = $_POST["sTitulo"];
-$iNumero = $_POST["iNumero"];
+$iNumero = $_POST["iNumero"]; //numero de posicion de la imagen en la interfaz de imagen robada; funciona para luego de guardo borrarla de la pantalla
 //$sComentario = $_POST["sComentario"];
 $sComentario = "";
 $aEtiqueta = $_POST["aEtiquetas"];
@@ -16,68 +25,59 @@ $sImagen = $_POST["sImagen"];
 $infomedia = "";
 //$sMetaData=$_POST["sMetaData"];
 $sMetaData = "";
-$bCensura = $_POST["bCensura"];
+//$bCensura = $_POST["bCensura"];
+$filename = $_POST["filename"];
+$id = $_POST["id"];
 
+$nameGif = $_POST["nameGif"];
+$height = $_POST["height"];
+$width = $_POST["width"];
+
+$ext = "";
+$media = 0;
 $json = new stdClass();
 $json->Error = "";
 
-$contents = file_get_contents($sImagen);
+if ($height > 1000) {
+    if ($nameGif == true) {
+        $fuente = @imagecreatefromgif(ARTICLE . "/" . $filename);
+    } else {
+        $fuente = @imagecreatefromjpeg(ARTICLE . "/" . $filename);
+    }
+    $imgAncho = imagesx($fuente);
+    $imgAlto = imagesy($fuente);
+     $imagen = imagecreatetruecolor($imgAncho, 350);
+    imagecopyresampled($imagen, $fuente, 0, 0, 0, 0, $imgAncho, 350, $imgAncho, 350);
+    imagejpeg($imagen, ARTICLE . "/C" . $filename . ".jpg");
+    $media = 5;
+    $infomedia = $filename;
+    $filename="C".$filename;
+    $filename.=".jpg";
+} else {
 
-
-$filename = "";
-$ext="";
-if ($contents != null) {
-    $filename .= rand(10, 99);
-    $filename .= rand(10, 99);
- 
-    $size = getimagesize($sImagen);
-    switch ($size['mime']) {
-        case "image/gif":
-            $ext .=".gif";
-            break;
-        case "image/jpeg":
-            $ext .=".jpg";
-            break;
-        case "image/png":
-            $ext .=".png";
-            break;
-        case "image/bmp":
-            $ext .=".bmp";
-            break;
+    if ($nameGif == true) {
+        $fuente = @imagecreatefromgif(ARTICLE . "/" . $filename);
+        $imgAncho = imagesx($fuente);
+        $imgAlto = imagesy($fuente);
+        $imagen = imagecreatetruecolor($imgAncho, $imgAlto);
+   //     $imagen = ImageCreate($imgAncho, $imgAlto);
+        ImageCopyResized($imagen, $fuente, 0, 0, 0, 0, $imgAncho, $imgAlto, $imgAncho, $imgAlto);
+        imagejpeg($imagen, ARTICLE . "/" . $filename . ".jpg");
+        $media = 4;
+        $infomedia = $filename;
+        $filename.=".jpg";
     }
 }
-while (file_exists($filename.$ext)){
-     $filename .= rand(10, 99);
-}
-$filename.=$ext;
-
-//   $filename .="." . end($trozos);
-$savefile = fopen(ARTICLE . "/" . $filename, 'w');
-fwrite($savefile, $contents);
-fclose($savefile);
-
-
 if ($bError == false) {
-    $iResultado = $bd->Create($sTitulo, 0, $infomedia, $filename, $aEtiqueta, $sComentario, $sMetaData, $bCensura);
-
+     $iResultado = $bd->UpdateUrl($filename, $id);
+    if ($media != 0) {
+        $iResultado = $bd->UpdateTypeMedia($media, $id);
+        $iResultado = $bd->UpdateInfoMedia($infomedia, $id);
+    }
     $json = new stdClass();
 }
-
-if ($iResultado > 0) {
-    $stags = json_decode($aEtiqueta, true);
-
-
-    for ($i = 0; $i < count($stags); $i++) {
-        $iIDTag = $bdTag->iSearchTagByNameExact($stags[$i]);
-        $bdTag->AddTagToArticle($iIDTag, $iResultado);
-    }
-} else {
-    $json->Error = $bd->bd->obtener_error();
-   
-}
-
-
 $json->Tupla = $iResultado;
- $json->Numero=$iNumero;
+//$json->iNumero = $iNumero;
+$json->iNumero = 0;
 echo json_encode($json);
 ?>

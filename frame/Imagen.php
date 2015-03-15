@@ -3,9 +3,9 @@
     <div class="post-header ">
         <h3 class="post-title text-info"><?php echo $sMetaTitulo; ?></h3>
         <h5 class="post-subtitle text-muted">
-            Publicado por: <a href="#"><?php echo $sUser; ?></a> <b>·</b> 
-            <span class="like-counter"><span class="glyphicon glyphicon-thumbs-up  "></span> <?php echo $iLike; ?> me gusta</span> <b>·</b> 
-            <span class="comment-counter"><span class="glyphicon glyphicon-comment"></span><?php echo $iComment; ?> comentarios</span>
+            Publicado por: <a href="#"><?php echo $sName; ?></a> <b>·</b> 
+            <span class="like-counter"><span class="glyphicon glyphicon-thumbs-up  "></span> <?php echo $iNMore; ?> me gusta</span> <b>·</b> 
+            <span class="comment-counter"><span class="glyphicon glyphicon-comment"></span><?php echo $iNComment; ?> comentarios</span>
         </h5>
     </div>
 
@@ -21,14 +21,14 @@
         </div>
         <div class="col-md-4">
 
-            <button id="FB-<?php echo $iID ?>" d-link="http://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode("http://www.memetomia.com/Imagen.php?i=") . $iID . "&t=" . $sMetaTitulo ?>" type="button" class="btn btn-primary btn-block">Facebook</button>
+            <button id="FB-<?php echo $iID ?>" d-link="http://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode("http://www.memetomia.com/Imagen.php?id=") . $iID . "&t=" . $sMetaTitulo ?>" type="button" class="btn btn-primary btn-block">Facebook</button>
             <script type="text/javascript">$('#FB-<?php echo $iID ?>').click(function() {
                     FB(<?php echo $iID ?>);
                 });</script>
 
         </div>
         <div class="col-md-4">
-            <button id="TW-<?php echo $iID ?>" d-link="https://twitter.com/intent/tweet?button_hashtag=&text=<?php echo urlencode("http://www.memetomia.com/Imagen.php?i=") . $iID ?>"type="button" class="btn btn-info btn-block">Twitter</button>
+            <button id="TW-<?php echo $iID ?>" d-link="https://twitter.com/intent/tweet?button_hashtag=&text=<?php echo urlencode("http://www.memetomia.com/Imagen.php?id=") . $iID ?>"type="button" class="btn btn-info btn-block">Twitter</button>
             <script type="text/javascript">$('#TW-<?php echo $iID ?>').click(function() {
                     TW(<?php echo $iID ?>);
                 });</script>
@@ -156,7 +156,7 @@
                  * agregar los comentarios en al bd y en la parte grafica
                  */
                 function AddComment() {
-alert("hola");
+
                     $.post("ajax/AddComment.php", {
                         //iID:  $('#btComment').attr("data-id"),
                         iID:<?php echo $iID; ?>,
@@ -197,7 +197,7 @@ alert("hola");
                 <textarea id="user-comment-input" class="form-control" placeholder="Deja un comentario"></textarea>
             </div>
             <div id="comment-button-container" class="text-right col-md-12">
-                <button class="btn btn-sm btn-success" >Comentar</button>                                
+                <button class="btn btn-sm" id="btComment">Comentar</button>                                
             </div>
         <!--</form>-->    
         <div class="col-md-12"><hr/></div>    

@@ -20,42 +20,17 @@ include_once 'frame/init.php';
         <script src="js/jqueryUI.custom.min.js"></script>  
         <script src="js/bootstrap-switch.min.js"></script>  
         <script src="js/jquery.validate.min.js"></script>
-        <script src="js/fileuploader.js"></script>
-        <?php
-        if (!$co->isEmpty()) {
-            ?>
-            <script src="js/facebook.js"></script>
-            <?php
-        }
-        ?>
-
+           <!--<script src="js/fileuploader.js"></script>-->
+          <script src="js/facebook.js"></script>
 
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-
-        <script>
-
-
-            (function(d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id))
-                    return;
-                js = d.createElement(s);
-                js.id = id;
-                js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=698748520141678&version=v2.0";
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-
-          
-
-
-        </script>
     </head>
     <body>       
 
-<?php include_once 'frame/bar.php'; ?>
+        <?php include_once 'frame/bar.php'; ?>
         <div id="main-content" class="container">
             <div id="timeline-container" class="col-md-12">
 
@@ -91,14 +66,14 @@ include_once 'frame/init.php';
                     $bdControl = new TableControl();
                     $bdControl->addVisitGlobal();
                     if ($index != 0) {
-                        $index = $index * 10;
+                        $index = $index * 5;
                     }
 
-                    $todo = $bd->LastNArticle($index, 10);
+                    $todo = $bd->LastNArticleforUser($index, 5);
 
                     if ($todo > 0) {
                         $html = "";
-
+                     
                         for ($i = 0; $i < $todo; $i++) {
 
                             $iState = $bd->bd->obtener_respuesta($i, "STATE");
@@ -112,22 +87,22 @@ include_once 'frame/init.php';
                             $iNComment = $bd->bd->obtener_respuesta($i, "N_COMMENT");
                             $ComentarioAdicional = $bd->bd->obtener_respuesta($i, "COMMENT_ADDITIONAL");
                             $bCensura = $bd->bd->obtener_respuesta($i, "CENSURA");
-                            $iNVisit = $bd->bd->obtener_respuesta($i, "N_VISIT");
+                           $iNVisit  = $bd->bd->obtener_respuesta($i, "N_VISIT");
                             if ($co->isEmpty()) {
                                 $bCensura = 0;
                             }
 
 //                            if ($co->isEmpty()) {
 //                                $bCensura = 0;
-                            // include 'frame/TimeLineIn.php';
+                           // include 'frame/TimeLineIn.php';
 //                            } else {
 //                                //  $bCensura = 1;
-                            include 'frame/TimeLineOut.php';
+     include 'frame/TimeLineOut.php';
 //                            }
                         }
                     }
                     ?>
-<?php // include_once 'frame/TimeLine.php';  ?>
+                    <?php // include_once 'frame/TimeLine.php'; ?>
 
                     <div class="col-md-12">
                         <ul class="pager">
@@ -140,11 +115,9 @@ include_once 'frame/init.php';
                 </div>
 
                 <div id="sidebar" class="col-md-4">
-                    <?php include_once 'frame/bannerFBcontacto.php'; ?>
-
+                    <?php include_once 'frame/Tag.php'; ?>
                     <?php include_once 'frame/Destacados.php'; ?>
-<?php include_once 'frame/Tag.php'; ?>
-<?php include_once 'frame/MasVistos.php'; ?>
+  <?php include_once 'frame/MasVistos.php'; ?>
 
 
                     <!--                    <div class="panel panel-info">                        
@@ -159,49 +132,47 @@ include_once 'frame/init.php';
 
         <!-- MODAL Windows -->
         <?php
-        if ($co->isEmpty()) {
-            include_once 'modal/notifications-modal.php';
-            include_once 'modal/new-post-modal.php';
-            include_once 'modal/activity-modal.php';
-            include_once 'modal/settings-modal.php';
-            ?> 
-            <script>
-                // Activating All Switches
-                $(".settings-switch").bootstrapSwitch();
-                function FunComment(iId) {
-                    window.location.href = IMAGE + iId;
-                }
-            </script>
-            <?php
-        } else {
-            include_once 'modal/login-modal.php';
-            include_once 'modal/sign-in-modal.php';
-            ?>
-            <script>
-                // activa modal registro al presionar botones
-                $('.comment-button, .like-button').click(function() {
-                    $('#sign-in-modal').modal('show');
-                });
-
-                (function(d, s, id) {
-                    var js, fjs = d.getElementsByTagName(s)[0];
-                    if (d.getElementById(id))
-                        return;
-                    js = d.createElement(s);
-                    js.id = id;
-                    js.src = "//connect.facebook.net/en_US/sdk.js";
-                    fjs.parentNode.insertBefore(js, fjs);
-                }(document, 'script', 'facebook-jssdk'));
-
-
-
-
-            </script>
-            <?php
+        if ($bTodoSimple != true) {
+            if ($co->isEmpty()) {
+                include_once 'modal/notifications-modal.php';
+                include_once 'modal/new-post-modal.php';
+                include_once 'modal/activity-modal.php';
+                include_once 'modal/settings-modal.php';
+                ?> 
+                <script>
+                    // Activating All Switches
+                    $(".settings-switch").bootstrapSwitch();
+                    function FunComment(iId) {
+                        window.location.href = IMAGE + iId;
+                    }
+                </script>
+                <?php
+            } else {
+                include_once 'modal/login-modal.php';
+                include_once 'modal/sign-in-modal.php';
+                ?>
+                <script>
+                    // activa modal registro al presionar botones
+                    $('.comment-button, .like-button').click(function() {
+                        $('#sign-in-modal').modal('show');
+                    });
+                </script>
+                <?php
+            }
         }
         ?>
         <!-- MODAL Windows -->
 
+   <script>
+	// Load the SDK asynchronously
+	  (function(d, s, id) {
+	    var js, fjs = d.getElementsByTagName(s)[0];
+	    if (d.getElementById(id)) return;
+	    js = d.createElement(s); js.id = id;
+	    js.src = "//connect.facebook.net/en_US/sdk.js";
+	    fjs.parentNode.insertBefore(js, fjs);
+	  }(document, 'script', 'facebook-jssdk'));
+	 </script>
 
 
 

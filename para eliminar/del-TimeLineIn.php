@@ -1,34 +1,30 @@
 <div class="post col-md-12">   
     <?php
     $sClass = "";
+
+
+
     $sUrlaMostrar = "";
     $botonplay = "";
-        include 'frame/PrepararImagen.php';
-        if ($bCensura == 1) {
-            $sUrlaMostrar = '<img style="width:100%" class="img-thumbnail img-small" src="' . EXT_MEDIA . '/default/INS.png" />';
-            $botonplay = "";
-        }
+    if ($iState == 0) {
+include_once 'frame/PrepararImagen.php';
         ?>
         <div id="A<?php echo $iID ?>" class="post-header col-md-12">
             <h3 class="post-title text-info"><a href="./Imagen.php?id=<?php echo $iID ?>"><?php echo $sTitle ?></a></h3>
             <h5 class="post-subtitle text-muted">
                 Publicado por: <a href="#"><?php echo $sName ?></a> <b>·</b> 
-                  <span class="like-counter"><span class="glyphicon glyphicon-thumbs-up"></span> <?php echo $iNVisit ?> visitas</span> <b>·</b> 
                 <span class="like-counter"><span class="glyphicon glyphicon-thumbs-up"></span> <?php echo $iNMore ?> me gusta</span> <b>·</b> 
                 <span class="comment-counter"><span class="glyphicon glyphicon-comment"></span> <?php echo $iNComment ?> comentarios</span>
-                
             </h5>                        
         </div>
-        <?php include 'frame/share.php'; ?>
+        <?php include_once 'frame/share.php'; ?>
         <div class="post-media-content col-md-12">
 
             <?php
-            include_once 'frame/share.php';
-            echo '<div class = "DivPlay" id = "d-' . $iID . '" > ' . $sUrlaMostrar;
+            echo '<div class="DivPlay" id="d-' . $iID . '" >' . $sUrlaMostrar;
             echo $botonplay . "</div>";
-            echo $ComentarioAdicional
+            echo $ComentarioAdicional;
             ?>    
-
 
         </div>
 
@@ -41,11 +37,10 @@
                 }
                 ?>
             </div>
-
         </div>
         <?php
-   
-    include 'frame/sharebottom.php';
+    }
+    include_once 'frame/sharebottom.php';
     ?> 
 
 

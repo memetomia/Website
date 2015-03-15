@@ -1,6 +1,6 @@
 <div class="panel panel-info">
     <div class="panel-heading">
-        <h3 class="panel-title">Destacados</h3>
+        <h3 class="panel-title">Mas vistos</h3>
     </div>
     <style type="text/css">
         .thumbdestacados{
@@ -9,10 +9,7 @@
 
         }
         .imagenOverFlow{
-
             max-width: 318px;
-         
-
         }
         .titleImagenOverFlow{
             font-size: 15px;
@@ -25,7 +22,7 @@
         include_once 'base/TableGallery.php';
 
         $bd = new TableGallery();
-        $todo = $bd->Trending(5);
+        $todo = $bd->MoreVisit(5);
         $html = "";
         if ($todo > 0) {
             $sClass = "";

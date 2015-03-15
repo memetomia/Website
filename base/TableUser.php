@@ -32,15 +32,15 @@ class TableUser {
 
         $query = sprintf("INSERT INTO `user` "
                 . "(`ID`, `FBID`, `NAME`, `EMAIL`, `PICTURE`, `VERIFY`, `USER`, `PASS`) VALUES "
-                . "(NULL, '', '%s', '%s', '', 0, '%s', md5('%s'));", $sName, $sEmail, $sUser, $sPass);
+                . "(NULL, '', '%s', '%s', 'media/default/UserPredeterminado.png', 0, '%s', md5('%s'));", $sName, $sEmail, $sUser, $sPass);
         $this->bd->hacer_query($query);
         return $this->bd->ultimo_id_generado_por_la_bd();
     }
 
-    public function CreateFB($sFBID, $sName, $sEmail, $sDirPicture, $sUser, $sPass) {
+    public function CreateFB($sFBID, $sName, $sEmail, $sDirPicture, $sUser, $sPass, $sGenero) {
         $query = sprintf("INSERT INTO `user` "
-                . "(`ID`, `FBID`, `NAME`, `EMAIL`, `PICTURE`, `VERIFY`, `USER`, `PASS`) VALUES "
-                . "(NULL, '%s', '%s', '%s', '%s', 1, '%s', md5('%s'));", $sFBID, $sName, $sEmail, $sDirPicture, $sUser, $sPass);
+                . "(`ID`, `FBID`, `NAME`, `EMAIL`, `PICTURE`, `VERIFY`, `USER`, `PASS`,`GENERO`) VALUES "
+                . "(NULL, '%s', '%s', '%s', '%s', 1, '%s', md5('%s'),'%s');", $sFBID, $sName, $sEmail, $sDirPicture, $sUser, $sPass, $sGenero);
         $this->bd->hacer_query($query);
         return $this->bd->ultimo_id_generado_por_la_bd();
     }
@@ -54,6 +54,7 @@ class TableUser {
 
     public function SearchEmail($sParam) {
         $query = sprintf("SELECT * FROM  `user` WHERE `EMAIL` =  '%s'", $sParam);
+
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
@@ -69,18 +70,21 @@ class TableUser {
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
- public function SearchaVarifyUserByCode($sParam) {
+
+    public function SearchaVarifyUserByCode($sParam) {
         $query = sprintf("UPDATE  `user` SET  `VERIFY` =  '1' WHERE   CONCAT(  md5(`ID`) ,  md5(`NAME`) ) ='%s'; ", $sParam);
-        
+
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
-public function SearchUserByCode($sParam) {
+
+    public function SearchUserByCode($sParam) {
         $query = sprintf("select  * from `user`  WHERE   CONCAT(  md5(`ID`) ,  md5(`NAME`) ) ='%s'; ", $sParam);
-        
+
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
+
     public function login($sName, $sPass) {
         $query = sprintf("SELECT * 
 FROM  `user` 
@@ -96,7 +100,7 @@ AND  `PASS` =  md5('%s')", $sName, $sName, $sPass);
     function SearchFbID($iID) {
         $query = sprintf("SELECT * 
 FROM  `user` 
-WHERE (
+WHERE
 `FBID` =  '%s'
 ", $iID);
         $this->bd->hacer_query($query);
@@ -112,6 +116,12 @@ WHERE (
      */
     public function UpdateUserPicture($sData, $iID) {
         $query = sprintf("UPDATE  `user` SET  `PICTURE` =  '%s' WHERE  `user`.`ID` ='%s';", $sData, $iID);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+
+    public function UpdateUserFBID($sData, $iID) {
+        $query = sprintf("UPDATE  `user` SET  `FBID` =  '%s' WHERE  `user`.`ID` ='%s';", $sData, $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }

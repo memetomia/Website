@@ -39,9 +39,6 @@ class TableGallery {
         return $this->bd->ultimo_id_generado_por_la_bd();
     }
 
-    
-    
-    
     /**
       Crea una tupla en la base de dato gallery ; agrega una imagen en la tabla gallery y a un usuario dueño de la tupla
       @param String $sTitle almacena el titulo maximo 255 caracteristica .
@@ -56,13 +53,30 @@ class TableGallery {
 
       @return integer numero de tupla o -1 si falla la creacion
      */
-    public function CreateWithUser($sTitle, $iOwner, $iTypeMedia, $sInfoMedia, $sUrl, $sTag, $sComment, $sMeta = "", $bCensura) {
+    public function CreateWithUser($sTitle, $iOwner, $sInfoMedia, $sUrl) {
         $query = sprintf("INSERT INTO `gallery` "
                 . "(`ID`,`OWNER`, `TITLE`, `TYPEMEDIA`, `INFOMEDIA`, `URL`, `DATE`, `TAG`, `N_MORE`, `N_LESS`, `N_COMMENT`, `COMMENT_ADDITIONAL`,STATE,META,CENSURA) "
-                . "VALUES (NULL, '%s', '%s', '%s', '%s', CURRENT_TIMESTAMP, '%s', 0, 0, 0, '%s','1','%s','%s');", $sTitle, $iOwner, $iTypeMedia, $sInfoMedia, $sUrl, $sTag, $sComment, $sMeta, $bCensura);
+                . "VALUES (NULL, '%s', '%s',0, '%s','%s', CURRENT_TIMESTAMP, '[]', 0, 0, 0, '','2','','');", $iOwner, $sTitle, $sInfoMedia, $sUrl);
         $this->bd->hacer_query($query);
-
         return $this->bd->ultimo_id_generado_por_la_bd();
+    }
+
+    public function UpdateUrl($sData, $iID) {
+        $query = sprintf("UPDATE  `gallery` SET  `URL` =  '%s' WHERE  `ID` ='%s';", $sData, $iID);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+
+    public function UpdateInfoMedia($sData, $iID) {
+        $query = sprintf("UPDATE  `gallery` SET  `INFOMEDIA` =  '%s' WHERE  `ID` ='%s';", $sData, $iID);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+
+    public function UpdateTypeMedia($sData, $iID) {
+        $query = sprintf("UPDATE  `gallery` SET  `TYPEMEDIA` =  '%s' WHERE  `ID` ='%s';", $sData, $iID);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
     }
 
     /**
@@ -99,6 +113,12 @@ class TableGallery {
      */
     public function UpdateNMorePlus($iID) {
         $query = sprintf("UPDATE  `gallery` SET  `N_MORE` = N_MORE+1,DATE=DATE WHERE  `ID` ='%s';", $iID);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+
+    public function UpdateNVISITPlus($iID) {
+        $query = sprintf("UPDATE  `gallery` SET  `N_VISIT` = N_VISIT+1,DATE=DATE WHERE  `ID` ='%s';", $iID);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
@@ -162,21 +182,41 @@ class TableGallery {
     }
 
     public function All() {
-        $query = sprintf("Select * from gallery ORDER BY  `ID` DESC");
+        $query = sprintf("Select g.* from gallery as g 
+WHERE g.STATE=0 ORDER BY  `ID` DESC");
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
- public function TodoNOAceptados() {
+
+    public function TodoNOAceptados() {
         $query = sprintf("Select * from gallery  where STATE=1 ORDER BY `ID` DESC");
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
+
     public function Trending($iN) {
-        $query = sprintf("SELECT g.*,u.NAME,u.PICTURE 
-FROM  `gallery` as g join user as u
+        $query = sprintf("SELECT g.* 
+FROM  `gallery` as g
 WHERE g.STATE=0
-ORDER BY  g.`N_MORE` ASC 
+ORDER BY  g.`N_MORE` desc 
 LIMIT 0 , %s", $iN);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+public function MoreVisit($iN) {
+        $query = sprintf("SELECT g.* 
+FROM  `gallery` as g
+WHERE g.STATE=0
+ORDER BY  g.`N_VISIT` desc 
+LIMIT 0 , %s", $iN);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+    
+    
+    public function Movil($iN) {
+        $query = sprintf("Select distinct g.*,u.NAME,u.PICTURE from gallery as g join user as u
+WHERE g.STATE=0 ORDER BY  g.`ID` asc LIMIT 0 , %s", $iN);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
@@ -207,6 +247,12 @@ FROM  `gallery` as g join gallery_tag as rgt on rgt.ID_GALLERY=g.ID where %s ", 
         return $this->bd->obtener_respuesta_completa();
     }
 
+    public function SearchByTitle($sTitle) {
+        $query = sprintf("Select g.ID, g.OWNER,g.TITLE,g.TYPEMEDIA,g.INFOMEDIA,g.URL,g.DATE,g.TAG,g.N_MORE,g.N_LESS,g.N_COMMENT,g.STATE,g.COMMENT_ADDITIONAL,u.NAME, g.META , g.CENSURA from gallery as g join user as u on (u.ID=g.OWNER) where g.TITLE='%s'", $sTitle);
+        $this->bd->hacer_query($query);
+        return $this->bd->obtener_respuesta_completa();
+    }
+
     public function Active($iID) {
         $query = sprintf("UPDATE  `gallery` SET  `STATE` = 0 WHERE  `ID` ='%s';", $iID);
         $this->bd->hacer_query($query);
@@ -226,9 +272,21 @@ FROM  `gallery` as g join gallery_tag as rgt on rgt.ID_GALLERY=g.ID where %s ", 
         return $this->bd->filas_retornadas_por_consulta();
     }
 
-// TODO ARREGLARAQUI UN PROBLEMA
     public function LastNArticle($iInicio, $iFin) {
-        $query = sprintf("Select g.CENSURA,g.ID, g.OWNER,g.TITLE,g.TYPEMEDIA,g.INFOMEDIA,g.URL,g.DATE,g.TAG,g.N_MORE,g.N_LESS,g.N_COMMENT,g.STATE,g.COMMENT_ADDITIONAL,u.NAME from gallery as g join user as u on (u.ID=g.OWNER) WHERE STATE=0 ORDER BY  g.`DATE`  DESC LIMIT %s,%s;", $iInicio, $iFin);
+        $query = sprintf("Select g.N_VISIT,g.CENSURA,g.ID, g.OWNER,g.TITLE,g.TYPEMEDIA,g.INFOMEDIA,g.URL,g.DATE,g.TAG,g.N_MORE,g.N_LESS,g.N_COMMENT,g.STATE,g.COMMENT_ADDITIONAL,u.NAME from gallery as g join user as u on (u.ID=g.OWNER) WHERE STATE=0 ORDER BY  g.`DATE`  DESC LIMIT %s,%s;", $iInicio, $iFin);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+
+     public function LastNArticleforUser($iInicio, $iFin) {
+        $query = sprintf("Select g.N_VISIT,g.CENSURA,g.ID, g.OWNER,g.TITLE,g.TYPEMEDIA,g.INFOMEDIA,g.URL,g.DATE,g.TAG,g.N_MORE,g.N_LESS,g.N_COMMENT,g.STATE,g.COMMENT_ADDITIONAL,u.NAME from gallery as g join user as u on (u.ID=g.OWNER) WHERE STATE=0 OR STATE=2 ORDER BY  g.`DATE`  DESC LIMIT %s,%s;", $iInicio, $iFin);
+        $this->bd->hacer_query($query);
+        return $this->bd->filas_retornadas_por_consulta();
+    }
+
+    
+    public function LastNArticleINS($iInicio, $iFin) {
+        $query = sprintf("Select g.CENSURA,g.ID, g.OWNER,g.TITLE,g.TYPEMEDIA,g.INFOMEDIA,g.URL,g.DATE,g.TAG,g.N_MORE,g.N_LESS,g.N_COMMENT,g.STATE,g.COMMENT_ADDITIONAL,u.NAME from gallery as g join user as u on (u.ID=g.OWNER) WHERE STATE=0 AND CENSURA=1 ORDER BY  g.`DATE`  DESC LIMIT %s,%s;", $iInicio, $iFin);
         $this->bd->hacer_query($query);
         return $this->bd->filas_retornadas_por_consulta();
     }
@@ -285,24 +343,26 @@ FROM  `tag` AS t
 JOIN gallery_tag AS g_t ON g_t.ID_TAG = t.ID
 WHERE g_t.`ID_GALLERY` ='%s'", $iID);
         $this->bd->hacer_query($query);
-         return $this->bd->filas_retornadas_por_consulta();
+        return $this->bd->filas_retornadas_por_consulta();
     }
-  public function ModArticle($sTitle,$sTag, $sComment,$bCensura,$iId) {
+
+    public function ModArticle($sTitle, $sTag, $sComment, $bCensura, $iId) {
         $query = sprintf("UPDATE  `gallery` SET  
             `TITLE` =  '%s',
             `TAG` =  '%s',
             `COMMENT_ADDITIONAL` =  '%s',
             `CENSURA` =  '%s'
-WHERE  `gallery`.`ID` ='%s';", $sTitle,$sTag, $sComment,$bCensura,$iId);
+WHERE  `gallery`.`ID` ='%s';", $sTitle, $sTag, $sComment, $bCensura, $iId);
         $this->bd->hacer_query($query);
 
         return $this->bd->filas_retornadas_por_consulta();
     }
-    public function DelAllTagForArticleId($iID){
-       $query = sprintf("delete from gallery_tag where ID_GALLERY='%s'",$iID);
+
+    public function DelAllTagForArticleId($iID) {
+        $query = sprintf("delete from gallery_tag where ID_GALLERY='%s'", $iID);
         $this->bd->hacer_query($query);
 
-        return $this->bd->filas_retornadas_por_consulta(); 
+        return $this->bd->filas_retornadas_por_consulta();
     }
-    
+
 }

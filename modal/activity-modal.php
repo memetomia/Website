@@ -259,7 +259,12 @@
          */
         $_menu.find('label').click(function()
         {
-            /* 
+           
+                  modalActivity.Iniciar();
+        modalActivity.CargarPost();
+        modalActivity.CargarLike();
+        modalActivity.CargarComment();
+   /* 
              * Descripción: 
              * 1- captura el ID de la opción seleccionada.
              * 2- reemplaza el 'option' del ID por 'content'.
@@ -271,13 +276,14 @@
             $_contents.hide();
             // busca dentro del modal y muestra el contenido escogido
             $_modal.find(idContent).show();
+        
         });
         /*
          * Eventos que se ejecutan cuando el modal se carga
          * pero aún no es visible para el usuario
          */
         $_modal.on('show.bs.modal', function()
-        {
+        { 
             // remueve la clase .active del menú que lo posea actualmente
             $_menu.find('label.active').removeClass('active');
             // coloca la clase .active al primer elemento del menú y llama al evento click

@@ -50,7 +50,7 @@ gt.`ID_GALLERY`=%s", $iID);
         $query = sprintf("SELECT DISTINCT g.TITLE, g.N_MORE, g.N_COMMENT, g.URL,g.TYPEMEDIA
 FROM gallery AS g
 JOIN user_gallery AS c ON g.ID = c.ID_GALLARY
-WHERE c.`ID_USER` =  '12'", $iUser);
+WHERE c.`ID_USER` =  '%s'", $iUser);
         $this->bd->hacer_query($query);
 
         return $this->bd->ultimo_id_generado_por_la_bd();

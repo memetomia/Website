@@ -1,18 +1,25 @@
 <?php
+
 include_once '../base/TableGallery.php';
-$bd=new TableGallery();
-$bError=false;
+include_once '../base/classSession.php';
+include_once '../base/TableUser_Gallery.php';
+$bd = new TableGallery();
+$bdug = new TableUser_Gallery();
+$co = new oSession();
+$bError = false;
 $iID = $_POST["iID"];
 
-if ($iID==""){
-    $bError=true;
+if ($iID == "") {
+    $bError = true;
 }
 
-if ($bError==false){
-$iResultado=$bd->UpdateNMorePlus($iID);
-$json=new stdClass();
+if ($co->isEmpty()) {
+    $bdug->Create($co->GetVar("iId"), $iID, 2);
 }
-$json->Tupla=$iResultado;
+if ($bError == false) {
+    $iResultado = $bd->UpdateNMorePlus($iID);
+    $json = new stdClass();
+}
+$json->Tupla = $iResultado;
 echo json_encode($json);
-
 ?>

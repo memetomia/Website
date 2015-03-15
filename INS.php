@@ -1,10 +1,7 @@
+<!DOCTYPE html>
 <?php
-//header ("Location: coming-soon.php");   
-//
 include_once 'frame/init.php';
 ?>
-
-<!DOCTYPE html>
 <html lang="es">
     <head>
         <meta charset="utf-8">
@@ -23,7 +20,7 @@ include_once 'frame/init.php';
         <script src="js/jqueryUI.custom.min.js"></script>  
         <script src="js/bootstrap-switch.min.js"></script>  
         <script src="js/jquery.validate.min.js"></script>
-        <script src="js/fileuploader.js"></script>
+           <!--<script src="js/fileuploader.js"></script>-->
         <script src="js/fb.js"></script>
 
         <!--[if lt IE 9]>
@@ -32,58 +29,52 @@ include_once 'frame/init.php';
         <![endif]-->
     </head>
     <body>       
+
         <?php include_once 'frame/bar.php'; ?>
         <div id="main-content" class="container">
             <div id="timeline-container" class="col-md-12">
 
-<!--                <div class="ad-panel col-md-12">
-                    <div class="panel panel-info">                    
-                        <div class="panel-body">
-                            publicidad aqui
-                        </div>
-                    </div>
-                </div>-->
 
                 <div id="timeline" class="col-md-8">
+
                     <?php
-                    // include_once 'base/const.php';
+                    //           include_once 'base/const.php';
                     $paginador = "";
                     $index = 0;
-                    $name = "";
-                    if (isset($_GET["Name"])) {
-                        $name = $_GET["Name"];
-                    }
                     if (isset($_GET["i"])) {
                         $index = $_GET["i"];
-                    } else {
-                        $index = 0;
                     }
                     if ($index <= 0) {
                         $index = 0;
                         $prev = $index - 1;
                         $next = $index + 1;
-                        $paginador = '<li class="previous disabled"><a href="' . SERVER . '/tag.php?i=' . $prev . '&Name=' . $name . '">&larr; Atrás</a></li><li class="next"><a href="' . SERVER . "/tag.php?i=" . $next . '&Name=' . $name . '">Siguiente &rarr;</a></li>';
+                        if ($index <= 0) {
+                            $paginador = '<li class="previous disabled"><a >&larr; Atrás</a></li><li class="next"><a href="' . SERVER . "/INS.php?i=" . $next . '">Siguiente &rarr;</a></li>';
+                        } else {
+                            $paginador = '<li class="previous disabled"><a href="' . SERVER . "/INS.php?i=" . $prev . '">&larr; Atrás</a></li><li class="next"><a href="' . SERVER . "/INS.php?i=" . $next . '">Siguiente &rarr;</a></li>';
+                        }
                     } else {
                         $prev = $index - 1;
                         $next = $index + 1;
-                        $paginador = '<li class="previous"><a href="' . SERVER . '/tag.php?i=' . $prev . '&Name=' . $name . '">&larr; Atrás</a></li><li class="next"><a href="' . SERVER . "/tag.php?i=" . $next . '&Name=' . $name . '">Siguiente &rarr;</a></li>';
+                        $paginador = '<li class="previous"><a href="' . SERVER . "/INS.php?i=" . $prev . '">&larr; Atrás</a></li><li class="next"><a href="' . SERVER . "/INS.php?i=" . $next . '">Siguiente &rarr;</a></li>';
                     }
 
                     include_once 'base/TableGallery.php';
                     include_once 'base/TableUser_Gallery.php';
                     include_once 'base/TableTag.php';
+                    $bdetiquetas = new TableTag();
                     $bd = new TableGallery();
                     $bdtag = new TableUser_Gallery();
-                    $bdetiquetas = new TableTag();
-                    $iNVisit=0;
                     if ($index != 0) {
                         $index = $index * 5;
                     }
-                    $todo = $bd->ArticleForTag($name, $index, 5);
-                    $bdetiquetas->UpdateVisitPlus($name);
+                    $iNVisit = 0;
+                    $todo = $bd->LastNArticleINS($index, 5);
+                    $bdetiquetas->UpdateVisitPlus("INS");
                     if ($todo > 0) {
                         $html = "";
                         for ($i = 0; $i < $todo; $i++) {
+
                             $iState = $bd->bd->obtener_respuesta($i, "STATE");
                             $iTipoMedia = $bd->bd->obtener_respuesta($i, "TYPEMEDIA");
                             $sUrl = $bd->bd->obtener_respuesta($i, "URL");
@@ -95,22 +86,17 @@ include_once 'frame/init.php';
                             $iNComment = $bd->bd->obtener_respuesta($i, "N_COMMENT");
                             $ComentarioAdicional = $bd->bd->obtener_respuesta($i, "COMMENT_ADDITIONAL");
                             $bCensura = $bd->bd->obtener_respuesta($i, "CENSURA");
-//$iNVisit=bd->bd->obtener_respuesta($i, "N_");
-//                                if ($co->isEmpty()) {
-//                                    $bCensura = 0;
-//                                      include 'frame/TimeLineIn.php';
-//                                }else{
-//                                    //  $bCensura = 1;
-//                                        include 'frame/TimeLineOut.php';
-//                                }
+
                             if ($co->isEmpty()) {
                                 $bCensura = 0;
                             }
+
+
                             include 'frame/TimeLineOut.php';
                         }
                     }
                     ?>
-
+                    <?php // include_once 'frame/TimeLine.php'; ?>
 
                     <div class="col-md-12">
                         <ul class="pager">
@@ -120,66 +106,58 @@ include_once 'frame/init.php';
 
                         </ul>
                     </div>
-
                 </div>
 
                 <div id="sidebar" class="col-md-4">
-
-<!--                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Memetomía en tu Smartphone</h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="col-md-12 text-center">
-                                <a href="#" target="itunes_store" style="display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/htmlResources/assets/es_mx//images/web/linkmaker/badge_appstore-lrg.png) no-repeat;width:135px;height:40px;@media only screen{background-image:url(https://linkmaker.itunes.apple.com/htmlResources/assets/es_mx//images/web/linkmaker/badge_appstore-lrg.svg);}"></a>
-                            </div>
-                            <div class = "col-md-12 text-center">
-                                <a href = "#"><img alt = "Get it on Google Play" src = "https://developer.android.com/images/brand/es-419_generic_rgb_wo_45.png"/></a>
-                            </div>
-                        </div>
-                    </div>-->
-                    <?php include_once 'frame/Tag.php';
-                    ?>
-
-
-
+                    <?php include_once 'frame/Tag.php'; ?>
                     <?php include_once 'frame/Destacados.php'; ?>
 
-                    <div class="panel panel-info">                        
-                        <div class="panel-body">
-                            publicidad aqui
-                        </div>
-                    </div>
+
+                    <!--                    <div class="panel panel-info">                        
+                                            <div class="panel-body">
+                                                publicidad aqui
+                                            </div>
+                                        </div>-->
                 </div>
             </div>
         </div>
 
+
         <!-- MODAL Windows -->
         <?php
-        if ($co->isEmpty()) {
-            include_once 'modal/notifications-modal.php';
-            include_once 'modal/new-post-modal.php';
-            include_once 'modal/activity-modal.php';
-            include_once 'modal/settings-modal.php';
-            ?> 
-            <script>
-                // Activating All Switches
-                $(".settings-switch").bootstrapSwitch();
-            </script>
-            <?php
-        } else {
-            include_once 'modal/login-modal.php';
-            include_once 'modal/sign-in-modal.php';
-            ?>
-            <script>
-                // activa modal registro al presionar botones
-                $('.comment-button, .like-button, #btComment').click(function() {
-                    $('#sign-in-modal').modal('show');
-                });
-            </script>
-            <?php
+        if ($bTodoSimple != true) {
+            if ($co->isEmpty()) {
+                include_once 'modal/notifications-modal.php';
+                include_once 'modal/new-post-modal.php';
+                include_once 'modal/activity-modal.php';
+                include_once 'modal/settings-modal.php';
+                ?> 
+                <script>
+                    // Activating All Switches
+                    $(".settings-switch").bootstrapSwitch();
+                    function FunComment(iId) {
+                        window.location.href = IMAGE + iId;
+                    }
+                </script>
+                <?php
+            } else {
+                include_once 'modal/login-modal.php';
+                include_once 'modal/sign-in-modal.php';
+                ?>
+                <script>
+                    // activa modal registro al presionar botones
+                    $('.comment-button, .like-button').click(function() {
+                        $('#sign-in-modal').modal('show');
+                    });
+                </script>
+                <?php
+            }
         }
         ?>
+        <!-- MODAL Windows -->
+
+
+
 
     </body>
 </html>

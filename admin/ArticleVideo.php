@@ -26,7 +26,16 @@
              */
             $(document).ready(function() {
 
-
+  function ConstruirMetaData() {
+        $("#TextMeta").val('<meta property="og:type" content="video.other"><meta property="twitter:card" content="player">\n\
+<meta property = "twitter:player:width" content = "435">\n\
+<meta property = "twitter:player:height" content = "435">\n\
+<meta property = "og:title" content = "' + sTitulo + '"><meta name="twitter:title" content="' + sTitulo + '" />\n\
+<meta property = "twitter:player" content ="https://www.youtube.com/watch?v=' + $("#UrlYouTube").val() + '">\n\
+<meta property="og:url"         content="https://www.youtube.com/watch?v=' + $("#UrlYouTube").val() + '" /> \n\
+<meta property="og:image"       content="http://img.youtube.com/vi/' + $("#UrlYouTube").val() + '/maxresdefault.jpg" />');       
+    
+    }
 
 
                 $("#TextAdicional").cleditor();
@@ -48,6 +57,7 @@
 
                         $("#Titulo").html($(t).val());
                         sTitulo = $(t).val();
+                        ConstruirMetaData();
                         msj("#MsgNombrePg", "Titulo agregado correctamente", "Exito");
                     }
                 }
@@ -61,12 +71,7 @@
                     if (event.which == 13) {
                         sDirImagen = "http://img.youtube.com/vi/" + $("#UrlYouTube").val() + "/0.jpg";
                         HtmlMedia = '<iframe id="iframe" width="430" height="315" src="//www.youtube.com/embed/' + $("#UrlYouTube").val() + '?autoplay=1&amp;controls=1&amp;iv_load_policy=3" frameborder="0" allowfullscreen></iframe>';
-                        $("#TextMeta").val('<meta property="og:type" content="video"><meta property="twitter:card" content="player">\n\
-<meta property = "twitter:player:width" content = "435">\n\
-<meta property = "twitter:player:height" content = "435">\n\
-<meta property = "twitter:player" content ="https://www.youtube.com/embed/' + $("#UrlYouTube").val() + '">\n\
-<meta property = "og:video" content ="https://www.youtube.com/embed/' + $("#UrlYouTube").val() + '">');
-
+                        ConstruirMetaData();
 
                         $("#Imagen").attr("src", "http://img.youtube.com/vi/" + $("#UrlYouTube").val() + "/maxresdefault.jpg");
                         $("#DivYouTube").attr("video", $("#UrlYouTube").val());

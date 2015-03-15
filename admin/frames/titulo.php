@@ -32,31 +32,43 @@
     function PostGuardar(numero) {
 
         var string = crearjson(numero);
-
-        $.post("ajax/SaveArticlerobado.php", {
-            iNumero:numero,
+        $.post("ajax/VerificarImagen.php", {
+            iNumero: numero,
             sTitulo: $("#Nombre-" + numero).val(),
             aEtiquetas: string,
             sImagen: $("#Imagen-" + numero).attr("src"),
             bCensura: $("#censura-" + numero).val()
 
         }, function(o) {
-            if (o.Tupla > 0) {
-                alert("guardo");
-                $("#art-" + o.Numero).hide();
-            } else {
 
-            }
 
+            $.post("ajax/SaveArticlerobado.php", {
+                iNumero: o.iNumero,
+                sTitulo: o.sTitulo,
+                aEtiquetas: o.aEtiquetas,
+                sImagen:o.sImagen ,
+                filename: o.filename,
+                id:o.id,
+                height:o.height,
+                width:o.width,
+                nameGif:o.nameGif        
+            }, function(o) {
+                if (o.Tupla > 0) {
+                    alert("guardo");
+                    $("#art-" + o.iNumero).hide();
+                } else {
+
+                }
+
+            }, "json");
         }, "json");
-
         //   alert("espera falta algo");
     }
     function PostEliminar(numero) {
 
         $("#art-" + numero).hide();
-         $("#botonera-" + numero).hide();
-        
+        $("#botonera-" + numero).hide();
+
         //   alert("espera falta algo");
     }
 

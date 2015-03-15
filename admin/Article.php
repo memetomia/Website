@@ -14,7 +14,8 @@
             sTitulo = "";
             sComentario = "";
             sDirImagen = "";
-            $vardirImag="";
+            $vardirImag = "";
+            sExt = "";
             /*
              MsgNombrePg
              MsgUrlPg
@@ -32,10 +33,10 @@
                     debug: false,
                     onComplete: nombreFun
                 });
-                
-                function ConstruirMetaData(){
-                      $("#TextMeta").val('<meta property="og:type" content="photo"><meta property="twitter:card" content="photo"><meta name="twitter:title" content="'+sTitulo+'" /><meta name="twitter:image" content="' + $vardirImag + '" /><meta name="twitter:url" content="' + $vardirImag + '" />');
-                    
+
+                function ConstruirMetaData() {
+                    $("#TextMeta").val('<meta property="og:type" content="photo"><meta property="twitter:card" content="photo"><meta property = "og:title" content = "' + sTitulo + '"><meta name="twitter:title" content="' + sTitulo + '" /><meta name="twitter:image" content="' + $vardirImag + '" /><meta property = "og:image" content = "' + $vardirImag + '"><meta name="twitter:url" content="' + $vardirImag + '" />');
+
                 }
                 function nombreFun(id, fileName, responseJSON) {
                     //$('#imgSubirid').attr('src','/OnionFW/means/'+responseJSON.info);
@@ -46,35 +47,51 @@
                         $vardirImag = ARTICLE + "/" + responseJSON.info;
                         $('#Imagen').attr('src', $vardirImag);
                         sDirImagen = responseJSON.info;
+                        sExt = responseJSON.ext
                         msj("#MsgUrlPg", "La imagen fue subida con exito", "Exito");
-                         ConstruirMetaData();
-                       }
+                        ConstruirMetaData();
+                    }
                 }
 
 
-               // $("#TextAdicional").cleditor();
+                // $("#TextAdicional").cleditor();
 //                $('#BtAgregar').bind('click', function() {
 //                    var $algo = $("#TextAdicional").cleditor()[0].$area[0].value;
 //                    $("#ContentAdicional").html($algo);
 //                    sComentario = $algo;
 //                });
-                 $("#TextAdicional").cleditor().change(function(){
-                   
-                       var $algo = $("#TextAdicional").cleditor()[0].$area[0].value;
+                $("#TextAdicional").cleditor().change(function() {
+
+                    var $algo = $("#TextAdicional").cleditor()[0].$area[0].value;
                     $("#ContentAdicional").html($algo);
                     sComentario = $algo;
-                     
-                 } );
-                
+
+                });
+
                 $('#NombrePg').keydown(function() {
+
                     CargarTitulo(event, this);
                 });
                 function CargarTitulo(event, t) {
                     if (event.which == 13) {
-                        $("#Titulo").html($(t).val());
-                        sTitulo = $(t).val();
-                        msj("#MsgNombrePg", "Titulo agregado correctamente", "Exito");
-                         ConstruirMetaData()
+
+                        $.post("ajax/VerificarTitulo.php",
+                                {
+                                    sTitulo: $("#NombrePg").val()
+                                }, function(o) {
+                            if (o.Tupla == -1) {
+                                $("#Titulo").html($(t).val());
+                                sTitulo = $(t).val();
+                                msj("#MsgNombrePg", "Titulo agregado correctamente", "Exito");
+                                ConstruirMetaData()
+
+                            } else {
+                                msj("#MsgNombrePg", "el titulo ya existe", "Error");
+                            }
+
+                        }, "json");
+
+
                     }
                 }
 
@@ -99,15 +116,16 @@
 
 
                     if (bool == true) {
-                        var sInfo = '<img class="post-media img-thumbnail" src="' + ARTICLE + '/' + sDirImagen + '" alt="' + sTitulo + '">'
+                        //  var sInfo = '<img class="post-media img-thumbnail" src="' + ARTICLE + '/' + sDirImagen + '" alt="' + sTitulo + '">'
                         $.post("ajax/SaveArticle.php", {
                             sTitulo: sTitulo,
                             sComentario: sComentario,
                             aEtiquetas: string,
                             sImagen: sDirImagen,
-                            sinfo: sInfo,
+//                            sinfo: sInfo,
                             sMetaData: $("#TextMeta").val(),
-                            bCensura: $("#censura").val()
+                            bCensura: $("#censura").val(),
+                            sExt: sExt
                         }, function(o) {
                             if (o.Tupla > 0) {
                                 msj("#MsgBtGuardar", "Todo ok", "Exito");
@@ -255,7 +273,7 @@
                 location.href = SERVER + ADMIN + "/EditArticle.php?IDPage=" + iIdEnTabla;
             }
 
-            function toggleMetadata(){                
+            function toggleMetadata() {
                 $("#metadata-container").toggle();
             }
         </script>
@@ -288,7 +306,7 @@
                                 <div id="MsgUrlPg" class="msgbox Oculto"><span class="spanNoti"></span></div>
 
                             </div>
-                        
+
                             <div class="form-group">
                                 <label for="inputTag">Etiqueta</label>
                                 <input type="text" class="form-control" id="inputTag" placeholder="Agrega una pagina nueva">
@@ -304,8 +322,8 @@
 
                             </div>
 
-<!--                            <button id='BtAgregar' type="button" class="btn btn-default"  >Agregar</button>
-                            <div id="MsgBtAgregar" class="msgbox Oculto"><span class="spanNoti"></span></div>-->
+                            <!--                            <button id='BtAgregar' type="button" class="btn btn-default"  >Agregar</button>
+                                                        <div id="MsgBtAgregar" class="msgbox Oculto"><span class="spanNoti"></span></div>-->
 
                             <br/>
                             <button id='BtGuardar' type="button" class="btn btn-default"  >Guardar</button>

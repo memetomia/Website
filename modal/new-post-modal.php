@@ -16,7 +16,7 @@
         cursor: pointer;
     }
 </style>
-
+ <script src="js/fileuploader.js"></script>
 <div class="modal fade" id="new-post-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -65,6 +65,7 @@
                                         </div>-->
 
                     <div id="new-post-tags-field" class="form-group"></div>
+                    <div id="new-post-mensaje" class="form-group"></div>
                 </form>
             </div>
             <div class="modal-footer">                        
@@ -76,7 +77,7 @@
 
 <script type="text/javascript">
 
-   
+
     modalNewPost = function() {
         // Prefijo del modal
         var MODAL_PREFIX;
@@ -88,6 +89,7 @@
         var $_urlImagen;
         var $_sBoton;
         var $_postImage;
+        var $_postMensaje;
         /**
          * 
          *     inicia todo el modal carga los div y li necesarios
@@ -104,45 +106,58 @@
             //  $_sTag = $('#' + MODAL_PREFIX + 'tags-search');
             $_sBoton = $('#' + MODAL_PREFIX + 'success');
             $_postImage = $('#' + MODAL_PREFIX + 'image');
-            $_sTitle.val("");
+            $_postMensaje = $('#' + MODAL_PREFIX + 'mensaje');
+
+           
             $_urlImagen = $('#' + MODAL_PREFIX + 'image-show');
-            // $_sUrl.val("");
-            //  $_sTag.val("");
-            //$_sBoton.click(Cargar());
-            $('#new-post-success').click(Cargar());
+            $_sTitle.val("");
+            MostrarImagen("./media/default/ArticlePredeterminado.jpg");
+            $_sBoton.unbind("click");
+            $_sBoton.click(function() {
+                Cargar();
+            });
             $_VentanaActual = "";
-             
+
 
         }
-
-        
+        function PostMensaje(mesaje) {
+            $_postMensaje.html(mesaje);
+        }
         function Cargar() {
 
-            if ($_DirUrl != "") {
-                $_DirUrl = $_sTitle.val();
+            if ($_sTitle.val() != "") {
             }
-
-            if ($_DirUrl != "") {
+            if (($_DirUrl != "")) {
+            }
+            if (($_sTitle.val() != "") && ($_DirUrl != "")) {
                 $.post("ajax/SaveArticleByUser.php", {
                     sTitle: $_sTitle.val(),
                     sUrl: $_DirUrl
-                 
-                }, function(o) {
 
+                }, function(o) {
+                    if (o.Tupla < 0) {
+                        modalNewPost.Iniciar();
+                        PostMensaje("La imagen fue subida con exito!!!");
+                    } else {
+                        PostMensaje(o.Error);
+                    }
                 }, "json");
             }
         }/* fin de funcion Cargar*/
         function GuardarDir(DirUrl) {
-            this.$_DirUrl= DirUrl;
+            $_DirUrl = DirUrl;
             $_urlImagen.attr("src", "./media/article/user/" + DirUrl);
         }
+        function MostrarImagen(DirUrl) {
 
+            $_urlImagen.attr("src", DirUrl);
+        }
         return {
             Iniciar: Iniciar,
             Cargar: Cargar,
-            GuardarDir: GuardarDir
-
-
+            GuardarDir: GuardarDir,
+            PostMensaje: PostMensaje,
+            MostrarImagen: MostrarImagen
         }
     }();
     $(function() {
@@ -173,15 +188,15 @@
         // constante de la máxima cantidad de caracteres del título del post.
         const POST_TITLE_MAX_LENGTH = 150;
         // Variables cacheadas
-//        var $_modal = $('#' + MODAL_PREFIX + 'modal');
-//        var $_menu = $('#' + MODAL_PREFIX + 'mode');
-//        var $_form = $('#' + MODAL_PREFIX + 'form');
+        var $_modal = $('#' + MODAL_PREFIX + 'modal');
+        var $_menu = $('#' + MODAL_PREFIX + 'mode');
+        var $_form = $('#' + MODAL_PREFIX + 'form');
         var $_postTitle = $('#' + MODAL_PREFIX + 'title');
         //   var $_postURL = $('#' + MODAL_PREFIX + 'url-field');
 //        var $_postImage = $('#' + MODAL_PREFIX + 'image-field');
         //var $_tagInput = $('#' + MODAL_PREFIX + 'tags-search');
-      //  var $_tagButton = $('#' + MODAL_PREFIX + 'add-tag');
-//        var $_tags = $('#' + MODAL_PREFIX + 'tags-field');
+        //  var $_tagButton = $('#' + MODAL_PREFIX + 'add-tag');
+        var $_tags = $('#' + MODAL_PREFIX + 'tags-field');
         /*
          * activa el autocompletado de tags para
          * tratar de evitar duplicado de tags. 
@@ -306,37 +321,37 @@
          * Eventos que se ejecutan cuando el modal se carga
          * pero aún no es visible para el usuario
          */
-//        $_modal.on('show.bs.modal', function()
-//        {
-//            // reinicia lo valores del formulario por default
-//
-//            $_form.get(0).reset();
-//            $_form.children().removeAttr('has-error has-success');
-//            // remueve la clase .active del menú que lo posea actualmente
-//            $_menu.find('label.active').removeClass('active');
-//            // coloca la clase .active al primer elemento del menú y llama al evento click
-//            $_menu.find('label:first').addClass('active').click();
-//            // reinicia el contador de caracteres asignando el valor máximo
-//            $_form.find('.char-counter').text(POST_TITLE_MAX_LENGTH);
-//            // elimina todos los tags introducidos previamente
-//            $_tags.empty();
-//            // Configurar las validaciones
-//            var $field = null;
-//            var $params = {rules: {}, messages: {}};
-//            // validaciones de titulo
-//            $field = $_postTitle.attr('name');
-//            $params['rules'][$field] = {"required": true, "rangelength": [3, 150]};
-//            $params['messages'][$field] = {"rangelength": jQuery.validator.format("El título del post debe contener entre {0} y {1} caracteres")};
-//            // validaciones de url
-//            // $field = $_postURL.attr('name');
-//            $params['rules'][$field] = {"required": true};
-//            $params['messages'][$field] = {};
-//            // validaciones de tags
-////            $field = $_tagInput.attr('name');
-//            $params['rules'][$field] = {"lettersonly": true};
-//            $params['messages'][$field] = {"lettersonly": "Las etiquetas sólo permiten caracteres alfabéticos"};
-//            // envia parametros de validación al formulario
-//            $_form.validate($params).resetForm();
-//        });
+        $_modal.on('show.bs.modal', function()
+        {
+            // reinicia lo valores del formulario por default
+
+            $_form.get(0).reset();
+            $_form.children().removeAttr('has-error has-success');
+            // remueve la clase .active del menú que lo posea actualmente
+            $_menu.find('label.active').removeClass('active');
+            // coloca la clase .active al primer elemento del menú y llama al evento click
+            $_menu.find('label:first').addClass('active').click();
+            // reinicia el contador de caracteres asignando el valor máximo
+            $_form.find('.char-counter').text(POST_TITLE_MAX_LENGTH);
+            // elimina todos los tags introducidos previamente
+            $_tags.empty();
+            // Configurar las validaciones
+            var $field = null;
+            var $params = {rules: {}, messages: {}};
+            // validaciones de titulo
+            $field = $_postTitle.attr('name');
+            $params['rules'][$field] = {"required": true, "rangelength": [3, 150]};
+            $params['messages'][$field] = {"rangelength": jQuery.validator.format("El título del post debe contener entre {0} y {1} caracteres")};
+            // validaciones de url
+            // $field = $_postURL.attr('name');
+            $params['rules'][$field] = {"required": true};
+            $params['messages'][$field] = {};
+            // validaciones de tags
+//            $field = $_tagInput.attr('name');
+            $params['rules'][$field] = {"lettersonly": true};
+            $params['messages'][$field] = {"lettersonly": "Las etiquetas sólo permiten caracteres alfabéticos"};
+            // envia parametros de validación al formulario
+            $_form.validate($params).resetForm();
+        });
     });
 </script>

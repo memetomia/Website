@@ -13,10 +13,9 @@ if ($usuario == "jaivic") {
     defined('MEDIA') ? null : define("MEDIA", "/media");
     defined('MEME') ? null : define("MEME", "C:\wamp\www\Website\media\meme");
     defined('ARTICLE') ? null : define("ARTICLE", "C:\wamp\www\Website\media\article");
-    defined('MEME') ? null : define("MEME", "C:\wamp\www\memetomia\media\meme"); 
-    defined('ARTICLE') ? null : define("ARTICLE", "C:\wamp\www\memetomia\media\article"); 
-    defined('ERROR_FILE') ? null : define("ERROR_FILE", "C:\wamp\www\memetomia\media\article"); 
-   
+    defined('USER') ? null : define("USER", "C:\wamp\www\Website\media\article\user");
+    defined('ERROR_FILE') ? null : define("ERROR_FILE", "C:\wamp\www\memetomia\media\article");
+
     defined('JS') ? null : define("JS", "/js");
     defined('MODAL_CONTROLLER') ? null : define("MODAL_CONTROLLER", "/js/modal_controllers");
     defined('CSS') ? null : define("CSS", "/css");
@@ -31,6 +30,7 @@ if ($usuario == "jaivic") {
     defined('EXT_TAG') ? null : define("EXT_TAG", SERVER . "/Tag.php");
     defined('EXT_IMAGEN') ? null : define("EXT_IMAGEN", SERVER . "/Imagen.php");
     defined('EXT_DEFAULT') ? null : define("EXT_DEFAULT", EXT_MEDIA . "/default");
+    defined('EXT_USER') ? null : define("EXT_USER", EXT_ARTICLE . "/user");
 }
 if ($usuario == "memetomia") {
     defined('DB_SERVER') ? null : define("DB_SERVER", "localhost");
@@ -45,7 +45,8 @@ if ($usuario == "memetomia") {
     defined('MEDIA') ? null : define("MEDIA", "/media");
     defined('MEME') ? null : define("MEME", "/home/memetomia/public_html/media/meme"); // no fue cambiada por HG
     defined('ARTICLE') ? null : define("ARTICLE", "/home/memetomia/public_html/media/article"); // no fue cambiada por HG
-   
+    defined('USER') ? null : define("USER", "/home/memetomia/public_html/media/article/user"); // no fue cambiada por HG
+
     defined('JS') ? null : define("JS", "/js");
     defined('MODAL_CONTROLLER') ? null : define("MODAL_CONTROLLER", "/js/modal_controllers");
     defined('CSS') ? null : define("CSS", "/css");
@@ -58,8 +59,9 @@ if ($usuario == "memetomia") {
     defined('EXT_MEME') ? null : define("EXT_MEME", EXT_MEDIA . "/meme");
     defined('EXT_ARTICLE') ? null : define("EXT_ARTICLE", EXT_MEDIA . "/article");
     defined('EXT_TAG') ? null : define("EXT_TAG", SERVER . "/Tag.php");
-    defined('EXT_IMAGEN') ? null : define("EXT_IMAGEN", SERVER  . "/Imagen.php");
-    defined('EXT_DEFAULT') ? null : define("EXT_DEFAULT", EXT_MEDIA . "/default");
+    defined('EXT_IMAGEN') ? null : define("EXT_IMAGEN", SERVER . "/Imagen.php");
+    defined('EXT_USER') ? null : define("EXT_USER", SERVER . "/user");
+    defined('EXT_DEFAULT') ? null : define("EXT_DEFAULT", EXT_ARTICLE . "/default");
 }
 
 if ($usuario == "hector") {
@@ -67,7 +69,7 @@ if ($usuario == "hector") {
     defined('DB_USER') ? null : define("DB_USER", "root");
     defined('DB_PASS') ? null : define("DB_PASS", "mysql");
     defined('DB_NAME') ? null : define("DB_NAME", "gallery");
-   
+
     defined('MODO_DEBUG') ? null : define("MODO_DEBUG", false);
     defined('SERVER') ? null : define("SERVER", "http://localhost/memetomia");
     defined('RESOURCES') ? null : define("RESOURCES", "/resources");
@@ -75,7 +77,8 @@ if ($usuario == "hector") {
     defined('MEDIA') ? null : define("MEDIA", "/media");
     defined('MEME') ? null : define("MEME", "/Library/WebServer/documents/memetomia/media/meme");
     defined('ARTICLE') ? null : define("ARTICLE", "/Library/WebServer/documents/memetomia/media/article");
-    
+    defined('USER') ? null : define("USER", "/Library/WebServer/documents/memetomia/media/article/user");
+
     defined('JS') ? null : define("JS", "/js");
     defined('MODAL_CONTROLLER') ? null : define("MODAL_CONTROLLER", "/js/modal_controllers");
     defined('CSS') ? null : define("CSS", "/css");
@@ -89,6 +92,7 @@ if ($usuario == "hector") {
     defined('EXT_ARTICLE') ? null : define("EXT_ARTICLE", EXT_MEDIA . "/article");
     defined('EXT_TAG') ? null : define("EXT_TAG", SERVER . "/Tag.php");
     defined('EXT_IMAGEN') ? null : define("EXT_IMAGEN", EXT_MEDIA . "/Imagen.php");
+    defined('EXT_IMAGEN') ? null : define("EXT_USER", EXT_ARTICLE . "/USER");
     defined('EXT_DEFAULT') ? null : define("EXT_DEFAULT", EXT_MEDIA . "/default");
 }
 
@@ -102,10 +106,10 @@ if ($usuario == "luis") {
     defined('RESOURCES') ? null : define("RESOURCES", "/resources");
     defined('FONTS') ? null : define("FONTS", "/resources/fonts");
     defined('MEDIA') ? null : define("MEDIA", "/media");
-    defined('MEME') ? null : define("MEME", "C:\wamp\www\memetomia\media\meme"); 
-    defined('ARTICLE') ? null : define("ARTICLE", "C:\wamp\www\memetomia\media\article"); 
-    defined('ERROR_FILE') ? null : define("ERROR_FILE", "C:\wamp\www\memetomia\media\article"); 
-   
+    defined('MEME') ? null : define("MEME", "C:\wamp\www\memetomia\media\meme");
+    defined('ARTICLE') ? null : define("ARTICLE", "C:\wamp\www\memetomia\media\article");
+    defined('ERROR_FILE') ? null : define("ERROR_FILE", "C:\wamp\www\memetomia\media\article");
+
     defined('JS') ? null : define("JS", "/js");
     defined('MODAL_CONTROLLER') ? null : define("MODAL_CONTROLLER", "/js/modal_controllers");
     defined('CSS') ? null : define("CSS", "/css");
@@ -121,5 +125,13 @@ if ($usuario == "luis") {
     defined('EXT_IMAGEN') ? null : define("EXT_IMAGEN", SERVER . "/Imagen.php");
     defined('EXT_DEFAULT') ? null : define("EXT_DEFAULT", EXT_MEDIA . "/default");
 }
+
+
+defined('TYPEMEDIA_IMAGEN') ? null : define("TYPEMEDIA_IMAGEN", 0);
+defined('TYPEMEDIA_VIDEO_YOUTUBE') ? null : define("TYPEMEDIA_VIDEO_YOUTUBE", 1);
+defined('TYPEMEDIA_VIDEO_VINE') ? null : define("TYPEMEDIA_VIDEO_VINE", 2);
+defined('TYPEMEDIA_VIDEO_EMBED') ? null : define("TYPEMEDIA_VIDEO_EMBED", 3);
+defined('TYPEMEDIA_GIF') ? null : define("TYPEMEDIA_GIF", 4);
+defined('TYPEMEDIA_IMAGEN_CORTADA') ? null : define("TYPEMEDIA_IMAGEN_CORTADA", 5);
 ?>
 

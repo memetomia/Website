@@ -58,11 +58,11 @@
         var $_password = $('#' + MODAL_PREFIX + 'password');
         var $_login = $('#' + MODAL_PREFIX + 'log');  
         var $_loginFB = $('#' + MODAL_PREFIX + 'facebook');
-        
-        $_loginFB.click(function() {
-            LoginFB();
-
-        });
+//        
+//        $_loginFB.click(function() {
+//            LoginFB();
+//
+//        });
         /*
          * Eventos que se ejecutan cuando el modal se carga
          * y ya es visible para el usuario

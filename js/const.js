@@ -18,7 +18,7 @@ var ADMIN_JS = "/admin/js";
 
 
 
-function FB(id) {
+function funFB(id) {
     window.open($("#FB-" + id).attr("d-link"), "nuevo", "directories=no, location=no, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=600, height=400");
 }
 function TW(iId) {
@@ -37,34 +37,34 @@ function FunLike(iId) {
 
     }, "json");
 }
-function LoginFB()
-{
-    fb.login(function() {
-
-        if (fb.logged) {
-            $.post("ajax/loginFB.php", {
-                iId: fb.user.id,
-                sUser: fb.user.name,
-                sName: fb.user.first_name,
-                sLName: fb.user.last_name,
-                sLink: fb.user.link,
-                sEmail: fb.user.email,
-                sPicture: fb.user.picture
-
-            }, function(o) {
-
-
-                if (o.iError == 1) {
-
-                    location.href = "index.php";
-
-                }/*end if o.valor==1 */
-                else {
-                    alert(o.sInfo);
-                }
-            }, "json");
-        } else {
-            alert("No se pudo identificar al usuario");
-        }
-    })
-}
+//function LoginFB()
+//{
+//    fb.login(function() {
+//
+//        if (fb.logged) {
+//            $.post("ajax/loginFB.php", {
+//                iId: fb.user.id,
+//                sUser: fb.user.name,
+//                sName: fb.user.first_name,
+//                sLName: fb.user.last_name,
+//                sLink: fb.user.link,
+//                sEmail: fb.user.email,
+//                sPicture: fb.user.picture
+//
+//            }, function(o) {
+//
+//
+//                if (o.iError == 1) {
+//
+//                    location.href = "index.php";
+//
+//                }/*end if o.valor==1 */
+//                else {
+//                    alert(o.sInfo);
+//                }
+//            }, "json");
+//        } else {
+//            alert("No se pudo identificar al usuario");
+//        }
+//    })
+//}

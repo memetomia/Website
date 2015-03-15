@@ -47,7 +47,7 @@ class TableComment {
         $query = sprintf("SELECT distinct g.TITLE, g.N_MORE, g.N_COMMENT, g.URL,g.TYPEMEDIA
 FROM gallery AS g
 JOIN COMMENT AS c ON g.ID = c.ID_GALLERY
-WHERE c.`ID_USER` =  '12'", $iUser);
+WHERE c.`ID_USER` =  '%s'", $iUser);
         $this->bd->hacer_query($query);
 
         return $this->bd->ultimo_id_generado_por_la_bd();

@@ -265,7 +265,7 @@ class qqFileUploader
         {
 
             $info =$filename .".". $ext;
-            return array('success' => true, "info" => $info);
+            return array('success' => true, "info" => $info,"ext"=> $ext);
         }
         else
         {
@@ -276,7 +276,7 @@ class qqFileUploader
 
 }
 
-$allowedExtensions = array("jpg", "png", "jpeg", "bmp");
+$allowedExtensions = array("jpg", "png", "jpeg", "bmp","gif");
 $sizeLimit = 2 * 1024 * 1024;
 
 $uploader = new qqFileUploader($allowedExtensions, $sizeLimit);

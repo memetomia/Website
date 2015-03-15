@@ -1,5 +1,4 @@
-<?php
-//header ("Location: coming-soon.php");   
+<?php //header ("Location: coming-soon.php");   
 //
 include_once 'frame/init.php';
 ?>
@@ -22,9 +21,7 @@ include_once 'frame/init.php';
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jqueryUI.custom.min.js"></script>  
         <script src="js/bootstrap-switch.min.js"></script>  
-        <script src="js/jquery.validate.min.js"></script>
-        <script src="js/fileuploader.js"></script>
-        <script src="js/fb.js"></script>
+        <script src="js/jquery.validate.min.js"></script>    
 
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -32,21 +29,21 @@ include_once 'frame/init.php';
         <![endif]-->
     </head>
     <body>       
-        <?php include_once 'frame/bar.php'; ?>
+     <?php include_once 'frame/bar.php'; ?>
         <div id="main-content" class="container">
             <div id="timeline-container" class="col-md-12">
 
-<!--                <div class="ad-panel col-md-12">
+                <div class="ad-panel col-md-12">
                     <div class="panel panel-info">                    
                         <div class="panel-body">
                             publicidad aqui
                         </div>
                     </div>
-                </div>-->
+                </div>
 
                 <div id="timeline" class="col-md-8">
                     <?php
-                    // include_once 'base/const.php';
+                   // include_once 'base/const.php';
                     $paginador = "";
                     $index = 0;
                     $name = "";
@@ -68,19 +65,14 @@ include_once 'frame/init.php';
                         $next = $index + 1;
                         $paginador = '<li class="previous"><a href="' . SERVER . '/tag.php?i=' . $prev . '&Name=' . $name . '">&larr; Atrás</a></li><li class="next"><a href="' . SERVER . "/tag.php?i=" . $next . '&Name=' . $name . '">Siguiente &rarr;</a></li>';
                     }
-
                     include_once 'base/TableGallery.php';
                     include_once 'base/TableUser_Gallery.php';
-                    include_once 'base/TableTag.php';
                     $bd = new TableGallery();
                     $bdtag = new TableUser_Gallery();
-                    $bdetiquetas = new TableTag();
-                    $iNVisit=0;
                     if ($index != 0) {
                         $index = $index * 5;
                     }
                     $todo = $bd->ArticleForTag($name, $index, 5);
-                    $bdetiquetas->UpdateVisitPlus($name);
                     if ($todo > 0) {
                         $html = "";
                         for ($i = 0; $i < $todo; $i++) {
@@ -94,19 +86,9 @@ include_once 'frame/init.php';
                             $iNMore = $bd->bd->obtener_respuesta($i, "N_MORE");
                             $iNComment = $bd->bd->obtener_respuesta($i, "N_COMMENT");
                             $ComentarioAdicional = $bd->bd->obtener_respuesta($i, "COMMENT_ADDITIONAL");
-                            $bCensura = $bd->bd->obtener_respuesta($i, "CENSURA");
-//$iNVisit=bd->bd->obtener_respuesta($i, "N_");
-//                                if ($co->isEmpty()) {
-//                                    $bCensura = 0;
-//                                      include 'frame/TimeLineIn.php';
-//                                }else{
-//                                    //  $bCensura = 1;
-//                                        include 'frame/TimeLineOut.php';
-//                                }
-                            if ($co->isEmpty()) {
-                                $bCensura = 0;
-                            }
-                            include 'frame/TimeLineOut.php';
+                             $bCensura = $bd->bd->obtener_respuesta($i, "CENSURA");
+
+                            include_once 'frame/TimeLineOut.php';
                         }
                     }
                     ?>
@@ -125,7 +107,7 @@ include_once 'frame/init.php';
 
                 <div id="sidebar" class="col-md-4">
 
-<!--                    <div class="panel panel-info">
+                    <div class="panel panel-info">
                         <div class="panel-heading">
                             <h3 class="panel-title">Memetomía en tu Smartphone</h3>
                         </div>
@@ -137,7 +119,7 @@ include_once 'frame/init.php';
                                 <a href = "#"><img alt = "Get it on Google Play" src = "https://developer.android.com/images/brand/es-419_generic_rgb_wo_45.png"/></a>
                             </div>
                         </div>
-                    </div>-->
+                    </div>
                     <?php include_once 'frame/Tag.php';
                     ?>
 
@@ -156,30 +138,25 @@ include_once 'frame/init.php';
 
         <!-- MODAL Windows -->
         <?php
-        if ($co->isEmpty()) {
-            include_once 'modal/notifications-modal.php';
-            include_once 'modal/new-post-modal.php';
-            include_once 'modal/activity-modal.php';
-            include_once 'modal/settings-modal.php';
-            ?> 
-            <script>
-                // Activating All Switches
-                $(".settings-switch").bootstrapSwitch();
-            </script>
-            <?php
-        } else {
-            include_once 'modal/login-modal.php';
-            include_once 'modal/sign-in-modal.php';
-            ?>
-            <script>
+        include_once 'modal/notifications-modal.php';
+        include_once 'modal/new-post-modal.php';
+        include_once 'modal/activity-modal.php';
+        include_once 'modal/settings-modal.php';
+        ?>        
+
+
+
+
+        <!--Ver donde poner esto-->
+        <script>
+            // Activating All Switches
+            $(".settings-switch").bootstrapSwitch();
+        </script>
+         <script>
                 // activa modal registro al presionar botones
                 $('.comment-button, .like-button, #btComment').click(function() {
                     $('#sign-in-modal').modal('show');
                 });
             </script>
-            <?php
-        }
-        ?>
-
     </body>
 </html>
