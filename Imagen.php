@@ -76,6 +76,12 @@
             ?>    
             <meta name = "og:locale" value = "es_ES"><meta property = "og:locale" content = "es_ES">
             <meta name = "og:site_name" value = "Memetomia"><meta property = "og:site_name" content = "Memetomia">
+            <meta property="og:type" content="photo">
+          <meta property="twitter:card" content="photo">
+          
+          
+          
+          
             <meta name = "twitter:site" value = "@memetomia"><meta property = "twitter:site" content = "@memetomia">
             <meta name = "twitter:creator" value = "@memetomia"><meta property = "twitter:creator" content = "@memetomia">
             <meta name = "twitter:title" value = "@memetomia"><meta property = "twitter:title" content = "@memetomia">
@@ -92,6 +98,8 @@
     <!--            <meta name = "twitter:title" value = "<?php echo $sTitle; ?>">-->
             <meta property = "twitter:title" content = "<?php echo $sTitle; ?>">
             <meta property = "twitter:image:src" content = "<?php echo $sMetaImagen; ?>">
+            <meta property = "twitter:image" content = "<?php echo $sMetaImagen; ?>">
+            <meta property = "twitter:url" content = "<?php echo $sMetaImagen; ?>">
     <!--            <meta name = "og:image" value = "<?php echo $sMetaImagen; ?>">-->
             <meta property = "og:image" content = "<?php echo $sMetaImagen; ?>">
 
